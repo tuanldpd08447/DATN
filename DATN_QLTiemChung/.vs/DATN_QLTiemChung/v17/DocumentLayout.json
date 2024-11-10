@@ -1,0 +1,453 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|c:\\users\\ductu\\documents\\datn_qltiemchung\\datn_qltiemchung_api\\models\\xuatxu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|solutionrelative:datn_qltiemchung_api\\models\\xuatxu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|c:\\users\\ductu\\documents\\datn_qltiemchung\\datn_qltiemchung_api\\models\\vattuyte.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|solutionrelative:datn_qltiemchung_api\\models\\vattuyte.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|c:\\users\\ductu\\documents\\datn_qltiemchung\\datn_qltiemchung_api\\models\\ward.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|solutionrelative:datn_qltiemchung_api\\models\\ward.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|c:\\users\\ductu\\documents\\datn_qltiemchung\\datn_qltiemchung_api\\models\\theodoisautiem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|solutionrelative:datn_qltiemchung_api\\models\\theodoisautiem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|c:\\users\\ductu\\documents\\datn_qltiemchung\\datn_qltiemchung_api\\models\\tiemchung.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|solutionrelative:datn_qltiemchung_api\\models\\tiemchung.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|c:\\users\\ductu\\documents\\datn_qltiemchung\\datn_qltiemchung_api\\models\\qlytaikhoannv.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|solutionrelative:datn_qltiemchung_api\\models\\qlytaikhoannv.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|c:\\users\\ductu\\documents\\datn_qltiemchung\\datn_qltiemchung_api\\models\\phongban.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|solutionrelative:datn_qltiemchung_api\\models\\phongban.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|c:\\users\\ductu\\documents\\datn_qltiemchung\\datn_qltiemchung_api\\models\\province.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|solutionrelative:datn_qltiemchung_api\\models\\province.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|c:\\users\\ductu\\documents\\datn_qltiemchung\\datn_qltiemchung_api\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|solutionrelative:datn_qltiemchung_api\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|c:\\users\\ductu\\documents\\datn_qltiemchung\\datn_qltiemchung_api\\models\\nhanvien.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|solutionrelative:datn_qltiemchung_api\\models\\nhanvien.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|c:\\users\\ductu\\documents\\datn_qltiemchung\\datn_qltiemchung_api\\models\\nhacungcap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|solutionrelative:datn_qltiemchung_api\\models\\nhacungcap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|c:\\users\\ductu\\documents\\datn_qltiemchung\\datn_qltiemchung_api\\models\\nguoncungcap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|solutionrelative:datn_qltiemchung_api\\models\\nguoncungcap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|c:\\users\\ductu\\documents\\datn_qltiemchung\\datn_qltiemchung_api\\models\\loaivattu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|solutionrelative:datn_qltiemchung_api\\models\\loaivattu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|c:\\users\\ductu\\documents\\datn_qltiemchung\\datn_qltiemchung_api\\models\\khamsangloc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|solutionrelative:datn_qltiemchung_api\\models\\khamsangloc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|c:\\users\\ductu\\documents\\datn_qltiemchung\\datn_qltiemchung_api\\models\\khachhang.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|solutionrelative:datn_qltiemchung_api\\models\\khachhang.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|c:\\users\\ductu\\documents\\datn_qltiemchung\\datn_qltiemchung_api\\models\\hoantra.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|solutionrelative:datn_qltiemchung_api\\models\\hoantra.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|c:\\users\\ductu\\documents\\datn_qltiemchung\\datn_qltiemchung_api\\models\\hoadonchitiet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|solutionrelative:datn_qltiemchung_api\\models\\hoadonchitiet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|c:\\users\\ductu\\documents\\datn_qltiemchung\\datn_qltiemchung_api\\models\\district.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|solutionrelative:datn_qltiemchung_api\\models\\district.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|c:\\users\\ductu\\documents\\datn_qltiemchung\\datn_qltiemchung_api\\controllers\\datacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|solutionrelative:datn_qltiemchung_api\\controllers\\datacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|c:\\users\\ductu\\documents\\datn_qltiemchung\\datn_qltiemchung_api\\dbcontex.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|solutionrelative:datn_qltiemchung_api\\dbcontex.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|c:\\users\\ductu\\documents\\datn_qltiemchung\\datn_qltiemchung_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|solutionrelative:datn_qltiemchung_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|c:\\users\\ductu\\documents\\datn_qltiemchung\\datn_qltiemchung_api\\models\\qlytaikhoankh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|solutionrelative:datn_qltiemchung_api\\models\\qlytaikhoankh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|c:\\users\\ductu\\documents\\datn_qltiemchung\\datn_qltiemchung_api\\models\\dangkyvaccine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|solutionrelative:datn_qltiemchung_api\\models\\dangkyvaccine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|c:\\users\\ductu\\documents\\datn_qltiemchung\\datn_qltiemchung_api\\models\\dangkytiemchung.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|solutionrelative:datn_qltiemchung_api\\models\\dangkytiemchung.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|c:\\users\\ductu\\documents\\datn_qltiemchung\\datn_qltiemchung_api\\models\\chungtu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|solutionrelative:datn_qltiemchung_api\\models\\chungtu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|c:\\users\\ductu\\documents\\datn_qltiemchung\\datn_qltiemchung_api\\models\\chucdanh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|solutionrelative:datn_qltiemchung_api\\models\\chucdanh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|c:\\users\\ductu\\documents\\datn_qltiemchung\\datn_qltiemchung_api\\models\\hoadon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|solutionrelative:datn_qltiemchung_api\\models\\hoadon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Program.cs",
+              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\Program.cs",
+              "ToolTip": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Program.cs",
+              "RelativeToolTip": "DATN_QLTiemChung_Api\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB4AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-10T03:50:09.707Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Ward.cs",
+              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\Ward.cs",
+              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\Models\\Ward.cs",
+              "ToolTip": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\Ward.cs",
+              "RelativeToolTip": "DATN_QLTiemChung_Api\\Models\\Ward.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAuAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-10T03:39:47.383Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "XuatXu.cs",
+              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\XuatXu.cs",
+              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\Models\\XuatXu.cs",
+              "ToolTip": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\XuatXu.cs",
+              "RelativeToolTip": "DATN_QLTiemChung_Api\\Models\\XuatXu.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAA2AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-10T03:23:26.787Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "VatTuYTe.cs",
+              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\VatTuYTe.cs",
+              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\Models\\VatTuYTe.cs",
+              "ToolTip": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\VatTuYTe.cs",
+              "RelativeToolTip": "DATN_QLTiemChung_Api\\Models\\VatTuYTe.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-10T03:23:17.817Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "TheoDoiSauTiem.cs",
+              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\TheoDoiSauTiem.cs",
+              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\Models\\TheoDoiSauTiem.cs",
+              "ToolTip": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\TheoDoiSauTiem.cs",
+              "RelativeToolTip": "DATN_QLTiemChung_Api\\Models\\TheoDoiSauTiem.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAA2AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-10T03:23:15.123Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "TiemChung.cs",
+              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\TiemChung.cs",
+              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\Models\\TiemChung.cs",
+              "ToolTip": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\TiemChung.cs",
+              "RelativeToolTip": "DATN_QLTiemChung_Api\\Models\\TiemChung.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-10T03:23:12.325Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "QLyTaiKhoanNV.cs",
+              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\QLyTaiKhoanNV.cs",
+              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\Models\\QLyTaiKhoanNV.cs",
+              "ToolTip": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\QLyTaiKhoanNV.cs",
+              "RelativeToolTip": "DATN_QLTiemChung_Api\\Models\\QLyTaiKhoanNV.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-10T03:23:08.603Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "QLyTaiKhoanKH.cs",
+              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\QLyTaiKhoanKH.cs",
+              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\Models\\QLyTaiKhoanKH.cs",
+              "ToolTip": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\QLyTaiKhoanKH.cs",
+              "RelativeToolTip": "DATN_QLTiemChung_Api\\Models\\QLyTaiKhoanKH.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-10T03:23:06.207Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "PhongBan.cs",
+              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\PhongBan.cs",
+              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\Models\\PhongBan.cs",
+              "ToolTip": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\PhongBan.cs",
+              "RelativeToolTip": "DATN_QLTiemChung_Api\\Models\\PhongBan.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-10T03:23:03.643Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Province.cs",
+              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\Province.cs",
+              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\Models\\Province.cs",
+              "ToolTip": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\Province.cs",
+              "RelativeToolTip": "DATN_QLTiemChung_Api\\Models\\Province.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAA4AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-10T03:23:01.358Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Order.cs",
+              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\Order.cs",
+              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\Models\\Order.cs",
+              "ToolTip": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\Order.cs",
+              "RelativeToolTip": "DATN_QLTiemChung_Api\\Models\\Order.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAA2AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-10T03:22:58.995Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "NhanVien.cs",
+              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\NhanVien.cs",
+              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\Models\\NhanVien.cs",
+              "ToolTip": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\NhanVien.cs",
+              "RelativeToolTip": "DATN_QLTiemChung_Api\\Models\\NhanVien.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-10T03:22:56.548Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "NguonCungCap.cs",
+              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\NguonCungCap.cs",
+              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\Models\\NguonCungCap.cs",
+              "ToolTip": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\NguonCungCap.cs",
+              "RelativeToolTip": "DATN_QLTiemChung_Api\\Models\\NguonCungCap.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-10T03:22:51.755Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "KhachHang.cs",
+              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\KhachHang.cs",
+              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\Models\\KhachHang.cs",
+              "ToolTip": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\KhachHang.cs",
+              "RelativeToolTip": "DATN_QLTiemChung_Api\\Models\\KhachHang.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-10T03:10:20.938Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "HoanTra.cs",
+              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\HoanTra.cs",
+              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\Models\\HoanTra.cs",
+              "ToolTip": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\HoanTra.cs",
+              "RelativeToolTip": "DATN_QLTiemChung_Api\\Models\\HoanTra.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAHAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-10T03:22:39.644Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "HoaDonChiTiet.cs",
+              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\HoaDonChiTiet.cs",
+              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\Models\\HoaDonChiTiet.cs",
+              "ToolTip": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\HoaDonChiTiet.cs",
+              "RelativeToolTip": "DATN_QLTiemChung_Api\\Models\\HoaDonChiTiet.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-10T03:22:37.362Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "HoaDon.cs",
+              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\HoaDon.cs",
+              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\Models\\HoaDon.cs",
+              "ToolTip": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\HoaDon.cs",
+              "RelativeToolTip": "DATN_QLTiemChung_Api\\Models\\HoaDon.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-10T03:22:34.152Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "DangKyVaccine.cs",
+              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\DangKyVaccine.cs",
+              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\Models\\DangKyVaccine.cs",
+              "ToolTip": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\DangKyVaccine.cs",
+              "RelativeToolTip": "DATN_QLTiemChung_Api\\Models\\DangKyVaccine.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-10T03:22:27.012Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "NhaCungCap.cs",
+              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\NhaCungCap.cs",
+              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\Models\\NhaCungCap.cs",
+              "ToolTip": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\NhaCungCap.cs",
+              "RelativeToolTip": "DATN_QLTiemChung_Api\\Models\\NhaCungCap.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-10T03:10:23.082Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "LoaiVatTu.cs",
+              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\LoaiVatTu.cs",
+              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\Models\\LoaiVatTu.cs",
+              "ToolTip": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\LoaiVatTu.cs",
+              "RelativeToolTip": "DATN_QLTiemChung_Api\\Models\\LoaiVatTu.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-10T03:10:22.542Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "KhamSangLoc.cs",
+              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\KhamSangLoc.cs",
+              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\Models\\KhamSangLoc.cs",
+              "ToolTip": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\KhamSangLoc.cs",
+              "RelativeToolTip": "DATN_QLTiemChung_Api\\Models\\KhamSangLoc.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-10T03:10:21.988Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "District.cs",
+              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\District.cs",
+              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\Models\\District.cs",
+              "ToolTip": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\District.cs",
+              "RelativeToolTip": "DATN_QLTiemChung_Api\\Models\\District.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-10T03:10:20.164Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "DangKyTiemChung.cs",
+              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\DangKyTiemChung.cs",
+              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\Models\\DangKyTiemChung.cs",
+              "ToolTip": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\DangKyTiemChung.cs",
+              "RelativeToolTip": "DATN_QLTiemChung_Api\\Models\\DangKyTiemChung.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-10T03:10:19.528Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "ChungTu.cs",
+              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\ChungTu.cs",
+              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\Models\\ChungTu.cs",
+              "ToolTip": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\ChungTu.cs",
+              "RelativeToolTip": "DATN_QLTiemChung_Api\\Models\\ChungTu.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-10T03:10:17.547Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "ChucDanh.cs",
+              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\ChucDanh.cs",
+              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\Models\\ChucDanh.cs",
+              "ToolTip": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\ChucDanh.cs",
+              "RelativeToolTip": "DATN_QLTiemChung_Api\\Models\\ChucDanh.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-10T03:10:06.583Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "DBContex.cs",
+              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\DBContex.cs",
+              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\DBContex.cs",
+              "ToolTip": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\DBContex.cs",
+              "RelativeToolTip": "DATN_QLTiemChung_Api\\DBContex.cs",
+              "ViewState": "AQIAAA4AAAAAAAAAAAA3wBoAAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-10T03:10:03.03Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "DataController.cs",
+              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Controllers\\DataController.cs",
+              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\Controllers\\DataController.cs",
+              "ToolTip": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Controllers\\DataController.cs",
+              "RelativeToolTip": "DATN_QLTiemChung_Api\\Controllers\\DataController.cs",
+              "ViewState": "AQIAAEcAAAAAAAAAAAAQwFkAAABPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-10T03:08:35.222Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

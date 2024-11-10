@@ -1,0 +1,6 @@
+@DATN_QLTiemChung_Api_HostAddress = http://localhost:5153
+
+GET {{DATN_QLTiemChung_Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
