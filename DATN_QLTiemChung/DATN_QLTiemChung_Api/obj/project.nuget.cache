@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "SWQq8gaWd9E=",
+  "dgSpecHash": "/z0ucSvqx6M=",
   "success": true,
-  "projectFilePath": "C:\\Users\\ductu\\Documents\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj",
+  "projectFilePath": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ductu\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\ductu\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
