@@ -1,0 +1,154 @@
+﻿<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="" style="color: #2fb388;">QUẢN LÝ TIÊM CHỦNG</h2>
+        <div class="float-end ">
+            <button class="btn fw-bold custom-btn"><i class="fa-solid fa-plus"></i> Thêm</button>
+            <button class="btn fw-bold custom-btn"><i class="fa-solid fa-floppy-disk"></i> Lưu</button>
+            <button class="btn fw-bold custom-btn"><i class="fa-solid fa-repeat"></i> Hủy </button>
+            <button class="btn fw-bold custom-btn"><i class="fa-solid fa-print"></i> In</button>
+            <button class="btn fw-bold custom-btn"><i class="fa-solid fa-right-from-bracket"></i> Thoát</button>
+        </div>
+    </div>
+
+    <!-- Thông tin hóa đơn -->
+    <div class="row m-0 mb-3 border rounded-4 py-2  ">
+        <div class="col-4">
+            <div class=" ms-1 p-3 py-1 border rounded-4 ">
+                <div class="row">
+                    <button class="col border  border-1 rounded-start btn "><i class="fa-solid fa-arrows-rotate"></i></button>
+                    <input class="col-8  border border-1 rounded-2 mx-1" type="text">
+                    <button type="button" class="col border border-1 rounded-end btn "><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+                <div class="row border rounded-4 border-1 mt-1 " style="height: 300px;">
+                    <table class="table  table-hover h-25 m-0 text-center ">
+                        <thead class="rounded-4">
+                            <tr>
+                                <th class="col-2">STT</th>
+                                <th class="col">Họ và Tên</th>
+                                <th class="col-4">Năm sinh</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Nguyễn Văn A</td>
+                                <td>1990</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Nguyễn Văn A</td>
+                                <td>1990</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row m-0 ms-1 mt-2 p-3 py-1 border rounded-4">
+                <div class="col pt-2">
+                    <div class="form-group row pb-2">
+                        <label class="fw-semibold col-4" for="medical-id">Mã y tế:</label>
+                        <input type="text" id="medical-id" class="form-control form-control-sm col">
+                    </div>
+                    <div class="form-group row pb-2">
+                        <label class="fw-semibold col-4" for="name">Họ và tên:</label>
+                        <input type="text" id="name" class="form-control form-control-sm col">
+                    </div>
+                    <div class="form-group row pb-2">
+                        <label class="fw-semibold col-4" for="gender">Giới tính:</label>
+                        <input type="text" id="gender" class="form-control form-control-sm col">
+                    </div>
+                    <div class="form-group row pb-2">
+                        <label class="fw-semibold col-4" for="dob">Ngày sinh:</label>
+                        <input type="text" id="dob" class="form-control form-control-sm col">
+                    </div>
+                    <div class="form-group row pb-2">
+                        <label class="fw-semibold col-4" for="phone">Số điện thoại:</label>
+                        <input type="text" id="phone" class="form-control form-control-sm col">
+                    </div>
+                    <div class="form-group row pb-2">
+                        <label class="fw-semibold col-4" for="address">Địa chỉ:</label>
+                        <input type="text" id="address" class="form-control form-control-sm col">
+                    </div>
+                    <div class="form-group row pb-2">
+                        <label class="fw-semibold col-4" for="height">Chiều cao:</label>
+                        <input type="text" id="height" value="1m7" class="form-control form-control-sm col">
+                    </div>
+                    <div class="form-group row pb-2">
+                        <label class="fw-semibold col-4" for="weight">Cân nặng:</label>
+                        <input type="text" id="weight" value="70kg" class="form-control form-control-sm col">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="invoice-section col-8  ">
+            <div class=" p-3 border rounded-4 ">
+                <div class="row ">
+                    <form>
+                        <div class="form-group row mb-2">
+                            <label class="col-1" style="width: 22%;" for="batchNumber">Lô nhập</label>
+                            <select class="form-control col-1 " style="width: 15%;" id="batchNumber">
+                                <option>24URAD036</option>
+                            </select>
+                            <p class="col-1 m-0 fw-bold pt-2 me-1" style="font-size: small;width: 14%;">HD: 24-9-2027</p>
+                            <button type="button" class="btn btn-outline col-3 fw-bold" style="font-size: small; width: 23%; color: black ; background-color: #f0f0f0; border: 2px solid #f0f0f0 ;">Gửi kho khách</button>
+                        </div>
+                        <div class="form-group row mb-2">
+                            <label class="col-1" style="width: 22%;" for="startTime">Thời gian bắt đầu thử</label>
+                            <select class="form-control col-3 me-1" style="width: 29%;" id="startTime">
+                                <option>Chọn thời gian</option>
+                            </select>
+                            <button type="button" class="btn btn-outline col-3 fw-bold" style="font-size: small; width: 23%;color: black ; background-color: #f0f0f0; border: 2px solid #f0f0f0 ;">Xác nhận bắt đầu thử</button>
+                        </div>
+                        <div class="form-group row mb-2">
+                            <label class="col-1" style="width: 22%;" for="endTime">Thời gian tiêm xong</label>
+                            <input type="datetime-local" class="form-control col-3 me-1" style="width: 29%;" id="endTime" value="2024-09-24T15:46:20">
+                            <button type="button" class="btn btn-outline col-3 fw-bold me-1" style="font-size: small; width: 23%; color: black ; background-color: #f0f0f0; border: 2px solid #f0f0f0 ;">Xác nhận đã tiêm hôm nay</button>
+                            <button type="button" class="btn btn-outline col-3 fw-bold" style="font-size: small; width: 23%; color: black ; background-color: #f0f0f0; border: 2px solid #f0f0f0 ;">Huỷ xác nhận tiêm</button>
+                        </div>
+                        <div class="form-group row mb-2">
+                            <label class="col-1" style="width: 22%;" for="note">Ghi chú</label>
+                            <input type="text" name="" id="note" class="form-control col-3 me-1" style="width: 29%;">
+                            <button type="button" class="btn btn-outline col-3 fw-bold" style="font-size: small; width: 23%; color: black ; background-color: #f0f0f0; border: 2px solid #f0f0f0 ;">Lưu ghi chú</button>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-1" style="width: 16%;"></div>
+                            <button type="button" class="btn btn-outline col-3 fw-bold me-1" style="font-size: small; width: 35%; color: black ; background-color: #f0f0f0; border: 2px solid #f0f0f0 ;">Chuyển kho khách các mũi đã chọn</button>
+                            <button type="button" class="btn btn-outline col-3 fw-bold me-1" style="font-size: small; width: 23%; color: black ; background-color: #f0f0f0; border: 2px solid #f0f0f0 ;">Tiêm các mũi đã chọn</button>
+                            <button type="button" class="btn btn-outline col-3 fw-bold me-1" style="font-size: small; width: 23%; color: black ; background-color: #f0f0f0; border: 2px solid #f0f0f0 ;">Lịch sử tiêm chủng</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class=" mt-1 p-3 border rounded-4 " style="height: 63%;">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Tên Vắc xin/Huyết thanh</th>
+                            <th>Số lô nhập</th>
+                            <th>Xác nhận tiêm</th>
+                            <th>Kết quả thử</th>
+                            <th>Y/Bác sĩ chỉ định</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="fw-semibold" colspan="5">Nhóm: Vaccine Tiêm theo bác sĩ chỉ định</td>
+                        </tr>
+                        <tr>
+                            <td>Vắc-xin thủy đậu – VARILRIX (Bỉ)</td>
+                            <td>24URAD036</td>
+                            <td><input type="checkbox" class="form-check-input"></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <!-- Add more rows as needed -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>

@@ -1,0 +1,159 @@
+﻿<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="" style="color: #2fb388;">PHIẾU LĨNH</h2>
+        <div class="float-end ">
+            <button class="btn btn-dark m-1">Thêm</button>
+            <button class="btn btn-dark m-1">Lưu</button>
+            <button class="btn btn-dark m-1">Hủy phiếu thu</button>
+            <button class="btn btn-dark m-1">In</button>
+            <button class="btn btn-dark m-1">Thoát</button>
+        </div>
+    </div>
+
+    <!-- Thông tin hóa đơn -->
+    <div class="row m-0 mb-3 border rounded-4 py-2  ">
+        <div class="invoice-section col-md-12  ">
+            <div class=" p-3 border rounded-4  ">
+                <div class="form-section">
+                    <div class="row mb-3">
+                        <div class="form-group mb-2">
+                            <label for="trangThaiDuyet">Trạng thái duyệt</label>
+                            <input type="text" class="form-control" id="trangThaiDuyet" disabled>
+                        </div>
+                        <div class="col">
+                            <div class="row mb-">
+                                <div class="form-group col ">
+                                    <label class="" for="soPhieuLinh">Số phiếu lĩnh</label>
+                                    <div class="row ms-1">
+                                        <input class="form-control col me-1" type="text" id="soPhieuLinh">
+                                        <button class="col-2 btn btn-outline-secondary"><i class="fa-solid fa-search"></i></button>
+                                    </div>
+                                </div>
+                                <div class="form-group col">
+                                    <label for="ngayLap">Ngày</label>
+                                    <input type="datetime-local" class="form-control" id="ngayLap">
+                                </div>
+                            </div>
+                            <div class="form-group mb-2 mt-2">
+                                <label for="duocPham">Dược phẩm</label>
+                                <div class="row mx-1 ">
+                                    <input type="text" class="form-control col me-1" id="duocPham">
+                                    <button class="col-1 btn btn-outline-secondary"><i class="fa-solid fa-sync"></i></button>
+                                </div>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label for="nguon">Nguồn</label>
+                                <select class="form-select" id="nguon">
+                                    <option>Nguồn A</option>
+                                    <option>Nguồn B</option>
+                                </select>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label for="noiPhat">Nơi phát</label>
+                                <select class="form-select" id="noiPhat">
+                                    <option>Nguồn A</option>
+                                    <option>Nguồn B</option>
+                                </select>
+                            </div>
+                            <div class="form-group row" style="margin-top: 5%;">
+                                <div class="col row">
+                                    <h6 class="col-2 mt-2">ĐVT</h6>
+                                    <input class="form-control col" type="text">
+                                </div>
+                                <div class="col row">
+                                    <h6 class="col-5 mt-2">Số lượng tồn</h6>
+                                    <input class="form-control col me-3" type="text">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col">
+                            <div class="row">
+                                <div class="form-group mb-2">
+                                    <label for="loaiPhieu">Loại phiếu lĩnh</label>
+                                    <select class="form-select" id="loaiPhieu">
+                                        <option>Phiếu lĩnh thuốc thường</option>
+                                        <option>Phiếu lĩnh thuốc đặc biệt</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label for="noiLapPhieu">Nơi lập phiếu</label>
+                                <select class="form-select" id="noiLapPhieu">
+                                    <option>Phòng Khám Đa Khoa (Phòng Tiêm)</option>
+                                    <option>Phòng Khám B</option>
+                                </select>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label for="nguoiLap">Người lập</label>
+                                <select class="form-select" id="nguoiLap" disabled>
+                                    <option value="Admin">Admin</option>
+                                    <option>Nguồn B</option>
+                                </select>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label for="dienGiai">Diễn giải</label>
+                                <input type="text" class="form-control" id="dienGiai">
+                            </div>
+                            <div class="form-group col">
+                                <label for="soLuong">Số lượng</label>
+                                <div class="row ms-1">
+                                    <input type="number" class="form-control col" id="soLuong" min="1" value="1">
+                                    <div class="btn-group  col">
+                                        <button class="btn btn-primary"><i class="fa-solid fa-plus"></i></button>
+                                        <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
+                                        <button class="btn btn-success"><i class="fa-solid fa-sync-alt"></i></button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="border rounded-4 mt-4 p-3 table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>STT</th>
+                            <th>Tên thuốc, hàm lượng</th>
+                            <th>ĐVT</th>
+                            <th>Số lượng yêu cầu</th>
+                            <th>Kho giao</th>
+                            <th>Kho nhận</th>
+                            <th>Nguồn</th>
+                            <th>Trạng thái xuất</th>
+                            <th>Được cấp trên</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="checkbox" name="" id=""></td>
+                            <td>1</td>
+                            <td>Paracetamol 500mg</td>
+                            <td>Viên</td>
+                            <td>100</td>
+                            <td>Kho A</td>
+                            <td>Kho B</td>
+                            <td>Nguồn A</td>
+                            <td>Đã xuất</td>
+                            <td>100</td>
+                        </tr>
+                        <!-- Thêm các dòng khác nếu cần -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+</div>

@@ -1,0 +1,89 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="container my-5 mt-4">
+    <style>
+        .feature-card {
+            transition: transform 0.3s ease;
+            border: none;
+        }
+
+            .feature-card:hover {
+                transform: translateY(-10px);
+            }
+
+        .icon-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            background-color: rgba(0, 123, 255, 0.1);
+        }</style>
+    <h2 class="text-center mb-4">Lợi Ích Của Hệ Thống Quản Lý Tiêm Chủng </h2>
+    <p class="text-center text-muted">Hãy để chúng tôi đồng hành cùng thành công của bạn</p>
+    <div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
+        <!-- Feature 1 -->
+        <div class="col">
+            <div class="card feature-card shadow-sm p-3">
+                <div class="icon-circle bg-warning text-white">
+                    <i class="bi bi-diagram-3-fill fs-3"></i>
+                </div>
+                <h5 class="text-center">Đầy đủ quy trình nghiệp vụ</h5>
+                <p class="text-center text-muted">Đáp ứng đầy đủ quy trình tiêm của cơ sở, giảm thiểu thao tác người dùng</p>
+            </div>
+        </div>
+        <!-- Feature 2 -->
+        <div class="col">
+            <div class="card feature-card shadow-sm p-3">
+                <div class="icon-circle bg-info text-white">
+                    <i class="bi bi-person-badge-fill fs-3"></i>
+                </div>
+                <h5 class="text-center">Quản lý và phân quyền</h5>
+                <p class="text-center text-muted">Quản lý và phân quyền chi tiết theo vai trò từng bộ phận, giúp cơ sở hoạt động hiệu quả</p>
+            </div>
+        </div>
+        <!-- Feature 3 -->
+        <div class="col">
+            <div class="card feature-card shadow-sm p-3">
+                <div class="icon-circle bg-primary text-white">
+                    <i class="bi bi-arrows-expand fs-3"></i>
+                </div>
+                <h5 class="text-center">Dễ dàng mở rộng</h5>
+                <p class="text-center text-muted">Dễ dàng mở rộng các dịch vụ kết nối (thanh toán, hóa đơn điện tử, SMS...)</p>
+            </div>
+        </div>
+        <!-- Feature 4 -->
+        <div class="col">
+            <div class="card feature-card shadow-sm p-3">
+                <div class="icon-circle bg-success text-white">
+                    <i class="bi bi-bar-chart-fill fs-3"></i>
+                </div>
+                <h5 class="text-center">Báo cáo thống kê</h5>
+                <p class="text-center text-muted">Tổng hợp đầy đủ các báo cáo doanh thu, kho... theo thời gian thực</p>
+            </div>
+        </div>
+        <!-- Feature 5 -->
+        <div class="col">
+            <div class="card feature-card shadow-sm p-3">
+                <div class="icon-circle bg-danger text-white">
+                    <i class="bi bi-cloud-fill fs-3"></i>
+                </div>
+                <h5 class="text-center">Nền tảng Cloud</h5>
+                <p class="text-center text-muted">Nền tảng Cloud an toàn, bảo mật, khả năng mở rộng nhanh chóng</p>
+            </div>
+        </div>
+        <!-- Feature 6 -->
+        <div class="col">
+            <div class="card feature-card shadow-sm p-3">
+                <div class="icon-circle bg-secondary text-white">
+                    <i class="bi bi-cash-stack fs-3"></i>
+                </div>
+                <h5 class="text-center">Tối ưu hóa chi phí</h5>
+                <p class="text-center text-muted">Tối ưu hóa chi phí đầu tư, triển khai nhanh chóng tại cơ sở mới</p>
+            </div>
+        </div>
+    </div>
+</div>

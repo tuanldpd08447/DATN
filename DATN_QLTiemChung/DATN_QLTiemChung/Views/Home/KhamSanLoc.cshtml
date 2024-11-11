@@ -1,0 +1,412 @@
+﻿    <div class="container mt-4" >
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="" style="color: #2fb388;">KHÁM SÀNG LỌC</h2>
+            <div class="float-end ">
+                <button class="btn fw-bold custom-btn"><i class="fa-solid fa-plus"></i> Thêm</button>
+                <button class="btn fw-bold custom-btn"><i class="fa-solid fa-floppy-disk"></i> Lưu</button>
+                <button class="btn fw-bold custom-btn"><i class="fa-solid fa-repeat"></i> Hủy </button>
+                <button class="btn fw-bold custom-btn"><i class="fa-solid fa-print"></i> In</button>
+                <button class="btn fw-bold custom-btn"><i class="fa-solid fa-right-from-bracket"></i> Thoát</button>
+              </div>
+        </div>
+      
+      <!-- Thông tin hóa đơn -->
+    <div class="row m-0 mb-3 border rounded-4 py-2  ">
+        <div class="col-4">
+            <div class=" ms-1 p-3 py-1 border rounded-4 ">
+                <div class="row">
+                    <button class="col border  border-1 rounded-start btn "><i class="fa-solid fa-arrows-rotate"></i></button>
+                    <input class="col-8  border border-1 rounded-2 mx-1" type="text">
+                    <button type="button" class="col border border-1 rounded-end btn "><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div> 
+                <div class="row border rounded-4 border-1 mt-1 "style="height: 300px;">
+                <table class="table  table-hover h-25 m-0 text-center " >
+                    <thead class="rounded-4"> 
+                      <tr>
+                        <th class="col-2">STT</th>
+                        <th class="col">Họ và Tên</th>
+                        <th class="col-4">Năm sinh</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>1</td>
+                        <td >Nguyễn Văn A</td>
+                        <td>1990</td>
+                      </tr>
+                      <tr>
+                        <td>1</td>
+                        <td>Nguyễn Văn A</td>
+                        <td>1990</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+            <div class="row m-0 ms-1 mt-2 p-3 py-1 border rounded-4">
+                <div class="col pt-2">
+                    <div class="form-group row pb-2">
+                        <label class="fw-semibold col-4" for="medical-id">Mã y tế:</label>
+                        <input type="text" id="medical-id"  class="form-control form-control-sm col">
+                    </div>
+                    <div class="form-group row pb-2">
+                        <label class="fw-semibold col-4" for="name">Họ và tên:</label>
+                        <input type="text" id="name"  class="form-control form-control-sm col">
+                    </div>
+                    <div class="form-group row pb-2">
+                        <label class="fw-semibold col-4" for="gender">Giới tính:</label>
+                        <input type="text" id="gender"  class="form-control form-control-sm col">
+                    </div>
+                    <div class="form-group row pb-2">
+                        <label class="fw-semibold col-4" for="dob">Ngày sinh:</label>
+                        <input type="text" id="dob"  class="form-control form-control-sm col">
+                    </div>
+                    <div class="form-group row pb-2">
+                        <label class="fw-semibold col-4" for="phone">Số điện thoại:</label>
+                        <input type="text" id="phone"  class="form-control form-control-sm col">
+                    </div>
+                    <div class="form-group row pb-2">
+                        <label class="fw-semibold col-4" for="address">Địa chỉ:</label>
+                        <input type="text" id="address" class="form-control form-control-sm col">
+                    </div>
+                    <div class="form-group row pb-2">
+                        <label class="fw-semibold col-4" for="height">Chiều cao:</label>
+                        <input type="text" id="height" value="1m7"  class="form-control form-control-sm col">
+                    </div>
+                    <div class="form-group row pb-2">
+                        <label class="fw-semibold col-4" for="weight">Cân nặng:</label>
+                        <input type="text" id="weight" value="70kg"  class="form-control form-control-sm col">
+                    </div>
+                </div>
+            </div>
+            <div class="row m-0 ms-1 mt-2 p-3 py-1 border rounded-4">
+                <button type="button" class="btn custom-btn rounded-pill px-4 py-2 font-weight-bold" data-bs-toggle="modal" data-bs-target="#vaccineModal">
+                    Chỉ định vắc xin
+                  </button>
+                <div class="modal fade" id="vaccineModal" tabindex="-1" aria-labelledby="vaccineModalLabel" aria-hidden="true" >
+                    <div class="modal-dialog modal-xl">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="vaccineModalLabel">CHỈ ĐỊNH VẮC XIN</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form class="mx-4" >
+                                    <div class="form-group row mb-1">
+                                        <label class="col-2 fw-bold" for="vaccineCode" >Mã Vaccine</label>
+                                        <input type="text" class="form-control col" id="vaccineCode" value="24URAD036">
+                                        <label class="col-2 fw-bold" for="vaccineName" >Tên Vaccine</label>
+                                        <input type="text" class="form-control col" id="vaccineName" value="Vắc-xin thủy đậu – VARILRIX (Bỉ)">
+                                    </div>
+                             
+                                    <div class="form-group row mb-1">
+                                        <label class="col-2 fw-bold" for="origin">Nguồn gốc</label>
+                                        <input type="text" class="form-control col" id="origin" value="Bỉ">
+                                        <label class="col-2 fw-bold" for="productionDate">Ngày sản xuất</label>
+                                        <input type="date" class="form-control col" id="productionDate" value="2023-02-03">
+                                    </div>
+                                    <div class="form-group row mb-1">
+                                        <label class="col-2 fw-bold" for="use">Công dụng</label>
+                                        <input type="text" class="form-control col" id="use" value="Phòng bệnh Thủy đậu">
+                                        <label class="col-2 fw-bold" for="expiryDate">Hạn sử dụng</label>
+                                        <input type="date" class="form-control col" id="expiryDate" value="2025-02-03">
+                                    </div>
+                        
+                                    <div class="form-group row mb-1">
+                                        <label class="col-2 fw-bold" for="composition">Thành phần</label>
+                                        <input type="text" class="form-control col" id="composition">
+                                        <label class="col-2 fw-bold" for="notes">Ghi chú</label>
+                                        <input type="text" class="form-control col" id="notes" value="Trẻ em từ 9 tháng tuổi đến 12 tuổi: Lịch tiêm 2 mũi">
+                                    </div>
+                            </form>
+                            <div class="border rounded-4 p-3 mt-2">
+                                <form class="row ">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="vaccineCodeFind">Mã Vaccine</label>
+                                            <input type="text" class="form-control" id="vaccineCodeFind" value="24URAD036">
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="vaccineNameFind">Tên Vaccine</label>
+                                            <input type="text" class="form-control" id="vaccineNameFind" value="Vắc-xin thủy đậu – VARILRIX (Bỉ)">
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label class="fw-bold" for="originFind">Nguồn gốc</label>
+                                            <input type="text" class="form-control col" id="originFind" value="Bỉ">
+                                        </div>
+                                    </div>
+                
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label for="useFind" >Công dụng</label>
+                                            <input type="text" class="form-control" id="useFind" value="Phòng bệnh Thủy đậu">
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="productionDateFind">Ngày sản xuất</label>
+                                            <input type="date" class="form-control" id="productionDateFind" value="2023-02-03">
+                                        </div>
+                                    </div class="col">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="expiryDateFind">Hạn sử dụng</label>
+                                            <input type="date" class="form-control" id="expiryDateFind" value="2025-02-03">
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <button class="btn custom-btn mt-4" type="button"><i class="fa-solid fa-magnifying-glass"></i>  Tìm</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="border rounded-4 mt-2" style="font-size: small;">
+                                <table class="table  m-0 mt-2 ">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Tên Vắc xin/Huyết thanh</th>
+                                            <th>Nguồn gốc</th>
+                                            <th>Số lượng tồn kho</th>
+                                            <th>Phòng bệnh</th>
+                                            <th>Đơn giá</th>
+                                            <th>Thành phần</th>
+                                            <th>Ghi chú</th>
+                                            <th>Ngày sản xuất</th>
+                                            <th>Ngày hết hạn</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th><input type="checkbox"></th>
+                                            <td>Vắc-xin thủy đậu – VARILRIX (Bỉ)</td>
+                                            <td>Bỉ</td>
+                                            <td>68</td>
+                                            <td>Thủy đậu</td>
+                                            <td>919,000</td>
+                                            <td></td>
+                                            <td>trẻ từ 9 tháng</td>
+                                            <td>03-02-2023</td>
+                                            <td>03-02-2025</td>
+                                        </tr>
+                                        <tr>
+                                            <th><input type="checkbox"></th>
+                                            <td>Vắc-xin thủy đậu – Varivax (Mỹ)</td>
+                                            <td>Mỹ</td>
+                                            <td>72</td>
+                                            <td>Thủy đậu</td>
+                                            <td>1,085,000</td>
+                                            <td></td>
+                                            <td>trẻ từ 12 tháng</td>
+                                            <td>16-04-2023</td>
+                                            <td>16-04-2025</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="10" class="font-weight-bold" >Đề Xuất Tiêm</td>
+                                        </tr>
+                                        <tr>
+                                            <th><input type="checkbox"></th>
+                                            <td>Vắc-xin thủy đậu – VARILRIX (Bỉ)</td>
+                                            <td>Bỉ</td>
+                                            <td>68</td>
+                                            <td>Thủy đậu</td>
+                                            <td>919,000</td>
+                                            <td></td>
+                                            <td>trẻ từ 9 tháng</td>
+                                            <td>03-02-2023</td>
+                                            <td>03-02-2025</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
+                          <button type="button" class="btn custom-btn">Save changes</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+        <div class="invoice-section col-8  ">
+            <div class=" ms-1 p-3 border rounded-4 h-100">
+                <div class="row ">
+                    <div class="col">
+                        <table class="table table-bordered">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Sàng Lọc</th>
+                                    <th>Không</th>
+                                    <th>Có</th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                                <tr>
+                                    <td>1. Bệnh cấp tính đang mắc</td>
+                                    <td><input type="checkbox" class="form-check-input"></td>
+                                    <td><input type="checkbox" class="form-check-input"></td>
+                                </tr>
+                                <tr>
+                                    <td>2. Tiền sử dị ứng (ghi rõ)</td>
+                                    <td><input type="checkbox" class="form-check-input"></td>
+                                    <td><input type="checkbox" class="form-check-input"></td>
+                                </tr>
+                                <tr>
+                                    <td>3. Tiền sử phản vệ tử độ 2 trở lên với bất kỳ tác nhân nào</td>
+                                    <td><input type="checkbox" class="form-check-input"></td>
+                                    <td><input type="checkbox" class="form-check-input"></td>
+                                </tr>
+                                <tr>
+                                    <td>4. Tiền sử tiêm vắc xin khác trong 14 ngày qua</td>
+                                    <td><input type="checkbox" class="form-check-input"></td>
+                                    <td><input type="checkbox" class="form-check-input"></td>
+                                </tr>
+                                <tr>
+                                    <td>5. Tiền sử bị COVID-19 trong vòng 6 tháng</td>
+                                    <td><input type="checkbox" class="form-check-input"></td>
+                                    <td><input type="checkbox" class="form-check-input"></td>
+                                </tr>
+                                <tr>
+                                    <td>6. Tiền sử điều trị huyết tương từ người đã được điều trị khỏi COVID-19 hoặc immunoglobulin trong vòng 90 ngày</td>
+                                    <td><input type="checkbox" class="form-check-input"></td>
+                                    <td><input type="checkbox" class="form-check-input"></td>
+                                </tr>
+                                <tr>
+                                    <td>7. Tiền sử suy giảm miễn dịch, ung thư, cắt lách, đang dùng thuốc ức chế miễn dịch, corticoid liều cao</td>
+                                    <td><input type="checkbox" class="form-check-input"></td>
+                                    <td><input type="checkbox" class="form-check-input"></td>
+                                </tr>
+                                <tr>
+                                    <td>8. Tiền sử rối loạn đông máu cầm máu hoặc đang dùng thuốc chống đông</td>
+                                    <td><input type="checkbox" class="form-check-input"></td>
+                                    <td><input type="checkbox" class="form-check-input"></td>
+                                </tr>
+                                <tr>
+                                    <td>9. Đang mang thai, phụ nữ đang nuôi con bằng sữa mẹ</td>
+                                    <td><input type="checkbox" class="form-check-input"></td>
+                                    <td><input type="checkbox" class="form-check-input"></td>
+                                </tr>
+                                <tr>
+                                    <td>10. Bất thường dấu hiệu sống (ghi rõ)
+                                        <div class="row mb-1 pt-2">
+                                            <label for="temp" class="form-label col">Nhiệt độ:</label>
+                                            <input type="text" class="form-control col me-3" id="temp" placeholder="Độ C">
+                                            <label for="bp" class="form-label col">Huyết áp:</label>
+                                            <input type="text" class="form-control col me-3" id="bp" placeholder="mmHg">
+                                        </div>
+                                        <div class="row mb-1">
+                                            <label for="spo2" class="form-label col">SpO2:</label>
+                                            <input type="text" class="form-control col me-3" id="spo2" placeholder="%">
+                                            <label for="pulse" class="form-label col">Mạch:</label>
+                                            <input type="text" class="form-control col me-3" id="pulse" placeholder="lần/phút">
+                                        </div>
+                                        <div class="d-flex mb-1">
+                                            <label for="breath" class="form-label flex-fill" style="width: 30%;">Nhịp thở:</label>
+                                            <input type="text" class="form-control flex-fill " style="width: 32%; margin-right: 52%;" id="breath" placeholder="lần/phút">
+                                        </div>
+                                    </td>
+                                    <td><input type="checkbox" class="form-check-input"></td>
+                                    <td><input type="checkbox" class="form-check-input"></td>
+                                </tr>
+                                <tr>
+                                    <td>11. Dấu hiệu bất thường khi nghe tim phổi</td>
+                                    <td><input type="checkbox" class="form-check-input"></td>
+                                    <td><input type="checkbox" class="form-check-input"></td>
+                                </tr>
+                                <tr>
+                                    <td>12. Rối loạn tri giác</td>
+                                    <td><input type="checkbox" class="form-check-input"></td>
+                                    <td><input type="checkbox" class="form-check-input"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="form-group px-5">
+                            <div class="form-check ">
+                                <label class="form-check-label fw-bold fst-italic" for="option1">
+                                    Đủ điều kiện tiêm chủng ngay (Tất cả điều KHÔNG có điểm bất thường)
+                                </label>
+                                <input class="form-check-input " type="checkbox" id="option1" checked>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label fw-bold fst-italic" for="option2">
+                                    Chống chỉ định tiêm chủng vắc xin cùng loại (Khi Có điểm bất thường tại mục 3)
+                                </label>
+                                <input class="form-check-input" type="checkbox" id="option2">
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label fw-bold fst-italic" for="option3">
+                                    Trì hoãn tiêm chủng (Khi Có bất kỳ một điểm bất thường tại các mục 1, 4, 5, 6, 7, 8, 9)
+                                </label>
+                                <input class="form-check-input" type="checkbox" id="option3">
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label fw-bold fst-italic" for="option4">
+                                    Chuyển tiêm chủng và theo dõi tại bệnh viện (Khi CÓ tại các mục 2, 10, 11, 12)
+                                </label>
+                                <input class="form-check-input" type="checkbox" id="option4">
+                            </div>
+                            <div class="form-group d-flex ">
+                                <label class="flex-fill fw-bold fst-italic" style="width: 7%;" for="reason">Lý do</label>
+                                <textarea class="form-control flex-fill pe-5" id="reason" rows="1" ></textarea>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>      
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- Bảng chi tiết hóa đơn -->
+    <div class="border rounded-4 ">
+        <div class="table-responsive p-2 ">
+            <table class="table table-bordered table-sm">
+                <thead>
+                    <tr>
+                        <th>Tên Vắc xin/Huyết thanh</th>
+                        <th>Nguồn gốc</th>
+                        <th>Số lượng tồn kho</th>
+                        <th>Phòng bệnh</th>
+                        <th>Đơn giá</th>
+                        <th>Số mũi</th>
+                        <th>Tình trạng</th>
+                        <th>Ngày sản xuất</th>
+                        <th>Ngày hết hạn</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Vắc-xin thủy đậu – VARILRIX (Bỉ)</td>
+                        <td>Bỉ</td>
+                        <td>68</td>
+                        <td>Thủy đậu</td>
+                        <td>919.000</td>
+                        <td>Mũi 1</td>
+                        <td>Chưa tiêm</td>
+                        <td>03-02-2023</td>
+                        <td>03-02-2025</td>
+                    </tr>
+                    <tr>
+                        <td>Vắc-xin thủy đậu – VARILRIX (Bỉ)</td>
+                        <td>Bỉ</td>
+                        <td>68</td>
+                        <td>Thủy đậu</td>
+                        <td>919.000</td>
+                        <td>Mũi 2</td>
+                        <td>Chưa tiêm</td>
+                        <td>03-02-2023</td>
+                        <td>03-02-2025</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="button" class="float-end btn custom-btn w-25" >Xác Nhận</button>
+        </div>
+    </div>
+ 
+</div>

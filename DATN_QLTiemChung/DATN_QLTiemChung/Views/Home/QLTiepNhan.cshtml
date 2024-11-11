@@ -1,0 +1,272 @@
+﻿    <div class="container mt-4" >
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="" style="color: #2fb388;">QUẢN LÝ TIẾP NHẬN</h2>
+            <div class="float-end ">
+                <button class="btn fw-bold custom-btn"><i class="fa-solid fa-plus"></i> Thêm</button>
+                <button class="btn fw-bold custom-btn"><i class="fa-solid fa-floppy-disk"></i> Lưu</button>
+                <button class="btn fw-bold custom-btn"><i class="fa-solid fa-repeat"></i> Hủy </button>
+                <button class="btn fw-bold custom-btn"><i class="fa-solid fa-print"></i> In</button>
+                <button class="btn fw-bold custom-btn"><i class="fa-solid fa-right-from-bracket"></i> Thoát</button>
+              </div>
+        </div>
+      
+      <!-- Thông tin hóa đơn -->
+    <div class="row m-0 mb-3 border rounded-4 py-2  ">
+        <div class="invoice-section col-md-12  ">
+            <div class=" p-3 border rounded-4  ">
+                <div class="row ">
+                    <form>
+                        <div class="row">
+                            <div class="form-group col">
+                                <label class="fw-semibold" for="maYTe">Mã y tế</label>
+                                <input type="text" class="form-control" id="maYTe" value="CDCD0912312345">
+                            </div>
+                            <div class="form-group col">
+                                <label class="fw-semibold" for="hoTen">Họ tên</label>
+                                <input type="text" class="form-control" id="hoTen" value="Nguyễn Quang Trường">
+                            </div>
+                            <div class="form-group col">
+                                <label class="fw-semibold" for="ngaySinh">Ngày sinh</label>
+                                <input type="date" class="form-control" id="ngaySinh" value="2006-02-08">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col">
+                                <label class="fw-semibold" for="danToc">Dân tộc</label>
+                                <input type="text" class="form-control" id="danToc" name="danToc" value="Kinh" placeholder="Nhập dân tộc" required>
+                            </div>
+                            <div class="form-group col">
+                                <label class="fw-semibold" for="gioiTinh">Giới tính</label>
+                                <input type="text" class="form-control" id="gioiTinh" value="Nam">
+                            </div>
+                            <div class="form-group col">
+                                <label class="fw-semibold" for="cmt">CMT/CCCD/Mã định danh</label>
+                                <input type="text" class="form-control" id="cmt" value="001082946357">
+                            </div>
+                        </div>
+                        <div class="row ">
+                         
+                            <div class="form-group col">
+                                <label class="fw-semibold" for="sdt">Sđt</label>
+                                <input type="text" class="form-control" id="sdt" value="08/02/2006">
+                            </div>
+                            <div class="form-group col">
+                                <label class="fw-semibold" for="email">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" value="example@gmail.com" placeholder="Nhập email" title="Nhập đúng định dạng email (example@gmail.com)" required>
+                            </div>
+                        </div>
+                        <h5 class="mt-2">Hộ khẩu</h5>
+                        <div class="row">
+                            <div class="form-group col">
+                                <label class="fw-semibold" for="hoKhauTinh">Tỉnh/TP</label>
+                                <select class="form-control" id="hoKhauTinh">
+                                    <option>Đà Nẵng</option>
+                                    <option>Hà Nội</option>
+                                    <option>Hồ Chí Minh</option>
+                                </select>
+                            </div>
+                            <div class="form-group col">
+                                <label class="fw-semibold" for="hoKhauQuan">Quận/Huyện</label>
+                                <select class="form-control" id="hoKhauQuan">
+                                    <option>Thanh Khê</option>
+                                    <option>Hải Châu</option>
+                                    <option>Ngũ Hành Sơn</option>
+                                </select>
+                            </div>
+                            <div class="form-group col">
+                                <label class="fw-semibold" for="hoKhauXa">Xã/Phường</label>
+                                <select class="form-control" id="hoKhauXa">
+                                    <option>Thạc Gián</option>
+                                    <option>Hòa Minh</option>
+                                    <option>Mỹ An</option>
+                                </select>
+                            </div>
+                            <div class="form-group col">
+                                <label class="fw-semibold" for="thonAp">Thôn/Ấp</label>
+                                <select class="form-control" id="thonAp">
+                                    <option>Thôn 1</option>
+                                    <option>Thôn 2</option>
+                                    <option>Thôn 3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col">
+                                <label class="fw-semibold" for="diaChiChiTiet">Địa chỉ chi tiết</label>
+                                <input type="text" class="form-control" id="diaChiChiTiet" value="37 Đ. Phạm Văn Nghị">
+                            </div>
+                        </div>
+                       
+                        <h5 class="mt-2">Nơi tạm trú</h5>
+                        <div class="row">
+                            <div class="form-group col">
+                                <label class="fw-semibold" for="tamTruTinh">Tỉnh/TP</label>
+                                <select class="form-control" id="tamTruTinh">
+                                    <option>Đà Nẵng</option>
+                                    <option>Hà Nội</option>
+                                    <option>Hồ Chí Minh</option>
+                                </select>
+                            </div>
+                            <div class="form-group col">
+                                <label class="fw-semibold" for="tamTruQuan">Quận/Huyện</label>
+                                <select class="form-control" id="tamTruQuan">
+                                    <option>Thanh Khê</option>
+                                    <option>Hải Châu</option>
+                                    <option>Ngũ Hành Sơn</option>
+                                </select>
+                            </div>
+                            <div class="form-group col">
+                                <label class="fw-semibold" for="tamTruXa">Xã/Phường</label>
+                                <select class="form-control" id="tamTruXa">
+                                    <option>Thạc Gián</option>
+                                    <option>Hòa Minh</option>
+                                    <option>Mỹ An</option>
+                                </select>
+                            </div>
+                            <div class="form-group col">
+                                <label class="fw-semibold" for="thonAp">Thôn/Ấp</label>
+                                <select class="form-control" id="thonAp">
+                                    <option>Thôn 1</option>
+                                    <option>Thôn 2</option>
+                                    <option>Thôn 3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col">
+                                <label class="fw-semibold" for="diaChiChiTietTamTru">Địa chỉ chi tiết</label>
+                                <input type="text" class="form-control" id="diaChiChiTietTamTru">
+                            </div>
+                        </div>
+                        
+                    </form>
+                </div>  
+                 
+            </div>
+            <div class="p-2 mt-2 border rounded-4 float-end" style="width: 35%;" >  
+                    <div >
+                        <button type="button" class="btn custom-btn rounded-pill font-weight-bold" data-bs-toggle="modal" data-bs-target="#vaccineModal" style="width: 100%;">Thêm hàng chờ</button>
+                    </div>
+                    <div class="modal fade" id="vaccineModal" tabindex="-1" aria-labelledby="vaccineModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-xl">
+                            <div class="modal-content">
+                                <!-- Header Modal -->
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="vaccineModalLabel">THÊM HÀNG CHỜ</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                
+                                <!-- Body Modal -->
+                                <div class="modal-body" style="overflow-x: auto; max-height: 80vh;">
+                                    <!-- Form tìm kiếm -->
+                                    <div class="border rounded-4 p-3 mt-2">
+                                        <form class="row g-3">
+                                            <div class="col-3">
+                                                <label class="fw-bold" for="medicalCodeFind">Số y tế</label>
+                                                <input type="text" class="form-control" id="medicalCodeFind" placeholder="Nhập số y tế">
+                                            </div>
+                                            
+                                            <div class="col">
+                                                <label class="fw-bold" for="userNameFind">Tên bệnh nhân</label>
+                                                <input type="text" class="form-control" id="userNameFind" placeholder="Nhập tên bệnh nhân">
+                                            </div>
+                                            
+                                            <div class="col">
+                                                <label class="fw-bold" for="identityCodeFind">CMT/CCCD/Mã định danh</label>
+                                                <input type="text" class="form-control" id="identityCodeFind" placeholder="Nhập mã định danh">
+                                            </div>
+                                            
+                                            <div class="col-2">
+                                                <button class="btn custom-btn mt-4 w-100" type="button">
+                                                    <i class="fa-solid fa-magnifying-glass"></i> Tìm
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                    
+                                    <!-- Bảng hẹn đặt trước -->
+                                    <div class="border rounded-4 mt-4 p-3 table-responsive" style="font-size: small;">
+                                        <h4>Bảng hẹn đặt trước: Ngày 02/10/2024</h4>
+                                        <table class="table table-bordered">
+                                            <thead >
+                                                <tr style="background-color: #2fb388;">
+                                                    <th></th>
+                                                    <th>Ngày đặt</th>
+                                                    <th>Số y tế</th>
+                                                    <th>Tên bệnh nhân</th>
+                                                    <th>Ngày sinh</th>
+                                                    <th>Dân tộc</th>
+                                                    <th>Giới tính</th>
+                                                    <th>CMT/CCCD/Mã định danh</th>
+                                                    <th>Hộ khẩu</th>
+                                                    <th>Nơi tạm trú</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><input type="checkbox" name="selectedAppointment"></td>
+                                                    <td>02/10/2024</td>
+                                                    <td>CDCD0912312345</td>
+                                                    <td>Nguyễn Quang Trường</td>
+                                                    <td>08/02/2006</td>
+                                                    <td>Kinh</td>
+                                                    <td>Nam</td>
+                                                    <td>001082946357</td>
+                                                    <td>Hộ Khẩu</td>
+                                                    <td>Nơi tạm trú</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                    
+                                    <!-- Bảng thông tin khách hàng -->
+                                    <div class="border rounded-4 mt-4 p-3 table-responsive" style="font-size: small;">
+                                        <h4>Bảng thông tin khách hàng</h4>
+                                        <table class="table table-bordered">
+                                            <thead class="">
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Số y tế</th>
+                                                    <th>Tên bệnh nhân</th>
+                                                    <th>Ngày sinh</th>
+                                                    <th>Dân tộc</th>
+                                                    <th>Giới tính</th>
+                                                    <th>CMT/CCCD/Mã định danh</th>
+                                                    <th>Hộ khẩu</th>
+                                                    <th>Nơi tạm trú</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><input type="checkbox" name="selectedCustomer"></td>
+                                                    <td>CDCD0912312345</td>
+                                                    <td>Nguyễn Quang Trường</td>
+                                                    <td>08/02/2006</td>
+                                                    <td>Kinh</td>
+                                                    <td>Nam</td>
+                                                    <td>001082946357</td>
+                                                    <td>Hộ Khẩu</td>
+                                                    <td>Nơi tạm trú</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                
+                                <!-- Footer Modal -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Thoát</button>
+                                    <button type="button" class="btn custom-btn">Thêm hàng chờ</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>  
+        </div>
+      
+       
+    </div>
+    
+
+  
+</div>

@@ -13,7 +13,7 @@ namespace DATN_QLTiemChung.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult HomeQL()
         {
             return View();
         }

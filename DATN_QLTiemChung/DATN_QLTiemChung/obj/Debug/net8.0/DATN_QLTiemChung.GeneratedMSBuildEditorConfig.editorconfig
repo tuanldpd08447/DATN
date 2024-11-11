@@ -18,12 +18,52 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_QLTiemChung
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/ductu/Documents/Github/DATN/DATN_QLTiemChung/DATN_QLTiemChung/Views/Home/HomeQL.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxIb21lUUwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/ductu/Documents/Github/DATN/DATN_QLTiemChung/DATN_QLTiemChung/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/ductu/Documents/Github/DATN/DATN_QLTiemChung/DATN_QLTiemChung/Views/Home/KhamSanLoc.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxLaGFtU2FuTG9jLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ductu/Documents/Github/DATN/DATN_QLTiemChung/DATN_QLTiemChung/Views/Home/PhieuLinh.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQaGlldUxpbmguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/ductu/Documents/Github/DATN/DATN_QLTiemChung/DATN_QLTiemChung/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ductu/Documents/Github/DATN/DATN_QLTiemChung/DATN_QLTiemChung/Views/Home/QLHoaDon.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxRTEhvYURvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ductu/Documents/Github/DATN/DATN_QLTiemChung/DATN_QLTiemChung/Views/Home/QLKhachHang.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxRTEtoYWNoSGFuZy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ductu/Documents/Github/DATN/DATN_QLTiemChung/DATN_QLTiemChung/Views/Home/QLKho.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxRTEtoby5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ductu/Documents/Github/DATN/DATN_QLTiemChung/DATN_QLTiemChung/Views/Home/QLNhanVien.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxRTE5oYW5WaWVuLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ductu/Documents/Github/DATN/DATN_QLTiemChung/DATN_QLTiemChung/Views/Home/QLTiemChung.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxRTFRpZW1DaHVuZy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ductu/Documents/Github/DATN/DATN_QLTiemChung/DATN_QLTiemChung/Views/Home/QLTiepNhan.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxRTFRpZXBOaGFuLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ductu/Documents/Github/DATN/DATN_QLTiemChung/DATN_QLTiemChung/Views/Home/QLXuatNhapKho.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxRTFh1YXROaGFwS2hvLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/ductu/Documents/Github/DATN/DATN_QLTiemChung/DATN_QLTiemChung/Views/Shared/Error.cshtml]

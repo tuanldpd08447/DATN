@@ -1,0 +1,196 @@
+﻿   <div class="container mt-4" >
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="" style="color: #2fb388;">QUẢN LÝ KHO</h2>
+            <div class="float-end ">
+                <button class="btn fw-bold custom-btn"><i class="fa-solid fa-plus"></i> Thêm</button>
+                <button class="btn fw-bold custom-btn"><i class="fa-solid fa-floppy-disk"></i> Lưu</button>
+                <button class="btn fw-bold custom-btn"><i class="fa-solid fa-repeat"></i> Hủy </button>
+                <button class="btn fw-bold custom-btn"><i class="fa-solid fa-print"></i> In</button>
+                <button class="btn fw-bold custom-btn"><i class="fa-solid fa-right-from-bracket"></i> Thoát</button>
+              </div>
+        </div>
+      
+      <!-- Thông tin hóa đơn -->
+    <div class="row m-0 mb-3 border rounded-4 py-2  ">
+        <div class="col">
+            <div class=" ms-1 p-3 py-1 border rounded-4  h-100">
+                <div class="row ">
+                    <div class="border rounded-4 p-2 ">
+                        <form class="row ">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="fw-bold" for="VatTuCodeFind">Mã vật tư</label>
+                                    <input type="text" class="form-control" id="VatTuCodeFind" value="24URAD036">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="fw-bold" for="VatTuNameFind">Tên vật tư</label>
+                                    <input type="text" class="form-control" id="VatTuNameFind" value="Vắc-xin thủy đậu – VARILRIX (Bỉ)">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="fw-bold" for="VatTuType">Loại vật tư</label>
+                                    <select class="form-control" id="VatTuType" placeholder="Nhập loại VatTu">
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                            </div>
+        
+                            <div class="col-2">
+                                <div class="form-group ">
+                                    <label class="fw-bold" for="origin">Nguồn cung cấp</label>
+                                    <select class="form-control" id="origin" placeholder="Nhập nguồn gốc VatTu">
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group ">
+                                    <label class="fw-bold" for="supplier">Nhà cung cấp</label>
+                                    <select class="form-control" id="supplier" placeholder="Nhập nhà cung cấp VatTu">
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                            </div class="col">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="fw-bold" for="expiryDateFind">Hạn sử dụng</label>
+                                    <input type="date" class="form-control" id="expiryDateFind" value="2025-02-03">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <button class="btn custom-btn mt-4" type="button"><i class="fa-solid fa-magnifying-glass"></i>  Tìm</button>
+                            </div>
+                        </form>
+                    </div>
+                    <form class="my-3">
+                        <div class="row">
+                            <div class="form-group col">
+                                <label for="VatTuCode">Mã vật tư</label>
+                                <input type="text" class="form-control" id="VatTuCode" placeholder="Nhập mã VatTu">
+                            </div>
+                            <div class="form-group col">
+                                <label for="VatTuName">Tên vật tư</label>
+                                <input type="text" class="form-control" id="VatTuName" placeholder="Nhập tên VatTu">
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="form-group col">
+                                <label for="VatTuType">Loại vật tư</label>
+                                <select class="form-control" id="VatTuType" placeholder="Nhập loại VatTu">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                            <div class="form-group col">
+                                <label for="origin">Nguồn cung cấp</label>
+                                <select class="form-control" id="origin" placeholder="Nhập nguồn gốc VatTu">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="form-group col">
+                                <label for="unitPrice">Đơn Giá</label>
+                                <input type="number" class="form-control" id="unitPrice" placeholder="Nhập Đơn giá">
+                            </div>
+                            <div class="form-group col">
+                                <label for="supplier">Nhà cung cấp</label>
+                                <select class="form-control" id="supplier" placeholder="Nhập nhà cung cấp VatTu">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                           
+                            <div class="form-group col">
+                                <label for="expirationDate">Hạn sử dụng</label>
+                                <input type="date" class="form-control" id="expirationDate">
+                            </div>
+                            <div class="form-group col">
+                                <label for="entryDate">Ngày nhập</label>
+                                <input type="date" class="form-control" id="entryDate">
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="form-group col">
+                                <label for="quantity">Số lượng</label>
+                                <input type="number" class="form-control" id="quantity" placeholder="Nhập số lượng">
+                            </div>
+                            <div class="form-group col">
+                                <label for="notes">Ghi chú</label>
+                                <textarea class="form-control" id="notes" rows="1" placeholder="Nhập ghi chú"></textarea>
+                            </div>
+                        </div>
+                    
+                    </form>
+                    
+                    
+                </div>
+                
+            </div>
+            
+            
+        </div>
+      
+        <div class="p-3 pt-1">
+            <div class="border rounded-4 mt-1 ">
+                <div class="table-responsive p-2 ">
+                    <table class="table  m-0 mt-2 ">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Mã vật tư</th>
+                                <th>Tên vật tư</th>
+                                <th>Nguồn cung cấp</th>
+                                <th>Số lượng </th>
+                                <th>Nhà cung cấp</th>
+                                <th>Đơn giá</th>
+                                <th>Loại vật tư</th>
+                                <th>Ngày nhập</th>
+                                <th>Ngày hết hạn</th>
+                                <th>Ghi chú</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th><input type="checkbox"></th>
+                                <td>Vắc-xin thủy đậu – VARILRIX (Bỉ)</td>
+                                <td>Bỉ</td>
+                                <td>68</td>
+                                <td>Thủy đậu</td>
+                                <td>919,000</td>
+                                <td></td>
+                                <td>trẻ từ 9 tháng</td>
+                                <td>03-02-2023</td>
+                                <td>03-02-2025</td>
+                            </tr>
+                            <tr>
+                                <th><input type="checkbox"></th>
+                                <td>Vắc-xin thủy đậu – Varivax (Mỹ)</td>
+                                <td>Mỹ</td>
+                                <td>72</td>
+                                <td>Thủy đậu</td>
+                                <td>1,085,000</td>
+                                <td></td>
+                                <td>trẻ từ 12 tháng</td>
+                                <td>16-04-2023</td>
+                                <td>16-04-2025</td>
+                            </tr>
+                          
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+    
+
+  
+</div>
