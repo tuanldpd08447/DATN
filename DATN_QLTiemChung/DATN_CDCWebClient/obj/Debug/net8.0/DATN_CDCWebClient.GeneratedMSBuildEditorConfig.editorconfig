@@ -18,12 +18,36 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_CDCWebClient
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/ductu/Documents/Github/DATN/DATN_QLTiemChung/DATN_CDCWebClient/Views/Home/DKyLichKham.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxES3lMaWNoS2hhbS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ductu/Documents/Github/DATN/DATN_QLTiemChung/DATN_CDCWebClient/Views/Home/Home.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxIb21lLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/ductu/Documents/Github/DATN/DATN_QLTiemChung/DATN_CDCWebClient/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/ductu/Documents/Github/DATN/DATN_QLTiemChung/DATN_CDCWebClient/Views/Home/LichSuTiem.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxMaWNoU3VUaWVtLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ductu/Documents/Github/DATN/DATN_QLTiemChung/DATN_CDCWebClient/Views/Home/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/ductu/Documents/Github/DATN/DATN_QLTiemChung/DATN_CDCWebClient/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ductu/Documents/Github/DATN/DATN_QLTiemChung/DATN_CDCWebClient/Views/Home/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ductu/Documents/Github/DATN/DATN_QLTiemChung/DATN_CDCWebClient/Views/Home/ThongTinCaNhan.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxUaG9uZ1RpbkNhTmhhbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/ductu/Documents/Github/DATN/DATN_QLTiemChung/DATN_CDCWebClient/Views/Shared/Error.cshtml]

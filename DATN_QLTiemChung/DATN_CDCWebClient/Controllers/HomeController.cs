@@ -13,11 +13,30 @@ namespace DATN_CDCWebClient.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Home()
         {
             return View();
         }
-
+        public IActionResult DKyLichKham()
+        {
+            return View();
+        }
+        public IActionResult LichSuTiem()
+        {
+            return View();
+        }
+        public IActionResult Login()
+        {
+            return View();
+        }
+        public IActionResult Register()
+        {
+            return View();
+        }
+        public IActionResult ThongTinCaNhan()
+        {
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();

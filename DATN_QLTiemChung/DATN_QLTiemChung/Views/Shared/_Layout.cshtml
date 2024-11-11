@@ -26,11 +26,11 @@
                 <button class="btn col text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
                     <i class="fa-solid fa-bars"></i>
                 </button>
-                <h3 class="m-0 col">CDC</h3>
+                <h3 class="m-0 col"><a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 text-white fw-bold" asp-action="">CDC</a></h3>
             </div>
             <div class="btn-group">
 
-                <button type="button" class="btn btn-outline-light fw-bold">Đăng nhập</button>
+                
 
                @if(login){
                     <button type="button" class="btn fs-6 border-0 dropdown-toggle text-white" data-bs-toggle="dropdown" aria-expanded="false">
@@ -41,6 +41,8 @@
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
                     </ul>
+                }else{
+                    <button type="button" class="btn btn-outline-light fw-bold">Đăng nhập</button>
                 }
             </div>
         </div>
@@ -54,28 +56,28 @@
         </div>
         <div class="offcanvas-body">
             <div class="row ">
-                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" href="QLTiepNhan.html">QUẢN LÝ TIẾP NHẬN</a>
+                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" asp-action="QLTiepNhan">QUẢN LÝ TIẾP NHẬN</a>
             </div>
             <div class="row">
-                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" href="KhamSanLoc.html">KHÁM SÀNG LỌC</a>
+                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" asp-action="KhamSanLoc">KHÁM SÀNG LỌC</a>
             </div>
             <div class="row">
-                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" href="QLHoaDon.html">QUẢN LÝ HÓA ĐƠN</a>
+                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" asp-action="QLHoaDon">QUẢN LÝ HÓA ĐƠN</a>
             </div>
             <div class="row">
-                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" href="QLTiemChung.html">QUẢN LÝ TIÊM CHỦNG</a>
+                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" asp-action="QLTiemChung">QUẢN LÝ TIÊM CHỦNG</a>
             </div>
             <div class="row">
-                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" href="QLKhachHang.html">QUẢN LÝ KHÁCH HÀNG</a>
+                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" asp-action="QLKhachHang">QUẢN LÝ KHÁCH HÀNG</a>
             </div>
             <div class="row">
-                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" href="QLNhanVien.html">QUẢN LÝ NHÂN VIÊN</a>
+                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" asp-action="QLNhanVien">QUẢN LÝ NHÂN VIÊN</a>
             </div>
             <div class="row">
-                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" href="QLKho.html">KHO VACCINE</a>
+                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" asp-action="QLKho">KHO VACCINE</a>
             </div>
             <div class="row">
-                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" href="QLXuatNhapKho.html">QUẢN LÝ XUẤT NHẬP KHO</a>
+                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" asp-action="QLXuatNhapKho">QUẢN LÝ XUẤT NHẬP KHO</a>
             </div>
         </div>
         <style>

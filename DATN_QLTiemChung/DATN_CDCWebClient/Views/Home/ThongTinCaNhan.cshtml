@@ -1,0 +1,99 @@
+﻿<div class="container mt-5" style="min-height: 900px;">
+    <div class="">
+        <h2 class="card-header bg-body-secondary py-4 mb-5 row">
+            <div class="col-1 border-2 border-end">
+            </div>
+            <div class="col fw-bold" style="color: #2fb388;">
+                Thông Tin Cá Nhân
+            </div>
+        </h2>
+
+        <div class="card-body">
+            <p>Thông Tin Bệnh Nhân</p>
+            <form>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="hoTen" class="form-label">Họ và Tên</label>
+                        <input type="text" class="form-control" id="hoTen">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="ngaySinh" class="form-label">Ngày Tháng Năm Sinh</label>
+                        <input type="date" class="form-control" id="ngaySinh">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="cmnd" class="form-label">Số CMND hoặc CCCD</label>
+                        <input type="text" class="form-control" id="cmnd">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="soDienThoai" class="form-label">Số Điện Thoại</label>
+                        <input type="text" class="form-control" id="soDienThoai">
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label for="city" class="form-label">Tỉnh thành</label>
+                            <select name="" class="form-control" id="city">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="district" class="form-label">Quận huyện</label>
+                            <select name="" class="form-control" id="district">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="ward" class="form-label">Phường xã</label>
+                            <select name="" class="form-control" id="ward">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="address" class="form-label">Số nhà, tên đường</label>
+                        <input type="text" class="form-control" id="address" placeholder="Nhập số nhà, tên đường">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email">
+                    </div>
+                </div>
+                <h4>Thông Tin Bệnh Án</h4>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="hoSoBenhAn" class="form-label">Hồ Sơ Bệnh Án</label><br>
+                        <label class="btn w-20" style=" background-color: #2fb388;color: white;border-color: #2fb388;">
+                            <i class="fa-solid fa-arrow-up-from-bracket"></i> Upload
+                            <input type="file" class="form-control d-none" id="hoSoBenhAn" accept="image/*" onchange="previewFile(event, 'previewHoSoBenhAn')">
+                        </label>
+                        <img id="previewHoSoBenhAn" src="#" alt="Ảnh Xem Trước" style="max-width: 30%; display: none;">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="baoHiemYTe" class="form-label">Thông Tin Bảo Hiểm Y Tế</label><br>
+                        <label class="btn w-20" style=" background-color: #2fb388;color: white;border-color: #2fb388;">
+                            <i class="fa-solid fa-arrow-up-from-bracket"></i> Upload
+                            <input type="file" class="form-control d-none" id="baoHiemYTe" accept="image/*" onchange="previewFile(event, 'previewBaoHiemYTe')">
+                        </label>
+                        <img id="previewBaoHiemYTe" src="#" alt="Ảnh Xem Trước" style="max-width: 30%; display: none;">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="ketQuaXetNghiem" class="form-label">Kết Quả Xét Nghiệm</label><br>
+                        <label class="btn w-20" style=" background-color: #2fb388;color: white;border-color: #2fb388;">
+                            <i class="fa-solid fa-arrow-up-from-bracket"></i> Upload
+                            <input type="file" class="form-control d-none" id="ketQuaXetNghiem" accept="image/*" onchange="previewFile(event, 'previewKetQuaXetNghiem')">
+                        </label>
+                        <img id="previewKetQuaXetNghiem" src="#" alt="Ảnh Xem Trước" style="max-width: 30%; display: none;">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="keHoachDieuTri" class="form-label">Kế Hoạch Điều Trị</label><br>
+                        <label class="btn w-20" style=" background-color: #2fb388;color: white;border-color: #2fb388;">
+                            <i class="fa-solid fa-arrow-up-from-bracket"></i> Upload
+                            <input type="file" class="form-control d-none" id="keHoachDieuTri" accept="image/*" onchange="previewFile(event, 'previewKeHoachDieuTri')">
+                        </label>
+                        <img id="previewKeHoachDieuTri" src="#" alt="Ảnh Xem Trước" style="max-width: 30%; display: none;">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
