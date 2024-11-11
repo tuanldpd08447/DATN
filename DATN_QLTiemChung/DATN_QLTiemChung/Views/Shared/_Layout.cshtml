@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var login = false;
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -26,14 +29,19 @@
                 <h3 class="m-0 col">CDC</h3>
             </div>
             <div class="btn-group">
-                <button type="button" class="btn fs-6 border-0 dropdown-toggle text-white" data-bs-toggle="dropdown" aria-expanded="false">
-                    Tunnd
-                </button>
-                <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="#">Thông tin cá nhân</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
-                </ul>
+
+                <button type="button" class="btn btn-outline-light fw-bold">Đăng nhập</button>
+
+               @if(login){
+                    <button type="button" class="btn fs-6 border-0 dropdown-toggle text-white" data-bs-toggle="dropdown" aria-expanded="false">
+                        Tunnd
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#">Thông tin cá nhân</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
+                    </ul>
+                }
             </div>
         </div>
     </nav>
@@ -45,19 +53,67 @@
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            <div class="row"><a class="custom-hover" href="QLTiepNhan.html">QUẢN LÝ TIẾP NHẬN</a></div>
-            <div class="row"><a class="custom-hover" href="KhamSanLoc.html">KHÁM SÀNG LỌC</a></div>
-            <div class="row"><a class="custom-hover" href="QLHoaDon.html">QUẢN LÝ HÓA ĐƠN</a></div>
-            <div class="row"><a class="custom-hover" href="QLTiemChung.html">QUẢN LÝ TIÊM CHỦNG</a></div>
-            <div class="row"><a class="custom-hover" href="QLKhachHang.html">QUẢN LÝ KHÁCH HÀNG</a></div>
-            <div class="row"><a class="custom-hover" href="QLNhanVien.html">QUẢN LÝ NHÂN VIÊN</a></div>
-            <div class="row"><a class="custom-hover" href="QLKho.html">KHO VACCINE</a></div>
-            <div class="row"><a class="custom-hover" href="QLXuatNhapKho.html">QUẢN LÝ XUẤT NHẬP KHO</a></div>
+            <div class="row ">
+                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" href="QLTiepNhan.html">QUẢN LÝ TIẾP NHẬN</a>
+            </div>
+            <div class="row">
+                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" href="KhamSanLoc.html">KHÁM SÀNG LỌC</a>
+            </div>
+            <div class="row">
+                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" href="QLHoaDon.html">QUẢN LÝ HÓA ĐƠN</a>
+            </div>
+            <div class="row">
+                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" href="QLTiemChung.html">QUẢN LÝ TIÊM CHỦNG</a>
+            </div>
+            <div class="row">
+                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" href="QLKhachHang.html">QUẢN LÝ KHÁCH HÀNG</a>
+            </div>
+            <div class="row">
+                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" href="QLNhanVien.html">QUẢN LÝ NHÂN VIÊN</a>
+            </div>
+            <div class="row">
+                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" href="QLKho.html">KHO VACCINE</a>
+            </div>
+            <div class="row">
+                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" href="QLXuatNhapKho.html">QUẢN LÝ XUẤT NHẬP KHO</a>
+            </div>
         </div>
+        <style>
+            .custom-hover {
+                color: #2fb388;
+                text-decoration: none;
+                transition: color 0.3s, background-color 0.3s;
+            }
+
+                .custom-hover:hover {
+                    color: #ffffff;
+                    background-color: #2fb388;
+                    text-decoration: underline;
+                    padding: 5px;
+                    border-radius: 5px;
+                }
+
+            .custom-btn {
+                color: #2fb388;
+                border: #2fb388 2px solid;
+            }
+
+                .custom-btn:hover {
+                    color: #ffffff;
+                    background-color: #2fb388;
+                }
+
+                .custom-btn:focus {
+                    color: #ffffff;
+                    background-color: #2fb388;
+                }
+        </style>
     </div>
 
     <!-- Render Body -->
-    @RenderBody()
+    <div>
+        @RenderBody()
+    </div>
 
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
