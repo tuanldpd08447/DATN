@@ -1,0 +1,278 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+  <div class="container mt-4" >
+        <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-uppercase" style="color: #2fb388;">nhập dược </h2>
+            <div class="float-end ">
+                <button class="btn fw-bold custom-btn"><i class="fa-solid fa-plus"></i> Thêm</button>
+                <button class="btn fw-bold custom-btn"><i class="fa-solid fa-floppy-disk"></i> Lưu</button>
+                <button class="btn fw-bold custom-btn"><i class="fa-solid fa-repeat"></i> Hủy </button>
+                <button class="btn fw-bold custom-btn"><i class="fa-solid fa-print"></i> In</button>
+                <button class="btn fw-bold custom-btn"><i class="fa-solid fa-right-from-bracket"></i> Thoát</button>
+              </div>
+        </div>
+      
+      <!-- Thông tin hóa đơn -->
+    <div class="row m-0 mb-3 border rounded-4 py-2  ">
+        <div class="col">
+            <div class=" ms-1 p-3 py-1 border rounded-4 ">
+                <form class=" col">
+                    <div class="row g-3">
+                        <!-- Cột trái -->
+                        <div class="col-md-4">
+                            <div class="row align-items-center mt-2">
+                                <label class="col-sm-5 col-form-label pe-0">Mã chứng từ</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" value="CDCTCHD240006">
+                                </div>
+                                <div class="col-sm-1">
+                                    <button class=" btn  btn-success me-2"><i class="bi bi-plus-lg"></i></button>
+                                </div>
+                            </div>
+                            <div class="row align-items-center mt-2">
+                                <label class="col-sm-5 col-form-label pe-0"> Nhà cung cấp</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row align-items-center mt-2">
+                                <label class="col-sm-5 col-form-label pe-0">Ghi chú kho</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+
+                           
+                        </div>
+        
+                        <!-- Cột phải -->
+                        <div class="col-md-4">
+                            <div class="row align-items-center mt-2">
+                                <label class="col-sm-5 col-form-label pe-0">Ngày</label>
+                                <div class="col-sm-7">
+                                    <input type="date" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row align-items-center mt-2">
+                                <label class="col-sm-5 col-form-label pe-0">Căn cứ vào </label>
+                                <div class="col-sm-7">
+                                    <textarea class="form-control"  name="" id=""></textarea>
+                                </div>
+                            </div>
+                            <div class="row align-items-center mt-2">
+                                <label class="col-sm-5 col-form-label pe-0">Người nhận</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" >
+                                </div>
+                            </div>
+                           
+                        </div>
+                        <div class="col-md-4">
+                            
+                            <div class="row align-items-center mt-2">
+                                <label class="col-sm-5 col-form-label pe-0">Số phiếu</label>
+                                <div class="col-sm-7">
+                                    <input type="number" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row align-items-center mt-2">
+                                <label class="col-sm-5 col-form-label pe-0">Diễn giải</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row align-items-center mt-2">
+                                <label class="col-sm-5 col-form-label pe-0">Kết thúc lúc </label>
+                                <div class="col-sm-7">
+                                    <input type="datetime-local" class="form-control">
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+              
+               
+               
+
+                    <div class="row  ">
+                        <div class="form-group col  row mt-2">
+                            <label for="tenDuoc" class="col-form-label pe-0">Tên dược</label>
+                            <div class="col-10">
+                            <input type="text" class="form-control" id="tenDuoc" name="tenDuoc" placeholder="Nhập tên dược" required>
+                            </div>
+                        </div>
+                        <div class="form-group col row mt-2">
+                            <label for="ghiChu" class="col-form-label">Ghi chú</label>
+                            <div class="col-10">
+                              <input type="text" class="form-control" id="ghiChu" name="ghiChu" placeholder="Ghi chú">
+                            </div>
+                        </div>
+    
+                        <div class="form-group col row mt-2">
+                            <label for="donViNhan" class="col-form-label pe-0">Đơn vị nhận</label>
+                            <div class="col-10">
+                            <input type="text" class="form-control" id="donViNhan" name="donViNhan" placeholder="Đơn vị nhận" required>
+                            </div>
+                        </div>
+    
+                        <div class="form-group col row mt-2">
+                            <label for="nguonDuoc" class="col-form-label pe-0">Nguồn dược</label>
+                            <div class="col-10">
+                            <input type="text" class="form-control" id="nguonDuoc" name="nguonDuoc" placeholder="Nguồn dược">
+                            </div>
+                        </div>
+                    </div>
+
+                   <div class="row  ">
+                    <div class="form-group col row mt-2">
+                        <label for="dvt" class=" col-form-label pe-0">ĐVT</label>
+                        <div class="col-10">
+                        <input type="text" class="form-control" id="dvt" name="dvt" placeholder="Đơn vị tính">
+                        </div>
+                    </div>
+
+                    <div class="form-group col row mt-2">
+                        <label for="soLuong" class=" col-form-label pe-0">Số lượng</label>
+                        <div class="col-10">
+                        <input type="number" class="form-control" id="soLuong" name="soLuong" placeholder="0" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-3 row mt-2">
+                        <label for="donGiaTruocThue" class=" col-form-label pe-0">Đơn giá trước thuế VAT (%)</label>
+                        <div class="col-10">
+                        <input type="number" class="form-control" id="donGiaTruocThue" name="donGiaTruocThue" placeholder="0">
+                        </div>
+                    </div>
+
+                    <div class="form-group col row mt-2">
+                        <label for="donGia" class=" col-form-label pe-0">Đơn giá</label>
+                        <div class="col-10">
+                        <input type="number" class="form-control" id="donGia" name="donGia" placeholder="0">
+                        </div>
+                    </div>
+
+                    <div class="form-group col row mt-2">
+                        <label for="thanhTien" class=" col-form-label pe-0">Thành tiền</label>
+                        <div class="col-10">
+                        <input type="number" class="form-control" id="thanhTien" name="thanhTien" placeholder="0">
+                        </div>
+                    </div>
+
+                    <div class="form-group col row mt-2">
+                        <label for="soLo" class=" col-form-label pe-0">Số lô hàng hóa</label>
+                        <div class="col-10">
+                        <input type="text" class="form-control" id="soLo" name="soLo" placeholder="Số lô">
+                        </div>
+                    </div>
+
+                    <div class="form-group col row mt-2">
+                        <label for="hanDung" class=" col-form-label pe-0">Hạn dùng</label>
+                        <div class="col-10">
+                        <input type="date" class="form-control" id="hanDung" name="hanDung">
+                        </div>
+                    </div>
+                   </div>
+                    <div class="row  mb-3">
+                    <div class="form-group col row mt-2">
+                        <label for="sdkGpnk" class=" col-form-label pe-0">SDK/GPNK</label>
+                        <div class="col">
+                        <input type="text" class="form-control" id="sdkGpnk" name="sdkGpnk">
+                        </div>
+                    </div>
+
+                    <div class="form-group col row mt-2">
+                        <label for="hangSx" class=" col-form-label pe-0">Hãng SX</label>
+                        <div class="col">
+                        <input type="text" class="form-control" id="hangSx" name="hangSx" placeholder="Hãng sản xuất">
+                        </div>
+                    </div>
+
+                    <div class="form-group col-3 row mt-2">
+                        <label for="nuocSanXuat" class=" col-form-label pe-0">Nước sản xuất</label>
+                        <div class="col">
+                        <input type="text" class="form-control" id="nuocSanXuat" name="nuocSanXuat" placeholder="Nước sản xuất">
+                        </div>
+                    </div>
+
+                    <div class="form-group col-2 row mt-5 ">
+                        <div class="col-2">
+                            <input type="checkbox" class="form-check-input " style="margin-top: 170%;" id="khongTinh" name="khongTinh">
+                            </div>
+                            <label for="khongTinh" class="col-10 col-form-label pe-0">Không tính</label>
+                    </div>
+                    <div class="row col-2">
+                        <div class="col d-flex align-items-end">
+                            <button class="btn btn-success me-2"><i class="bi bi-plus-lg"></i></button>
+                            <button class="btn btn-warning me-2"><i class="bi bi-pencil"></i></button>
+                            <button class="btn btn-danger"><i class="bi bi-x-lg"></i></button>
+                        </div>
+                       </div>
+                    </div>
+                </form>
+                </div>
+              
+            
+            </div>
+        <div class="ms-3 mt-2 p-3 py-1 border rounded-4" style="width: 98%;">
+            <div class="row mb-3 mt-2">
+                <div class="col-md-6">
+                    <input type="text" class="form-control" placeholder="Tìm Kiêm">
+                </div>
+                <div class="col-md-4 d-flex align-items-end">
+                    <button class="btn btn btn-outline-secondary me-2"><i class="bi bi-search"></i></button>
+                </div>
+            </div>
+            <style>
+                .table th {
+                  background-color: #e8f5e9; /* Màu nền xanh nhạt cho tiêu đề */
+                  color: #000; /* Màu chữ đen */
+                  text-align: center;
+                  white-space: nowrap; /* Ngăn chữ bị xuống hàng */
+                }
+              
+                .table tbody tr td {
+                  text-align: center;
+                  white-space: nowrap; /* Ngăn chữ bị xuống hàng trong ô dữ liệu */
+                }
+              </style>
+            <div class=" table-responsive">
+                <table class="table table-bordered mt-3">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>STT</th>
+                            <th>Tên thuốc, hàm lượng (hãng, nước SX,...)</th>
+                            <th>ĐVT</th>
+                            <th>Số lượng</th>
+                            <th>Số lô hàng hóa</th>
+                            <th>Hạn dùng</th>
+                            <th>Đơn giá trước thuế</th>
+                            <th>Giá trị VAT</th>
+                            <th>Đơn giá</th>
+                            <th>Thành tiền</th>
+                            <th>SDK/GPNK</th>
+                            <th>Kho nhập</th>
+                            <th>Nguồn</th>
+                            <th>Nước sản xuất</th>
+                            <th>Hãng sản xuất</th>
+                            <th>Dược cập trữ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="checkbox" name="" id=""></td>
+                            <td colspan="16" class="text-center">Không có dữ liệu</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+           
+                <button type="button" class="float-end btn custom-btn w-25" >Xác Nhận</button>
+            </div>
+        </div>
+        
+    </div>

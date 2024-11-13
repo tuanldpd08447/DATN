@@ -1,0 +1,158 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-uppercase" style="color: #2fb388;">Quản Lý Hoàn trả </h2>
+        <div class="float-end ">
+            <button class="btn fw-bold custom-btn"><i class="fa-solid fa-plus"></i> Thêm</button>
+            <button class="btn fw-bold custom-btn"><i class="fa-solid fa-floppy-disk"></i> Lưu</button>
+            <button class="btn fw-bold custom-btn"><i class="fa-solid fa-repeat"></i> Hủy </button>
+            <button class="btn fw-bold custom-btn"><i class="fa-solid fa-print"></i> In</button>
+            <button class="btn fw-bold custom-btn"><i class="fa-solid fa-right-from-bracket"></i> Thoát</button>
+        </div>
+    </div>
+
+    <!-- Thông tin hóa đơn -->
+    <div class="row m-0 mb-3 border rounded-4 py-2  ">
+        <div class="col">
+            <div class=" ms-1 p-3 py-1 border rounded-4 ">
+                <form class=" col">
+                    <div class="row g-3 mt-1">
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label class="form-label">Mã chứng từ</label>
+                                <input type="text" class="form-control" placeholder="Nhập mã chứng từ" value="CDCTCHD240006">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Tên bệnh nhân</label>
+                                <div class="row">
+                                    <input type="text" class="ms-3 col form-control" placeholder="Nhập tên bệnh nhân" value="Nguyễn Văn An">
+                                    <div class="col-sm-2">
+                                        <button class=" btn  btn-success me-2"><i class="bi bi-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cột 2 -->
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label class="form-label">Ngày</label>
+                                <input type="date" class="form-control" value="2024-05-26">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Số hóa đơn</label>
+                                <select class="form-select">
+                                    <option value="HDTT24051569" selected>HDTT24051569</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Cột 3 -->
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label class="form-label">Diễn giải lý do</label>
+                                <input type="text" class="form-control" placeholder="Nhập lý do">
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="row">
+                        <div class="col-md-8 row">
+                            <label class="form-label">Dược phẩm</label>
+                            <div class="input-group">
+                                <select class="form-select" id="selectDrug">
+                                    <option value="">-- Chọn dược phẩm --</option>
+                                    <option value="D00093">D00093 - Leaves</option>
+                                    <option value="D00042">D00042 - Dung dịch vệ sinh Habeme</option>
+                                    <option value="D001123">D001123 - Thuốc giảm đau</option>
+                                </select>
+                                <input type="number" class="form-control" id="drugQuantity" placeholder="0" min="0">
+                                <button class="btn btn-primary" type="button" onclick="addDrug()"><i class="bi bi-plus-lg"></i></button>
+                                <button class="btn btn-danger" type="button" onclick="clearInput()"><i class="bi bi-x-lg"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3 mb-3 ">
+                        <div class="col">
+                            <label for="">Hạn sử dụng: ....</label>
+                        </div>
+                        <div class="col">
+                            <label for="">Lô kiểm soát: ....</label>
+                        </div>
+                        <div class="col">
+                            <label for="">ĐVT: ....</label>
+                        </div>
+                        <div class="col">
+                            <label for="">Tổng SL tồn: ....</label>
+                        </div>
+                        <div class="col">
+                            <label for="">SL tồn lô: ....</label>
+                        </div>
+                        <div class="col">
+                            <label for="">Đơn giá xuất: ....</label>
+                        </div>
+                        <div class="col">
+                            <label for="">Thành tiên: ....</label>
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="ms-3 mt-2 p-3 py-1 border rounded-4" style="width: 98%;">
+                <div class="row mb-3 mt-2">
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" placeholder="Tìm Kiêm">
+                    </div>
+                    <div class="col-md-4 d-flex align-items-end">
+                        <button class="btn btn btn-outline-secondary me-2"><i class="bi bi-search"></i></button>
+                    </div>
+                </div>
+                <style>
+                    .table th {
+                        background-color: #e8f5e9; /* Màu nền xanh nhạt cho tiêu đề */
+                        color: #000; /* Màu chữ đen */
+                        text-align: center;
+                        white-space: nowrap; /* Ngăn chữ bị xuống hàng */
+                    }
+
+                    .table tbody tr td {
+                        text-align: center;
+                        white-space: nowrap; /* Ngăn chữ bị xuống hàng trong ô dữ liệu */
+                    }
+                </style>
+                <div class=" table-responsive">
+                    <table class="table table-bordered mt-3">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>STT</th>
+                                <th>Tên thuốc, hàm lượng (hãng, nước SX,...)</th>
+                                <th>ĐVT</th>
+                                <th>Số lượng</th>
+                                <th>Đơn giá</th>
+                                <th>Thành tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="checkbox" name="" id=""></td>
+                                <td colspan="6" class="text-center">Không có dữ liệu</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <button type="button" class="float-end btn custom-btn w-25">Xác Nhận</button>
+            </div>
+        </div>
+    </div>
+</div>

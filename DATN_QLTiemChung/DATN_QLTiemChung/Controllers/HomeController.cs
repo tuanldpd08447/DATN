@@ -53,6 +53,26 @@ namespace DATN_QLTiemChung.Controllers
         {
             return View();
         }
+        public IActionResult QLHoanTra()
+        {
+            return View();
+        }
+        public IActionResult NhapDuoc()
+        {
+            return View();
+        }
+        public IActionResult QLTaiKhoan()
+        {
+            return View();
+        }
+        public IActionResult TNTiemChungTheoHopDong()
+        {
+            return View();
+        }
+        public IActionResult XuatDuoc()
+        {
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();

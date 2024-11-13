@@ -1,0 +1,223 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-uppercase" style="color: #2fb388;">Tiếp nhận tiêm chủng hợp đồng</h2>
+        <div class="float-end ">
+            <button class="btn fw-bold custom-btn"><i class="fa-solid fa-plus"></i> Thêm</button>
+            <button class="btn fw-bold custom-btn"><i class="fa-solid fa-floppy-disk"></i> Lưu</button>
+            <button class="btn fw-bold custom-btn"><i class="fa-solid fa-repeat"></i> Hủy </button>
+            <button class="btn fw-bold custom-btn"><i class="fa-solid fa-print"></i> In</button>
+            <button class="btn fw-bold custom-btn"><i class="fa-solid fa-right-from-bracket"></i> Thoát</button>
+        </div>
+    </div>
+
+    <!-- Thông tin hóa đơn -->
+    <div class="row m-0 mb-3 border rounded-4 py-2  ">
+        <div class="col-7">
+            <div class=" ms-1 p-3 py-1 border rounded-4 ">
+                <form class=" col">
+                    <div class="row g-3">
+                        <!-- Cột trái -->
+                        <div class="col-md-6">
+                            <div class="row align-items-center mt-2">
+                                <label class="col-sm-5 col-form-label">Mã Hợp Đồng</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" value="CDCTCHD240006">
+                                </div>
+                            </div>
+                            <div class="row align-items-center mt-2">
+                                <label class="col-sm-5 col-form-label">Tên Công Ty</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row align-items-center mt-3">
+                                <label class="col-sm-5 col-form-label">Tên Hợp Đồng</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row align-items-center mt-4">
+                                <label class="col-sm-5 col-form-label">Số Hợp Đồng</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row align-items-center mt-3">
+                                <label class="col-sm-5 col-form-label">Số Điện Thoại</label>
+                                <div class="col-sm-7">
+                                    <input type="tel" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row align-items-center mt-4">
+                                <label class="col-sm-5 col-form-label">Địa Chỉ Chi Tiết</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row align-items-center mt-2">
+                                <label class="col-sm-5 col-form-label">Tỉnh Thành</label>
+                                <div class="col-sm-7">
+                                    <select class="form-select">
+                                        <option selected>Thành phố Đà Nẵng</option>
+                                        <option>Hà Nội</option>
+                                        <option>Hồ Chí Minh</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row align-items-center mt-2">
+                                <label class="col-sm-5 col-form-label">Quận Huyện</label>
+                                <div class="col-sm-7">
+                                    <select class="form-select">
+                                        <option selected>Chọn Quận/Huyện</option>
+                                        <option>Hải Châu</option>
+                                        <option>Thanh Khê</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row align-items-center mt-2">
+                                <label class="col-sm-5 col-form-label">Xã Phường</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cột phải -->
+                        <div class="col-md-6">
+                            <div class="row align-items-center mt-2">
+                                <label class="col-sm-7 col-form-label">Ngày Hợp Đồng</label>
+                                <div class="col-sm-5">
+                                    <input type="date" class="form-control" value="2024-11-08">
+                                </div>
+                            </div>
+                            <div class="row align-items-center mt-2">
+                                <label class="col-sm-7 col-form-label">Ngày Hiệu Lực Hợp Đồng</label>
+                                <div class="col-sm-5">
+                                    <input type="date" class="form-control" value="2024-11-08">
+                                </div>
+                            </div>
+                            <div class="row align-items-center mt-2">
+                                <label class="col-sm-7 col-form-label">Ngày Hết Hiệu Lực Hợp Đồng</label>
+                                <div class="col-sm-5">
+                                    <input type="date" class="form-control" value="2024-11-08">
+                                </div>
+                            </div>
+                            <div class="row align-items-center mt-2">
+                                <label class="col-sm-5 col-form-label">Số Bệnh Nhân</label>
+                                <div class="col-sm-7">
+                                    <input type="number" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row align-items-center mt-2">
+                                <label class="col-sm-5 col-form-label">Hình Thức Thanh Toán</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row align-items-center mt-2">
+                                <label class="col-sm-5 col-form-label">Diễn Giải</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row align-items-center mt-2">
+                                <label class="col-sm-5 col-form-label">Giá Trị Hợp Đồng</label>
+                                <div class="col-sm-7">
+                                    <input type="number" class="form-control" value="0">
+                                </div>
+                            </div>
+                            <div class="row align-items-center mt-2">
+                                <label class="col-sm-5 col-form-label">Giá Trị Tạm Ứng</label>
+                                <div class="col-sm-7">
+                                    <input type="number" class="form-control" value="0">
+                                </div>
+                            </div>
+                            <div class="row align-items-center mt-2">
+                                <label class="col-sm-5 col-form-label">Giá Trị Phát Sinh</label>
+                                <div class="col-sm-7">
+                                    <input type="number" class="form-control" value="0">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
+        <div class="invoice-section col-5  ">
+            <div class=" p-3 border rounded-4 table-responsive">
+                <h5>Danh Sách Bệnh Nhân</h5>
+                <table class="table table-bordered mt-3">
+                    <thead>
+                        <tr>
+                            <th>Tên Bệnh Nhân</th>
+                            <th>Ngày Sinh</th>
+                            <th>Giới Tính</th>
+                            <th>Địa Chỉ</th>
+                            <th>Số Điện Thoại</th>
+                            <th>CCCD</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="6" class="text-center">Không có dữ liệu</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <div class="ms-3 mt-2 p-3 py-1 border rounded-4" style="width: 98%;">
+            <div class=" mt-1">
+                <h5>Chỉ Định Tiêm Chủng</h5>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Vắc Xin</label>
+                        <select class="form-select">
+                            <option>Chọn loại vắc xin</option>
+                            <option>Vắc xin A</option>
+                            <option>Vắc xin B</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">Số Lượng</label>
+                        <input type="number" class="form-control" value="1">
+                    </div>
+                    <div class="col-md-4 d-flex align-items-end">
+                        <button class="btn btn-success me-2"><i class="bi bi-plus-lg"></i></button>
+                        <button class="btn btn-warning me-2"><i class="bi bi-pencil"></i></button>
+                        <button class="btn btn-danger"><i class="bi bi-x-lg"></i></button>
+                    </div>
+                </div>
+                <div class=" table-responsive">
+                    <table class="table table-bordered mt-3">
+                        <thead>
+                            <tr>
+                                <th>Loại Vắc Xin</th>
+                                <th>Số Lượng Vaccine cho 1 khách hàng</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="2" class="text-center">Không có dữ liệu</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <button type="button" class="float-end btn custom-btn w-25">Xác Nhận</button>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</div>
