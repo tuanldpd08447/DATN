@@ -35,8 +35,7 @@
               "ViewState": "AQIAADkAAAAAAAAAAAAiwF8AAACtAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-11-13T07:06:35.408Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -46,7 +45,7 @@
               "RelativeDocumentMoniker": "DATN_QLTiemChung\\Controllers\\HomeController.cs",
               "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Controllers\\HomeController.cs",
               "RelativeToolTip": "DATN_QLTiemChung\\Controllers\\HomeController.cs",
-              "ViewState": "AQIAACgAAAAAAAAAAADwv0oAAAAJAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAEoAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-13T07:12:18.335Z",
               "EditorCaption": ""
@@ -61,8 +60,7 @@
               "RelativeToolTip": "DATN_QLTiemChung\\Views\\Home\\QLHoanTra.cshtml",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAA7AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-13T07:10:11.358Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-13T07:10:11.358Z"
             }
           ]
         }
