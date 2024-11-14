@@ -8,5 +8,6 @@ namespace DATN_QLTiemChung_Api.Models
         public string IDPB { get; set; } // ID phòng ban
         public string TenPhongBan { get; set; } // Tên phòng ban
         public string? GhiChu { get; set; } // Ghi chú
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DATN_QLTiemChung_Api.Models
 {
@@ -6,11 +7,25 @@ namespace DATN_QLTiemChung_Api.Models
     {
         [Key]
         public string IDTC { get; set; } // ID tiêm chủng
+
+        [Required]
         public string IDKH { get; set; } // ID khách hàng
+        [ForeignKey(nameof(IDKH))]
+        public KhachHang KhachHang { get; set; }
+
+        [Required]
         public string IDNV { get; set; } // ID nhân viên
+        [ForeignKey(nameof(IDNV))]
+        public NhanVien NhanVien { get; set; }
+
+        [Required]
         public string IDDK { get; set; } // ID đăng ký
-        public TimeSpan ThoiGian { get; set; } // Thời gian
-        public bool TrangThai { get; set; } // Trạng thái
-        public string? GhiChu { get; set; } // Ghi chú
+        [ForeignKey(nameof(IDDK))]
+        public DangKyTiemChung DangKyTiemChung { get; set; }
+
+        public TimeSpan ThoiGian { get; set; }
+        public bool TrangThai { get; set; }
+        public string? GhiChu { get; set; }
     }
+
 }

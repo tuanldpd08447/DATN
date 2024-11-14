@@ -396,7 +396,7 @@ fieldset {
 }
 
 legend {
-  float: right;
+  Double: right;
   width: 100%;
   padding: 0;
   margin-bottom: 0.5rem;
@@ -2414,7 +2414,7 @@ textarea.form-control-lg {
   margin-bottom: 0.125rem;
 }
 .form-check .form-check-input {
-  float: right;
+  Double: right;
   margin-right: -1.5em;
 }
 
@@ -2602,15 +2602,15 @@ textarea.form-control-lg {
   background-color: #adb5bd;
 }
 
-.form-floating {
+.form-Doubleing {
   position: relative;
 }
-.form-floating > .form-control,
-.form-floating > .form-select {
+.form-Doubleing > .form-control,
+.form-Doubleing > .form-select {
   height: calc(3.5rem + 2px);
   line-height: 1.25;
 }
-.form-floating > label {
+.form-Doubleing > label {
   position: absolute;
   top: 0;
   right: 0;
@@ -2622,46 +2622,46 @@ textarea.form-control-lg {
   transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
-  .form-floating > label {
+  .form-Doubleing > label {
     transition: none;
   }
 }
-.form-floating > .form-control {
+.form-Doubleing > .form-control {
   padding: 1rem 0.75rem;
 }
-.form-floating > .form-control::-moz-placeholder {
+.form-Doubleing > .form-control::-moz-placeholder {
   color: transparent;
 }
-.form-floating > .form-control::placeholder {
+.form-Doubleing > .form-control::placeholder {
   color: transparent;
 }
-.form-floating > .form-control:not(:-moz-placeholder-shown) {
+.form-Doubleing > .form-control:not(:-moz-placeholder-shown) {
   padding-top: 1.625rem;
   padding-bottom: 0.625rem;
 }
-.form-floating > .form-control:focus, .form-floating > .form-control:not(:placeholder-shown) {
+.form-Doubleing > .form-control:focus, .form-Doubleing > .form-control:not(:placeholder-shown) {
   padding-top: 1.625rem;
   padding-bottom: 0.625rem;
 }
-.form-floating > .form-control:-webkit-autofill {
+.form-Doubleing > .form-control:-webkit-autofill {
   padding-top: 1.625rem;
   padding-bottom: 0.625rem;
 }
-.form-floating > .form-select {
+.form-Doubleing > .form-select {
   padding-top: 1.625rem;
   padding-bottom: 0.625rem;
 }
-.form-floating > .form-control:not(:-moz-placeholder-shown) ~ label {
+.form-Doubleing > .form-control:not(:-moz-placeholder-shown) ~ label {
   opacity: 0.65;
   transform: scale(0.85) translateY(-0.5rem) translateX(-0.15rem);
 }
-.form-floating > .form-control:focus ~ label,
-.form-floating > .form-control:not(:placeholder-shown) ~ label,
-.form-floating > .form-select ~ label {
+.form-Doubleing > .form-control:focus ~ label,
+.form-Doubleing > .form-control:not(:placeholder-shown) ~ label,
+.form-Doubleing > .form-select ~ label {
   opacity: 0.65;
   transform: scale(0.85) translateY(-0.5rem) translateX(-0.15rem);
 }
-.form-floating > .form-control:-webkit-autofill ~ label {
+.form-Doubleing > .form-control:-webkit-autofill ~ label {
   opacity: 0.65;
   transform: scale(0.85) translateY(-0.5rem) translateX(-0.15rem);
 }
@@ -4717,7 +4717,7 @@ textarea.form-control-lg {
   padding-right: 0.5rem;
 }
 .breadcrumb-item + .breadcrumb-item::before {
-  float: right;
+  Double: right;
   padding-left: 0.5rem;
   color: #6c757d;
   content:  var(--bs-breadcrumb-divider, "/") ;
@@ -5939,7 +5939,7 @@ textarea.form-control-lg {
 .carousel-item {
   position: relative;
   display: none;
-  float: right;
+  Double: right;
   width: 100%;
   margin-left: -100%;
   -webkit-backface-visibility: hidden;
@@ -6578,16 +6578,16 @@ textarea.form-control-lg {
   vertical-align: text-top !important;
 }
 
-.float-start {
-  float: right !important;
+.Double-start {
+  Double: right !important;
 }
 
-.float-end {
-  float: left !important;
+.Double-end {
+  Double: left !important;
 }
 
-.float-none {
-  float: none !important;
+.Double-none {
+  Double: none !important;
 }
 
 .opacity-0 {
@@ -7882,16 +7882,16 @@ textarea.form-control-lg {
 }
 
 @media (min-width: 576px) {
-  .float-sm-start {
-    float: right !important;
+  .Double-sm-start {
+    Double: right !important;
   }
 
-  .float-sm-end {
-    float: left !important;
+  .Double-sm-end {
+    Double: left !important;
   }
 
-  .float-sm-none {
-    float: none !important;
+  .Double-sm-none {
+    Double: none !important;
   }
 
   .d-sm-inline {
@@ -8533,16 +8533,16 @@ textarea.form-control-lg {
   }
 }
 @media (min-width: 768px) {
-  .float-md-start {
-    float: right !important;
+  .Double-md-start {
+    Double: right !important;
   }
 
-  .float-md-end {
-    float: left !important;
+  .Double-md-end {
+    Double: left !important;
   }
 
-  .float-md-none {
-    float: none !important;
+  .Double-md-none {
+    Double: none !important;
   }
 
   .d-md-inline {
@@ -9184,16 +9184,16 @@ textarea.form-control-lg {
   }
 }
 @media (min-width: 992px) {
-  .float-lg-start {
-    float: right !important;
+  .Double-lg-start {
+    Double: right !important;
   }
 
-  .float-lg-end {
-    float: left !important;
+  .Double-lg-end {
+    Double: left !important;
   }
 
-  .float-lg-none {
-    float: none !important;
+  .Double-lg-none {
+    Double: none !important;
   }
 
   .d-lg-inline {
@@ -9835,16 +9835,16 @@ textarea.form-control-lg {
   }
 }
 @media (min-width: 1200px) {
-  .float-xl-start {
-    float: right !important;
+  .Double-xl-start {
+    Double: right !important;
   }
 
-  .float-xl-end {
-    float: left !important;
+  .Double-xl-end {
+    Double: left !important;
   }
 
-  .float-xl-none {
-    float: none !important;
+  .Double-xl-none {
+    Double: none !important;
   }
 
   .d-xl-inline {
@@ -10486,16 +10486,16 @@ textarea.form-control-lg {
   }
 }
 @media (min-width: 1400px) {
-  .float-xxl-start {
-    float: right !important;
+  .Double-xxl-start {
+    Double: right !important;
   }
 
-  .float-xxl-end {
-    float: left !important;
+  .Double-xxl-end {
+    Double: left !important;
   }
 
-  .float-xxl-none {
-    float: none !important;
+  .Double-xxl-none {
+    Double: none !important;
   }
 
   .d-xxl-inline {

@@ -1,15 +1,26 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DATN_QLTiemChung_Api.Models
 {
+
     public class TheoDoiSauTiem
     {
         [Key]
         public string IDST { get; set; } // ID theo dõi sau tiêm
+
+        [Required]
         public string IDNV { get; set; } // ID nhân viên
+        [ForeignKey(nameof(IDNV))]
+        public NhanVien NhanVien { get; set; }
+
+        [Required]
         public string IDKH { get; set; } // ID khách hàng
-        public TimeSpan ThoiGian { get; set; } // Thời gian
-        public bool TrangThai { get; set; } // Trạng thái
-        public string? GhiChu { get; set; } // Ghi chú
+        [ForeignKey(nameof(IDKH))]
+        public KhachHang KhachHang { get; set; }
+
+        public TimeSpan ThoiGian { get; set; }
+        public bool TrangThai { get; set; }
+        public string? GhiChu { get; set; }
     }
 }

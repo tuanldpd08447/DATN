@@ -8,5 +8,7 @@ namespace DATN_QLTiemChung_Api.Models
         public string IDXX { get; set; } // ID xuất xứ
         public string QuocGia { get; set; } // Quốc gia
         public string? GhiChu { get; set; } // Ghi chú
+
+        public ICollection<VatTuYTe> VatTuYTes { get; set; }
     }
 }

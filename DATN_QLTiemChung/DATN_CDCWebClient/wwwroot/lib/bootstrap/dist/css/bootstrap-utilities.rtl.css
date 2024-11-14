@@ -238,16 +238,16 @@
   vertical-align: text-top !important;
 }
 
-.float-start {
-  float: right !important;
+.Double-start {
+  Double: right !important;
 }
 
-.float-end {
-  float: left !important;
+.Double-end {
+  Double: left !important;
 }
 
-.float-none {
-  float: none !important;
+.Double-none {
+  Double: none !important;
 }
 
 .opacity-0 {
@@ -1542,16 +1542,16 @@
 }
 
 @media (min-width: 576px) {
-  .float-sm-start {
-    float: right !important;
+  .Double-sm-start {
+    Double: right !important;
   }
 
-  .float-sm-end {
-    float: left !important;
+  .Double-sm-end {
+    Double: left !important;
   }
 
-  .float-sm-none {
-    float: none !important;
+  .Double-sm-none {
+    Double: none !important;
   }
 
   .d-sm-inline {
@@ -2193,16 +2193,16 @@
   }
 }
 @media (min-width: 768px) {
-  .float-md-start {
-    float: right !important;
+  .Double-md-start {
+    Double: right !important;
   }
 
-  .float-md-end {
-    float: left !important;
+  .Double-md-end {
+    Double: left !important;
   }
 
-  .float-md-none {
-    float: none !important;
+  .Double-md-none {
+    Double: none !important;
   }
 
   .d-md-inline {
@@ -2844,16 +2844,16 @@
   }
 }
 @media (min-width: 992px) {
-  .float-lg-start {
-    float: right !important;
+  .Double-lg-start {
+    Double: right !important;
   }
 
-  .float-lg-end {
-    float: left !important;
+  .Double-lg-end {
+    Double: left !important;
   }
 
-  .float-lg-none {
-    float: none !important;
+  .Double-lg-none {
+    Double: none !important;
   }
 
   .d-lg-inline {
@@ -3495,16 +3495,16 @@
   }
 }
 @media (min-width: 1200px) {
-  .float-xl-start {
-    float: right !important;
+  .Double-xl-start {
+    Double: right !important;
   }
 
-  .float-xl-end {
-    float: left !important;
+  .Double-xl-end {
+    Double: left !important;
   }
 
-  .float-xl-none {
-    float: none !important;
+  .Double-xl-none {
+    Double: none !important;
   }
 
   .d-xl-inline {
@@ -4146,16 +4146,16 @@
   }
 }
 @media (min-width: 1400px) {
-  .float-xxl-start {
-    float: right !important;
+  .Double-xxl-start {
+    Double: right !important;
   }
 
-  .float-xxl-end {
-    float: left !important;
+  .Double-xxl-end {
+    Double: left !important;
   }
 
-  .float-xxl-none {
-    float: none !important;
+  .Double-xxl-none {
+    Double: none !important;
   }
 
   .d-xxl-inline {

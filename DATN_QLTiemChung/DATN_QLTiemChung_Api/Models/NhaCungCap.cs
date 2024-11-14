@@ -8,6 +8,7 @@ namespace DATN_QLTiemChung_Api.Models
         public string IDNHC { get; set; }
         public string TenNhaCungCap { get; set; }
         public string? GhiChu { get; set; }
+        public ICollection<VatTuYTe> VatTuYTes { get; set; }
     }
 
 }

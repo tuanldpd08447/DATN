@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DATN_QLTiemChung_Api.Models
 {
@@ -6,12 +7,22 @@ namespace DATN_QLTiemChung_Api.Models
     {
         [Key]
         public string IDHDCT { get; set; }
+
+        [Required]
         public string IDHD { get; set; }
-        public string IDVT { get; set; }
+        [ForeignKey(nameof(IDHD))]
+        public HoaDon HoaDon { get; set; }
+
+        [Required]
+        public string IDVT { get; set; } 
+        [ForeignKey(nameof(IDVT))]
+        public VatTuYTe VatTuYTe { get; set; }
+
         public int SoLuong { get; set; }
-        public float DonGia { get; set; }
-        public float ThanhTien { get; set; }
-        public string GhiChu { get; set; }
+        public Double DonGia { get; set; }
+        public Double ThanhTien { get; set; }
+        public string? GhiChu { get; set; }
     }
+
 
 }

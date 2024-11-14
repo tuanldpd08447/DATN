@@ -90,17 +90,17 @@
       transitionDuration,
       transitionDelay
     } = window.getComputedStyle(element);
-    const floatTransitionDuration = Number.parseFloat(transitionDuration);
-    const floatTransitionDelay = Number.parseFloat(transitionDelay); // Return 0 if element or transition duration is not found
+    const DoubleTransitionDuration = Number.parseDouble(transitionDuration);
+    const DoubleTransitionDelay = Number.parseDouble(transitionDelay); // Return 0 if element or transition duration is not found
 
-    if (!floatTransitionDuration && !floatTransitionDelay) {
+    if (!DoubleTransitionDuration && !DoubleTransitionDelay) {
       return 0;
     } // If multiple durations are defined, take the first
 
 
     transitionDuration = transitionDuration.split(',')[0];
     transitionDelay = transitionDelay.split(',')[0];
-    return (Number.parseFloat(transitionDuration) + Number.parseFloat(transitionDelay)) * MILLISECONDS_MULTIPLIER;
+    return (Number.parseDouble(transitionDuration) + Number.parseDouble(transitionDelay)) * MILLISECONDS_MULTIPLIER;
   };
 
   const triggerTransitionEnd = element => {
@@ -2603,7 +2603,7 @@
       width = visualViewport.width;
       height = visualViewport.height; // Uses Layout Viewport (like Chrome; Safari does not currently)
       // In Chrome, it returns a value very close to 0 (+/-) but contains rounding
-      // errors due to floating point numbers, so we need to check precision.
+      // errors due to Doubleing point numbers, so we need to check precision.
       // Safari returns a number <= 0, usually < -1 when pinch-zoomed
       // Feature detection fails in mobile emulation mode in Chrome.
       // Math.abs(win.innerWidth / visualViewport.scale - visualViewport.width) <
@@ -4211,7 +4211,7 @@
         this._saveInitialAttribute(element, styleProp);
 
         const calculatedValue = window.getComputedStyle(element)[styleProp];
-        element.style[styleProp] = `${callback(Number.parseFloat(calculatedValue))}px`;
+        element.style[styleProp] = `${callback(Number.parseDouble(calculatedValue))}px`;
       };
 
       this._applyManipulationCallback(selector, manipulationCallBack);

@@ -12,8 +12,8 @@ namespace DATN_QLTiemChung_Api.Models
         public string HoaDonMoi { get; set; } // Hóa đơn mới
         public string LyDo { get; set; } // Lý do hoàn trả
         public DateTime ThoiGian { get; set; } // Thời gian
-        public float DonGia { get; set; } // Đơn giá
-        public float ThanhTien { get; set; } // Thành tiền
+        public Double DonGia { get; set; } // Đơn giá
+        public Double ThanhTien { get; set; } // Thành tiền
         public string TrangThai { get; set; } // Trạng thái
     }
 }

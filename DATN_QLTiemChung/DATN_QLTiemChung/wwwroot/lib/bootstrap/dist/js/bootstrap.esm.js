@@ -86,17 +86,17 @@ const getTransitionDurationFromElement = element => {
     transitionDuration,
     transitionDelay
   } = window.getComputedStyle(element);
-  const floatTransitionDuration = Number.parseFloat(transitionDuration);
-  const floatTransitionDelay = Number.parseFloat(transitionDelay); // Return 0 if element or transition duration is not found
+  const DoubleTransitionDuration = Number.parseDouble(transitionDuration);
+  const DoubleTransitionDelay = Number.parseDouble(transitionDelay); // Return 0 if element or transition duration is not found
 
-  if (!floatTransitionDuration && !floatTransitionDelay) {
+  if (!DoubleTransitionDuration && !DoubleTransitionDelay) {
     return 0;
   } // If multiple durations are defined, take the first
 
 
   transitionDuration = transitionDuration.split(',')[0];
   transitionDelay = transitionDelay.split(',')[0];
-  return (Number.parseFloat(transitionDuration) + Number.parseFloat(transitionDelay)) * MILLISECONDS_MULTIPLIER;
+  return (Number.parseDouble(transitionDuration) + Number.parseDouble(transitionDelay)) * MILLISECONDS_MULTIPLIER;
 };
 
 const triggerTransitionEnd = element => {
@@ -2431,7 +2431,7 @@ class ScrollBarHelper {
       this._saveInitialAttribute(element, styleProp);
 
       const calculatedValue = window.getComputedStyle(element)[styleProp];
-      element.style[styleProp] = `${callback(Number.parseFloat(calculatedValue))}px`;
+      element.style[styleProp] = `${callback(Number.parseDouble(calculatedValue))}px`;
     };
 
     this._applyManipulationCallback(selector, manipulationCallBack);
