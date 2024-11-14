@@ -5,6 +5,14 @@
       "PackagePath": "staticwebassets\\DATN_QLTiemChung.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\wwwroot\\Img\\CDC Đà Nẵng copy.png",
+      "PackagePath": "staticwebassets\\Img\\CDC Đà Nẵng copy.png"
+    },
+    {
+      "Id": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\wwwroot\\Img\\logo.png",
+      "PackagePath": "staticwebassets\\Img\\logo.png"
+    },
+    {
       "Id": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

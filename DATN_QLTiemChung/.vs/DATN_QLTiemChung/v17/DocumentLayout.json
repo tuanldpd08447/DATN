@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_qltiemchung\\views\\home\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|solutionrelative:datn_qltiemchung\\views\\home\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_qltiemchung\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|solutionrelative:datn_qltiemchung\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_qltiemchung\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|solutionrelative:datn_qltiemchung\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_qltiemchung\\views\\home\\qlhoantra.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|solutionrelative:datn_qltiemchung\\views\\home\\qlhoantra.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,41 +26,43 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "DATN_QLTiemChung\\Views\\Shared\\_Layout.cshtml",
               "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Views\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "DATN_QLTiemChung\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AQIAADkAAAAAAAAAAAAiwF8AAACtAAAA",
+              "ViewState": "AQIAABsAAAAAAAAAAAAiwCwAAABUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-11-13T07:06:35.408Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Views\\Home\\Login.cshtml",
+              "RelativeDocumentMoniker": "DATN_QLTiemChung\\Views\\Home\\Login.cshtml",
+              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Views\\Home\\Login.cshtml",
+              "RelativeToolTip": "DATN_QLTiemChung\\Views\\Home\\Login.cshtml",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABgAAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-14T03:43:08.471Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "HomeController.cs",
               "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "DATN_QLTiemChung\\Controllers\\HomeController.cs",
               "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Controllers\\HomeController.cs",
               "RelativeToolTip": "DATN_QLTiemChung\\Controllers\\HomeController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAEoAAAAJAAAA",
+              "ViewState": "AQIAADcAAAAAAAAAAAAcwEsAAAAiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-13T07:12:18.335Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "QLHoanTra.cshtml",
-              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Views\\Home\\QLHoanTra.cshtml",
-              "RelativeDocumentMoniker": "DATN_QLTiemChung\\Views\\Home\\QLHoanTra.cshtml",
-              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Views\\Home\\QLHoanTra.cshtml",
-              "RelativeToolTip": "DATN_QLTiemChung\\Views\\Home\\QLHoanTra.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAA7AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-13T07:10:11.358Z"
             }
           ]
         }
