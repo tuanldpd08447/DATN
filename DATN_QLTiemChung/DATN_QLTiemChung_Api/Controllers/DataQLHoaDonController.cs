@@ -15,14 +15,12 @@ namespace DATN_QLTiemChung_Api.Controllers
         {
             _context = context;
         }
-
-        [HttpGet]
+        [HttpGet("GetAll/{IDHD}")]
         public async Task<ActionResult<HoaDonDTO>> GetAll(string IDHD)
         {
-            try
-            {
-                var hoaDon = await _context.HoaDon
+            var hoaDon = await _context.HoaDon
                 .Include(hd => hd.KhachHang)
+                .Include(hd => hd.NhanVien)
                 .Include(hd => hd.HoaDonChiTiets)
                 .FirstOrDefaultAsync(hd => hd.IDHD == IDHD);
 
@@ -49,10 +47,17 @@ namespace DATN_QLTiemChung_Api.Controllers
                     IDKH = hoaDon.KhachHang.IDKH,
                     TenKhachHang = hoaDon.KhachHang.TenKhachHang,
                     SoDienThoai = hoaDon.KhachHang.SoDienThoai,
-                    Email = hoaDon.KhachHang.Email,
+                    NgaySinh = hoaDon.KhachHang.NgaySinh,
+                    IDXP = hoaDon.KhachHang.IDXP,
                     DiaChi = hoaDon.KhachHang.DiaChi
                 } : null,
 
+                // Ánh xạ các thuộc tính cần thiết cho Nhân viên
+                NhanVien = hoaDon.NhanVien != null ? new NhanVien
+                {
+                    IDNV = hoaDon.NhanVien.IDNV,
+
+                } : null,
 
                 // Ánh xạ danh sách chi tiết hóa đơn
                 HoaDonChiTiets = hoaDon.HoaDonChiTiets?.Select(hdct => new HoaDonChiTiet
@@ -67,14 +72,7 @@ namespace DATN_QLTiemChung_Api.Controllers
             };
 
             return Ok(dto);
-            }
-            catch (Exception ex)
-            {
-                // Log exception if needed
-                return StatusCode(500, new { message = "Đã xảy ra lỗi khi truy vấn dữ liệu", error = ex.Message });
-            }
         }
-
 
     }
 }

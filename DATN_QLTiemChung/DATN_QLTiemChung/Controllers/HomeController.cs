@@ -25,10 +25,7 @@ namespace DATN_QLTiemChung.Controllers
         {
             return View();
         }
-        public IActionResult QLHoaDon()
-        {
-            return View();
-        }
+     
         public IActionResult QLKhachHang()
         {
             return View();

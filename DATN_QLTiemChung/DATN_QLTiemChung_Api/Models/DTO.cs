@@ -17,6 +17,7 @@ namespace DATN_QLTiemChung_Api.Models
 
   
         public KhachHang? KhachHang { get; set; }
+        public NhanVien? NhanVien { get; set; }
         public List<HoaDonChiTiet> HoaDonChiTiets { get; set; } = new List<HoaDonChiTiet>();
     }
 }

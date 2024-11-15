@@ -59,3 +59,9 @@ C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_QLTiemChung\obj\Debug
 C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_QLTiemChung\obj\Debug\net8.0\DATN_QLTiemChung.pdb
 C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_QLTiemChung\obj\Debug\net8.0\DATN_QLTiemChung.genruntimeconfig.cache
 C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_QLTiemChung\obj\Debug\net8.0\ref\DATN_QLTiemChung.dll
+C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_QLTiemChung\obj\Debug\net8.0\DATN_QLTiemChung.csproj.AssemblyReference.cache
+C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_QLTiemChung\bin\Debug\net8.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_QLTiemChung\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_QLTiemChung\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_QLTiemChung\bin\Debug\net8.0\Newtonsoft.Json.Bson.dll
+C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_QLTiemChung\obj\Debug\net8.0\DATN_QLT.CE2B28C1.Up2Date

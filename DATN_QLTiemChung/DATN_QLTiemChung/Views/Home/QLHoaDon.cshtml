@@ -1,12 +1,17 @@
-﻿<div class="container mt-4">
+﻿@model DATN_QLTiemChung.Models.HoaDonDTO
+@{
+    var tuoi = DateTime.Now.Year - Model.KhachHang.NgaySinh.Year;
+}
+
+<div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="" style="color: #2fb388;">QUẢN LÝ HÓA ĐƠN</h2>
-        <div class="Double-end ">
+        <div class="float-end ">
             <button class="btn fw-bold custom-btn"><i class="fa-solid fa-plus"></i> Thêm</button>
             <button class="btn fw-bold custom-btn"><i class="fa-solid fa-floppy-disk"></i> Lưu</button>
             <button class="btn fw-bold custom-btn"><i class="fa-solid fa-repeat"></i> Hủy </button>
             <button class="btn fw-bold custom-btn"><i class="fa-solid fa-print"></i> In</button>
-            <button class="btn fw-bold custom-btn"><i class="fa-solid fa-right-from-bracket"></i> Thoát</button>
+            <button class="btn fw-bold custom-btn"><i class="fa-solid fa-right-from-bracket"></i> </button>
         </div>
     </div>
 
@@ -19,151 +24,224 @@
                     <input class="col-8  border border-1 rounded-2 mx-1" type="text">
                     <button type="button" class="col border border-1 rounded-end btn "><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
-                <div class="row border rounded-4 border-1 mt-1 " style="height: 300px;">
+                <div class="row border rounded-4 border-1 mt-1 " style="min-height: 90%;">
                     <table class="table  table-hover h-25 m-0 text-center ">
                         <thead class="rounded-4">
                             <tr>
                                 <th class="col-2">STT</th>
-                                <th class="col">Họ và Tên</th>
-                                <th class="col-4">Năm sinh</th>
+                                <th class="col">Mã khách hàng</th>
+                                <th class="col-4">Họ tên</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Nguyễn Văn A</td>
-                                <td>1990</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>Nguyễn Văn A</td>
-                                <td>1990</td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
         <div class="invoice-section col-8  ">
-            <div class=" ms-2 p-3 border rounded-4 h-100">
-                <div class="row ">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label class="fw-semibold" for="medicalCode">Mã y tế</label>
-                            <input type="text" class="form-control form-control-sm" id="medicalCode" value="CDCD0912312345">
+            <form action="/" method="post">
+                <div class=" ms-2 p-3 border rounded-4 h-100">
+                    <div class="row ">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="fw-semibold" for="medicalCode">Mã Khách Hàng</label>
+                                <input type="text" class="form-control form-control-sm" id="medicalCode " asp-for="IDHD">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label class="fw-semibold" for="name">Họ tên</label>
-                            <input type="text" class="form-control form-control-sm" id="name" value="Nguyễn Quang Trường">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="fw-semibold" for="name">Họ tên</label>
+                                <input type="text" class="form-control form-control-sm" id="name" asp-for="KhachHang.TenKhachHang">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-1">
-                        <div class="form-group">
-                            <label class="fw-semibold" for="age">Tuổi</label>
-                            <input type="text" class="form-control form-control-sm" id="age" value="18">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="fw-semibold" for="phone">Số điện thoại</label>
+                                <input type="text" class="form-control form-control-sm" id="phone" asp-for="KhachHang.SoDienThoai">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label class="fw-semibold" for="birthYear">Năm sinh</label>
-                            <input type="text" class="form-control form-control-sm" id="birthYear" value="2006">
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <label class="fw-semibold" for="age">Tuổi</label>
+                                <input type="text" class="form-control form-control-sm" id="age" value="@tuoi">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label class="fw-semibold" for="phone">Số điện thoại</label>
-                            <input type="text" class="form-control form-control-sm" id="phone" value="0964225610">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="fw-semibold" for="birthYear">Năm sinh</label>
+                                <input type="number" class="form-control form-control-sm"
+                                       asp-for="KhachHang.NgaySinh.Year"
+                                
+                                       min="1900" max="2100" />
+                            </div>
                         </div>
-                    </div>
 
-                </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label class="fw-semibold" for="invoiceNumber">Số hóa đơn</label>
-                            <select id="invoiceNumber" class="form-control form-control-sm">
-                                <option selected>HDDT/3007894</option>
-                                <!-- Các lựa chọn khác -->
+
+                    </div>
+                    <div class="row">
+                        <div class="form-group col">
+                            <label class="fw-semibold" for="hoKhauTinh">Tỉnh/TP</label>
+                            <select class="form-control" id="hoKhauTinh">
+                                <option>Đà Nẵng</option>
+                                <option>Hà Nội</option>
+                                <option>Hồ Chí Minh</option>
                             </select>
                         </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label class="fw-semibold" for="address">Địa chỉ</label>
-                            <input type="text" class="form-control form-control-sm" id="address" value="36 Phạm Văn Nghị, Thạch Gián, Đà Nẵng">
+                        <div class="form-group col">
+                            <label class="fw-semibold" for="hoKhauQuan">Quận/Huyện</label>
+                            <select class="form-control" id="hoKhauQuan">
+                                <option>Thanh Khê</option>
+                                <option>Hải Châu</option>
+                                <option>Ngũ Hành Sơn</option>
+                            </select>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label class="fw-semibold" for="totalInvoice">Giá trị hóa đơn</label>
-                            <input type="text" class="form-control form-control-sm" id="totalInvoice" value="178,140.00">
+                        <div class="form-group col">
+                            <label class="fw-semibold" for="hoKhauXa">Xã/Phường</label>
+                            <select class="form-control" id="hoKhauXa">
+                                <option>Thạc Gián</option>
+                                <option>Hòa Minh</option>
+                                <option>Mỹ An</option>
+                            </select>
                         </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label class="fw-semibold" for="taxCode">Mã số thuế</label>
-                            <input type="text" class="form-control form-control-sm gray-bg" id="taxCode" disabled>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label class="fw-semibold" for="atmCode">Mã ATM</label>
-                            <input type="text" class="form-control form-control-sm gray-bg" id="atmCode" disabled>
-                        </div>
-                    </div>
-                </div>
 
 
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="form-group">
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="fw-semibold" for="address">Địa chỉ</label>
+                                <input type="text" class="form-control form-control-sm" id="address" asp-for="KhachHang.DiaChi">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="fw-semibold" for="medicalCode">Mã nhân viên</label>
+                                <input type="text" class="form-control form-control-sm" id="medicalCode" asp-for="NhanVien.IDNV">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="fw-semibold" for="invoiceNumber">Mã hóa đơn</label>
+                                <select id="invoiceNumber" class="form-control form-control-sm">
+                                    <option selected>@Html.DisplayFor(model => model.IDHD)</option>
+                                    <!-- Các lựa chọn khác -->
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="fw-semibold" for="invoiceNumber">Mã vaccine</label>
+                                <select id="invoiceNumber" class="form-control form-control-sm">
+                                    <option selected></option>
+                                    <!-- Các lựa chọn khác -->
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="fw-semibold" for="medicalCode">Nội dung</label>
+                                <input type="text" class="form-control form-control-sm" id="medicalCode" value="CDCD0912312345" asp-for="NoiDung">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="fw-semibold" for="totalInvoice">Số lượng</label>
+                                <input type="text" class="form-control form-control-sm" id="totalInvoice" value="178,140.00">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="fw-semibold" for="totalInvoice">Đơn giá</label>
+                                <input type="text" class="form-control form-control-sm" id="totalInvoice" value="178,140.00">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="fw-semibold" for="totalInvoice">Thành Tiền</label>
+                                <input type="text" class="form-control form-control-sm" id="totalInvoice" value="178,140.00">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
                             <label class="fw-semibold" for="paymentMethod">Hình thức thanh toán</label>
                             <select id="paymentMethod" class="form-control form-control-sm">
                                 <option selected>Tiền mặt</option>
                                 <option>Chuyển khoản</option>
                             </select>
                         </div>
-                    </div>
-
-                    <div class="col">
-                        <div class="form-group">
-                            <label class="fw-semibold" for="companyName">Tên đơn vị</label>
-                            <input type="text" class="form-control form-control-sm gray-bg" id="companyName" disabled>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="fw-semibold" for="paymentMethod">Trạng thái</label>
+                                <select id="paymentMethod" class="form-control form-control-sm">
+                                    <option selected>Đã thanh toán</option>
+                                    <option>Chưa thanh toán</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="fw-semibold" for="medicalCode">Thời gian</label>
+                            <input type="datetime-local" class="form-control col-3 me-1">
                         </div>
                     </div>
-                </div>
-                <div class="row p-2 ps-4">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <div class="radio-group row">
-                                <div class="form-check col-2 pt-2">
-                                    <input type="radio" class="form-check-input" id="phieuThu" name="action">
-                                    <label class="form-check-label" for="phieuThu">Phiếu thu</label>
-                                </div>
-                                <div class="form-check col-2 pt-2">
-                                    <input type="radio" class="form-check-input" id="huyHoaDon" name="action">
-                                    <label class="form-check-label" for="huyHoaDon">Hủy hóa đơn</label>
-                                </div>
-                                <div class="col">
-                                    <button class="btn">Lựa chọn hoàn trả</button>
+
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="fw-semibold" for="taxCode">Mã số thuế</label>
+                                <input type="text" class="form-control form-control-sm gray-bg" id="taxCode" disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="fw-semibold" for="atmCode">Mã ATM</label>
+                                <input type="text" class="form-control form-control-sm gray-bg" id="atmCode" disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="fw-semibold" for="companyName">Tên đơn vị</label>
+                                <input type="text" class="form-control form-control-sm gray-bg" id="companyName" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row p-2 ps-4">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="radio-group row">
+                                    <div class="form-check col-2 pt-2">
+                                        <input type="radio" class="form-check-input" id="phieuThu" name="action">
+                                        <label class="form-check-label" for="phieuThu">Phiếu thu</label>
+                                    </div>
+                                    <div class="form-check col-2 pt-2">
+                                        <input type="radio" class="form-check-input" id="huyHoaDon" name="action">
+                                        <label class="form-check-label" for="huyHoaDon">Hủy hóa đơn</label>
+                                    </div>
+                                    <div class="col">
+                                        <button class="btn">Lựa chọn hoàn trả</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- Trạng thái HĐ -->
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <p>Trạng thái HDDT Đã có hóa đơn điện tử - Số HĐ: <strong>HDDT/3007894</strong></p>
+                    <!-- Trạng thái HĐ -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <p>Trạng thái HDDT Đã có hóa đơn điện tử - Số HĐ: <strong>HDDT/3007894</strong></p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 
@@ -181,58 +259,37 @@
             <table class="table table-bordered table-sm">
                 <thead>
                     <tr>
-                        <th>Số phiếu yêu cầu</th>
-                        <th>Nội dung</th>
+                        <th>Mã khách hàng</th>
+                        <th>Mã vaccine</th>
                         <th>Số lượng</th>
                         <th>Đơn giá</th>
                         <th>Thành tiền</th>
-                        <th>Số tiền đã thanh toán</th>
                         <th>Trạng thái</th>
-                        <th>Ngày thu</th>
+
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>STC246599</td>
-                        <td>Gene-HBvax 1ml (Vắc xin viêm Gan B)</td>
-                        <td>1</td>
-                        <td>40,640.00</td>
-                        <td>40,640.00</td>
-                        <td>40,640.00</td>
-                        <td>Chưa tiêm</td>
-                        <td>20/09/2024</td>
-                    </tr>
-                    <tr>
-                        <td>TYVT2451532</td>
-                        <td>Tư vấn sức khỏe (Tư vấn tiêm chủng)</td>
-                        <td>1</td>
-                        <td>50,000.00</td>
-                        <td>50,000.00</td>
-                        <td>50,000.00</td>
-                        <td>Chưa thực hiện</td>
-                        <td>20/09/2024</td>
-                    </tr>
-                    <tr>
-                        <td>KVCT2167978</td>
-                        <td>Vắc xin tiêm bắp</td>
-                        <td>1</td>
-                        <td>10,000.00</td>
-                        <td>10,000.00</td>
-                        <td>10,000.00</td>
-                        <td>Chưa thực hiện</td>
-                        <td>20/09/2024</td>
-                    </tr>
+                    @foreach (var item in Model.HoaDonChiTiets)
+                    {
+                        <tr>
+                            <td>@Model.IDKH</td>
+                            <td>@item.IDVT</td>
+                            <td>@item.SoLuong</td>
+                            <td>@item.DonGia</td>
+                            <td>@(item.ThanhTien)</td>
+                            <td>@Model.TrangThai</td>
+
+                        </tr>
+                    }
+
+
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="4" class="text-right total-amount">Tổng cộng:</td>
-                        <td class="total-amount">100,640.00 VNĐ</td>
-                        <td class="total-amount">100,640.00 VNĐ</td>
-                        <td colspan="2"></td>
                     </tr>
                 </tfoot>
             </table>
-            <button type="button" class="Double-end btn w-25 custom-btn ">Xác Nhận</button>
+            <button type="button" class="float-end btn w-25 custom-btn ">Xác Nhận</button>
         </div>
     </div>
 

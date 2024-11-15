@@ -1,9 +1,10 @@
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
 
-var app = builder.Build();
+builder.Services.AddControllersWithViews();
+builder.Services.AddHttpClient();
+builder.Services.AddDistributedMemoryCache(); var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -22,6 +23,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=HomeQL}/{id?}");
+    pattern: "{controller=QLHoaDon}/{action=QLHoaDon}/{id?}");
 
 app.Run();
