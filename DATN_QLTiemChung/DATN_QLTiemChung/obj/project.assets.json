@@ -242,19 +242,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ductu\\.nuget\\packages\\": {}
+    "C:\\Users\\dn042\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\DATN_QLTiemChung.csproj",
+      "projectUniqueName": "D:\\Dự án tốt nghiệp\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\DATN_QLTiemChung.csproj",
       "projectName": "DATN_QLTiemChung",
-      "projectPath": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\DATN_QLTiemChung.csproj",
-      "packagesPath": "C:\\Users\\ductu\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\obj\\",
+      "projectPath": "D:\\Dự án tốt nghiệp\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\DATN_QLTiemChung.csproj",
+      "packagesPath": "C:\\Users\\dn042\\.nuget\\packages\\",
+      "outputPath": "D:\\Dự án tốt nghiệp\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\ductu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\dn042\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
