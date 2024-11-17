@@ -27,7 +27,7 @@ namespace DATN_QLTiemChung.Controllers
 
                 return View("~/Views/Home/QLHoaDon.cshtml", hoaDon);
             }
-            return View();
+            return View("~/Views/Home/HomeQl.cshtml");
         }
     }
 }

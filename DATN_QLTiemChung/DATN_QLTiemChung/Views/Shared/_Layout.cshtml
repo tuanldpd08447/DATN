@@ -20,19 +20,30 @@
 </head>
 <body>
     <!-- Header -->
-    <nav class="navbar navbar-expand-lg navbar-light text-white" style="background-color: #2fb388;">
-        <div class="container">
-            <div class="row">
-                <button class="btn col text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-                <h3 class="m-0 col"><a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 text-white fw-bold" asp-action="">CDC</a></h3>
+    <nav class="navbar navbar-expand-lg navbar-light text-white" style="background-color: #2fb388;min-height: 0px;">
+        <div class="container px-2">
+            <div class="row align-items-center">
+                <!-- Button Offcanvas -->
+                <div class="col-auto">
+                    <button class="btn btn-outline-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+
+                <!-- Title -->
+                <div class="col-auto">
+                    <a asp-controller="Home" asp-action="HomeQL" class="fs-3 text-light link-opacity-75-hover link-underline link-underline-opacity-0 py-2 fw-bold m-0">CDC</a>
+                </div>
+
+                <!-- Links -->
+                <div class="col text-end">
+                    <a class="text-light link-opacity-75-hover link-underline link-underline-opacity-0 py-2 fw-bold mx-2" asp-controller="QLTiepNhan" asp-action="QLTiepNhan">QUẢN LÝ TIẾP NHẬN </a>
+
+                </div>
             </div>
             <div class="btn-group">
-
-                
-
-               @if(login){
+                @if (login)
+                {
                     <button type="button" class="btn fs-6 border-0 dropdown-toggle text-white" data-bs-toggle="dropdown" aria-expanded="false">
                         Tunnd
                     </button>
@@ -41,13 +52,14 @@
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
                     </ul>
-                }else{
+                }
+                else
+                {
                     <a type="button" asp-action="Login" class="btn btn-outline-light fw-bold">Đăng nhập</a>
                 }
             </div>
         </div>
     </nav>
-
     <!-- Sidebar Offcanvas -->
     <div class="offcanvas offcanvas-start" style="width: 20%;" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
         <div class="offcanvas-header">
@@ -56,13 +68,13 @@
         </div>
         <div class="offcanvas-body">
             <div class="row ">
-                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" asp-controller="Home" asp-action="QLTiepNhan">QUẢN LÝ TIẾP NHẬN</a>
+                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" asp-controller="QLTiepNhan" asp-action="QLTiepNhan">QUẢN LÝ TIẾP NHẬN</a>
             </div>
             <div class="row">
                 <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" asp-controller="Home" asp-action="KhamSanLoc">KHÁM SÀNG LỌC</a>
             </div>
             <div class="row">
-                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" asp-controller="Home" asp-action="QLHoaDon">QUẢN LÝ HÓA ĐƠN</a>
+                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" asp-controller="QLHoaDon" asp-action="QLHoaDon">QUẢN LÝ HÓA ĐƠN</a>
             </div>
             <div class="row">
                 <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" asp-controller="Home" asp-action="QLTiemChung">QUẢN LÝ TIÊM CHỦNG</a>
@@ -125,6 +137,18 @@
                     color: #ffffff;
                     background-color: #2fb388;
                 }
+
+            .table th {
+                background-color: #e8f5e9; /* Màu nền xanh nhạt cho tiêu đề */
+                color: #000; /* Màu chữ đen */
+                text-align: center;
+                white-space: nowrap; /* Ngăn chữ bị xuống hàng */
+            }
+
+            .table tbody tr td {
+                text-align: center;
+                white-space: nowrap; /* Ngăn chữ bị xuống hàng trong ô dữ liệu */
+            }
         </style>
     </div>
 

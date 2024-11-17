@@ -173,7 +173,7 @@ namespace DATN_QLTiemChung_Api.Controllers
         [HttpGet("ward")]
         public async Task<ActionResult<IEnumerable<Ward>>> GetWards()
         {
-            var wards = await _context.wards.Where(c => c.district_code == "001").ToListAsync();
+            var wards = await _context.wards.ToListAsync();
             return Ok(wards);
         }
 

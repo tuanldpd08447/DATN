@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "AzDDO927FeFc56qQteDicmG+6JgjRBr18OQ9sfPEhn4=",
+  "Hash": "6DU3wb8M9Nm/cvH1u//pL+loIOXEbu067NqM6MZyxa4=",
   "Source": "DATN_QLTiemChung",
   "BasePath": "_content/DATN_QLTiemChung",
   "Mode": "Default",
@@ -129,6 +129,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Img\\logo.png"
+    },
+    {
+      "Identity": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\wwwroot\\js\\diachi.js",
+      "SourceId": "DATN_QLTiemChung",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\wwwroot\\",
+      "BasePath": "_content/DATN_QLTiemChung",
+      "RelativePath": "js/diachi.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\diachi.js"
     },
     {
       "Identity": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\wwwroot\\js\\site.js",

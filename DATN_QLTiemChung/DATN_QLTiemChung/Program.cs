@@ -23,6 +23,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=QLHoaDon}/{action=QLHoaDon}/{id?}");
+    pattern: "{controller=Home}/{action=HomeQL}/{id?}");
 
 app.Run();

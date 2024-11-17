@@ -35,7 +35,22 @@ namespace DATN_QLTiemChung_Api
         public DbSet<VatTuYTe> VatTuYTe { get; set; }
         public DbSet<Ward> wards { get; set; }
         public DbSet<XuatXu> XuatXu { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Cấu hình quan hệ giữa District và Ward
+            modelBuilder.Entity<Ward>()
+                .HasOne(w => w.District)
+                .WithMany(d => d.Wards)
+                .HasForeignKey(w => w.district_code)
+                .OnDelete(DeleteBehavior.Restrict);
 
+            // Cấu hình quan hệ giữa Province và District
+            modelBuilder.Entity<District>()
+                .HasOne(d => d.Province)
+                .WithMany(p => p.Districts)
+                .HasForeignKey(d => d.province_code)
+                .OnDelete(DeleteBehavior.Restrict);
+        }
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
        
     }

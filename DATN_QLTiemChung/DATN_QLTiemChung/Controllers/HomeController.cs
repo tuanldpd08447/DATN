@@ -42,10 +42,7 @@ namespace DATN_QLTiemChung.Controllers
         {
             return View();
         }
-        public IActionResult QLTiepNhan()
-        {
-            return View();
-        }
+      
         public IActionResult QLXuatNhapKho()
         {
             return View();
