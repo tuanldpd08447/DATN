@@ -1,7 +1,8 @@
 ﻿@using Newtonsoft.Json
 @{
     var khachHangsJson = JsonConvert.SerializeObject(ViewBag.KhachHangs);
-     List<string> _danTocList = new List<string>
+    var khachHangPreoderJson = JsonConvert.SerializeObject(ViewBag.KhachHangPreorder);
+    List<string> _danTocList = new List<string>
     {
         "Kinh", "Tày", "Mường", "Mông", "H'mông", "Khmer", "Hoa", "Nùng", "Thái",
         "Dzao", "Cờ Lao", "Gian", "Ê Đê", "Ba Na", "Sán Dìu", "Sán Chay", "Cơ Tu",
@@ -10,7 +11,8 @@
         "Bình Định", "Tày", "Tày", "Tày", "Chơ", "Chống", "Gieo", "Mai", "Gia Rai",
         "Kon Tum", "Đồng Tháp", "Gyar", "Lý Tự", "Tư", "Chứt", "Vân Kiều"
     };
-    string emailtemplpe = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$/";
+    var temp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$";
+
 }
 <style>
     .error-message {
@@ -109,13 +111,17 @@
                             </div>
                             <div class="form-group col">
                                 <label class="fw-semibold" for="email">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="Nhập email" title="Nhập đúng định dạng email (example@gmail.com)" required disabled>
-                                <span id="emailError" class="error-message"></span>
-                                <input type="hidden" id="emailPattern" value="@emailtemplpe" style="display:none;" />
+                                <input type="email" class="form-control" id="email" name="email"
+                                       oninput="validateEmail()" placeholder="Nhập email"
+                                       title="Nhập đúng định dạng email (example@gmail.com)" required disabled>
+                                <span id="emailError" class="error-message" style="color:red;"></span>
+
+                                <input type="hidden" id="emailPattern" value="@temp" />
+
                                 <script>
                                     function validateEmail() {
                                         var email = document.getElementById('email').value;
-                                        var emailPattern = document.getElementById('emailPattern').value;  // Lấy pattern từ thuộc tính HTML
+                                        var emailPattern = document.getElementById('emailPattern').value; /
                                         var regexPattern = new RegExp(emailPattern);
                                         var errorElement = document.getElementById('emailError');
 
@@ -129,8 +135,6 @@
                                         }
                                     }
                                 </script>
-
-
                             </div>
                         </div>
                         <h5 class="mt-2">Hộ khẩu</h5>
@@ -240,34 +244,26 @@
                                     <!-- Bảng hẹn đặt trước -->
                                     <div class="border rounded-4 mt-4 p-3 table-responsive" style="font-size: small;">
                                         <h4>Bảng hẹn đặt trước: Ngày 02/10/2024</h4>
-                                        <table class="table table-bordered">
+                                    <table class="table table-bordered" id="khachHangPreoderTable">
                                             <thead >
                                                 <tr style="background-color: #2fb388;">
                                                     <th></th>
+                                                    <th>ID</th>
                                                     <th>Ngày đặt</th>
-                                                    <th>Số y tế</th>
-                                                    <th>Tên bệnh nhân</th>
-                                                    <th>Ngày sinh</th>
-                                                    <th>Dân tộc</th>
-                                                    <th>Giới tính</th>
-                                                    <th>CMT/CCCD/Mã định danh</th>
-                                                    <th>Hộ khẩu</th>
-                                                    <th>Nơi tạm trú</th>
+                                                    <th>Giờ Hẹn</th>
+                                                    <th>Tên Khách Hàng</th>
+                                                    <th>Ngày Sinh</th>
+                                                    <th>Giới Tính</th>
+                                                    <th>Địa Chỉ</th>
+                                                    <th>Số Điện Thoại</th>
+                                                    <th>Email</th>
+                                                    <th>CCCD/MD</th>
+                                                    <th>Dân Tộc</th>
+                                                    <th>Địa Chỉ Đầy Đủ</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td><input type="checkbox" name="selectedAppointment"></td>
-                                                    <td>02/10/2024</td>
-                                                    <td>CDCD0912312345</td>
-                                                    <td>Nguyễn Quang Trường</td>
-                                                    <td>08/02/2006</td>
-                                                    <td>Kinh</td>
-                                                    <td>Nam</td>
-                                                    <td>001082946357</td>
-                                                    <td>Hộ Khẩu</td>
-                                                    <td>Nơi tạm trú</td>
-                                                </tr>
+                                                
                                             </tbody>
                                         </table>
                                     </div>
@@ -300,6 +296,7 @@
                             <script>
 
                                 const khachHangs = @Html.Raw(khachHangsJson); // Dữ liệu khách hàng từ server
+                                const khachHangPreoder = @Html.Raw(khachHangPreoderJson); // Dữ liệu khách hàng từ server
 
                                 // Hàm để render lại bảng với dữ liệu mới
                                 function renderTable(data) {
@@ -345,7 +342,47 @@
 
                                     tbody.appendChild(fragment);
                                 }
+                                function renderKhachHangPreoderTable(data) {
+                                    const tbody = document.querySelector("#khachHangPreoderTable tbody");
+                                    tbody.innerHTML = ''; // Xóa dữ liệu cũ
 
+                                    if (data.length === 0) {
+                                        tbody.innerHTML = `
+                                                <tr>
+                                                    <td colspan="12" class="text-center">Không có lịch hẹn nào</td>
+                                                </tr>
+                                            `;
+                                        return;
+                                    }
+
+                                    const fragment = document.createDocumentFragment();
+
+                                    data.forEach(order => {
+                                        const tr = document.createElement("tr");
+                                        tr.innerHTML = `
+                                                <td>
+                                                <div class="form-check">
+                                                  <input class="form-check-input" type="radio" name="RadioKhachHang" id="Radio${order.IDKH}" value="${order.IDKH}">
+                                                </div>
+                                                </td>
+                                                <td>${order.IDKH}</td>
+                                                <td>${order.NgayHen}</td>
+                                                <td>${order.ThoiGianHen}</td>
+                                                 <td>${order.TenKhachHang}</td>
+                                                <td>${order.NgaySinh ? new Date(order.NgaySinh).toLocaleDateString('vi-VN') : ''}</td>
+                                                <td>${order.GioiTinh || ''}</td>
+                                                <td>${order.DiaChi || ''}</td>
+                                                <td>${order.SoDienThoai || ''}</td>
+                                                <td>${order.Email || ''}</td>
+                                                <td>${order.CCCD_MDD || ''}</td>
+                                                <td>${order.DanToc || ''}</td>
+                                                <td>${order.FullAddress || ''}</td>
+                                            `;
+                                        fragment.appendChild(tr);
+                                    });
+
+                                    tbody.appendChild(fragment);
+                                }
                                 // Hàm tìm kiếm
                                 document.getElementById('searchButton').addEventListener('click', function () {
                                     const medicalCode = document.getElementById('medicalCodeFind').value.trim().toLowerCase();
@@ -360,13 +397,22 @@
                                             (identityCode === '' || (kh.CCCD_MDD && kh.CCCD_MDD.toLowerCase().includes(identityCode)))
                                         );
                                     });
+                                    const filteredData2 = khachHangPreoder.filter(kh => {
+                                        return (
+                                            (medicalCode === '' || (kh.IDKH && kh.IDKH.toLowerCase().includes(medicalCode))) &&
+                                            (userName === '' || (kh.TenKhachHang && kh.TenKhachHang.toLowerCase().includes(userName))) &&
+                                            (identityCode === '' || (kh.CCCD_MDD && kh.CCCD_MDD.toLowerCase().includes(identityCode)))
+                                        );
+                                    });
 
                                     // Render lại bảng với dữ liệu đã lọc
                                     renderTable(filteredData);
+                                    renderKhachHangPreoderTable(filteredData2);
                                 });
 
                                 // Hiển thị dữ liệu mặc định khi trang tải
                                 renderTable(khachHangs);
+                                renderKhachHangPreoderTable(khachHangPreoder);
 
 
                                 // Xử lý sự kiện khi nhấn nút "Thêm"
