@@ -21,6 +21,15 @@ namespace DATN_QLTiemChung_Api.Models
         public NhanVien? NhanVien { get; set; }
         public List<HoaDonChiTiet> HoaDonChiTiets { get; set; } = new List<HoaDonChiTiet>();
     }
+    public class DiaChiDTO
+    {
+        public string IDXP { get; set; }
+        public string TenXaPhuong { get; set; }
+        public string IDQH { get; set; }
+        public string TenQuanHuyen { get; set; }
+        public string IDTTP { get; set; }
+        public string TenTinhThanhPho {  get; set; }
+    }
     public class KhachHangDTo
     {
         public string IDKH { get; set; }

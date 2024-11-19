@@ -11361,4 +11361,5 @@ const provinces = [
 {"code":"32244","name":"Rạch Gốc","name_en":"Rach Goc","full_name":"Thị trấn Rạch Gốc","full_name_en":"Rach Goc Township","code_name":"rach_goc","district_code":"973","administrative_unit_id":9},
 {"code":"32245","name":"Tân Ân","name_en":"Tan An","full_name":"Xã Tân Ân","full_name_en":"Tan An Commune","code_name":"tan_an","district_code":"973","administrative_unit_id":10},
 {"code":"32248","name":"Đất Mũi","name_en":"Dat Mui","full_name":"Xã Đất Mũi","full_name_en":"Dat Mui Commune","code_name":"dat_mui","district_code":"973","administrative_unit_id":10}];
-  export { provinces, districts, wards };
+ 
+export { provinces, districts, wards };

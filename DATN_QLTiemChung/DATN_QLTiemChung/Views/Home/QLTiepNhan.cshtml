@@ -142,6 +142,7 @@
                             <div class="form-group col">
                                 <label class="fw-semibold" for="hoKhauTinh">Tỉnh/TP</label>
                                 <select class="form-control" id="hoKhauTinh"  required disabled>
+                                    <option>-- Chọn Tỉnh/TP --</option>
                                 </select>
                             </div>
                             <div class="form-group col">
@@ -193,7 +194,7 @@
                         
                         <button id="targetButton" type="submit" style="display:none;">Nút bị kích hoạt</button>
 
-                        <script type="module" src="~/js/site.js"></script>
+                        <script type="module" src="~/js/site.js" asp-append-version="true"></script>
                     </form>
 
 
@@ -320,21 +321,24 @@
                                         const tr = document.createElement("tr");
 
                                         tr.innerHTML = `
-                                            <td>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="RadioKhachHang" id="Radio${kh.IDKH}" value="${kh.IDKH}">
-                                                </div>
-                                            </td>
-                                            <td>${kh.IDKH}</td>
-                                            <td>${kh.TenKhachHang}</td>
-                                            <td>${kh.NgaySinh ? new Date(kh.NgaySinh).toLocaleDateString('vi-VN') : ''}</td>
-                                            <td>${kh.GioiTinh || ''}</td>
-                                            <td>${kh.DiaChi || ''}</td>
-                                            <td>${kh.SoDienThoai || ''}</td>
-                                            <td>${kh.Email || ''}</td>
-                                            <td>${kh.CCCD_MDD || ''}</td>
-                                            <td>${kh.DanToc || ''}</td>
-                                            <td>${kh.FullAddress || ''}</td>
+                                    <td RadioCell${kh.IDKH}>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="RadioKhachHang" id="Radio${kh.IDKH}" value="${kh.IDKH}">
+                                        </div>
+                                    </td>
+                                    <!-- Các cột dữ liệu khác với id riêng -->
+                                    <td id="IDKHCell${kh.IDKH}">${kh.IDKH}</td>
+                                    <td id="TenKhachHangCell${kh.IDKH}">${kh.TenKhachHang}</td>
+                                    <td id="NgaySinhCell${kh.IDKH}">
+                                        ${kh.NgaySinh ? new Date(kh.NgaySinh).toLocaleDateString('vi-VN') : ''}
+                                    </td>
+                                    <td id="GioiTinhCell${kh.IDKH}">${kh.GioiTinh || ''}</td>
+                                    <td id="DiaChiCell${kh.IDKH}">${kh.DiaChi || ''}</td>
+                                    <td id="SoDienThoaiCell${kh.IDKH}">${kh.SoDienThoai || ''}</td>
+                                    <td id="EmailCell${kh.IDKH}">${kh.Email || ''}</td>
+                                    <td id="CCCD_MDDCell${kh.IDKH}">${kh.CCCD_MDD || ''}</td>
+                                    <td id="DanTocCell${kh.IDKH}">${kh.DanToc || ''}</td>
+                                    <td id="FullAddressCell${kh.IDKH}">${kh.FullAddress || ''}</td>
                                         `;
 
                                         fragment.appendChild(tr);
@@ -360,23 +364,26 @@
                                     data.forEach(order => {
                                         const tr = document.createElement("tr");
                                         tr.innerHTML = `
-                                                <td>
-                                                <div class="form-check">
-                                                  <input class="form-check-input" type="radio" name="RadioKhachHang" id="Radio${order.IDKH}" value="${order.IDKH}">
-                                                </div>
-                                                </td>
-                                                <td>${order.IDKH}</td>
-                                                <td>${order.NgayHen}</td>
-                                                <td>${order.ThoiGianHen}</td>
-                                                 <td>${order.TenKhachHang}</td>
-                                                <td>${order.NgaySinh ? new Date(order.NgaySinh).toLocaleDateString('vi-VN') : ''}</td>
-                                                <td>${order.GioiTinh || ''}</td>
-                                                <td>${order.DiaChi || ''}</td>
-                                                <td>${order.SoDienThoai || ''}</td>
-                                                <td>${order.Email || ''}</td>
-                                                <td>${order.CCCD_MDD || ''}</td>
-                                                <td>${order.DanToc || ''}</td>
-                                                <td>${order.FullAddress || ''}</td>
+                                          <td id="RadioCell${order.IDKH}">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="RadioKhachHang" id="Radio${order.IDKH}" value="${order.IDKH}">
+                                        </div>
+                                    </td>
+                                    <!-- Các cột dữ liệu khác với id riêng -->
+                                    <td id="IDKHCell${order.IDKH}">${order.IDKH}</td>
+                                    <td id="NgayHenCell${order.IDKH}">${order.NgayHen}</td>
+                                    <td id="ThoiGianHenCell${order.IDKH}">${order.ThoiGianHen}</td>
+                                    <td id="TenKhachHangCell${order.IDKH}">${order.TenKhachHang}</td>
+                                    <td id="NgaySinhCell${order.IDKH}">
+                                        ${order.NgaySinh ? new Date(order.NgaySinh).toLocaleDateString('vi-VN') : ''}
+                                    </td>
+                                    <td id="GioiTinhCell${order.IDKH}">${order.GioiTinh || ''}</td>
+                                    <td id="DiaChiCell${order.IDKH}">${order.DiaChi || ''}</td>
+                                    <td id="SoDienThoaiCell${order.IDKH}">${order.SoDienThoai || ''}</td>
+                                    <td id="EmailCell${order.IDKH}">${order.Email || ''}</td>
+                                    <td id="CCCD_MDDCell${order.IDKH}">${order.CCCD_MDD || ''}</td>
+                                    <td id="DanTocCell${order.IDKH}">${order.DanToc || ''}</td>
+                                    <td id="FullAddressCell${order.IDKH}">${order.FullAddress || ''}</td>
                                             `;
                                         fragment.appendChild(tr);
                                     });

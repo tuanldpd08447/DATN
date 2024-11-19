@@ -15,6 +15,25 @@ namespace DATN_QLTiemChung_Api.Controllers
         {
             _context = context;
         }
+
+        [HttpGet("GetDiaChi")]
+        public async Task<IActionResult> GetDiaChi(string idxp)
+        {
+            var ward = await _context.wards
+               .Include(w => w.District)
+                   .ThenInclude(d => d.Province).Select(diachi => new DiaChiDTO
+                   {
+                       IDXP = diachi.code,
+                       TenXaPhuong = diachi.full_name,
+                       IDQH = diachi.District.code,
+                       TenQuanHuyen = diachi.District.full_name,
+                       IDTTP = diachi.District.Province.code,
+                       TenTinhThanhPho = diachi.District.Province.full_name
+                   }).FirstOrDefaultAsync(w => w.IDXP == idxp)
+           ;
+
+            return Ok(ward);
+        }
         [HttpGet("GetAll/{IDHD}")]
         public async Task<ActionResult<HoaDonDTO>> GetAll(string IDHD)
         {

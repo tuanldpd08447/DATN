@@ -82,35 +82,27 @@
                     <div class="row">
                         <div class="form-group col">
                             <label class="fw-semibold" for="hoKhauTinh">Tỉnh/TP</label>
-                            <select class="form-control" id="hoKhauTinh">
-                                <option>Đà Nẵng</option>
-                                <option>Hà Nội</option>
-                                <option>Hồ Chí Minh</option>
+                            <select class="form-control" id="hoKhauTinh" required >
+                                <option>-- Chọn Tỉnh/TP --</option>
                             </select>
                         </div>
                         <div class="form-group col">
                             <label class="fw-semibold" for="hoKhauQuan">Quận/Huyện</label>
-                            <select class="form-control" id="hoKhauQuan">
-                                <option>Thanh Khê</option>
-                                <option>Hải Châu</option>
-                                <option>Ngũ Hành Sơn</option>
+                            <select class="form-control" id="hoKhauQuan" required >
+                                <option>-- Chọn Quận/Huyện --</option>
                             </select>
                         </div>
                         <div class="form-group col">
                             <label class="fw-semibold" for="hoKhauXa">Xã/Phường</label>
-                            <select class="form-control" id="hoKhauXa">
-                                <option>Thạc Gián</option>
-                                <option>Hòa Minh</option>
-                                <option>Mỹ An</option>
+                            <select class="form-control" id="hoKhauXa" name="hoKhauXa" required >
+                                <option>-- Chọn Xã/Phường --</option>
                             </select>
                         </div>
-
-
-                        <div class="col">
-                            <div class="form-group">
-                                <label class="fw-semibold" for="address">Địa chỉ</label>
-                                <input type="text" class="form-control form-control-sm" id="address" asp-for="KhachHang.DiaChi">
-                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col">
+                            <label class="fw-semibold" for="diaChiChiTiet">Địa chỉ chi tiết</label>
+                            <input type="text" class="form-control" name="diaChiChiTiet" id="diaChiChiTiet" placeholder="Nhập địa chỉ chi tiết" required >
                         </div>
                     </div>
                     <div class="row">
@@ -241,6 +233,8 @@
                         </div>
                     </div>
                 </div>
+                <script
+                    ></script>
             </form>
         </div>
     </div>

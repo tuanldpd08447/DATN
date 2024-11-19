@@ -1,66 +1,52 @@
-﻿import { provinces, districts, wards } from './diachi.js';
+﻿import { provinces, districts, wards } from "./diachi.js";
 
-document.addEventListener("DOMContentLoaded", function () {
-    const hoKhauTinhSelect = document.getElementById("hoKhauTinh");
-    const tamTruTinhSelect = document.getElementById("tamTruTinh");
 
-    // Điền Tỉnh/TP vào dropdown
-    provinces.forEach(province => {
+function initAddressDropdown() {
+
+    const hoKhauTinh = document.getElementById("hoKhauTinh");
+    const hoKhauQuan = document.getElementById("hoKhauQuan");
+    const hoKhauXa = document.getElementById("hoKhauXa");
+
+
+    if (!hoKhauTinh || !hoKhauQuan || !hoKhauXa) return;
+
+    provinces.forEach((province) => {
         const option = document.createElement("option");
         option.value = province.code;
         option.textContent = province.name;
-        hoKhauTinhSelect.appendChild(option);
-        tamTruTinhSelect.appendChild(option.cloneNode(true));
+        hoKhauTinh.appendChild(option);
     });
 
-    // Lọc Quận/Huyện khi Tỉnh được chọn
-    hoKhauTinhSelect.addEventListener("change", function () {
-        filterDistricts("hoKhauQuan", hoKhauTinhSelect.value);
+
+    hoKhauTinh.addEventListener("change", function () {
+        const provinceCode = hoKhauTinh.value;
+        hoKhauQuan.innerHTML = '<option>-- Chọn Quận/Huyện --</option>';
+        hoKhauXa.innerHTML = '<option>-- Chọn Xã/Phường --</option>'; 
+
+        const filteredDistricts = districts.filter(d => d.province_code === provinceCode);
+        filteredDistricts.forEach((district) => {
+            const option = document.createElement("option");
+            option.value = district.code;
+            option.textContent = district.name;
+            hoKhauQuan.appendChild(option);
+        });
     });
 
-    tamTruTinhSelect.addEventListener("change", function () {
-        filterDistricts("tamTruQuan", tamTruTinhSelect.value);
-    });
 
-    // Lọc Phường/Xã khi Quận/Huyện được chọn
-    document.getElementById("hoKhauQuan").addEventListener("change", function () {
-        filterWards("hoKhauXa", this.value);
-    });
+    hoKhauQuan.addEventListener("change", function () {
+        const districtCode = hoKhauQuan.value;
+        hoKhauXa.innerHTML = '<option>-- Chọn Xã/Phường --</option>';
 
-    document.getElementById("tamTruQuan").addEventListener("change", function () {
-        filterWards("tamTruXa", this.value);
-    });
-});
-
-// Hàm lọc Quận/Huyện theo Tỉnh
-function filterDistricts(selectId, provinceCode) {
-    const districtSelect = document.getElementById(selectId);
-    districtSelect.innerHTML = '<option>-- Chọn Quận/Huyện --</option>';
-
-    const filteredDistricts = districts.filter(d => d.province_code === provinceCode);
-    filteredDistricts.forEach(district => {
-        const option = document.createElement("option");
-        option.value = district.code;
-        option.textContent = district.name;
-        districtSelect.appendChild(option);
-    });
-
-    // Reset Phường/Xã khi thay đổi Quận/Huyện
-    document.getElementById(selectId.replace('Quan', 'Xa')).innerHTML = '<option>-- Chọn Xã/Phường --</option>';
-}
-
-// Hàm lọc Phường/Xã theo Quận/Huyện
-function filterWards(selectId, districtCode) {
-    const wardSelect = document.getElementById(selectId);
-    wardSelect.innerHTML = '<option>-- Chọn Xã/Phường --</option>';
-
-    const filteredWards = wards.filter(w => w.district_code === districtCode);
-    filteredWards.forEach(ward => {
-        const option = document.createElement("option");
-        option.value = ward.code;
-        option.textContent = ward.name;
-        wardSelect.appendChild(option);
+        const filteredWards = wards.filter(w => w.district_code === districtCode);
+        filteredWards.forEach((ward) => {
+            const option = document.createElement("option");
+            option.value = ward.code;
+            option.textContent = ward.name;
+            hoKhauXa.appendChild(option);
+        });
     });
 }
 
- 
+
+document.addEventListener("DOMContentLoaded", initAddressDropdown);
+

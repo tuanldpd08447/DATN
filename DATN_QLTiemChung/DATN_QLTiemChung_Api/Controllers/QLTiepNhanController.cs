@@ -41,7 +41,7 @@ public class QLTiepNhanController : ControllerBase
         return Ok(khachHangs);
     }
 
-  
+   
 
     // GET: api/DatLichKham/GetAllDatLichKhams
     [HttpGet("GetAllDatLichKhams")]
