@@ -20,6 +20,32 @@ namespace DATN_QLTiemChung.Controllers
 
 
         }
+        public async Task<IActionResult> ClickKhachHang(string IDKH)
+        {
+            var hd = _httpClientFactory.CreateClient();
+            var foodResponse = await hd.GetAsync("https://localhost:7143/api/DataQLHoaDon/GetAllBYIDKh/" + IDKH);
+            if (foodResponse.IsSuccessStatusCode)
+            {
+                var apiResponse = await foodResponse.Content.ReadAsStringAsync();
+                HoaDonDTO hoaDon = JsonConvert.DeserializeObject<HoaDonDTO>(apiResponse);
+                var Response = await hd.GetAsync("https://localhost:7143/api/DataQLHoaDon/GetAllVatTu");
+                var Responses = await Response.Content.ReadAsStringAsync();
+                List<VatTuYTe> vatTuYTe = JsonConvert.DeserializeObject<List<VatTuYTe>>(Responses);
+                ViewBag.vatTuYTe = vatTuYTe;
+
+                var response = await hd.GetAsync("https://localhost:7143/api/QLTiepNhan/GetAllKhachHang");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var khachhangapiResponse = await response.Content.ReadAsStringAsync();
+                    List<KhachHang> khachHangs = JsonConvert.DeserializeObject<List<KhachHang>>(khachhangapiResponse);
+                    ViewBag.KhachHangs = khachHangs;
+                }
+                return View("~/Views/Home/QLHoaDon.cshtml", hoaDon);
+
+            }
+            return View("~/Views/Home/HomeQl.cshtml");
+        }
         public async Task<IActionResult> QLHoaDon()
         {
 

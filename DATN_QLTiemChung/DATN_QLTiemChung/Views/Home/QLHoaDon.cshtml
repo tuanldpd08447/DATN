@@ -41,7 +41,7 @@
                             }
                             @foreach (var item in ViewBag.KhachHangs)
                             {
-                                <tr onclick="fillInvoiceForm('@STT')">
+                                <tr onclick="location.href='@Url.Action("ClickKhachHang", "QLHoaDon", new { IDKH = @item.IDKH })' ">
 
                                     <td>@STT</td>
                                     <td>@item.IDKH</td>
