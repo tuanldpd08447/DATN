@@ -16,7 +16,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="~/DATN_CDCWebClient.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body>
     <!-- Header -->
@@ -149,6 +149,7 @@
                 text-align: center;
                 white-space: nowrap; /* Ngăn chữ bị xuống hàng trong ô dữ liệu */
             }
+
         </style>
     </div>
 
@@ -156,6 +157,20 @@
     <div>
         @RenderBody()
     </div>
+    @if (TempData["NotificationTitle"] != null && TempData["NotificationMessage"] != null)
+    {
+        <div id="notification-container" class="notification-container">
+            <div class="notification">
+                <div class="notification-icon" style="color: @(TempData["NotificationType"] == "success" ? "#00FA9A" : TempData["NotificationType"] == "error" ? "red" : "#FFD700");">
+                    <i class="@(TempData["NotificationType"] == "success" ? "fas fa-check-circle" : TempData["NotificationType"] == "error" ? "fas fa-exclamation-circle" : "fas fa-exclamation-triangle")"></i>
+                </div>
+                <div class="notification-content">
+                    <h4>@TempData["NotificationTitle"]</h4>
+                    <p>@TempData["NotificationMessage"]</p>
+                </div>
+            </div>
+        </div>
+    }
 
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -163,6 +178,19 @@
 
     <!-- Custom JS -->
     <script type="module" src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const notification = document.querySelector('.notification');
+
+            if (notification) {
+                // Xóa thông báo khỏi DOM sau hiệu ứng mờ dần
+                setTimeout(() => {
+                    notification.remove();
+                }, 5500); // 5 giây hiển thị + 0.5 giây hiệu ứng
+            }
+        });
+
+    </script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
