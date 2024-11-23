@@ -16,6 +16,7 @@ namespace DATN_QLTiemChung.Controllers
 
 
         }
+        
         public async Task<IActionResult> QLTiepNhan()
         {
             var client = _httpClientFactory.CreateClient();
@@ -49,6 +50,7 @@ namespace DATN_QLTiemChung.Controllers
                     // Xử lý khi API không trả về thành công
                     ViewBag.ErrorMessage = "Không thể tải danh sách khách hàng đặt lịch.";
                 }
+
             }
             catch (Exception ex)
             {
@@ -58,6 +60,54 @@ namespace DATN_QLTiemChung.Controllers
 
             return View("~/Views/Home/QLTiepNhan.cshtml");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> AddHangCho(string IDKH)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var response1 = await client.GetAsync("https://65b86c3a46324d531d562e3d.mockapi.io/HangCho");
+            var khachhangapiResponse = await response1.Content.ReadAsStringAsync();
+            List<HangCho> hangChoList = JsonConvert.DeserializeObject<List<HangCho>>(khachhangapiResponse);
+
+            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+
+            var existingHangCho = hangChoList.FirstOrDefault(h => h.IDKH == IDKH && h.NgayCho == today);
+
+            if (existingHangCho != null)
+            {
+                // If an entry is found
+                return BadRequest("Đã có HangCho với IDKH và NgayCho trùng với hôm nay.");
+            }
+           
+            var response = await client.GetAsync($"https://localhost:7143/api/QLTiepNhan/GetAllKhachHangByIDKH/{IDKH}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var apiResponse = await response.Content.ReadAsStringAsync();
+                KhachHangDTo kh = JsonConvert.DeserializeObject<KhachHangDTo>(apiResponse);
+
+                var hc = new HangCho
+                {
+                    ID = null,
+                    IDKH = IDKH,
+                    HoTen = kh.TenKhachHang,
+                    NgaySinh = DateOnly.FromDateTime(kh.NgaySinh),
+                    NgayCho = DateOnly.FromDateTime(DateTime.Now),
+                    Step = "TiepNhan"
+                };
+
+                var content = new StringContent(JsonConvert.SerializeObject(hc), Encoding.UTF8, "application/json");
+                var response2 = await client.PostAsync("https://65b86c3a46324d531d562e3d.mockapi.io/HangCho", content);
+
+                return RedirectToAction("QLTiepNhan");
+            }
+            else
+            {
+                // Handle failure response (if necessary)
+                return BadRequest("Failed to fetch customer data");
+            }
+        }
+
 
 
         [HttpPost]

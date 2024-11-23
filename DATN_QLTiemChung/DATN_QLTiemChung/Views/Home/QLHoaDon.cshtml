@@ -39,13 +39,13 @@
                             @{
                                 int STT = 1;
                             }
-                            @foreach (var item in ViewBag.KhachHangs)
+                            @foreach (var item in ViewBag.KhachHangs as List<HangCho>)
                             {
                                 <tr onclick="location.href='@Url.Action("ClickKhachHang", "QLHoaDon", new { IDKH = @item.IDKH })' ">
 
                                     <td>@STT</td>
                                     <td>@item.IDKH</td>
-                                    <td>@item.TenKhachHang</td>
+                                    <td>@item.HoTen</td>
 
                                 </tr>
                                 STT++;

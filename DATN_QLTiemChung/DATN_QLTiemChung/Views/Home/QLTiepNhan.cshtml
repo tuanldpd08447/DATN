@@ -296,8 +296,11 @@
                                 </div>
                             <script>
 
-                                const khachHangs = @Html.Raw(khachHangsJson); // Dữ liệu khách hàng từ server
-                                const khachHangPreoder = @Html.Raw(khachHangPreoderJson); // Dữ liệu khách hàng từ server
+                                const khachHangs = @Html.Raw(khachHangsJson ?? "null");
+                                const khachHangList = khachHangs || [];
+
+                                const khachHangPreoder = @Html.Raw(khachHangPreoderJson ?? "null");
+                                const khachHangPreoderList = khachHangPreoder || [];
 
                                 // Hàm để render lại bảng với dữ liệu mới
                                 function renderTable(data) {
@@ -308,7 +311,7 @@
                                         // Hiển thị thông báo khi không có dữ liệu
                                         tbody.innerHTML = `
                                             <tr>
-                                                <td class="text-center fw-semibold" colspan="11">Không tìm thấy dữ liệu cần tìm</td>
+                                                <td class="text-center fw-semibold" colspan="12">Không tìm thấy dữ liệu cần tìm</td>
                                             </tr>
                                         `;
                                         return;
@@ -323,7 +326,7 @@
                                         tr.innerHTML = `
                                     <td RadioCell${kh.IDKH}>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="RadioKhachHang" id="Radio${kh.IDKH}" value="${kh.IDKH}">
+                                           <input class="form-check-input" type="radio" name="RadioKhachHang" id="Radio${kh.IDKH}" onchange="AddHangCho('${kh.IDKH}')" value="${kh.IDKH}">
                                         </div>
                                     </td>
                                     <!-- Các cột dữ liệu khác với id riêng -->
@@ -353,7 +356,7 @@
                                     if (data.length === 0) {
                                         tbody.innerHTML = `
                                                 <tr>
-                                                    <td colspan="12" class="text-center">Không có lịch hẹn nào</td>
+                                                    <td colspan="13" class="text-center">Không có lịch hẹn nào</td>
                                                 </tr>
                                             `;
                                         return;
@@ -366,7 +369,7 @@
                                         tr.innerHTML = `
                                           <td id="RadioCell${order.IDKH}">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="RadioKhachHang" id="Radio${order.IDKH}" value="${order.IDKH}">
+                                          <input class="form-check-input" type="radio" name="RadioKhachHang" id="Radio${order.IDKH}" onchange="AddHangCho('${order.IDKH}')"  value="${order.IDKH}">
                                         </div>
                                     </td>
                                     <!-- Các cột dữ liệu khác với id riêng -->
@@ -418,8 +421,8 @@
                                 });
 
                                 // Hiển thị dữ liệu mặc định khi trang tải
-                                renderTable(khachHangs);
-                                renderKhachHangPreoderTable(khachHangPreoder);
+                                renderTable(khachHangList);
+                                renderKhachHangPreoderTable(khachHangPreoderList);
 
 
                                 // Xử lý sự kiện khi nhấn nút "Thêm"
@@ -486,12 +489,44 @@
 
                                 });
 
+                                let selectedID = null;
+
+                                function AddHangCho(id) {
+                                    selectedID = id;
+                                    console.log("Selected ID:", id);
+                                }
+
+                                // Hàm gửi ID đã chọn lên server
+                                function onSelectCustomer() {
+                                    if (!selectedID) {
+                                        console.error("Không có ID nào được chọn.");
+                                        return;
+                                    }
+
+                                    fetch(`/QLTiepNhan/AddHangCho?IDKH=${selectedID}`, {
+                                        method: 'POST',
+                                       
+  
+                                    })
+                                        .then(response => {
+                                            if (response.ok) {
+                                                console.log("Selected ID:", selectedID);
+                                                console.log("ID khách hàng đã được gửi:", selectedID);
+                                            } else {
+                                                console.error("Lỗi khi gửi dữ liệu");
+                                                console.log("Selected ID:", selectedID);
+                                            }
+                                        })
+                                        .catch(error => console.error("Lỗi kết nối:", error));
+                                }
+
+
                             </script>
 
                                 <!-- Footer Modal -->
                                 <div class="modal-footer">
                                 <button type="button" class="btn btn-outline-danger border-2" data-bs-dismiss="modal">Thoát</button>
-                                    <button type="button" class="btn custom-btn">Thêm hàng chờ</button>
+                                <button type="button" class="btn custom-btn" onclick="onSelectCustomer()">Thêm hàng chờ</button>
                                 </div>
                             </div>
                         </div>

@@ -41,7 +41,29 @@ public class QLTiepNhanController : ControllerBase
         return Ok(khachHangs);
     }
 
-   
+    [HttpGet("GetAllKhachHangByIDKH/{IDKH}")]
+    public async Task<IActionResult> GetAllKhachHangByIDKH(string IDKH)
+    {
+        var khachHangs = await _context.KhachHang
+       .Include(kh => kh.Ward)
+           .ThenInclude(w => w.District)
+               .ThenInclude(d => d.Province)
+       .Select(kh => new KhachHangDTo
+       {
+           IDKH = kh.IDKH.ToString(),
+           TenKhachHang = kh.TenKhachHang,
+           NgaySinh = kh.NgaySinh,
+           GioiTinh = kh.GioiTinh,
+           DiaChi = kh.DiaChi,
+           SoDienThoai = kh.SoDienThoai,
+           Email = kh.Email,
+           CCCD_MDD = kh.CCCD_MDD,
+           DanToc = kh.DanToc,
+           FullAddress = $"{kh.DiaChi}, {kh.Ward.name}, {kh.Ward.District.name}, {kh.Ward.District.Province.name}"
+       })
+       .FirstOrDefaultAsync(kh => kh.IDKH == IDKH);
+        return Ok(khachHangs);
+    }
 
     // GET: api/DatLichKham/GetAllDatLichKhams
     [HttpGet("GetAllDatLichKhams")]

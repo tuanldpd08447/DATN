@@ -20,6 +20,7 @@ namespace DATN_QLTiemChung.Controllers
 
 
         }
+
         public async Task<IActionResult> ClickKhachHang(string IDKH)
         {
             var hd = _httpClientFactory.CreateClient();
@@ -33,12 +34,12 @@ namespace DATN_QLTiemChung.Controllers
                 List<VatTuYTe> vatTuYTe = JsonConvert.DeserializeObject<List<VatTuYTe>>(Responses);
                 ViewBag.vatTuYTe = vatTuYTe;
 
-                var response = await hd.GetAsync("https://localhost:7143/api/QLTiepNhan/GetAllKhachHang");
+                var response = await hd.GetAsync("https://65b86c3a46324d531d562e3d.mockapi.io/HangCho");
 
                 if (response.IsSuccessStatusCode)
                 {
                     var khachhangapiResponse = await response.Content.ReadAsStringAsync();
-                    List<KhachHang> khachHangs = JsonConvert.DeserializeObject<List<KhachHang>>(khachhangapiResponse);
+                    List<HangCho> khachHangs = JsonConvert.DeserializeObject<List<HangCho>>(khachhangapiResponse);
                     ViewBag.KhachHangs = khachHangs;
                 }
                 return View("~/Views/Home/QLHoaDon.cshtml", hoaDon);
@@ -60,12 +61,12 @@ namespace DATN_QLTiemChung.Controllers
                 List<VatTuYTe> vatTuYTe = JsonConvert.DeserializeObject<List<VatTuYTe>>(Responses);
                 ViewBag.vatTuYTe = vatTuYTe;
 
-                var response = await hd.GetAsync("https://localhost:7143/api/QLTiepNhan/GetAllKhachHang");
+                var response = await hd.GetAsync("https://65b86c3a46324d531d562e3d.mockapi.io/HangCho");
 
                 if (response.IsSuccessStatusCode)
                 {
                     var khachhangapiResponse = await response.Content.ReadAsStringAsync();
-                    List<KhachHang> khachHangs = JsonConvert.DeserializeObject<List<KhachHang>>(khachhangapiResponse);
+                    List<HangCho> khachHangs = JsonConvert.DeserializeObject<List<HangCho>>(khachhangapiResponse);
                     ViewBag.KhachHangs = khachHangs;
                 }
                 return View("~/Views/Home/QLHoaDon.cshtml", hoaDon);

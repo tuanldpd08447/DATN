@@ -7,12 +7,24 @@
       "RelativeMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|solutionrelative:datn_qltiemchung\\controllers\\qlhoadoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_qltiemchung\\controllers\\qltiepnhancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|solutionrelative:datn_qltiemchung\\controllers\\qltiepnhancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_qltiemchung\\models\\dto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|solutionrelative:datn_qltiemchung\\models\\dto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_qltiemchung_api\\controllers\\qltiepnhancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|solutionrelative:datn_qltiemchung_api\\controllers\\qltiepnhancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_qltiemchung\\views\\home\\qlhoadon.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|solutionrelative:datn_qltiemchung\\views\\home\\qlhoadon.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D642E841-13E7-47F6-8D34-2CA83B800396}|DATN_CDCWebClient\\DATN_CDCWebClient.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_cdcwebclient\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D642E841-13E7-47F6-8D34-2CA83B800396}|DATN_CDCWebClient\\DATN_CDCWebClient.csproj|solutionrelative:datn_cdcwebclient\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_qltiemchung\\views\\home\\qltiepnhan.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|solutionrelative:datn_qltiemchung\\views\\home\\qltiepnhan.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_qltiemchung_api\\controllers\\dataqlkhovaccinecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -23,140 +35,8 @@
       "RelativeMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|solutionrelative:datn_qltiemchung_api\\controllers\\dataqlhoadoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_qltiemchung\\models\\nhanvien.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|solutionrelative:datn_qltiemchung\\models\\nhanvien.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_qltiemchung\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|solutionrelative:datn_qltiemchung\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_qltiemchung\\views\\home\\qltiepnhan.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|solutionrelative:datn_qltiemchung\\views\\home\\qltiepnhan.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_qltiemchung\\controllers\\qltiepnhancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|solutionrelative:datn_qltiemchung\\controllers\\qltiepnhancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_qltiemchung\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|solutionrelative:datn_qltiemchung\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_qltiemchung_api\\models\\dto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|solutionrelative:datn_qltiemchung_api\\models\\dto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D642E841-13E7-47F6-8D34-2CA83B800396}|DATN_CDCWebClient\\DATN_CDCWebClient.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_cdcwebclient\\views\\home\\dkylichkham.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{D642E841-13E7-47F6-8D34-2CA83B800396}|DATN_CDCWebClient\\DATN_CDCWebClient.csproj|solutionrelative:datn_cdcwebclient\\views\\home\\dkylichkham.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D642E841-13E7-47F6-8D34-2CA83B800396}|DATN_CDCWebClient\\DATN_CDCWebClient.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_cdcwebclient\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{D642E841-13E7-47F6-8D34-2CA83B800396}|DATN_CDCWebClient\\DATN_CDCWebClient.csproj|solutionrelative:datn_cdcwebclient\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D642E841-13E7-47F6-8D34-2CA83B800396}|DATN_CDCWebClient\\DATN_CDCWebClient.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_cdcwebclient\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{D642E841-13E7-47F6-8D34-2CA83B800396}|DATN_CDCWebClient\\DATN_CDCWebClient.csproj|solutionrelative:datn_cdcwebclient\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_qltiemchung\\views\\home\\qlnhanvien.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|solutionrelative:datn_qltiemchung\\views\\home\\qlnhanvien.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D642E841-13E7-47F6-8D34-2CA83B800396}|DATN_CDCWebClient\\DATN_CDCWebClient.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_cdcwebclient\\wwwroot\\js\\diachi.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{D642E841-13E7-47F6-8D34-2CA83B800396}|DATN_CDCWebClient\\DATN_CDCWebClient.csproj|solutionrelative:datn_cdcwebclient\\wwwroot\\js\\diachi.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_qltiemchung\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|solutionrelative:datn_qltiemchung\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_qltiemchung\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|solutionrelative:datn_qltiemchung\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_qltiemchung_api\\models\\datlichkham.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|solutionrelative:datn_qltiemchung_api\\models\\datlichkham.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_qltiemchung_api\\controllers\\qltiepnhancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|solutionrelative:datn_qltiemchung_api\\controllers\\qltiepnhancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_qltiemchung_api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|solutionrelative:datn_qltiemchung_api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_qltiemchung\\wwwroot\\js\\diachi.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|solutionrelative:datn_qltiemchung\\wwwroot\\js\\diachi.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_qltiemchung\\views\\home\\qlkhachhang.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|solutionrelative:datn_qltiemchung\\views\\home\\qlkhachhang.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_qltiemchung\\views\\home\\qlhoantra.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|solutionrelative:datn_qltiemchung\\views\\home\\qlhoantra.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_qltiemchung\\views\\home\\nhapduoc.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|solutionrelative:datn_qltiemchung\\views\\home\\nhapduoc.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_qltiemchung\\views\\home\\khamsanloc.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|solutionrelative:datn_qltiemchung\\views\\home\\khamsanloc.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_qltiemchung\\models\\qlytaikhoannv.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|solutionrelative:datn_qltiemchung\\models\\qlytaikhoannv.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_qltiemchung_api\\models\\district.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|solutionrelative:datn_qltiemchung_api\\models\\district.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_qltiemchung\\models\\khachhang.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|solutionrelative:datn_qltiemchung\\models\\khachhang.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_qltiemchung\\models\\hoadonchitiet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|solutionrelative:datn_qltiemchung\\models\\hoadonchitiet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_qltiemchung\\models\\hoantra.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|solutionrelative:datn_qltiemchung\\models\\hoantra.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_qltiemchung\\models\\dto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|solutionrelative:datn_qltiemchung\\models\\dto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_qltiemchung\\models\\ward.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|solutionrelative:datn_qltiemchung\\models\\ward.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_qltiemchung_api\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|solutionrelative:datn_qltiemchung_api\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_qltiemchung_api\\models\\theodoisautiem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|solutionrelative:datn_qltiemchung_api\\models\\theodoisautiem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_qltiemchung_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|solutionrelative:datn_qltiemchung_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_qltiemchung_api\\dbcontex.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|solutionrelative:datn_qltiemchung_api\\dbcontex.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_qltiemchung_api\\models\\vattuyte.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|solutionrelative:datn_qltiemchung_api\\models\\vattuyte.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_qltiemchung_api\\models\\khachhang.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{90F2406D-4702-45F3-8E00-F72267E1C132}|DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj|solutionrelative:datn_qltiemchung_api\\models\\khachhang.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|c:\\users\\ductu\\documents\\github\\datn\\datn_qltiemchung\\datn_qltiemchung\\views\\home\\homeql.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4B9F3F39-A2E4-43C9-ACEF-7B60DDC0D5A9}|DATN_QLTiemChung\\DATN_QLTiemChung.csproj|solutionrelative:datn_qltiemchung\\views\\home\\homeql.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -166,58 +46,70 @@
       "DocumentGroups": [
         {
           "DockedWidth": 251,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "NhanVien.cs",
-              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Models\\NhanVien.cs",
-              "RelativeDocumentMoniker": "DATN_QLTiemChung\\Models\\NhanVien.cs",
-              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Models\\NhanVien.cs",
-              "RelativeToolTip": "DATN_QLTiemChung\\Models\\NhanVien.cs",
-              "ViewState": "AQIAABUAAAAAAAAAAAAowAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-19T07:56:07.404Z",
-              "IsPinned": true
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "DATN_QLTiemChung\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "DATN_QLTiemChung\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AQIAAGAAAAAAAAAAAAAAAKMAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-19T08:02:30.006Z",
-              "IsPinned": true
+              "Title": "DataQLKhoVaccineController.cs",
+              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Controllers\\DataQLKhoVaccineController.cs",
+              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\Controllers\\DataQLKhoVaccineController.cs",
+              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Controllers\\DataQLKhoVaccineController.cs",
+              "RelativeToolTip": "DATN_QLTiemChung_Api\\Controllers\\DataQLKhoVaccineController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-23T13:20:58.356Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
+              "Title": "QLTiepNhanController.cs",
+              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Controllers\\QLTiepNhanController.cs",
+              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\Controllers\\QLTiepNhanController.cs",
+              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Controllers\\QLTiepNhanController.cs",
+              "RelativeToolTip": "DATN_QLTiemChung_Api\\Controllers\\QLTiepNhanController.cs",
+              "ViewState": "AQIAABsAAAAAAAAAAAAuwCsAAAAOAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-23T13:20:10.438Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "QLHoaDon.cshtml",
               "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Views\\Home\\QLHoaDon.cshtml",
               "RelativeDocumentMoniker": "DATN_QLTiemChung\\Views\\Home\\QLHoaDon.cshtml",
               "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Views\\Home\\QLHoaDon.cshtml",
               "RelativeToolTip": "DATN_QLTiemChung\\Views\\Home\\QLHoaDon.cshtml",
-              "ViewState": "AQIAABgAAAAAAAAAAAAewDAAAAAAAAAA",
+              "ViewState": "AQIAAB0AAAAAAAAAAAAMwCkAAAAyAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-23T08:13:20.906Z",
+              "WhenOpened": "2024-11-23T13:10:25.069Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_CDCWebClient\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "DATN_CDCWebClient\\Controllers\\HomeController.cs",
-              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_CDCWebClient\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "DATN_CDCWebClient\\Controllers\\HomeController.cs",
-              "ViewState": "AQIAABIAAAAAAAAAAAAYwAAAAAAAAAAA",
+              "Title": "DTO.cs",
+              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Models\\DTO.cs",
+              "RelativeDocumentMoniker": "DATN_QLTiemChung\\Models\\DTO.cs",
+              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Models\\DTO.cs",
+              "RelativeToolTip": "DATN_QLTiemChung\\Models\\DTO.cs",
+              "ViewState": "AQIAABEAAAAAAAAAAAAtwBwAAAAgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-22T04:20:45.441Z",
+              "WhenOpened": "2024-11-23T13:00:40.941Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "QLTiepNhanController.cs",
+              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Controllers\\QLTiepNhanController.cs",
+              "RelativeDocumentMoniker": "DATN_QLTiemChung\\Controllers\\QLTiepNhanController.cs",
+              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Controllers\\QLTiepNhanController.cs",
+              "RelativeToolTip": "DATN_QLTiemChung\\Controllers\\QLTiepNhanController.cs",
+              "ViewState": "AQIAAA8AAAAAAAAAAADwv2UAAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-23T12:59:01.184Z",
               "EditorCaption": ""
             },
             {
@@ -228,418 +120,46 @@
               "RelativeDocumentMoniker": "DATN_QLTiemChung\\Controllers\\QLHoaDonController.cs",
               "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Controllers\\QLHoaDonController.cs",
               "RelativeToolTip": "DATN_QLTiemChung\\Controllers\\QLHoaDonController.cs",
-              "ViewState": "AQIAABEAAAAAAAAAAAAswBYAAAA3AAAA",
+              "ViewState": "AQIAABsAAAAAAAAAAAAYwCkAAAByAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T08:37:14.333Z",
+              "WhenOpened": "2024-11-23T12:57:19.891Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "DataQLKhoVaccineController.cs",
-              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Controllers\\DataQLKhoVaccineController.cs",
-              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\Controllers\\DataQLKhoVaccineController.cs",
-              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Controllers\\DataQLKhoVaccineController.cs",
-              "RelativeToolTip": "DATN_QLTiemChung_Api\\Controllers\\DataQLKhoVaccineController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-23T04:25:49.724Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "DataQLHoaDonController.cs",
-              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Controllers\\DataQLHoaDonController.cs",
-              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\Controllers\\DataQLHoaDonController.cs",
-              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Controllers\\DataQLHoaDonController.cs",
-              "RelativeToolTip": "DATN_QLTiemChung_Api\\Controllers\\DataQLHoaDonController.cs",
-              "ViewState": "AQIAAEQAAAAAAAAAAAAqwFEAAAAfAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-19T05:48:38.73Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 5,
               "Title": "QLTiepNhan.cshtml",
               "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Views\\Home\\QLTiepNhan.cshtml",
               "RelativeDocumentMoniker": "DATN_QLTiemChung\\Views\\Home\\QLTiepNhan.cshtml",
               "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Views\\Home\\QLTiepNhan.cshtml",
               "RelativeToolTip": "DATN_QLTiemChung\\Views\\Home\\QLTiepNhan.cshtml",
-              "ViewState": "AQIAAC8AAAAAAAAAAAAAACsBAAB5AAAA",
+              "ViewState": "AQIAANYBAAAAAAAAAAAAAPsBAAAnAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-19T06:18:17.48Z"
+              "WhenOpened": "2024-11-23T12:36:21.022Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "DataQLHoaDonController.cs",
+              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Controllers\\DataQLHoaDonController.cs",
+              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\Controllers\\DataQLHoaDonController.cs",
+              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Controllers\\DataQLHoaDonController.cs",
+              "RelativeToolTip": "DATN_QLTiemChung_Api\\Controllers\\DataQLHoaDonController.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAABEAAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-23T13:20:58.881Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
-              "Title": "QLTiepNhanController.cs",
-              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Controllers\\QLTiepNhanController.cs",
-              "RelativeDocumentMoniker": "DATN_QLTiemChung\\Controllers\\QLTiepNhanController.cs",
-              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Controllers\\QLTiepNhanController.cs",
-              "RelativeToolTip": "DATN_QLTiemChung\\Controllers\\QLTiepNhanController.cs",
-              "ViewState": "AQIAABAAAAAAAAAAAAAQwCcAAAByAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T08:37:15.229Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "site.js",
-              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\wwwroot\\js\\site.js",
-              "RelativeDocumentMoniker": "DATN_QLTiemChung\\wwwroot\\js\\site.js",
-              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\wwwroot\\js\\site.js",
-              "RelativeToolTip": "DATN_QLTiemChung\\wwwroot\\js\\site.js",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACcAAABSAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-11-18T09:37:26.454Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "DTO.cs",
-              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\DTO.cs",
-              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\Models\\DTO.cs",
-              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\DTO.cs",
-              "RelativeToolTip": "DATN_QLTiemChung_Api\\Models\\DTO.cs",
-              "ViewState": "AQIAAA8AAAAAAAAAAAApwB8AAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T08:46:55.436Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "_ViewImports.cshtml",
-              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Views\\_ViewImports.cshtml",
-              "RelativeDocumentMoniker": "DATN_QLTiemChung\\Views\\_ViewImports.cshtml",
-              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Views\\_ViewImports.cshtml",
-              "RelativeToolTip": "DATN_QLTiemChung\\Views\\_ViewImports.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAXAAAA",
+              "Title": "HomeQL.cshtml",
+              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Views\\Home\\HomeQL.cshtml",
+              "RelativeDocumentMoniker": "DATN_QLTiemChung\\Views\\Home\\HomeQL.cshtml",
+              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Views\\Home\\HomeQL.cshtml",
+              "RelativeToolTip": "DATN_QLTiemChung\\Views\\Home\\HomeQL.cshtml",
+              "ViewState": "AQIAAEgAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-21T09:44:13.044Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "site.js",
-              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_CDCWebClient\\wwwroot\\js\\site.js",
-              "RelativeDocumentMoniker": "DATN_CDCWebClient\\wwwroot\\js\\site.js",
-              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_CDCWebClient\\wwwroot\\js\\site.js",
-              "RelativeToolTip": "DATN_CDCWebClient\\wwwroot\\js\\site.js",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-11-22T13:07:00.691Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "diachi.js",
-              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_CDCWebClient\\wwwroot\\js\\diachi.js",
-              "RelativeDocumentMoniker": "DATN_CDCWebClient\\wwwroot\\js\\diachi.js",
-              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_CDCWebClient\\wwwroot\\js\\diachi.js",
-              "RelativeToolTip": "DATN_CDCWebClient\\wwwroot\\js\\diachi.js",
-              "ViewState": "AQIAADAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-11-22T13:07:07.242Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "DKyLichKham.cshtml",
-              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_CDCWebClient\\Views\\Home\\DKyLichKham.cshtml",
-              "RelativeDocumentMoniker": "DATN_CDCWebClient\\Views\\Home\\DKyLichKham.cshtml",
-              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_CDCWebClient\\Views\\Home\\DKyLichKham.cshtml",
-              "RelativeToolTip": "DATN_CDCWebClient\\Views\\Home\\DKyLichKham.cshtml",
-              "ViewState": "AQIAAD8AAAAAAAAAAAAAAEsAAABUAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-22T13:07:24.208Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_CDCWebClient\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "DATN_CDCWebClient\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_CDCWebClient\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "DATN_CDCWebClient\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AQIAAKIAAAAAAAAAAAAAALAAAAADAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-22T13:09:06.594Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "QLNhanVien.cshtml",
-              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Views\\Home\\QLNhanVien.cshtml",
-              "RelativeDocumentMoniker": "DATN_QLTiemChung\\Views\\Home\\QLNhanVien.cshtml",
-              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Views\\Home\\QLNhanVien.cshtml",
-              "RelativeToolTip": "DATN_QLTiemChung\\Views\\Home\\QLNhanVien.cshtml",
-              "ViewState": "AQIAAI0AAAAAAAAAAAAAAJQAAAAoAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-20T03:33:38.285Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "DATN_QLTiemChung\\Controllers\\HomeController.cs",
-              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "DATN_QLTiemChung\\Controllers\\HomeController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T10:03:41.834Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "DatLichKham.cs",
-              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\DatLichKham.cs",
-              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\Models\\DatLichKham.cs",
-              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\DatLichKham.cs",
-              "RelativeToolTip": "DATN_QLTiemChung_Api\\Models\\DatLichKham.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAuwAQAAAARAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T08:39:04.784Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "QLTiepNhanController.cs",
-              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Controllers\\QLTiepNhanController.cs",
-              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\Controllers\\QLTiepNhanController.cs",
-              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Controllers\\QLTiepNhanController.cs",
-              "RelativeToolTip": "DATN_QLTiemChung_Api\\Controllers\\QLTiepNhanController.cs",
-              "ViewState": "AQIAAC8AAAAAAAAAAAA3wFUAAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-19T05:48:40.612Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\appsettings.json",
-              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\appsettings.json",
-              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\appsettings.json",
-              "RelativeToolTip": "DATN_QLTiemChung_Api\\appsettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-11-21T07:06:20.045Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 25,
-              "Title": "KhamSanLoc.cshtml",
-              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Views\\Home\\KhamSanLoc.cshtml",
-              "RelativeDocumentMoniker": "DATN_QLTiemChung\\Views\\Home\\KhamSanLoc.cshtml",
-              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Views\\Home\\KhamSanLoc.cshtml",
-              "RelativeToolTip": "DATN_QLTiemChung\\Views\\Home\\KhamSanLoc.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-20T03:41:20.676Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "NhapDuoc.cshtml",
-              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Views\\Home\\NhapDuoc.cshtml",
-              "RelativeDocumentMoniker": "DATN_QLTiemChung\\Views\\Home\\NhapDuoc.cshtml",
-              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Views\\Home\\NhapDuoc.cshtml",
-              "RelativeToolTip": "DATN_QLTiemChung\\Views\\Home\\NhapDuoc.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-20T03:41:22.047Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "QLKhachHang.cshtml",
-              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Views\\Home\\QLKhachHang.cshtml",
-              "RelativeDocumentMoniker": "DATN_QLTiemChung\\Views\\Home\\QLKhachHang.cshtml",
-              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Views\\Home\\QLKhachHang.cshtml",
-              "RelativeToolTip": "DATN_QLTiemChung\\Views\\Home\\QLKhachHang.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-20T03:41:24.244Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "diachi.js",
-              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\wwwroot\\js\\diachi.js",
-              "RelativeDocumentMoniker": "DATN_QLTiemChung\\wwwroot\\js\\diachi.js",
-              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\wwwroot\\js\\diachi.js",
-              "RelativeToolTip": "DATN_QLTiemChung\\wwwroot\\js\\diachi.js",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-11-19T08:52:45.059Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "QLHoanTra.cshtml",
-              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Views\\Home\\QLHoanTra.cshtml",
-              "RelativeDocumentMoniker": "DATN_QLTiemChung\\Views\\Home\\QLHoanTra.cshtml",
-              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Views\\Home\\QLHoanTra.cshtml",
-              "RelativeToolTip": "DATN_QLTiemChung\\Views\\Home\\QLHoanTra.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-20T03:41:24.805Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 26,
-              "Title": "QLyTaiKhoanNV.cs",
-              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Models\\QLyTaiKhoanNV.cs",
-              "RelativeDocumentMoniker": "DATN_QLTiemChung\\Models\\QLyTaiKhoanNV.cs",
-              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Models\\QLyTaiKhoanNV.cs",
-              "RelativeToolTip": "DATN_QLTiemChung\\Models\\QLyTaiKhoanNV.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-20T03:33:12.959Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 28,
-              "Title": "KhachHang.cs",
-              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Models\\KhachHang.cs",
-              "RelativeDocumentMoniker": "DATN_QLTiemChung\\Models\\KhachHang.cs",
-              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Models\\KhachHang.cs",
-              "RelativeToolTip": "DATN_QLTiemChung\\Models\\KhachHang.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-19T07:17:08.144Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 27,
-              "Title": "District.cs",
-              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\District.cs",
-              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\Models\\District.cs",
-              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\District.cs",
-              "RelativeToolTip": "DATN_QLTiemChung_Api\\Models\\District.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-19T06:30:22.773Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 32,
-              "Title": "Ward.cs",
-              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Models\\Ward.cs",
-              "RelativeDocumentMoniker": "DATN_QLTiemChung\\Models\\Ward.cs",
-              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Models\\Ward.cs",
-              "RelativeToolTip": "DATN_QLTiemChung\\Models\\Ward.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-19T06:13:15.65Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 29,
-              "Title": "HoaDonChiTiet.cs",
-              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Models\\HoaDonChiTiet.cs",
-              "RelativeDocumentMoniker": "DATN_QLTiemChung\\Models\\HoaDonChiTiet.cs",
-              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Models\\HoaDonChiTiet.cs",
-              "RelativeToolTip": "DATN_QLTiemChung\\Models\\HoaDonChiTiet.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-19T07:17:10.159Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 30,
-              "Title": "HoanTra.cs",
-              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Models\\HoanTra.cs",
-              "RelativeDocumentMoniker": "DATN_QLTiemChung\\Models\\HoanTra.cs",
-              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Models\\HoanTra.cs",
-              "RelativeToolTip": "DATN_QLTiemChung\\Models\\HoanTra.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-19T08:04:29.289Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 33,
-              "Title": "WeatherForecastController.cs",
-              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Controllers\\WeatherForecastController.cs",
-              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\Controllers\\WeatherForecastController.cs",
-              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Controllers\\WeatherForecastController.cs",
-              "RelativeToolTip": "DATN_QLTiemChung_Api\\Controllers\\WeatherForecastController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-19T05:48:40.11Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 31,
-              "Title": "DTO.cs",
-              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Models\\DTO.cs",
-              "RelativeDocumentMoniker": "DATN_QLTiemChung\\Models\\DTO.cs",
-              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\Models\\DTO.cs",
-              "RelativeToolTip": "DATN_QLTiemChung\\Models\\DTO.cs",
-              "ViewState": "AQIAAEMAAAAAAAAAAAAqwFEAAAAhAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T10:06:41.549Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 34,
-              "Title": "TheoDoiSauTiem.cs",
-              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\TheoDoiSauTiem.cs",
-              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\Models\\TheoDoiSauTiem.cs",
-              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\TheoDoiSauTiem.cs",
-              "RelativeToolTip": "DATN_QLTiemChung_Api\\Models\\TheoDoiSauTiem.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T08:51:24.143Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 37,
-              "Title": "VatTuYTe.cs",
-              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\VatTuYTe.cs",
-              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\Models\\VatTuYTe.cs",
-              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\VatTuYTe.cs",
-              "RelativeToolTip": "DATN_QLTiemChung_Api\\Models\\VatTuYTe.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T08:51:23.59Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 35,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Program.cs",
-              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\Program.cs",
-              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Program.cs",
-              "RelativeToolTip": "DATN_QLTiemChung_Api\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T08:50:57.751Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 38,
-              "Title": "KhachHang.cs",
-              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\KhachHang.cs",
-              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\Models\\KhachHang.cs",
-              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\Models\\KhachHang.cs",
-              "RelativeToolTip": "DATN_QLTiemChung_Api\\Models\\KhachHang.cs",
-              "ViewState": "AQIAAA0AAAAAAAAAAIA0wBwAAABDAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T08:38:52.436Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 36,
-              "Title": "DBContex.cs",
-              "DocumentMoniker": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\DBContex.cs",
-              "RelativeDocumentMoniker": "DATN_QLTiemChung_Api\\DBContex.cs",
-              "ToolTip": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\DBContex.cs",
-              "RelativeToolTip": "DATN_QLTiemChung_Api\\DBContex.cs",
-              "ViewState": "AQIAAB0AAAAAAAAAAAAxwDcAAAAnAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T08:38:49.354Z"
+              "WhenOpened": "2024-11-23T12:46:26.483Z"
             }
           ]
         }

@@ -96,4 +96,14 @@ namespace DATN_QLTiemChung.Models
         public string DanToc { get; set; }
         public string FullAddress { get; set; }
     }
+    public class HangCho
+    {
+        public string ID { get; set; }
+        public string IDKH { get; set; }
+        public string HoTen { get; set; }
+        public DateOnly NgaySinh { get; set; }
+        public DateOnly NgayCho { get; set; }
+        public string Step { get; set; }
+
+    }
 }
