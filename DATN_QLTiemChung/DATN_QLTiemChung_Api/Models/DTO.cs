@@ -27,8 +27,8 @@ namespace DATN_QLTiemChung_Api.Models
         public string TenXaPhuong { get; set; }
         public string IDQH { get; set; }
         public string TenQuanHuyen { get; set; }
-        public string IDTTP { get; set; }
-        public string TenTinhThanhPho {  get; set; }
+        public string IDTP { get; set; }
+        public string TenTinhThanhPho { get; set; }
     }
     public class KhachHangDTo
     {
@@ -95,4 +95,5 @@ namespace DATN_QLTiemChung_Api.Models
         DateOnly Ngayhen { get; set; }
         TimeOnly ThoiGianHen {  get; set; }
     }
+   
 }
