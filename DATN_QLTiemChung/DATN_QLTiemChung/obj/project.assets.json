@@ -247,11 +247,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\DATN_QLTiemChung.csproj",
+      "projectUniqueName": "C:\\Users\\ductu\\Downloads\\DATN-main\\DATN-main\\DATN_QLTiemChung\\DATN_QLTiemChung\\DATN_QLTiemChung.csproj",
       "projectName": "DATN_QLTiemChung",
-      "projectPath": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\DATN_QLTiemChung.csproj",
+      "projectPath": "C:\\Users\\ductu\\Downloads\\DATN-main\\DATN-main\\DATN_QLTiemChung\\DATN_QLTiemChung\\DATN_QLTiemChung.csproj",
       "packagesPath": "C:\\Users\\ductu\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\obj\\",
+      "outputPath": "C:\\Users\\ductu\\Downloads\\DATN-main\\DATN-main\\DATN_QLTiemChung\\DATN_QLTiemChung\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ductu\\AppData\\Roaming\\NuGet\\NuGet.Config",

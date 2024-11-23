@@ -9,63 +9,63 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = DATN_CDCWebClient
 build_property.RootNamespace = DATN_CDCWebClient
-build_property.ProjectDir = C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_CDCWebClient\
+build_property.ProjectDir = C:\Users\ductu\Downloads\DATN-main\DATN-main\DATN_QLTiemChung\DATN_CDCWebClient\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_CDCWebClient
+build_property.MSBuildProjectDirectory = C:\Users\ductu\Downloads\DATN-main\DATN-main\DATN_QLTiemChung\DATN_CDCWebClient
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/ductu/Documents/Github/DATN/DATN_QLTiemChung/DATN_CDCWebClient/Views/Home/DKyLichKham.cshtml]
+[C:/Users/ductu/Downloads/DATN-main/DATN-main/DATN_QLTiemChung/DATN_CDCWebClient/Views/Home/DKyLichKham.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxES3lMaWNoS2hhbS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ductu/Documents/Github/DATN/DATN_QLTiemChung/DATN_CDCWebClient/Views/Home/Home.cshtml]
+[C:/Users/ductu/Downloads/DATN-main/DATN-main/DATN_QLTiemChung/DATN_CDCWebClient/Views/Home/Home.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxIb21lLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ductu/Documents/Github/DATN/DATN_QLTiemChung/DATN_CDCWebClient/Views/Home/Index.cshtml]
+[C:/Users/ductu/Downloads/DATN-main/DATN-main/DATN_QLTiemChung/DATN_CDCWebClient/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ductu/Documents/Github/DATN/DATN_QLTiemChung/DATN_CDCWebClient/Views/Home/LichSuTiem.cshtml]
+[C:/Users/ductu/Downloads/DATN-main/DATN-main/DATN_QLTiemChung/DATN_CDCWebClient/Views/Home/LichSuTiem.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxMaWNoU3VUaWVtLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ductu/Documents/Github/DATN/DATN_QLTiemChung/DATN_CDCWebClient/Views/Home/Login.cshtml]
+[C:/Users/ductu/Downloads/DATN-main/DATN-main/DATN_QLTiemChung/DATN_CDCWebClient/Views/Home/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ductu/Documents/Github/DATN/DATN_QLTiemChung/DATN_CDCWebClient/Views/Home/Privacy.cshtml]
+[C:/Users/ductu/Downloads/DATN-main/DATN-main/DATN_QLTiemChung/DATN_CDCWebClient/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ductu/Documents/Github/DATN/DATN_QLTiemChung/DATN_CDCWebClient/Views/Home/Register.cshtml]
+[C:/Users/ductu/Downloads/DATN-main/DATN-main/DATN_QLTiemChung/DATN_CDCWebClient/Views/Home/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ductu/Documents/Github/DATN/DATN_QLTiemChung/DATN_CDCWebClient/Views/Home/ThongTinCaNhan.cshtml]
+[C:/Users/ductu/Downloads/DATN-main/DATN-main/DATN_QLTiemChung/DATN_CDCWebClient/Views/Home/ThongTinCaNhan.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxUaG9uZ1RpbkNhTmhhbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ductu/Documents/Github/DATN/DATN_QLTiemChung/DATN_CDCWebClient/Views/Shared/Error.cshtml]
+[C:/Users/ductu/Downloads/DATN-main/DATN-main/DATN_QLTiemChung/DATN_CDCWebClient/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ductu/Documents/Github/DATN/DATN_QLTiemChung/DATN_CDCWebClient/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/ductu/Downloads/DATN-main/DATN-main/DATN_QLTiemChung/DATN_CDCWebClient/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ductu/Documents/Github/DATN/DATN_QLTiemChung/DATN_CDCWebClient/Views/_ViewImports.cshtml]
+[C:/Users/ductu/Downloads/DATN-main/DATN-main/DATN_QLTiemChung/DATN_CDCWebClient/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ductu/Documents/Github/DATN/DATN_QLTiemChung/DATN_CDCWebClient/Views/_ViewStart.cshtml]
+[C:/Users/ductu/Downloads/DATN-main/DATN-main/DATN_QLTiemChung/DATN_CDCWebClient/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ductu/Documents/Github/DATN/DATN_QLTiemChung/DATN_CDCWebClient/Views/Shared/_Layout.cshtml]
+[C:/Users/ductu/Downloads/DATN-main/DATN-main/DATN_QLTiemChung/DATN_CDCWebClient/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-cffaic9kjy

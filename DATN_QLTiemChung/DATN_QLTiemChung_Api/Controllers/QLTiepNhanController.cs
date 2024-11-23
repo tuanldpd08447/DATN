@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using DATN_QLTiemChung_Api.Models;
 using DATN_QLTiemChung_Api;
-using static DATN_QLTiemChung_Api.Models.KhachHangDTo;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -21,9 +20,9 @@ public class QLTiepNhanController : ControllerBase
     public async Task<IActionResult> GetAllKhachHang()
     {
         var khachHangs = await _context.KhachHang
-       .Include(kh => kh.Ward) 
-           .ThenInclude(w => w.District) 
-               .ThenInclude(d => d.Province) 
+       .Include(kh => kh.Ward) // Lấy thông tin từ bảng Ward
+           .ThenInclude(w => w.District) // Lấy thông tin từ bảng District
+               .ThenInclude(d => d.Province) // Lấy thông tin từ bảng Province
        .Select(kh => new KhachHangDTo
        {
            IDKH = kh.IDKH.ToString(),
@@ -39,50 +38,6 @@ public class QLTiepNhanController : ControllerBase
        })
        .ToListAsync();
         return Ok(khachHangs);
-    }
-
-   
-
-    // GET: api/DatLichKham/GetAllDatLichKhams
-    [HttpGet("GetAllDatLichKhams")]
-    public async Task<ActionResult<IEnumerable<KhachHangPreOder>>> GetAllDatLichKhams([FromQuery] DateOnly? ngayHen = null)
-    {
-        // Truy vấn dữ liệu từ bảng DatLichKham và các bảng liên quan
-        var query = _context.DatLichKham
-            .Include(d => d.KhachHang)
-                .ThenInclude(kh => kh.Ward)
-                    .ThenInclude(w => w.District)
-                        .ThenInclude(d => d.Province)
-            .Select(kh => new KhachHangPreOder
-            {
-                IDKH = kh.KhachHang.IDKH.ToString(),
-                TenKhachHang = kh.KhachHang.TenKhachHang,
-                NgayHen = DateOnly.FromDateTime(kh.ThoiGian),
-                ThoiGianHen = TimeOnly.FromDateTime(kh.ThoiGian),
-                NgaySinh = kh.KhachHang.NgaySinh,
-                GioiTinh = kh.KhachHang.GioiTinh,
-                DiaChi = kh.KhachHang.DiaChi,
-                SoDienThoai = kh.KhachHang.SoDienThoai,
-                Email = kh.KhachHang.Email,
-                CCCD_MDD = kh.KhachHang.CCCD_MDD,
-                DanToc = kh.KhachHang.DanToc,
-                FullAddress = $"{kh.KhachHang.DiaChi}, {kh.KhachHang.Ward.name}, {kh.KhachHang.Ward.District.name}, {kh.KhachHang.Ward.District.Province.name}"
-            });
-
-        if (ngayHen.HasValue)
-        {
-            query = query.Where(kh => kh.NgayHen == ngayHen.Value);
-        }
-
- 
-        var datLichKhams = await query.ToListAsync();
-
-        if (datLichKhams == null || datLichKhams.Count == 0)
-        {
-            return NotFound("Không có lịch khám nào.");
-        }
-
-        return Ok(datLichKhams);
     }
 
 

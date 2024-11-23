@@ -1,6 +1,7 @@
 ﻿@model DATN_QLTiemChung.Models.HoaDonDTO
 @{
-    var tuoi = DateTime.Now.Year - Model.KhachHang.NgaySinh.Year;
+    var vatTu = ViewBag.vatTuYTe as List<VatTuYTe>;
+
 }
 
 <div class="container mt-4">
@@ -25,6 +26,7 @@
                     <button type="button" class="col border border-1 rounded-end btn "><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
                 <div class="row border rounded-4 border-1 mt-1 " style="min-height: 90%;">
+                  
                     <table class="table  table-hover h-25 m-0 text-center ">
                         <thead class="rounded-4">
                             <tr>
@@ -34,6 +36,20 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @{
+                                int STT = 1;
+                            }
+                            @foreach (var item in ViewBag.KhachHangs)
+                        {
+                                <tr onclick="fillInvoiceForm('@STT')">
+
+                                <td>@STT</td>
+                                <td>@item.IDKH</td>
+                                <td>@item.TenKhachHang</td>
+
+                                </tr>
+                                STT++;
+                            }
                         </tbody>
                     </table>
                 </div>
@@ -64,7 +80,7 @@
                         <div class="col-md-1">
                             <div class="form-group">
                                 <label class="fw-semibold" for="age">Tuổi</label>
-                                <input type="text" class="form-control form-control-sm" id="age" value="@tuoi">
+                                <input type="text" class="form-control form-control-sm" id="age" value="18">
                             </div>
                         </div>
                         <div class="col-md-2">
@@ -83,7 +99,6 @@
                         <div class="form-group col">
                             <label class="fw-semibold" for="hoKhauTinh">Tỉnh/TP</label>
                             <select class="form-control" id="hoKhauTinh" required >
-                                <option>-- Chọn Tỉnh/TP --</option>
                             </select>
                         </div>
                         <div class="form-group col">
@@ -98,12 +113,16 @@
                                 <option>-- Chọn Xã/Phường --</option>
                             </select>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col">
-                            <label class="fw-semibold" for="diaChiChiTiet">Địa chỉ chi tiết</label>
-                            <input type="text" class="form-control" name="diaChiChiTiet" id="diaChiChiTiet" placeholder="Nhập địa chỉ chi tiết" required >
+                        <script type="module" src="~/js/site.js"></script>
+                       
+
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="fw-semibold" for="address">Địa chỉ</label>
+                                <input type="text" class="form-control form-control-sm" id="address" asp-for="KhachHang.DiaChi">
+                            </div>
                         </div>
+                     
                     </div>
                     <div class="row">
 
@@ -116,57 +135,66 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label class="fw-semibold" for="invoiceNumber">Mã hóa đơn</label>
-                                <select id="invoiceNumber" class="form-control form-control-sm">
-                                    <option selected>@Html.DisplayFor(model => model.IDHD)</option>
-                                    <!-- Các lựa chọn khác -->
-                                </select>
+                                <input type="text" class="form-control form-control-sm" id="medicalCode" asp-for="IDHD">
+                                
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label class="fw-semibold" for="invoiceNumber">Mã vaccine</label>
-                                <select id="invoiceNumber" class="form-control form-control-sm">
-                                    <option selected></option>
-                                    <!-- Các lựa chọn khác -->
+                                <label class="fw-semibold" for="medicalCode">Mã vaccine</label>
+
+                                <select class ="form-control form-control-sm" id="medicalCode">
+                                    @foreach (var item in vatTu)
+                                    {
+                                        <option value="">@item.IDVT</option>
+                                    }
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label class="fw-semibold" for="medicalCode">Nội dung</label>
-                                <input type="text" class="form-control form-control-sm" id="medicalCode" value="CDCD0912312345" asp-for="NoiDung">
+                                <select class="form-control form-control-sm" id="medicalCode">
+                                    @foreach (var item in vatTu)
+                                    {
+                                        <option value="">@item.TenVatTu</option>
+                                    }
+                                </select>
                             </div>
                         </div>
 
                     </div>
+
+
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label class="fw-semibold" for="totalInvoice">Số lượng</label>
-                                <input type="text" class="form-control form-control-sm" id="totalInvoice" value="178,140.00">
+                                <label class="fw-semibold" for="medicalCode">Số lượng</label>
+                                <input type="number" min="1"  class="form-control form-control-sm" id="medicalCode" value="" asp-for="NoiDung">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label class="fw-semibold" for="totalInvoice">Đơn giá</label>
-                                <input type="text" class="form-control form-control-sm" id="totalInvoice" value="178,140.00">
+                                <label class="fw-semibold" for="medicalCode">Đơn giá</label>
+                                <input type="text" class="form-control form-control-sm" id="medicalCode" value="" asp-for="NoiDung">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label class="fw-semibold" for="totalInvoice">Thành Tiền</label>
-                                <input type="text" class="form-control form-control-sm" id="totalInvoice" value="178,140.00">
+                                <label class="fw-semibold" for="medicalCode">Thành Tiền</label>
+                                <input type="text" class="form-control form-control-sm" id="medicalCode" value="" asp-for="NoiDung">
                             </div>
                         </div>
-
                     </div>
 
                     <div class="row">
                         <div class="col-md-3">
                             <label class="fw-semibold" for="paymentMethod">Hình thức thanh toán</label>
                             <select id="paymentMethod" class="form-control form-control-sm">
-                                <option selected>Tiền mặt</option>
-                                <option>Chuyển khoản</option>
+                                <option   selected>@Model.GhiChu</option>
+                                <option>Tiền mặt</option>
+                                <option >Chuyển khoản</option>
+                                
                             </select>
                         </div>
                         <div class="col-md-3">
@@ -233,8 +261,6 @@
                         </div>
                     </div>
                 </div>
-                <script
-                    ></script>
             </form>
         </div>
     </div>
@@ -253,12 +279,13 @@
             <table class="table table-bordered table-sm">
                 <thead>
                     <tr>
-                        <th>Mã khách hàng</th>
+                        <th>Mã hóa đơn chi tiết</th>
+                        <th>Mã hóa đơn</th>
                         <th>Mã vaccine</th>
                         <th>Số lượng</th>
                         <th>Đơn giá</th>
                         <th>Thành tiền</th>
-                        <th>Trạng thái</th>
+                        <th>Ghi chú</th>
 
                     </tr>
                 </thead>
@@ -266,12 +293,13 @@
                     @foreach (var item in Model.HoaDonChiTiets)
                     {
                         <tr>
-                            <td>@Model.IDKH</td>
+                            <td>@item.IDHDCT</td>
+                            <td>@Model.IDHD</td>
                             <td>@item.IDVT</td>
                             <td>@item.SoLuong</td>
                             <td>@item.DonGia</td>
-                            <td>@(item.ThanhTien)</td>
-                            <td>@Model.TrangThai</td>
+                            <td>@item.ThanhTien</td>
+                            <td>@item.GhiChu</td>
 
                         </tr>
                     }

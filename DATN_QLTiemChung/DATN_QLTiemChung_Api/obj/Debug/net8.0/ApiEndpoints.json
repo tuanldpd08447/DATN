@@ -1,0 +1,612 @@
+[
+  {
+    "ContainingType": "DATN_QLTiemChung_Api.Controllers.DataController",
+    "Method": "GetChucDanhs",
+    "RelativePath": "api/Data/chucdanh",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DATN_QLTiemChung_Api.Models.ChucDanh, DATN_QLTiemChung_Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DATN_QLTiemChung_Api.Controllers.DataController",
+    "Method": "GetChungTus",
+    "RelativePath": "api/Data/chungtu",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DATN_QLTiemChung_Api.Models.ChungTu, DATN_QLTiemChung_Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DATN_QLTiemChung_Api.Controllers.DataController",
+    "Method": "GetDangKyTiemChungs",
+    "RelativePath": "api/Data/dangkytimchung",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DATN_QLTiemChung_Api.Models.DangKyTiemChung, DATN_QLTiemChung_Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DATN_QLTiemChung_Api.Controllers.DataController",
+    "Method": "GetDangKyVaccines",
+    "RelativePath": "api/Data/dangkyvaccine",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DATN_QLTiemChung_Api.Models.DangKyVaccine, DATN_QLTiemChung_Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DATN_QLTiemChung_Api.Controllers.DataController",
+    "Method": "GetDistricts",
+    "RelativePath": "api/Data/district",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DATN_QLTiemChung_Api.Models.District, DATN_QLTiemChung_Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DATN_QLTiemChung_Api.Controllers.DataController",
+    "Method": "GetHoaDons",
+    "RelativePath": "api/Data/hoadon",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DATN_QLTiemChung_Api.Models.HoaDon, DATN_QLTiemChung_Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DATN_QLTiemChung_Api.Controllers.DataController",
+    "Method": "GetHoaDonChiTiets",
+    "RelativePath": "api/Data/hoadonchitiet",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DATN_QLTiemChung_Api.Models.HoaDonChiTiet, DATN_QLTiemChung_Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DATN_QLTiemChung_Api.Controllers.DataController",
+    "Method": "GetHoanTras",
+    "RelativePath": "api/Data/hoantra",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DATN_QLTiemChung_Api.Models.HoanTra, DATN_QLTiemChung_Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DATN_QLTiemChung_Api.Controllers.DataController",
+    "Method": "GetKhachHangs",
+    "RelativePath": "api/Data/khachhang",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DATN_QLTiemChung_Api.Models.KhachHang, DATN_QLTiemChung_Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DATN_QLTiemChung_Api.Controllers.DataController",
+    "Method": "GetKhamSangLocs",
+    "RelativePath": "api/Data/khamsangloc",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DATN_QLTiemChung_Api.Models.KhamSangLoc, DATN_QLTiemChung_Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DATN_QLTiemChung_Api.Controllers.DataController",
+    "Method": "GetLoaiVatTus",
+    "RelativePath": "api/Data/loaivattu",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DATN_QLTiemChung_Api.Models.LoaivatTu, DATN_QLTiemChung_Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DATN_QLTiemChung_Api.Controllers.DataController",
+    "Method": "GetNguonCungCaps",
+    "RelativePath": "api/Data/nguoncungcap",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DATN_QLTiemChung_Api.Models.NguonCungCap, DATN_QLTiemChung_Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DATN_QLTiemChung_Api.Controllers.DataController",
+    "Method": "GetNhaCungCaps",
+    "RelativePath": "api/Data/nhacungcap",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DATN_QLTiemChung_Api.Models.NhaCungCap, DATN_QLTiemChung_Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DATN_QLTiemChung_Api.Controllers.DataController",
+    "Method": "GetNhanViens",
+    "RelativePath": "api/Data/nhanvien",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DATN_QLTiemChung_Api.Models.NhanVien, DATN_QLTiemChung_Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DATN_QLTiemChung_Api.Controllers.DataController",
+    "Method": "GetOrders",
+    "RelativePath": "api/Data/order",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DATN_QLTiemChung_Api.Models.Order, DATN_QLTiemChung_Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DATN_QLTiemChung_Api.Controllers.DataController",
+    "Method": "GetPhongBans",
+    "RelativePath": "api/Data/phongban",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DATN_QLTiemChung_Api.Models.PhongBan, DATN_QLTiemChung_Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DATN_QLTiemChung_Api.Controllers.DataController",
+    "Method": "GetProvinces",
+    "RelativePath": "api/Data/province",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DATN_QLTiemChung_Api.Models.Province, DATN_QLTiemChung_Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DATN_QLTiemChung_Api.Controllers.DataController",
+    "Method": "GetQLyTaiKhoanKHs",
+    "RelativePath": "api/Data/qlytkkh",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DATN_QLTiemChung_Api.Models.QLyTaiKhoanKH, DATN_QLTiemChung_Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DATN_QLTiemChung_Api.Controllers.DataController",
+    "Method": "GetQLyTaiKhoanNVs",
+    "RelativePath": "api/Data/qlytknv",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DATN_QLTiemChung_Api.Models.QLyTaiKhoanNV, DATN_QLTiemChung_Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DATN_QLTiemChung_Api.Controllers.DataController",
+    "Method": "GetTheoDoiSauTiems",
+    "RelativePath": "api/Data/theodoisautiem",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DATN_QLTiemChung_Api.Models.TheoDoiSauTiem, DATN_QLTiemChung_Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DATN_QLTiemChung_Api.Controllers.DataController",
+    "Method": "GetTiemChungs",
+    "RelativePath": "api/Data/tiemchung",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DATN_QLTiemChung_Api.Models.TiemChung, DATN_QLTiemChung_Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DATN_QLTiemChung_Api.Controllers.DataController",
+    "Method": "GetVatTuYTes",
+    "RelativePath": "api/Data/vattuyte",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DATN_QLTiemChung_Api.Models.VatTuYTe, DATN_QLTiemChung_Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DATN_QLTiemChung_Api.Controllers.DataController",
+    "Method": "GetWards",
+    "RelativePath": "api/Data/ward",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DATN_QLTiemChung_Api.Models.Ward, DATN_QLTiemChung_Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DATN_QLTiemChung_Api.Controllers.DataController",
+    "Method": "GetXuatXus",
+    "RelativePath": "api/Data/xuatxu",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DATN_QLTiemChung_Api.Models.XuatXu, DATN_QLTiemChung_Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DATN_QLTiemChung_Api.Controllers.DataQLHoaDonController",
+    "Method": "AddHoaDon",
+    "RelativePath": "api/DataQLHoaDon/AddHoaDon",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "HoaDonDto",
+        "Type": "DATN_QLTiemChung_Api.Models.HoaDonDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DATN_QLTiemChung_Api.Controllers.DataQLHoaDonController",
+    "Method": "GetAll",
+    "RelativePath": "api/DataQLHoaDon/GetAll/{IDHD}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "IDHD",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "DATN_QLTiemChung_Api.Models.HoaDonDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DATN_QLTiemChung_Api.Controllers.DataQLHoaDonController",
+    "Method": "GetAllVatTu",
+    "RelativePath": "api/DataQLHoaDon/GetAllVatTu",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DATN_QLTiemChung_Api.Controllers.DataQLHoaDonController",
+    "Method": "GetDiaChi",
+    "RelativePath": "api/DataQLHoaDon/GetDiaChi",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "idxp",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QLTiepNhanController",
+    "Method": "GetKhachHangById",
+    "RelativePath": "api/QLTiepNhan/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QLTiepNhanController",
+    "Method": "AddKhachHang",
+    "RelativePath": "api/QLTiepNhan/AddKhachHang",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "khachHangDTO",
+        "Type": "DATN_QLTiemChung_Api.Models.KhachHangCreateDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QLTiepNhanController",
+    "Method": "GetAllKhachHang",
+    "RelativePath": "api/QLTiepNhan/GetAllKhachHang",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DATN_QLTiemChung_Api.Controllers.WeatherForecastController",
+    "Method": "Get",
+    "RelativePath": "WeatherForecast",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DATN_QLTiemChung_Api.WeatherForecast, DATN_QLTiemChung_Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  }
+]
