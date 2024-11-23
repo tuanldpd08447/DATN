@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "llVE89FZByQ=",
+  "dgSpecHash": "ZdOyxQ04dLM=",
   "success": true,
-  "projectFilePath": "C:\\Users\\ductu\\Downloads\\DATN-main\\DATN-main\\DATN_QLTiemChung\\DATN_QLTiemChung\\DATN_QLTiemChung.csproj",
+  "projectFilePath": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\DATN_QLTiemChung.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ductu\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\8.0.11\\microsoft.aspnetcore.jsonpatch.8.0.11.nupkg.sha512",
     "C:\\Users\\ductu\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\8.0.11\\microsoft.aspnetcore.mvc.newtonsoftjson.8.0.11.nupkg.sha512",

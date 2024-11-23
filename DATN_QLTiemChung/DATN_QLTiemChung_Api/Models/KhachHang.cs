@@ -26,6 +26,7 @@ namespace DATN_QLTiemChung_Api.Models
 
         public ICollection<DangKyTiemChung> DangKyTiemChungs { get; set; }
         public ICollection<HoaDon>? HoaDons { get; set; } = new List<HoaDon>();
+        public ICollection<DatLichKham>? DatLichKhams { get; set; }
     }
 
 

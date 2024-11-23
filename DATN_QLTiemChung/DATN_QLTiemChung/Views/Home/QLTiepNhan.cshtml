@@ -1,7 +1,8 @@
 ﻿@using Newtonsoft.Json
 @{
     var khachHangsJson = JsonConvert.SerializeObject(ViewBag.KhachHangs);
-     List<string> _danTocList = new List<string>
+    var khachHangPreoderJson = JsonConvert.SerializeObject(ViewBag.KhachHangPreorder);
+    List<string> _danTocList = new List<string>
     {
         "Kinh", "Tày", "Mường", "Mông", "H'mông", "Khmer", "Hoa", "Nùng", "Thái",
         "Dzao", "Cờ Lao", "Gian", "Ê Đê", "Ba Na", "Sán Dìu", "Sán Chay", "Cơ Tu",
@@ -10,7 +11,8 @@
         "Bình Định", "Tày", "Tày", "Tày", "Chơ", "Chống", "Gieo", "Mai", "Gia Rai",
         "Kon Tum", "Đồng Tháp", "Gyar", "Lý Tự", "Tư", "Chứt", "Vân Kiều"
     };
-  
+    var temp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$";
+
 }
 <style>
     .error-message {
@@ -109,11 +111,30 @@
                             </div>
                             <div class="form-group col">
                                 <label class="fw-semibold" for="email">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="Nhập email" title="Nhập đúng định dạng email (example@gmail.com)" required disabled>
-                                <span id="emailError" class="error-message"></span>
-                               
+                                <input type="email" class="form-control" id="email" name="email"
+                                       oninput="validateEmail()" placeholder="Nhập email"
+                                       title="Nhập đúng định dạng email (example@gmail.com)" required disabled>
+                                <span id="emailError" class="error-message" style="color:red;"></span>
 
+                                <input type="hidden" id="emailPattern" value="@temp" />
 
+                                <script>
+                                    function validateEmail() {
+                                        var email = document.getElementById('email').value;
+                                        var emailPattern = document.getElementById('emailPattern').value; /
+                                        var regexPattern = new RegExp(emailPattern);
+                                        var errorElement = document.getElementById('emailError');
+
+                                        if (!regexPattern.test(email)) {
+                                            document.getElementById('email').classList.add('input-error');
+                                            errorElement.textContent = "Email không hợp lệ.";
+                                            errorElement.style.display = 'block';
+                                        } else {
+                                            document.getElementById('email').classList.remove('input-error');
+                                            errorElement.style.display = 'none';
+                                        }
+                                    }
+                                </script>
                             </div>
                         </div>
                         <h5 class="mt-2">Hộ khẩu</h5>
@@ -121,6 +142,7 @@
                             <div class="form-group col">
                                 <label class="fw-semibold" for="hoKhauTinh">Tỉnh/TP</label>
                                 <select class="form-control" id="hoKhauTinh"  required disabled>
+                                    <option>-- Chọn Tỉnh/TP --</option>
                                 </select>
                             </div>
                             <div class="form-group col">
@@ -161,10 +183,7 @@
                                 <select class="form-control" id="tamTruXa"   disabled>
                                     <option>-- Chọn Xã/Phường --</option>
                                 </select>
-
                             </div>
-
-                       
                         </div>
                         <div class="row">
                             <div class="form-group col">
@@ -175,7 +194,7 @@
                         
                         <button id="targetButton" type="submit" style="display:none;">Nút bị kích hoạt</button>
 
-                        <script type="module" src="~/js/site.js"></script>
+                        <script type="module" src="~/js/site.js" asp-append-version="true"></script>
                     </form>
 
 
@@ -226,34 +245,26 @@
                                     <!-- Bảng hẹn đặt trước -->
                                     <div class="border rounded-4 mt-4 p-3 table-responsive" style="font-size: small;">
                                         <h4>Bảng hẹn đặt trước: Ngày 02/10/2024</h4>
-                                        <table class="table table-bordered">
+                                    <table class="table table-bordered" id="khachHangPreoderTable">
                                             <thead >
                                                 <tr style="background-color: #2fb388;">
                                                     <th></th>
+                                                    <th>ID</th>
                                                     <th>Ngày đặt</th>
-                                                    <th>Số y tế</th>
-                                                    <th>Tên bệnh nhân</th>
-                                                    <th>Ngày sinh</th>
-                                                    <th>Dân tộc</th>
-                                                    <th>Giới tính</th>
-                                                    <th>CMT/CCCD/Mã định danh</th>
-                                                    <th>Hộ khẩu</th>
-                                                    <th>Nơi tạm trú</th>
+                                                    <th>Giờ Hẹn</th>
+                                                    <th>Tên Khách Hàng</th>
+                                                    <th>Ngày Sinh</th>
+                                                    <th>Giới Tính</th>
+                                                    <th>Địa Chỉ</th>
+                                                    <th>Số Điện Thoại</th>
+                                                    <th>Email</th>
+                                                    <th>CCCD/MD</th>
+                                                    <th>Dân Tộc</th>
+                                                    <th>Địa Chỉ Đầy Đủ</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td><input type="checkbox" name="selectedAppointment"></td>
-                                                    <td>02/10/2024</td>
-                                                    <td>CDCD0912312345</td>
-                                                    <td>Nguyễn Quang Trường</td>
-                                                    <td>08/02/2006</td>
-                                                    <td>Kinh</td>
-                                                    <td>Nam</td>
-                                                    <td>001082946357</td>
-                                                    <td>Hộ Khẩu</td>
-                                                    <td>Nơi tạm trú</td>
-                                                </tr>
+                                                
                                             </tbody>
                                         </table>
                                     </div>
@@ -286,6 +297,7 @@
                             <script>
 
                                 const khachHangs = @Html.Raw(khachHangsJson); // Dữ liệu khách hàng từ server
+                                const khachHangPreoder = @Html.Raw(khachHangPreoderJson); // Dữ liệu khách hàng từ server
 
                                 // Hàm để render lại bảng với dữ liệu mới
                                 function renderTable(data) {
@@ -309,21 +321,24 @@
                                         const tr = document.createElement("tr");
 
                                         tr.innerHTML = `
-                                            <td>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="RadioKhachHang" id="Radio${kh.IDKH}" value="${kh.IDKH}">
-                                                </div>
-                                            </td>
-                                            <td>${kh.IDKH}</td>
-                                            <td>${kh.TenKhachHang}</td>
-                                            <td>${kh.NgaySinh ? new Date(kh.NgaySinh).toLocaleDateString('vi-VN') : ''}</td>
-                                            <td>${kh.GioiTinh || ''}</td>
-                                            <td>${kh.DiaChi || ''}</td>
-                                            <td>${kh.SoDienThoai || ''}</td>
-                                            <td>${kh.Email || ''}</td>
-                                            <td>${kh.CCCD_MDD || ''}</td>
-                                            <td>${kh.DanToc || ''}</td>
-                                            <td>${kh.FullAddress || ''}</td>
+                                    <td RadioCell${kh.IDKH}>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="RadioKhachHang" id="Radio${kh.IDKH}" value="${kh.IDKH}">
+                                        </div>
+                                    </td>
+                                    <!-- Các cột dữ liệu khác với id riêng -->
+                                    <td id="IDKHCell${kh.IDKH}">${kh.IDKH}</td>
+                                    <td id="TenKhachHangCell${kh.IDKH}">${kh.TenKhachHang}</td>
+                                    <td id="NgaySinhCell${kh.IDKH}">
+                                        ${kh.NgaySinh ? new Date(kh.NgaySinh).toLocaleDateString('vi-VN') : ''}
+                                    </td>
+                                    <td id="GioiTinhCell${kh.IDKH}">${kh.GioiTinh || ''}</td>
+                                    <td id="DiaChiCell${kh.IDKH}">${kh.DiaChi || ''}</td>
+                                    <td id="SoDienThoaiCell${kh.IDKH}">${kh.SoDienThoai || ''}</td>
+                                    <td id="EmailCell${kh.IDKH}">${kh.Email || ''}</td>
+                                    <td id="CCCD_MDDCell${kh.IDKH}">${kh.CCCD_MDD || ''}</td>
+                                    <td id="DanTocCell${kh.IDKH}">${kh.DanToc || ''}</td>
+                                    <td id="FullAddressCell${kh.IDKH}">${kh.FullAddress || ''}</td>
                                         `;
 
                                         fragment.appendChild(tr);
@@ -331,7 +346,50 @@
 
                                     tbody.appendChild(fragment);
                                 }
+                                function renderKhachHangPreoderTable(data) {
+                                    const tbody = document.querySelector("#khachHangPreoderTable tbody");
+                                    tbody.innerHTML = ''; // Xóa dữ liệu cũ
 
+                                    if (data.length === 0) {
+                                        tbody.innerHTML = `
+                                                <tr>
+                                                    <td colspan="12" class="text-center">Không có lịch hẹn nào</td>
+                                                </tr>
+                                            `;
+                                        return;
+                                    }
+
+                                    const fragment = document.createDocumentFragment();
+
+                                    data.forEach(order => {
+                                        const tr = document.createElement("tr");
+                                        tr.innerHTML = `
+                                          <td id="RadioCell${order.IDKH}">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="RadioKhachHang" id="Radio${order.IDKH}" value="${order.IDKH}">
+                                        </div>
+                                    </td>
+                                    <!-- Các cột dữ liệu khác với id riêng -->
+                                    <td id="IDKHCell${order.IDKH}">${order.IDKH}</td>
+                                    <td id="NgayHenCell${order.IDKH}">${order.NgayHen}</td>
+                                    <td id="ThoiGianHenCell${order.IDKH}">${order.ThoiGianHen}</td>
+                                    <td id="TenKhachHangCell${order.IDKH}">${order.TenKhachHang}</td>
+                                    <td id="NgaySinhCell${order.IDKH}">
+                                        ${order.NgaySinh ? new Date(order.NgaySinh).toLocaleDateString('vi-VN') : ''}
+                                    </td>
+                                    <td id="GioiTinhCell${order.IDKH}">${order.GioiTinh || ''}</td>
+                                    <td id="DiaChiCell${order.IDKH}">${order.DiaChi || ''}</td>
+                                    <td id="SoDienThoaiCell${order.IDKH}">${order.SoDienThoai || ''}</td>
+                                    <td id="EmailCell${order.IDKH}">${order.Email || ''}</td>
+                                    <td id="CCCD_MDDCell${order.IDKH}">${order.CCCD_MDD || ''}</td>
+                                    <td id="DanTocCell${order.IDKH}">${order.DanToc || ''}</td>
+                                    <td id="FullAddressCell${order.IDKH}">${order.FullAddress || ''}</td>
+                                            `;
+                                        fragment.appendChild(tr);
+                                    });
+
+                                    tbody.appendChild(fragment);
+                                }
                                 // Hàm tìm kiếm
                                 document.getElementById('searchButton').addEventListener('click', function () {
                                     const medicalCode = document.getElementById('medicalCodeFind').value.trim().toLowerCase();
@@ -346,13 +404,22 @@
                                             (identityCode === '' || (kh.CCCD_MDD && kh.CCCD_MDD.toLowerCase().includes(identityCode)))
                                         );
                                     });
+                                    const filteredData2 = khachHangPreoder.filter(kh => {
+                                        return (
+                                            (medicalCode === '' || (kh.IDKH && kh.IDKH.toLowerCase().includes(medicalCode))) &&
+                                            (userName === '' || (kh.TenKhachHang && kh.TenKhachHang.toLowerCase().includes(userName))) &&
+                                            (identityCode === '' || (kh.CCCD_MDD && kh.CCCD_MDD.toLowerCase().includes(identityCode)))
+                                        );
+                                    });
 
                                     // Render lại bảng với dữ liệu đã lọc
                                     renderTable(filteredData);
+                                    renderKhachHangPreoderTable(filteredData2);
                                 });
 
                                 // Hiển thị dữ liệu mặc định khi trang tải
                                 renderTable(khachHangs);
+                                renderKhachHangPreoderTable(khachHangPreoder);
 
 
                                 // Xử lý sự kiện khi nhấn nút "Thêm"

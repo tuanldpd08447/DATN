@@ -16,40 +16,20 @@ namespace DATN_QLTiemChung_Api.Models
         public bool TrangThai { get; set; }
         public string GhiChu { get; set; }
 
-
-
+  
         public KhachHang? KhachHang { get; set; }
         public NhanVien? NhanVien { get; set; }
         public List<HoaDonChiTiet> HoaDonChiTiets { get; set; } = new List<HoaDonChiTiet>();
-    
-
     }
-    public class HoaDonCreateDTO
+    public class DiaChiDTO
     {
-       
-        public string IDKH { get; set; }
-        public string IDNV { get; set; }
-        public DateTime ThoiGian { get; set; }
-   
-        public string NoiDung { get; set; }
-
-        public Double TongTien { get; set; }
-
-        public bool TrangThai { get; set; }
-        public string GhiChu { get; set; }
-        public List<HoaDonChiTietCreateDTO> HoaDonChiTiets { get; set; } = new List<HoaDonChiTietCreateDTO>();
-
+        public string IDXP { get; set; }
+        public string TenXaPhuong { get; set; }
+        public string IDQH { get; set; }
+        public string TenQuanHuyen { get; set; }
+        public string IDTTP { get; set; }
+        public string TenTinhThanhPho {  get; set; }
     }
-    public class HoaDonChiTietCreateDTO
-    {
-        public string IDHDCT { get; set; }
-        public string IDVT { get; set; }
-        public int SoLuong { get; set; }
-        public Double DonGia { get; set; }
-        public double ThanhTien { get; set; }
-        public string GhiChu { get; set; }
-    }
-
     public class KhachHangDTo
     {
         public string IDKH { get; set; }
@@ -64,7 +44,24 @@ namespace DATN_QLTiemChung_Api.Models
         public string DanToc { get; set; }
         public string FullAddress { get; set; }
     }
-    public class KhachHangCreateDTO
+        public class KhachHangPreOder
+        {
+            public string IDKH { get; set; }
+
+            public string TenKhachHang { get; set; }
+            public TimeOnly ThoiGianHen { get; set; }
+            public DateOnly NgayHen { get; set; }
+
+            public DateTime NgaySinh { get; set; }
+            public string GioiTinh { get; set; }
+            public string DiaChi { get; set; }
+            public string SoDienThoai { get; set; }
+            public string Email { get; set; }
+            public string CCCD_MDD { get; set; }
+            public string DanToc { get; set; }
+            public string FullAddress { get; set; }
+        }
+        public class KhachHangCreateDTO
     {
         [Required]
         public string IDXP { get; set; }
@@ -93,13 +90,9 @@ namespace DATN_QLTiemChung_Api.Models
 
         public string DanToc { get; set; }
     }
-    public class DiaChiDTO
+    public class ThoiGianKham
     {
-        public string IDXP { get; set; }
-        public string TenXaPhuong { get; set; }
-        public string IDQH { get; set; }
-        public string TenQuanHuyen { get; set; }
-        public string IDTP { get; set; }
-        public string TenTinhThanhPho { get; set; }
+        DateOnly Ngayhen { get; set; }
+        TimeOnly ThoiGianHen {  get; set; }
     }
 }

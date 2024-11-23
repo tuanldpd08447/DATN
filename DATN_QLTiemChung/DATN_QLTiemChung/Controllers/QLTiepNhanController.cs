@@ -19,17 +19,46 @@ namespace DATN_QLTiemChung.Controllers
         public async Task<IActionResult> QLTiepNhan()
         {
             var client = _httpClientFactory.CreateClient();
-            var response = await client.GetAsync("https://localhost:7143/api/QLTiepNhan/GetAllKhachHang");
 
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var apiResponse = await response.Content.ReadAsStringAsync();
-                List<KhachHangDTo> khachHangs = JsonConvert.DeserializeObject<List<KhachHangDTo>>(apiResponse);
-                ViewBag.KhachHangs = khachHangs; 
+                // Lấy danh sách khách hàng
+                var response = await client.GetAsync("https://localhost:7143/api/QLTiepNhan/GetAllKhachHang");
+                if (response.IsSuccessStatusCode)
+                {
+                    var apiResponse = await response.Content.ReadAsStringAsync();
+                    List<KhachHangDTo> khachHangs = JsonConvert.DeserializeObject<List<KhachHangDTo>>(apiResponse);
+                    ViewBag.KhachHangs = khachHangs;
+                }
+                else
+                {
+                    // Xử lý khi API không trả về thành công
+                    ViewBag.ErrorMessage = "Không thể tải danh sách khách hàng.";
+                }
+
+                // Lấy danh sách khách hàng đặt lịch
+                var response1 = await client.GetAsync("https://localhost:7143/api/QLTiepNhan/GetAllDatLichKhams");
+                if (response1.IsSuccessStatusCode)
+                {
+                    var apiResponse1 = await response1.Content.ReadAsStringAsync();
+                    List<KhachHangPreOder> khachHangPreoder = JsonConvert.DeserializeObject<List<KhachHangPreOder>>(apiResponse1);
+                    ViewBag.KhachHangPreorder = khachHangPreoder;
+                }
+                else
+                {
+                    // Xử lý khi API không trả về thành công
+                    ViewBag.ErrorMessage = "Không thể tải danh sách khách hàng đặt lịch.";
+                }
+            }
+            catch (Exception ex)
+            {
+                // Xử lý lỗi kết nối hoặc lỗi khác
+                ViewBag.ErrorMessage = $"Đã xảy ra lỗi: {ex.Message}";
             }
 
             return View("~/Views/Home/QLTiepNhan.cshtml");
         }
+
 
         [HttpPost]
         public async Task<IActionResult> AddKhachHang(string hoKhauXa, string hoTen, DateTime ngaySinh, string danToc, string gioiTinh, string cmt, string sdt, string email, string diaChiChiTiet)

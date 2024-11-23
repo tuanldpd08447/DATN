@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ductu\\Downloads\\DATN-main\\DATN-main\\DATN_QLTiemChung\\DATN_CDCWebClient\\DATN_CDCWebClient.csproj",
+      "projectUniqueName": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_CDCWebClient\\DATN_CDCWebClient.csproj",
       "projectName": "DATN_CDCWebClient",
-      "projectPath": "C:\\Users\\ductu\\Downloads\\DATN-main\\DATN-main\\DATN_QLTiemChung\\DATN_CDCWebClient\\DATN_CDCWebClient.csproj",
+      "projectPath": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_CDCWebClient\\DATN_CDCWebClient.csproj",
       "packagesPath": "C:\\Users\\ductu\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ductu\\Downloads\\DATN-main\\DATN-main\\DATN_QLTiemChung\\DATN_CDCWebClient\\obj\\",
+      "outputPath": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_CDCWebClient\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ductu\\AppData\\Roaming\\NuGet\\NuGet.Config",

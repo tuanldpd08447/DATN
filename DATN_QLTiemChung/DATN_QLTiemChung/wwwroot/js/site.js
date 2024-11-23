@@ -21,7 +21,7 @@ function initAddressDropdown() {
     hoKhauTinh.addEventListener("change", function () {
         const provinceCode = hoKhauTinh.value;
         hoKhauQuan.innerHTML = '<option>-- Chọn Quận/Huyện --</option>';
-        hoKhauXa.innerHTML = '<option>-- Chọn Xã/Phường --</option>';
+        hoKhauXa.innerHTML = '<option>-- Chọn Xã/Phường --</option>'; 
 
         const filteredDistricts = districts.filter(d => d.province_code === provinceCode);
         filteredDistricts.forEach((district) => {
@@ -49,3 +49,4 @@ function initAddressDropdown() {
 
 
 document.addEventListener("DOMContentLoaded", initAddressDropdown);
+

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ductu\\Downloads\\DATN-main\\DATN-main\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj": {}
+    "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ductu\\Downloads\\DATN-main\\DATN-main\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj": {
+    "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ductu\\Downloads\\DATN-main\\DATN-main\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj",
+        "projectUniqueName": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj",
         "projectName": "DATN_QLTiemChung_Api",
-        "projectPath": "C:\\Users\\ductu\\Downloads\\DATN-main\\DATN-main\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj",
+        "projectPath": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\DATN_QLTiemChung_Api.csproj",
         "packagesPath": "C:\\Users\\ductu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ductu\\Downloads\\DATN-main\\DATN-main\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\obj\\",
+        "outputPath": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung_Api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ductu\\AppData\\Roaming\\NuGet\\NuGet.Config",
