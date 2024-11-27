@@ -57,9 +57,6 @@ namespace DATN_QLTiemChung.Controllers
                 // Xử lý lỗi kết nối hoặc lỗi khác
                 ViewBag.ErrorMessage = $"Đã xảy ra lỗi: {ex.Message}";
             }
-            TempData["NotificationTitle"] = "Success!";
-            TempData["NotificationMessage"] = "Your operation was successful.";
-            TempData["NotificationType"] = "success";
 
             return View("~/Views/Home/QLTiepNhan.cshtml");
         }

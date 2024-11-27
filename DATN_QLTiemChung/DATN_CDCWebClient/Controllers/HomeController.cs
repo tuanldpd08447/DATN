@@ -12,33 +12,41 @@ namespace DATN_CDCWebClient.Controllers
         {
             _logger = logger;
         }
+        public void GetSession()
+        {
+            string userId = HttpContext.Session.GetString("ID");
+            string Username = HttpContext.Session.GetString("Username");
+            string userRole = HttpContext.Session.GetString("Role");
+
+            TempData["ID"] = userId;
+            TempData["Username"] = Username;
+            TempData["Role"] = userRole;
+        }
 
         public IActionResult Home()
         {
+            GetSession();
             return View();
         }
         public IActionResult DKyLichKham()
         {
+            GetSession();
             return View();
         }
         public IActionResult LichSuTiem()
         {
+            GetSession();
             return View();
         }
-        public IActionResult Login()
-        {
-            return View();
-        }
-        public IActionResult Register()
-        {
-            return View();
-        }
+      
         public IActionResult ThongTinCaNhan()
         {
+            GetSession();
             return View();
         }
         public IActionResult Privacy()
         {
+            GetSession();
             return View();
         }
        

@@ -1,33 +1,13 @@
-﻿html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-  margin-bottom: 60px;
-}
+﻿/* Container của thông báo */
 .notification-container {
     position: fixed;
-    top: 60px; /* Cách mép trên 20px */
-    right: 10px;
+    top: 20px;
+    right: 20px;
     width: 300px;
     z-index: 9999; /* Đảm bảo thông báo nằm trên các phần tử khác */
 }
 
+/* Thông báo */
 .notification {
     display: flex;
     align-items: center;
@@ -43,6 +23,7 @@ body {
     pointer-events: auto; /* Cho phép tương tác với thông báo */
 }
 
+/* Điều chỉnh các phần tử khác không bị khóa */
 body, .container, .other-elements {
     position: relative; /* Đảm bảo các phần tử này không bị ảnh hưởng bởi z-index */
     z-index: 1; /* Đảm bảo các phần tử dưới thông báo vẫn có thể tương tác */
@@ -50,22 +31,6 @@ body, .container, .other-elements {
 
 .notification-container * {
     pointer-events: auto; /* Cho phép tương tác với các phần tử trong thông báo */
-}
-.notification-icon {
-    font-size: 24px;
-    margin-right: 15px;
-}
-
-.notification-content h4 {
-    margin: 0;
-    font-size: 16px;
-    font-weight: bold;
-}
-
-.notification-content p {
-    margin: 0;
-    font-size: 14px;
-    color: #777;
 }
 
 /* Hiệu ứng trượt vào */
@@ -78,16 +43,5 @@ body, .container, .other-elements {
     to {
         transform: translateX(0);
         opacity: 1;
-    }
-}
-
-/* Hiệu ứng mờ dần khi ẩn */
-@keyframes fade-out {
-    from {
-        opacity: 1;
-    }
-
-    to {
-        opacity: 0;
     }
 }

@@ -4,7 +4,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient();
-builder.Services.AddDistributedMemoryCache(); var app = builder.Build();
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Th?i gian h?t h?n
+    options.Cookie.HttpOnly = true;                // Ch? cho phép truy c?p qua HTTP
+    options.Cookie.IsEssential = true;             // B?t bu?c cho ho?t ??ng c?a ?ng d?ng
+});
+var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -14,6 +21,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseSession(); 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

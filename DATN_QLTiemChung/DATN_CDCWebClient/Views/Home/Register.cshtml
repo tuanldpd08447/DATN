@@ -1,5 +1,16 @@
 ﻿@{
     Layout = null;
+    List<string> _danTocList = new List<string>
+    {
+        "Kinh", "Tày", "Mường", "Mông", "H'mông", "Khmer", "Hoa", "Nùng", "Thái",
+        "Dzao", "Cờ Lao", "Gian", "Ê Đê", "Ba Na", "Sán Dìu", "Sán Chay", "Cơ Tu",
+        "Sơ Đăng", "Tà Ôi", "Pà Thẻn", "Hà Nhì", "Chứt", "Lào", "Lự", "Tày",
+        "Chăm", "Dẻo", "Bố Y", "Rơ Măm", "Ra Glai", "Sak", "Xinh Mun", "Xơ Đăng",
+        "Bình Định", "Tày", "Tày", "Tày", "Chơ", "Chống", "Gieo", "Mai", "Gia Rai",
+        "Kon Tum", "Đồng Tháp", "Gyar", "Lý Tự", "Tư", "Chứt", "Vân Kiều"
+    };
+    var register = ViewBag.register as RegisterDto;
+    var dc = ViewBag.DiaChi as DiaChi;
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -15,9 +26,9 @@
     <div class="bg-light d-flex justify-content-center align-items-center" style="height: 100vh;">
 
 
-        <div class="card p-4 shadow-lg" style="width: 100%; max-width: 50%; border-radius: 15px;">
+        <div class="card p-4 shadow-lg" style="width: 100%; max-width: 90%; border-radius: 15px;">
             <div class="row">
-                <div class="col-6 pt-5 mt-5">
+                <div class="col-4 pt-5 mt-5">
                     <img src="~/Img/CDC Đà Nẵng copy.png" class="pt-5" alt="" width="100%">
                 </div>
                 <div class="col">
@@ -26,109 +37,301 @@
                         <h4 class="mt-2 fw-bold">ĐĂNG KÝ</h4>
                     </div>
 
-                    <form>
-                        <div class="form-group mt-2">
-                            <div class="input-group">
-                                <div class="input-group-prepend ">
-                                    <span class="input-group border rounded-start-2" style="padding: 20px;">
+                    <form id="registerForm" asp-action="RegisterSumit" asp-controller="DNhapDKy" method="post">
+                        <!-- Tên khách hàng -->
+                        <div class="form-group mt-2 row">
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <span class="input-group-text border rounded-start" style="padding: 20px;">
                                         <i class="fa-solid fa-user"></i>
                                     </span>
+                                    <input type="text" class="form-control border-start-0" id="FullName" name="hoTen" placeholder="Họ và Tên" required value="@if(register!=null){@register.TenKhachHang}">
                                 </div>
-                                <div class="form-Doubleing">
-                                    <input type="text" class="form-control border-start-0 " id="DoubleingInputName" placeholder="Nguyen Van A" style="height: 75%;">
-                                    <label for="DoubleingInputName">Họ và Tên</label>
-                                </div>
+                                <span class="text-danger error-message" id="errorFullName" style="display: none;">Họ và Tên là bắt buộc.</span>
                             </div>
-                        </div>
 
-                        <div class="form-group mt-2">
-                            <div class="input-group">
-                                <div class="input-group-prepend ">
-                                    <span class="input-group border rounded-start-2" style="padding: 20px;">
-                                        <i class="fas fa-envelope"></i>
+                        <!-- Ngày sinh -->
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <span class="input-group-text border rounded-start" style="padding: 20px;">
+                                        <i class="fa-solid fa-calendar"></i>
                                     </span>
+                                    <input type="date" class="form-control border-start-0" id="BirthDate" name="ngaySinh" required value="@if(register!=null){@register.NgaySinh.Date}">
                                 </div>
-                                <div class="form-Doubleing">
-                                    <input type="email" class="form-control border-start-0 " id="DoubleingInputEmail" placeholder="name@example.com" style="height: 75%;">
-                                    <label for="DoubleingInputEmail">Email</label>
+                                <span class="text-danger error-message" id="errorBirthDate" style="display: none;">Ngày sinh là bắt buộc.</span>
+                           </div>
+                            
+                        </div>
+
+                        <!-- Giới tính -->
+                        <div class="form-group mt-2 row">
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <span class="input-group-text border rounded-start" style="padding: 20px;">
+                                        <i class="fa-solid fa-venus-mars"></i>
+                                    </span>
+                                    <select class="form-control border-start-0" id="Gender" name="gioiTinh" required>
+                                        <option value="" disabled>Chọn giới tính</option>
+                                        @if (register != null)
+                                        {
+                                            if (register.GioiTinh == "Nam")
+                                            {
+                                                <option value="Nam" selected>Nam</option>
+                                                <option value="Nữ">Nữ</option>
+                                                <option value="Khác">Khác</option>
+                                            }
+                                            else if (register.GioiTinh == "Nữ")
+                                            {
+                                                <option value="Nam">Nam</option>
+                                                <option value="Nữ" selected >Nữ</option>
+                                                <option value="Khác">Khác</option>
+                                            }
+                                            else 
+                                            {
+                                                <option value="Nam">Nam</option>
+                                                <option value="Nữ">Nữ</option>
+                                                <option value="Khác" selected>Khác</option>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <option value="Nam">Nam</option>
+                                            <option value="Nữ">Nữ</option>
+                                            <option value="Khác">Khác</option>
+                                        }
+
+                                    </select>
                                 </div>
+                                <span class="text-danger error-message" id="errorGender" style="display: none;">Giới tính là bắt buộc.</span>
                             </div>
+                        <!-- Dân tộc -->
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <span class="input-group-text border rounded-start" style="padding: 20px;">
+                                        <i class="fa-solid fa-users"></i>
+                                    </span>
+                                    <select class="form-control border-start-0" id="Ethnic" placeholder="Dân tộc" name="danToc" required>
+                                        <option value="" disabled selected>Chọn dân tộc</option>
+                                        @foreach (var danToc in _danTocList)
+                                        {
+                                            if (register != null && register.DanToc == danToc)
+                                            {
+                                                <option value="@danToc" selected>@danToc</option>
+                                            }
+                                            <option value="@danToc">@danToc</option>
+                                        }
+                                    </select>
+                                </div>
+                                <span class="text-danger error-message" id="errorEthnic" style="display: none;">Dân tộc là bắt buộc.</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group mt-2 row">
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <span class="input-group-text border rounded-start" style="padding: 20px;">
+                                        <i class="fa-solid fa-map-marker-alt"></i>
+                                    </span>
+
+                                    <!-- Chọn tỉnh thành -->
+                                    <select class="form-control border-start-0" id="hoKhauTinh" required>
+                                        @if (dc!=null)
+                                        {
+                                            <option value="@dc.IDTTP" selected>@dc.NameTTP</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="" disabled selected>Chọn tỉnh/thành phố</option>
+                                        }
+
+                                        <!-- Add other provinces here -->
+                                    </select>
+                                </div>
+                                <span class="text-danger error-message" id="errorProvince" style="display: none;">Tỉnh/thành phố là bắt buộc.</span>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <span class="input-group-text border rounded-start" style="padding: 20px;">
+                                        <i class="fa-solid fa-building"></i>
+                                    </span>
+
+                                    <!-- Chọn quận/huyện -->
+                                    <select class="form-control border-start-0" id="hoKhauQuan" required>
+                                       
+                                        @if (dc != null)
+                                        {
+                                            <option value="@dc.IDQH" selected>@dc.NameQH</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="" disabled selected>Chọn quận/huyện</option>
+                                        }
+
+                                        <!-- Add other districts here -->
+                                    </select>
+                                </div>
+                                <span class="text-danger error-message" id="errorDistrict" style="display: none;">Quận/huyện là bắt buộc.</span>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <span class="input-group-text border rounded-start" style="padding: 20px;">
+                                        <i class="fa-solid fa-home"></i>
+                                    </span>
+
+                                    <!-- Chọn phường/xã -->
+                                    <select class="form-control border-start-0" id="hoKhauXa" name="hoKhauXa" required>
+                                      
+
+                                        @if (dc != null)
+                                        {
+                                            <option value="@dc.IDXP" selected>@dc.NameXP</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="" disabled selected>Chọn phường/xã</option>
+                                        }
+
+                                        <!-- Add other wards here -->
+                                    </select>
+                                </div>
+                                <span class="text-danger error-message" id="errorWard" style="display: none;">Phường/xã là bắt buộc.</span>
+                            </div>
+
+                         
                         </div>
 
                         <div class="form-group mt-2">
                             <div class="input-group">
-                                <div class="input-group-prepend ">
-                                    <span class="input-group border rounded-start-2" style="padding: 20px;">
+                                <span class="input-group-text border rounded-start" style="padding: 20px;">
+                                    <i class="fa-solid fa-road"></i>
+                                </span>
+
+                                <!-- Số nhà/đường -->
+                                <input type="text" class="form-control border-start-0" id="Street" name="diaChiChiTiet" placeholder="Số nhà, tên đường" required value="@if(register!=null){@register.DiaChi}">
+                            </div>
+                            <span class="text-danger error-message" id="errorStreet" style="display: none;">Số nhà/đường là bắt buộc.</span>
+                        </div>
+
+                        <!-- Số điện thoại -->
+                        <div class="form-group mt-2 row">
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <span class="input-group-text border rounded-start" style="padding: 20px;">
                                         <i class="fa-solid fa-phone"></i>
                                     </span>
+                                    <input type="tel" class="form-control border-start-0" id="PhoneNumber" name="sdt" placeholder="Số điện thoại" pattern="[0-9]{10,11}" required value="@if(register!=null){@register.SoDienThoai}">
                                 </div>
-                                <div class="form-Doubleing">
-                                    <input type="tel" class="form-control border-start-0 " id="DoubleingPhoneNumber" placeholder="0123456789" style="height: 75%;">
-                                    <label for="DoubleingPhoneNumber">Số điện thoại</label>
-                                </div>
+                                <span class="text-danger error-message" id="errorPhoneNumber" style="display: none;">Số điện thoại không hợp lệ.</span>
+                                @if (TempData["errorSdt"] != null)
+                                {
+                                    <span class="text-danger">@TempData["errorSdt"]</span>
+                                }
                             </div>
-                        </div>
 
+                        <!-- Email -->
+                            <div class="col-md-6">
+                                    <div class="input-group">
+                                        <span class="input-group-text border rounded-start" style="padding: 20px;">
+                                            <i class="fa-solid fa-envelope"></i>
+                                        </span>
+                                    <input type="email" class="form-control border-start-0" id="Email" name="email" placeholder="Email" required value="@if(register!=null){@register.Email}">
+                                    </div>
+                                    <span class="text-danger error-message" id="errorEmail" style="display: none;">Email không hợp lệ.</span>
+                                    @if (TempData["errorEmail"] != null)
+                                    {
+                                        <span class="text-danger">@TempData["errorEmail"]</span>
+                                    }
+                                </div>
+                        </div>
+                        <!-- CCCD hoặc MDD -->
                         <div class="form-group mt-2">
                             <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group border rounded-start-2" style="padding: 20px;">
-                                        <i class="fas fa-lock"></i>
+                                <span class="input-group-text border rounded-start" style="padding: 20px;">
+                                    <i class="fa-solid fa-id-card"></i>
+                                </span>
+                                <input type="text" class="form-control border-start-0" id="CCCD_MDD" name="cmt" placeholder="CCCD hoặc Mã định danh" required value="@if(register!=null){@register.CCCD_MDD}">
+                            </div>
+                            <span class="text-danger error-message" id="errorCCCD_MDD" style="display: none;">CCCD/Mã định danh là bắt buộc.</span>
+                            @if (TempData["errorCCCD/MDD"] != null)
+                            {
+                                <span class="text-danger">@TempData["errorCCCD/MDD"]</span>
+                            }
+                        </div>
+
+                      
+
+                        <!-- Mật khẩu -->
+                        <div class="form-group mt-2 row">
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <span class="input-group-text border rounded-start" style="padding: 20px;">
+                                        <i class="fa-solid fa-lock"></i>
                                     </span>
+                                    <input type="password" class="form-control border-start-0" id="Password" name="password" placeholder="Mật khẩu" minlength="6" required>
                                 </div>
-                                <div class="form-Doubleing">
-                                    <input type="password" class="form-control border-start-0" id="DoubleingPassword" placeholder="Password">
-                                    <label for="DoubleingPassword">Mật khẩu</label>
-                                </div>
+                                <span class="text-danger error-message" id="errorPassword" style="display: none;">Mật khẩu phải từ 6 ký tự trở lên.</span>
                             </div>
-                        </div>
 
-                        <div class="form-group mt-2">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group border rounded-start-2" style="padding: 20px;">
-                                        <i class="fas fa-lock"></i>
+                        <!-- Nhập lại mật khẩu -->
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <span class="input-group-text border rounded-start" style="padding: 20px;">
+                                        <i class="fa-solid fa-lock"></i>
                                     </span>
+                                    <input type="password" class="form-control border-start-0" id="ConfirmPassword" name="confirmpassword" placeholder="Nhập lại mật khẩu" required>
                                 </div>
-                                <div class="form-Doubleing">
-                                    <input type="password" class="form-control border-start-0" id="DoubleingEnterPassword" placeholder="Password">
-                                    <label for="DoubleingEnterPassword">Nhập lại mật khẩu</label>
-                                </div>
+                                <span class="text-danger error-message" id="errorConfirmPassword" style="display: none;">Mật khẩu không khớp.</span>
                             </div>
                         </div>
-
-
-                        <button type="submit" class="btn  btn-block mt-4 fw-bold" style="width: 100%;background-color: #0099CF; color: white;">Đăng nhập</button>
-
-                        <div class="text-center my-3">
-                            <div class="container text-center">
-                                <div class="row">
-                                    <div class="col">
-                                        <hr>
-                                    </div>
-                                    <div class="col-2">
-                                        <span>or</span>
-                                    </div>
-                                    <div class="col">
-                                        <hr>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="d-flex justify-content-between">
-                            <a href="#" class="btn btn-outline-danger w-100 me-2"><i class="fab fa-google"></i> Google</a>
-                            <a href="#" class="btn btn-outline-primary w-100 ms-2"><i class="fab fa-facebook-f"></i> Facebook</a>
-                        </div>
-
-                        <div class="text-center mt-3">
-                            <p>Bạn đã có tài khoản? <a asp-action="Login">Đăng nhập</a></p>
-                        </div>
+                        <!-- Nút Đăng Ký -->
+                        <button type="submit" class="btn btn-block mt-4 fw-bold" style="width: 100%; background-color: #0099CF; color: white;">Đăng Ký</button>
                     </form>
+
                 </div>
             </div>
         </div>
     </div>
+    <script src="~/js/site.js" type="module"></script>
+
+    @if (register != null)
+    {
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const testWardCode = "@register.IDXP"; // Giá trị từ Razor
+                autoSelectAddress(testWardCode); // Gọi hàm để chọn địa chỉ
+            });
+        </script>
+    }
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const selectElement = document.getElementById('hoKhauTinh');
+            for (let i = 0; i < selectElement.options.length; i++) {
+                const option = selectElement.options[i];
+                if (option.value === '49') {
+                    option.selected = true;
+                    break;
+                }
+            }
+        });
+       
+
+        document.getElementById("ConfirmPassword").addEventListener("input", function () {
+            const password = document.getElementById("Password").value;
+            const confirmPassword = this.value; 
+
+            if (password !== confirmPassword) {
+                document.getElementById("errorConfirmPassword").style.display = "block"; 
+            } else {
+                document.getElementById("errorConfirmPassword").style.display = "none";
+            }
+        });
+
+    </script>
+    
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>

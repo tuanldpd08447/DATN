@@ -106,4 +106,21 @@ namespace DATN_QLTiemChung.Models
         public string Step { get; set; }
 
     }
+    public class LoginNhanVien
+    {
+        public string Email { get; set; }
+        public string Password { get; set; }
+    }
+    public class LoginKhachHang
+    {
+        public string Sdt { get; set; }
+        public string Password { get; set; }
+    }
+    public class LoginResult
+    {
+        public string ID { get; set; }
+        public string Role { get; set; }
+
+        public string Username { get; set; }
+    }
 }

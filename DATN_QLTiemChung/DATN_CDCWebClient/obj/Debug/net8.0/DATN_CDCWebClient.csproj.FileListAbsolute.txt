@@ -29,3 +29,9 @@ C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_CDCWebClient\obj\Debu
 C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_CDCWebClient\obj\Debug\net8.0\DATN_CDCWebClient.pdb
 C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_CDCWebClient\obj\Debug\net8.0\DATN_CDCWebClient.genruntimeconfig.cache
 C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_CDCWebClient\obj\Debug\net8.0\ref\DATN_CDCWebClient.dll
+C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_CDCWebClient\bin\Debug\net8.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_CDCWebClient\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_CDCWebClient\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_CDCWebClient\bin\Debug\net8.0\Newtonsoft.Json.Bson.dll
+C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_CDCWebClient\obj\Debug\net8.0\DATN_CDCWebClient.csproj.AssemblyReference.cache
+C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_CDCWebClient\obj\Debug\net8.0\DATN_CDC.EF466BB7.Up2Date

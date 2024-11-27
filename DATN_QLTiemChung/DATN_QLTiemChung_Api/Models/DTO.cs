@@ -95,5 +95,62 @@ namespace DATN_QLTiemChung_Api.Models
         DateOnly Ngayhen { get; set; }
         TimeOnly ThoiGianHen {  get; set; }
     }
-   
+    public class LoginNhanVien
+    {
+        public string Email { get; set; }
+        public string Password { get; set; }
+    }
+    public class LoginKhachHang
+    {
+        public string Sdt { get; set; }
+        public string Password { get; set; }
+    }
+    public class LoginResult
+    {
+        public string ID { get; set; }
+        public string Role { get; set; }
+
+        public string Username { get; set; }
+    }
+    public class RegisterDto
+    {
+        [Required]
+        public string IDXP { get; set; }
+
+        [Required]
+        public string TenKhachHang { get; set; }
+
+        [Required]
+        public DateTime NgaySinh { get; set; }
+
+        [Required]
+        public string GioiTinh { get; set; }
+
+        [Required]
+        public string DiaChi { get; set; }
+
+        [Required]
+        public string SoDienThoai { get; set; }
+
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [Required]
+        public string CCCD_MDD { get; set; }
+
+        public string DanToc { get; set; }
+
+        public string Password { get; set; }
+
+    }
+    public class DiaChi
+    {
+        public string IDXP { get; set; }
+        public string NameXP { get; set; }
+        public string IDQH { get; set; }
+        public string NameQH { get; set; }
+        public string IDTTP { get; set; }
+        public string NameTTP { get; set; }
+    }
 }

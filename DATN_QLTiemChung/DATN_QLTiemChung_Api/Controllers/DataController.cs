@@ -177,6 +177,44 @@ namespace DATN_QLTiemChung_Api.Controllers
             return Ok(wards);
         }
 
+        [HttpGet("GetWardByid/{id}")]
+        public async Task<ActionResult<DiaChi>> GetWardByid(string id)
+        {
+            // Lấy thông tin của ward dựa trên id
+            var wards = await _context.wards.FirstOrDefaultAsync(w => w.code == id);
+            if (wards == null)
+            {
+                return NotFound("Không tìm thấy phường/xã với mã " + id);
+            }
+
+            // Lấy thông tin của district dựa trên mã của ward
+            var districts = await _context.districts.FirstOrDefaultAsync(w => w.code == wards.district_code);
+            if (districts == null)
+            {
+                return NotFound("Không tìm thấy quận/huyện với mã " + wards.district_code);
+            }
+
+            // Lấy thông tin của province dựa trên mã của district
+            var provinces = await _context.provinces.FirstOrDefaultAsync(w => w.code == districts.province_code);
+            if (provinces == null)
+            {
+                return NotFound("Không tìm thấy tỉnh/thành phố với mã " + districts.province_code);
+            }
+
+            // Tạo đối tượng DiaChi
+            DiaChi diaChi = new DiaChi
+            {
+                IDXP = wards.code,
+                IDQH = districts.code,
+                IDTTP = provinces.code,
+                NameXP = wards.name,
+                NameQH = districts.name,
+                NameTTP = provinces.name,
+            };
+
+            return Ok(diaChi);
+        }
+
         // Lấy tất cả XuatXus
         [HttpGet("xuatxu")]
         public async Task<ActionResult<IEnumerable<XuatXu>>> GetXuatXus()
