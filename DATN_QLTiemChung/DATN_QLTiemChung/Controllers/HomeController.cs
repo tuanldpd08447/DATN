@@ -15,6 +15,7 @@ namespace DATN_QLTiemChung.Controllers
 
         public IActionResult HomeQL()
         {
+           
             return View();
         }
         public IActionResult KhamSanLoc()

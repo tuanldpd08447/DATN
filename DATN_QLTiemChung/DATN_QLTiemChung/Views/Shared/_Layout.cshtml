@@ -86,10 +86,10 @@
                 <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" asp-controller="Home" asp-action="QLNhanVien">QUẢN LÝ NHÂN VIÊN</a>
             </div>
             <div class="row">
-                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" asp-controller="Home" asp-action="QLKho">KHO VACCINE</a>
+                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" asp-controller="QLKhoVaccine" asp-action="QLKhoVaccine">KHO VACCINE</a>
             </div>
             <div class="row">
-                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" asp-controller="Home" asp-action="QLXuatNhapKho">QUẢN LÝ XUẤT NHẬP KHO</a>
+                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" asp-controller="QLXuatNhapKho" asp-action="QLXuatNhapKho">QUẢN LÝ XUẤT NHẬP KHO</a>
             </div>
             <div class="row">
                 <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold text-uppercase" asp-controller="Home" asp-action="TNTiemChungTheoHopDong">TN tiêm chủng theo hợp đồng</a>
@@ -157,7 +157,46 @@
     <div>
         @RenderBody()
     </div>
-   
+
+    @if (TempData["Notification"] != null)
+    {
+        var notificationType = TempData["NotificationType"] ?? "info"; // Loại thông báo
+        var notificationIcon = notificationType switch
+        {
+            "success" => "bi bi-check-circle-fill text-success",
+            "error" => "bi bi-exclamation-triangle-fill text-danger",
+            "warning" => "bi bi-exclamation-triangle-fill text-warning",
+            _ => "bi bi-info-circle-fill text-info"
+        };
+
+        <div class="position-fixed  end-0 p-3" style="z-index: 11; top:5%;">
+            <div id="autoHideToast" class="toast align-items-center text-bg-info border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="5000">
+                <div class="d-flex align-items-center justify-content-between bg-white border rounded p-3 mb-3 shadow-sm">
+                    <!-- Icon và nội dung -->
+                    <div class="d-flex align-items-center">
+                        <i class="@notificationIcon fs-3 me-3"></i>
+                        <div>
+                            <div class="fw-bold">@TempData["NotificationTitle"]</div>
+                            <div class="text-muted">@TempData["Notification"]</div>
+                        </div>
+                        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"> </button>
+
+                    </div>
+                    <!-- Nút hành động -->
+                </div>
+            </div>
+        </div>
+
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const toastElement = document.getElementById('autoHideToast');
+                const toast = new bootstrap.Toast(toastElement);
+                toast.show();
+            });
+        </script>
+    }
+
 
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

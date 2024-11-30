@@ -25,9 +25,10 @@ namespace DATN_QLTiemChung_Api.Models
         public XuatXu? XuatXu { get; set; }
 
         public string TenVatTu { get; set; }
-        public DateTime? HanSuDung { get; set; }
+        public DateTime HanSuDung { get; set; }
         public string? GhiChu { get; set; }
         public double? DonGia { get; set; }
+        public int SoLuong { get; set; }
     }
 
 }

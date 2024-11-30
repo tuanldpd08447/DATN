@@ -20,7 +20,9 @@ namespace DATN_QLTiemChung.Controllers
         public async Task<IActionResult> QLTiepNhan()
         {
             var client = _httpClientFactory.CreateClient();
-
+            TempData["Notification"] = "The message was rejected by the server because it is too large.";
+            TempData["NotificationType"] = "success";
+            TempData["NotificationTitle"] = "Cannot Send Mail";
             try
             {
                 // Lấy danh sách khách hàng

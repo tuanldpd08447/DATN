@@ -1,4 +1,12 @@
-﻿   <div class="container mt-4" >
+﻿@{
+    var vattu =  ViewBag.vatTuYTe as List<VatTuDTO>;
+    var VatTu = ViewBag.vattu as VatTuDTO;
+    var loaivattu =  ViewBag.loaivattu as List<LoaivatTu>;
+    var nguoncap = ViewBag.NguonCap as List<NguonCungCap>;
+    var nhacap =ViewBag.NhaCap as List<NhaCungCap>;
+
+} 
+ <div class="container mt-4" >
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="" style="color: #2fb388;">QUẢN LÝ KHO</h2>
             <div class="Double-end ">
@@ -20,7 +28,7 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label class="fw-bold" for="VatTuCodeFind">Mã vật tư</label>
-                                    <input type="text" class="form-control" id="VatTuCodeFind" value="24URAD036">
+                                    <input type="text" class="form-control" id="VatTuCodeFind"  >
                                 </div>
                             </div>
                             <div class="col">
@@ -69,25 +77,61 @@
                         <div class="row">
                             <div class="form-group col">
                                 <label for="VatTuCode">Mã vật tư</label>
-                                <input type="text" class="form-control" id="VatTuCode" placeholder="Nhập mã VatTu">
+                                <input type="text" class="form-control" id="VatTuCode" placeholder="Nhập mã VatTu" value="@if(VatTu != null){@VatTu.IDVT}">
                             </div>
-                            <div class="form-group col">
-                                <label for="VatTuName">Tên vật tư</label>
-                                <input type="text" class="form-control" id="VatTuName" placeholder="Nhập tên VatTu">
+                               <div class="form-group col">
+                                <label for="VatTuType">Loại vật tư</label>
+                                <select class="form-control" id="VatTuType" >
+                                    @if (loaivattu != null)
+                                    {
+                                     
+                                        @foreach(var item in loaivattu)
+                                        {
+                                            @if(VatTu != null && VatTu.IDTL == item.IDTL)
+                                            {
+                
+                                             <option value="@item.IDTL" selected >@item.LoaiVatTu</option>
+                                            }
+                                            else
+                                            {
+                                                
+                                                <option value="@item.IDTL" >@item.LoaiVatTu</option>
+                                            }
+                                        }
+                                    }
+                                   
+                                </select>
                             </div>
                         </div>
                         
                         <div class="row">
-                            <div class="form-group col">
-                                <label for="VatTuType">Loại vật tư</label>
-                                <select class="form-control" id="VatTuType" placeholder="Nhập loại VatTu">
-                                    <option value=""></option>
-                                </select>
+                        
+                             <div class="form-group col">
+                                <label for="VatTuName">Tên vật tư</label>
+                                <input type="text" class="form-control" id="VatTuName" value="@if(VatTu != null){@VatTu.TenVatTu}" placeholder="Nhập tên VatTu">
                             </div>
                             <div class="form-group col">
                                 <label for="origin">Nguồn cung cấp</label>
-                                <select class="form-control" id="origin" placeholder="Nhập nguồn gốc VatTu">
-                                    <option value=""></option>
+                                <select class="form-control" id="origin">
+                                    <option ></option>
+                                     @if (nguoncap != null)
+                                    {
+                                        @foreach( var item in nguoncap)
+                                        {
+                                            
+                                            @if(VatTu != null && VatTu.IDNGC == item.IDNGC)
+                                            {
+                                                  <option></option>
+                                             <option value="@item.IDNGC" selected >@item.TenNguonCungCap</option>
+                                            }
+                                            else
+                                            {
+                                                
+                                                <option value="@item.IDNGC" >@item.TenNguonCungCap</option>
+                                            }
+                                          
+                                    
+                                        }}
                                 </select>
                             </div>
                         </div>
@@ -95,12 +139,29 @@
                         <div class="row">
                             <div class="form-group col">
                                 <label for="unitPrice">Đơn Giá</label>
-                                <input type="number" class="form-control" id="unitPrice" placeholder="Nhập Đơn giá">
+                                <input  class="form-control" id="unitPrice" value="@if(VatTu != null){@VatTu.DonGia}" placeholder="Nhập Đơn giá">
                             </div>
                             <div class="form-group col">
                                 <label for="supplier">Nhà cung cấp</label>
                                 <select class="form-control" id="supplier" placeholder="Nhập nhà cung cấp VatTu">
-                                    <option value=""></option>
+                                    <option ></option>
+                                      @if (nhacap != null)
+                                    {
+                                        @foreach( var item in nhacap)
+                                        {
+                                             @if(VatTu != null && VatTu.IDNHC == item.IDNHC)
+                                            {
+                                                  
+                                                    <option value="@item.IDNHC" selected>@item.TenNhaCungCap </option>
+                                            }
+                                            else
+                                            {
+                                                
+                                                <option value="@item.IDNHC" >@item.TenNhaCungCap</option>
+                                            }
+                                         
+                                    
+                                        }}
                                 </select>
                             </div>
                         </div>
@@ -109,24 +170,23 @@
                            
                             <div class="form-group col">
                                 <label for="expirationDate">Hạn sử dụng</label>
-                                <input type="date" class="form-control" id="expirationDate">
+                                <input type="date" class="form-control" id="expirationDate"  value="@(VatTu?.HanSuDung.ToString("yyyy-MM-dd") ?? "")">
                             </div>
-                            <div class="form-group col">
-                                <label for="entryDate">Ngày nhập</label>
-                                <input type="date" class="form-control" id="entryDate">
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="form-group col">
-                                <label for="quantity">Số lượng</label>
-                                <input type="number" class="form-control" id="quantity" placeholder="Nhập số lượng">
-                            </div>
-                            <div class="form-group col">
+                           
+                             <div class="form-group col">
                                 <label for="notes">Ghi chú</label>
-                                <textarea class="form-control" id="notes" rows="1" placeholder="Nhập ghi chú"></textarea>
+                                <textarea class="form-control" id="notes" rows="1" value="@if(VatTu != null){@VatTu.GhiChu}" placeholder="Nhập ghi chú"></textarea>
                             </div>
                         </div>
+                           <div class="row">
+                           
+                            <div class="form-group col-md-6>
+                                <label for="expirationDate">Số Lượng</label>
+                                <input type="number" min="1" class="form-control" value="@if(VatTu != null){@VatTu.SoLuong}" id="expirationDate">
+                            </div>
+                              </div>
+                        
+                        
                     
                     </form>
                     
@@ -140,49 +200,48 @@
       
         <div class="p-3 pt-1">
             <div class="border rounded-4 mt-1 ">
-                <div class="table-responsive p-2 ">
+                <div class="table-responsive p-2 " style="max-height: 400px; overflow-y: scroll; border: 1px solid #ccc;">
                     <table class="table  m-0 mt-2 ">
                         <thead>
                             <tr>
-                                <th></th>
+                                
                                 <th>Mã vật tư</th>
-                                <th>Tên vật tư</th>
-                                <th>Nguồn cung cấp</th>
-                                <th>Số lượng </th>
-                                <th>Nhà cung cấp</th>
-                                <th>Đơn giá</th>
-                                <th>Loại vật tư</th>
-                                <th>Ngày nhập</th>
-                                <th>Ngày hết hạn</th>
+                                <th>IDTL</th>
+                                 <th>IDNHC</th>
+                                <th>IDNGC</th>
+                                <th>IDXX</th>
+                                <th>Tên vật tư </th>
+                                <th>Đơn Giá</th>
+                                <th>Hạn sử dụng</th>
+                                  <th>Số Lượng</th>
                                 <th>Ghi chú</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th><input type="checkbox"></th>
-                                <td>Vắc-xin thủy đậu – VARILRIX (Bỉ)</td>
-                                <td>Bỉ</td>
-                                <td>68</td>
-                                <td>Thủy đậu</td>
-                                <td>919,000</td>
-                                <td></td>
-                                <td>trẻ từ 9 tháng</td>
-                                <td>03-02-2023</td>
-                                <td>03-02-2025</td>
-                            </tr>
-                            <tr>
-                                <th><input type="checkbox"></th>
-                                <td>Vắc-xin thủy đậu – Varivax (Mỹ)</td>
-                                <td>Mỹ</td>
-                                <td>72</td>
-                                <td>Thủy đậu</td>
-                                <td>1,085,000</td>
-                                <td></td>
-                                <td>trẻ từ 12 tháng</td>
-                                <td>16-04-2023</td>
-                                <td>16-04-2025</td>
-                            </tr>
+
+                            
+                            @if (vattu != null)
+                            {
+                                      @foreach(var item in vattu)
+                            {
+                             <tr  onclick="location.href='@Url.Action("Clickvaccine", "QLKhoVaccine", new { IDVT = @item.IDVT })' " >
+                                 <td>@item.IDVT</td>
+                                 <td>@item.IDTL</td>
+                                 <td>@item.IDNHC</td>
+                                 <td>@item.IDNGC</td>
+                                 <td>@item.IDXX</td>
+                                 <td>@item.TenVatTu</td>
+                                 <td>@item.DonGia</td>
+                                 <td>@item.HanSuDung</td>
+                                  <td>@item.SoLuong</td>
+                                 <td>@item.GhiChu</td>
+
+                             </tr>
                           
+                         }
+                            }
+
+
                         </tbody>
                     </table>
                 </div>

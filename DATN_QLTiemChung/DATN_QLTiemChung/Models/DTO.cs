@@ -123,4 +123,42 @@ namespace DATN_QLTiemChung.Models
 
         public string Username { get; set; }
     }
+    public class VatTuDTO
+    {
+        public string IDVT { get; set; }
+        public string TenVatTu { get; set; }
+        public double? DonGia { get; set; }
+        public int SoLuong { get; set; }
+
+        public DateTime HanSuDung { get; set; }
+        public string? GhiChu { get; set; }
+        public string? IDTL { get; set; }
+        public string? IDNGC { get; set; }
+        public string? IDNHC { get; set; }
+        public string? IDXX { get; set; }
+    }
+    public class HoaDonCreateDTO
+    {
+        [Required]
+        public string IDHD { get; set; }
+        [Required]
+        public string IDKH { get; set; }
+        [Required]
+        public string IDNV { get; set; }
+        [Required]
+        public DateTime ThoiGian { get; set; }
+        [Required]
+        public string NoiDung { get; set; }
+        [Required]
+        public Double TongTien { get; set; }
+        [Required]
+        public bool TrangThai { get; set; }
+        [Required]
+        public string GhiChu { get; set; }
+
+
+        public KhachHang? KhachHang { get; set; }
+        public NhanVien? NhanVien { get; set; }
+        public List<HoaDonChiTiet> HoaDonChiTiets { get; set; } = new List<HoaDonChiTiet>();
+    }
 }

@@ -56,7 +56,7 @@
                                     <span class="input-group-text border rounded-start" style="padding: 20px;">
                                         <i class="fa-solid fa-calendar"></i>
                                     </span>
-                                    <input type="date" class="form-control border-start-0" id="BirthDate" name="ngaySinh" required value="@if(register!=null){@register.NgaySinh.Date}">
+                                    <input type="date" class="form-control border-start-0" id="BirthDate" name="ngaySinh" required value="@(register?.NgaySinh.ToString("yyyy-MM-dd") ?? "")">
                                 </div>
                                 <span class="text-danger error-message" id="errorBirthDate" style="display: none;">Ngày sinh là bắt buộc.</span>
                            </div>
@@ -307,16 +307,7 @@
 
     <script>
 
-        document.addEventListener("DOMContentLoaded", () => {
-            const selectElement = document.getElementById('hoKhauTinh');
-            for (let i = 0; i < selectElement.options.length; i++) {
-                const option = selectElement.options[i];
-                if (option.value === '49') {
-                    option.selected = true;
-                    break;
-                }
-            }
-        });
+        
        
 
         document.getElementById("ConfirmPassword").addEventListener("input", function () {

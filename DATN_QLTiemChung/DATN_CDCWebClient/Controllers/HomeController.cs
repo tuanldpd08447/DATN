@@ -28,11 +28,7 @@ namespace DATN_CDCWebClient.Controllers
             GetSession();
             return View();
         }
-        public IActionResult DKyLichKham()
-        {
-            GetSession();
-            return View();
-        }
+     
         public IActionResult LichSuTiem()
         {
             GetSession();

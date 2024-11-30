@@ -169,7 +169,7 @@ namespace DATN_QLTiemChung_Api.Controllers
             return Ok(VatTuYTe);
         }
         [HttpPost("AddHoaDon")]
-        public async Task<IActionResult> AddHoaDon([FromBody] HoaDonDTO HoaDonDto)
+        public async Task<IActionResult> AddHoaDon([FromBody] HoaDonCreateDTO HoaDonDto)
         {
             if (!ModelState.IsValid)
             {
@@ -181,6 +181,7 @@ namespace DATN_QLTiemChung_Api.Controllers
             if (hd == null)
             {
                 string newIDHD = await GenerateNewIDHD();
+
 
                 var newHoaDon = new HoaDon
                 {
@@ -206,6 +207,39 @@ namespace DATN_QLTiemChung_Api.Controllers
 
 
             return NotFound(new { Message = "Hóa đơn không tồn tại." });
+        }
+
+        [HttpPut("UpdateHoaDon")]
+        public async Task<IActionResult> UpdateHoaDon(string IDHD, [FromBody] HoaDonDTO HoaDonDto)
+        {
+            // Kiểm tra dữ liệu hợp lệ
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            // Tìm hóa đơn trong cơ sở dữ liệu theo ID
+            var hd = await _context.HoaDon.FindAsync(IDHD);
+            if (hd == null)
+            {
+                return NotFound(new { Message = "Hóa đơn không tồn tại." });
+            }
+
+            // Cập nhật các trường thông tin của hóa đơn từ DTO
+            hd.IDKH = HoaDonDto.IDKH;
+            hd.IDNV = HoaDonDto.IDNV;
+            hd.ThoiGian = HoaDonDto.ThoiGian;
+            hd.GhiChu = HoaDonDto.GhiChu;
+            hd.NoiDung = HoaDonDto.NoiDung;
+            hd.TongTien = HoaDonDto.TongTien;
+            hd.TrangThai = HoaDonDto.TrangThai;
+
+            // Lưu các thay đổi vào cơ sở dữ liệu
+            _context.HoaDon.Update(hd);
+            await _context.SaveChangesAsync();
+
+            // Trả về đối tượng hóa đơn đã cập nhật
+            return Ok(hd);
         }
         private async Task<string> GenerateNewIDHD()
         {

@@ -92,9 +92,10 @@ namespace DATN_CDCWebClient.Models
     }
     public class ThoiGianKham
     {
-        DateOnly Ngayhen { get; set; }
-        TimeOnly ThoiGianHen {  get; set; }
+        public DateOnly NgayHen { get; set; }
+        public TimeOnly ThoiGianHen { get; set; }
     }
+
     public class LoginNhanVien
     {
         public string Email { get; set; }

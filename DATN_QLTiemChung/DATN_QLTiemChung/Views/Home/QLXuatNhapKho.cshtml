@@ -1,4 +1,12 @@
-﻿   <div class="container mt-4" >
+﻿ @{
+    var vattu =  ViewBag.vatTuYTe as List<VatTuDTO>;
+    var VatTu = ViewBag.vattu as VatTuDTO;
+    var loaivattu =  ViewBag.loaivattu as List<LoaivatTu>;
+    var nguoncap = ViewBag.NguonCap as List<NguonCungCap>;
+    var nhacap =ViewBag.NhaCap as List<NhaCungCap>;
+
+}
+  <div class="container mt-4" >
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="" style="color: #2fb388;">QUẢN LÝ XUẤT NHẬP KHO</h2>
             <div class="Double-end ">
@@ -71,24 +79,76 @@
                             <div class="row">
                                 <div class="form-group col">
                                     <label for="VatTuType">Loại vật tư</label>
-                                    <select class="form-control" id="VatTuType" placeholder="Nhập loại VatTu">
-                                        <option value=""></option>
-                                    </select>
+                                   <select class="form-control" id="VatTuType" >
+                                         @if (loaivattu != null)
+                                         {
+      
+                                             @foreach(var item in loaivattu)
+                                             {
+                                                 @if(VatTu != null && VatTu.IDTL == item.IDTL)
+                                                 {
+                
+                                                  <option value="@item.IDTL" selected >@item.LoaiVatTu</option>
+                                                 }
+                                                 else
+                                                 {
+                 
+                                                     <option value="@item.IDTL" >@item.LoaiVatTu</option>
+                                                 }
+                                             }
+                                         }
+    
+                                     </select>
                                 </div>
                                 <div class="form-group col">
                                     <label for="origin">Nguồn cung cấp</label>
-                                    <select class="form-control" id="origin" placeholder="Nhập nguồn gốc VatTu">
-                                        <option value=""></option>
-                                    </select>
+                                   <select class="form-control" id="origin">
+                                            <option ></option>
+                                             @if (nguoncap != null)
+                                            {
+                                                @foreach( var item in nguoncap)
+                                                {
+                        
+                                                    @if(VatTu != null && VatTu.IDNGC == item.IDNGC)
+                                                    {
+                                                          <option></option>
+                                                     <option value="@item.IDNGC" selected >@item.TenNguonCungCap</option>
+                                                    }
+                                                    else
+                                                    {
+                            
+                                                        <option value="@item.IDNGC" >@item.TenNguonCungCap</option>
+                                                    }
+                      
+                
+                                                }}
+                                        </select>
                                 </div>
                             </div>
                             
                             <div class="row">
                                 <div class="form-group col">
                                     <label for="supplier">Nhà cung cấp</label>
-                                    <select class="form-control" id="supplier" placeholder="Nhập nhà cung cấp VatTu">
-                                        <option value=""></option>
-                                    </select>
+                                                                      <select class="form-control" id="supplier" placeholder="Nhập nhà cung cấp VatTu">
+                                         <option ></option>
+                                           @if (nhacap != null)
+                                         {
+                                             @foreach( var item in nhacap)
+                                             {
+                                                  @if(VatTu != null && VatTu.IDNHC == item.IDNHC)
+                                                 {
+                   
+                                                         <option value="@item.IDNHC" selected>@item.TenNhaCungCap </option>
+                                                 }
+                                                 else
+                                                 {
+                 
+                                                     <option value="@item.IDNHC" >@item.TenNhaCungCap</option>
+                                                 }
+          
+     
+                                             }}
+                                     </select>
                                 </div>
                                 <div class="form-group col">
                                     <label for="documentType">Loại chứng từ</label>

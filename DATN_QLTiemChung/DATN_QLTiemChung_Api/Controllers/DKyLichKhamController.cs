@@ -63,5 +63,63 @@ namespace DATN_QLTiemChung_Api.Controllers
             var datlichkham = await _context.DatLichKham.ToListAsync();
             return Ok(datlichkham);
         }
+
+        private string GetNextLichKhamID()
+        {
+            var lastLichKham = _context.DatLichKham
+                .OrderByDescending(lk => lk.IDLK)
+                .FirstOrDefault();
+
+            if (lastLichKham == null)
+            {
+                return "LK001";
+            }
+            else
+            {
+                var lastIDNumber = int.Parse(lastLichKham.IDLK.Substring(2)); 
+                var nextIDNumber = lastIDNumber + 1;
+                return $"LK{nextIDNumber:D3}"; 
+            }
+        }
+
+        [HttpPost("ThemLichKham")]
+        public async Task<IActionResult> ThemLichKham([FromBody] DatLichKham lichKham)
+        {
+            if (lichKham == null)
+            {
+                return BadRequest("Dữ liệu không hợp lệ");
+            }
+
+            lichKham.IDLK = GetNextLichKhamID();
+
+            var existingLichKham = _context.DatLichKham
+                .FirstOrDefault(lk => lk.ThoiGian == lichKham.ThoiGian);
+
+            if (existingLichKham != null)
+            {
+                return Conflict("Thời gian này đã có lịch khám.");
+            }
+
+            _context.DatLichKham.Add(lichKham);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(ThemLichKham), new { id = lichKham.IDLK }, lichKham);
+        }
+
+
+
+        [HttpGet("GetThongtinCaNhan/{id}")]
+        public async Task<ActionResult<IEnumerable<KhachHang>>> GetThongtinCaNhan(string id)
+        {
+
+            var khachHang = await _context.KhachHang.FirstOrDefaultAsync(kh=>kh.IDKH ==id);
+
+            if (khachHang == null )
+            {
+                return NotFound("Không tìm thấy thông tin.");
+            }
+
+            return Ok(khachHang);
+        }
     }
 }

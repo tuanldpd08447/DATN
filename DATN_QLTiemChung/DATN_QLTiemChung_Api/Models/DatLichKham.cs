@@ -10,6 +10,6 @@ namespace DATN_QLTiemChung_Api.Models
         public DateTime ThoiGian { get; set; }
 
 
-        public KhachHang KhachHang { get; set; }
+        public KhachHang? KhachHang { get; set; }
     }
 }

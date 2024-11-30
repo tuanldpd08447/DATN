@@ -19,7 +19,7 @@ namespace DATN_CDCWebClient.Controllers
         }
         public IActionResult Login()
         {
-            return View("~/Views/Home/Login.cshtml"); 
+            return View("~/Views/Home/Login.cshtml");
         }
         public void GetSession()
         {
@@ -31,11 +31,11 @@ namespace DATN_CDCWebClient.Controllers
             TempData["Username"] = Username;
             TempData["Role"] = userRole;
         }
-        public async Task<IActionResult> LoginSumit(string sdt ,string password)
+        public async Task<IActionResult> LoginSumit(string sdt, string password)
         {
-            LoginKhachHang login = new LoginKhachHang 
+            LoginKhachHang login = new LoginKhachHang
             {
-                Sdt = sdt ,
+                Sdt = sdt,
                 Password = password
             };
             var client = _httpClientFactory.CreateClient();
@@ -52,9 +52,9 @@ namespace DATN_CDCWebClient.Controllers
 
                 return RedirectToAction("Home", "Home");
             }
- 
-                ViewBag.ErrorMessage = "Thông tin đăng nhập không chính xác.";
-                return View("~/Views/Home/Login.cshtml");
+
+            ViewBag.ErrorMessage = "Thông tin đăng nhập không chính xác.";
+            return View("~/Views/Home/Login.cshtml");
 
         }
         public async Task<IActionResult> RegisterSumit(
@@ -149,7 +149,7 @@ namespace DATN_CDCWebClient.Controllers
 
 
 
-        public async Task<IActionResult> Register()
+        public IActionResult Register()
         {
             return View("~/Views/Home/Register.cshtml"); ;
         }

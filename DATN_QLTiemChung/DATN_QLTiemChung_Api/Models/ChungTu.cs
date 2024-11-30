@@ -24,6 +24,8 @@ namespace DATN_QLTiemChung_Api.Models
         public double ThanhTien { get; set; } // Thành tiền
         public bool TrangThai { get; set; } // Trạng thái
         public string GhiChu { get; set; } // Ghi chú
+        public string HinhAnh { get; set; } // Ghi chú
+        public int SoLuong { get; set; }
     }
 
 }
