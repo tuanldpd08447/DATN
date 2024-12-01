@@ -1,221 +1,314 @@
-﻿ <div class="container mt-4" >
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="" style="color: #2fb388;">QUẢN LÝ KHÁCH HÀNG</h2>
-            <div class="Double-end ">
-                <button class="btn fw-bold custom-btn"><i class="fa-solid fa-plus"></i> Thêm</button>
-                <button class="btn fw-bold custom-btn"><i class="fa-solid fa-floppy-disk"></i> Lưu</button>
-                <button class="btn fw-bold custom-btn"><i class="fa-solid fa-repeat"></i> Hủy </button>
-                <button class="btn fw-bold custom-btn"><i class="fa-solid fa-print"></i> In</button>
-                <button class="btn fw-bold custom-btn"><i class="fa-solid fa-right-from-bracket"></i> Thoát</button>
-              </div>
-        </div>
-      
-      <!-- Thông tin hóa đơn -->
-    <div class="row m-0 mb-3 border rounded-4 py-2  ">
-        
-        <div class="col">
-            <div class=" ms-1 p-3 py-1 border rounded-4  h-100">
-                <form class="row ">
-                    <div class="col-3">
-                        <div class="form-group">
-                            <label class="fw-bold" for="medicalCodeFind">Số y tế</label>
-                            <input type="text" class="form-control" id="medicalCodeFind" >
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label class="fw-bold" for="UserNameFind">Tên bệnh nhân</label>
-                            <input type="text" class="form-control" id="UserNameFind" >
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label class="fw-bold" for="CMT/CCCD/MaDinhDanhFind">CMT/CCCD/Mã định danh</label>
-                            <input type="text" class="form-control col" id="CMT/CCCD/MaDinhDanhFind" >
-                        </div>
-                    </div>
-                    <div class="col-2">
-                        <button class="btn btn-dark mt-4" type="button"><i class="fa-solid fa-magnifying-glass"></i>  Tìm</button>
-                    </div>
-                </form>
-            </div>
-            
-            
-        </div>
+﻿@using Newtonsoft.Json
+@{
+	var khachHangJson = ViewBag.KhachHangs as List<KhachHangDTo>;
+	var nhanVien = ViewBag.NhanVien as NhanVienDTO;
+	List<string> _danTocList = new List<string>
+	{
+		"Kinh", "Tày", "Mường", "Mông", "H'mông", "Khmer", "Hoa", "Nùng", "Thái",
+		"Dzao", "Cờ Lao", "Gian", "Ê Đê", "Ba Na", "Sán Dìu", "Sán Chay", "Cơ Tu",
+		"Sơ Đăng", "Tà Ôi", "Pà Thẻn", "Hà Nhì", "Chứt", "Lào", "Lự", "Tày",
+		"Chăm", "Dẻo", "Bố Y", "Rơ Măm", "Ra Glai", "Sak", "Xinh Mun", "Xơ Đăng",
+		"Bình Định", "Tày", "Tày", "Tày", "Chơ", "Chống", "Gieo", "Mai", "Gia Rai",
+		"Kon Tum", "Đồng Tháp", "Gyar", "Lý Tự", "Tư", "Chứt", "Vân Kiều"
+	};
+	var dc = ViewBag.DiaChi as DiaChi;
+}
+<style>
+	.error-message {
+		color: red;
+		font-size: 12px;
+		display: none;
+	}
 
-        <div class="invoice-section col-md-12 mt-2  ">
-            <div class=" p-3 border rounded-4  ">
-                <div class="row ">
-                    <form>
-                        <div class="row">
-                            <div class="form-group col">
-                                <label class="fw-semibold" for="maYTe">Mã y tế</label>
-                                <input type="text" class="form-control" id="maYTe" value="CDCD0912312345">
-                            </div>
-                            <div class="form-group col">
-                                <label class="fw-semibold" for="hoTen">Họ tên</label>
-                                <input type="text" class="form-control" id="hoTen" value="Nguyễn Quang Trường">
-                            </div>
-                            <div class="form-group col">
-                                <label class="fw-semibold" for="ngaySinh">Ngày sinh</label>
-                                <input type="date" class="form-control" id="ngaySinh" value="2006-02-08">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col">
-                                <label class="fw-semibold" for="danToc">Dân tộc</label>
-                                <input type="text" class="form-control" id="danToc" name="danToc" value="Kinh" placeholder="Nhập dân tộc" required>
-                            </div>
-                            <div class="form-group col">
-                                <label class="fw-semibold" for="gioiTinh">Giới tính</label>
-                                <input type="text" class="form-control" id="gioiTinh" value="Nam">
-                            </div>
-                            <div class="form-group col">
-                                <label class="fw-semibold" for="cmt">CMT/CCCD/Mã định danh</label>
-                                <input type="text" class="form-control" id="cmt" value="001082946357">
-                            </div>
-                        </div>
-                        <div class="row ">
-                         
-                            <div class="form-group col">
-                                <label class="fw-semibold" for="sdt">Sđt</label>
-                                <input type="text" class="form-control" id="sdt" value="08/02/2006">
-                            </div>
-                            <div class="form-group col">
-                                <label class="fw-semibold" for="email">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" value="example@gmail.com" placeholder="Nhập email"  title="Nhập đúng định dạng email (example@gmail.com)" required>
-                            </div>
-                        </div>
-                        <h5 class="mt-2">Hộ khẩu</h5>
-                        <div class="row">
-                            <div class="form-group col">
-                                <label class="fw-semibold" for="hoKhauTinh">Tỉnh/TP</label>
-                                <select class="form-control" id="hoKhauTinh">
-                                    <option>Đà Nẵng</option>
-                                    <option>Hà Nội</option>
-                                    <option>Hồ Chí Minh</option>
-                                </select>
-                            </div>
-                            <div class="form-group col">
-                                <label class="fw-semibold" for="hoKhauQuan">Quận/Huyện</label>
-                                <select class="form-control" id="hoKhauQuan">
-                                    <option>Thanh Khê</option>
-                                    <option>Hải Châu</option>
-                                    <option>Ngũ Hành Sơn</option>
-                                </select>
-                            </div>
-                            <div class="form-group col">
-                                <label class="fw-semibold" for="hoKhauXa">Xã/Phường</label>
-                                <select class="form-control" id="hoKhauXa">
-                                    <option>Thạc Gián</option>
-                                    <option>Hòa Minh</option>
-                                    <option>Mỹ An</option>
-                                </select>
-                            </div>
-                            <div class="form-group col">
-                                <label class="fw-semibold" for="thonAp">Thôn/Ấp</label>
-                                <select class="form-control" id="thonAp">
-                                    <option>Thôn 1</option>
-                                    <option>Thôn 2</option>
-                                    <option>Thôn 3</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col">
-                                <label class="fw-semibold" for="diaChiChiTiet">Địa chỉ chi tiết</label>
-                                <input type="text" class="form-control" id="diaChiChiTiet" value="37 Đ. Phạm Văn Nghị">
-                            </div>
-                        </div>
-                       
-                        <h5 class="mt-2">Nơi tạm trú</h5>
-                        <div class="row">
-                            <div class="form-group col">
-                                <label class="fw-semibold" for="tamTruTinh">Tỉnh/TP</label>
-                                <select class="form-control" id="tamTruTinh">
-                                    <option>Đà Nẵng</option>
-                                    <option>Hà Nội</option>
-                                    <option>Hồ Chí Minh</option>
-                                </select>
-                            </div>
-                            <div class="form-group col">
-                                <label class="fw-semibold" for="tamTruQuan">Quận/Huyện</label>
-                                <select class="form-control" id="tamTruQuan">
-                                    <option>Thanh Khê</option>
-                                    <option>Hải Châu</option>
-                                    <option>Ngũ Hành Sơn</option>
-                                </select>
-                            </div>
-                            <div class="form-group col">
-                                <label class="fw-semibold" for="tamTruXa">Xã/Phường</label>
-                                <select class="form-control" id="tamTruXa">
-                                    <option>Thạc Gián</option>
-                                    <option>Hòa Minh</option>
-                                    <option>Mỹ An</option>
-                                </select>
-                            </div>
-                            <div class="form-group col">
-                                <label class="fw-semibold" for="thonAp">Thôn/Ấp</label>
-                                <select class="form-control" id="thonAp">
-                                    <option>Thôn 1</option>
-                                    <option>Thôn 2</option>
-                                    <option>Thôn 3</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col">
-                                <label class="fw-semibold" for="diaChiChiTietTamTru">Địa chỉ chi tiết</label>
-                                <input type="text" class="form-control" id="diaChiChiTietTamTru">
-                            </div>
-                        </div>
-                        
-                    </form>
-                </div>  
-                 
-            </div>
-            
-        </div>
-        <div class="p-3 pt-1">
-            <div class="border rounded-4 mt-1 ">
-                <div class="table-responsive p-2 ">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>Số y tế</th>
-                                <th>Tên bệnh nhân</th>
-                                <th>Ngày sinh</th>
-                                <th>Dân tộc</th>
-                                <th>Giới tính</th>
-                                <th>CMT/CCCD/Mã định danh</th>
-                                <th>Hộ Khẩu</th>
-                                <th>Nơi tạm trú</th>
-                                
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><input type="checkbox" class="form-check-input"></td>
-                                <td>CDCD0912312345</td>
-                                <td>Nguyễn Quang Trường</td>
-                                <td>08/02/2006</td>
-                                <td>Kinh</td>
-                                <td>Nam</td>
-                                <td>001082946357</td>
-                                <td>Hộ Khẩu</td>
-                                <td>Nơi tạm trú</td>
-                                
-                            </tr>
-                            <!-- Add more rows as needed -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-       
-    </div>
-    
+	.input-error {
+		border-color: red;
+	}
+</style>
 
-  
+
+<div class="container mt-4">
+	<div class="d-flex justify-content-between align-items-center mb-4">
+		<h2 class="" style="color: #2fb388;">QUẢN LÝ KHÁCH HÀNG</h2>
+		<div class="Double-end ">
+			<button class="btn fw-bold custom-btn" id="addButton">
+				<i class="fa-solid fa-plus"></i> Thêm
+			</button>
+			<button class="btn fw-bold custom-btn" id="activateButton">
+				<i class="fa-solid fa-floppy-disk"></i> Lưu
+			</button>
+			<button class="btn fw-bold custom-btn" id="CancelButton">
+				<i class="fa-solid fa-repeat"></i> Hủy
+			</button>
+			<button class="btn fw-bold custom-btn"><i class="fa-solid fa-print"></i> In</button>
+			<button class="btn fw-bold custom-btn"><i class="fa-solid fa-right-from-bracket"></i> Thoát</button>
+		</div>
+	</div>
+
+	<!-- Thông tin hóa đơn -->
+	<div class="row m-0 mb-3 border rounded-4 py-2  ">
+
+		<div class="col">
+			<div class=" ms-1 p-3 py-1 border rounded-4  h-100">
+				<form class="row " asp-action="AddKhachHang" asp-controller="QLKhachHang">
+					<div class="col-3">
+						<div class="form-group">
+							<label class="fw-bold" for="medicalCodeFind">Số y tế</label>
+							<input type="text" class="form-control" id="medicalCodeFind">
+						</div>
+					</div>
+					<div class="col">
+						<div class="form-group">
+							<label class="fw-bold" for="UserNameFind">Tên bệnh nhân</label>
+							<input type="text" class="form-control" id="UserNameFind">
+						</div>
+					</div>
+					<div class="col">
+						<div class="form-group">
+							<label class="fw-bold" for="CMT/CCCD/MaDinhDanhFind">CMT/CCCD/Mã định danh</label>
+							<input type="text" class="form-control col" id="CMT/CCCD/MaDinhDanhFind">
+						</div>
+					</div>
+					<div class="col-2">
+						<button class="btn btn-dark mt-4" type="button"><i class="fa-solid fa-magnifying-glass"></i>  Tìm</button>
+					</div>
+				</form>
+			</div>
+
+
+		</div>
+
+		<div class="invoice-section col-md-12 mt-2  ">
+			<div class=" p-3 border rounded-4  ">
+				<div class="row ">
+					<form id="customerForm" asp-action="AddKhachHang" asp-controller="QLKhachHang">
+						<div class="row">
+							<div class="form-group col">
+								<label class="fw-semibold" for="maYTe">Mã y tế</label>
+								<input type="text" class="form-control" id="maYTe" name="maYTe" required disabled>
+							</div>
+							<div class="form-group col">
+								<label class="fw-semibold" for="hoTen">Họ tên</label>
+								<input type="text" class="form-control" id="hoTen" name="hoTen" required disabled>
+							</div>
+							<div class="form-group col">
+								<label class="fw-semibold" for="ngaySinh">Ngày sinh</label>
+								<input type="date" class="form-control" id="ngaySinh" name="ngaySinh" required disabled>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col">
+								<label class="fw-semibold" for="danToc">Dân tộc</label>
+								<select class="form-control" id="danToc" name="danToc" required disabled>
+									<option value="">Chọn dân tộc</option>
+									@foreach (var danToc in _danTocList)
+									{
+										<option value="@danToc">@danToc</option>
+									}
+								</select>
+							</div>
+							<div class="form-group col">
+								<label class="fw-semibold" for="gioiTinh">Giới tính</label>
+								<select class="form-control" id="gioiTinh" name="gioiTinh" required disabled>
+									<option value="Nam">Nam</option>
+									<option value="Nữ">Nữ</option>
+								</select>
+							</div>
+							<div class="form-group col">
+								<label class="fw-semibold" for="cmt">CMT/CCCD/Mã định danh</label>
+								<input type="text" class="form-control" id="cmt" name="cmt" placeholder="Nhập số CMT/CCCD" required disabled>
+							</div>
+						</div>
+						<div class="row ">
+
+							<div class="form-group col">
+								<label class="fw-semibold" for="sdt">Sđt</label>
+								<input type="text" class="form-control" id="sdt" name="sdt" oninput="validatePhoneNumber()" placeholder="Nhập số điện thoại" required disabled>
+								<span id="sdtError" class="error-message"></span>
+								<script>
+									function validatePhoneNumber() {
+										var phone = document.getElementById('sdt').value;
+										var phonePattern = /^[0-9]{10}$/; // Số điện thoại phải có 10 chữ số
+										var errorElement = document.getElementById('sdtError');
+
+										if (!phonePattern.test(phone)) {
+											document.getElementById('sdt').classList.add('input-error');
+											errorElement.textContent = "Số điện thoại phải có 10 chữ số.";
+											errorElement.style.display = 'block';
+										} else {
+											document.getElementById('sdt').classList.remove('input-error');
+											errorElement.style.display = 'none';
+										}
+									}
+
+								</script>
+							</div>
+							<div class="form-group col">
+								<label class="fw-semibold" for="email">Email</label>
+								<input type="email" class="form-control" id="email" name="email" placeholder="Nhập email" title="Nhập đúng định dạng email (example@gmail.com)" required disabled>
+								<span id="emailError" class="error-message"></span>
+
+							</div>
+						</div>
+						<h5 class="mt-2">Hộ khẩu</h5>
+						<div class="row">
+							<div class="form-group col">
+								<label class="fw-semibold" for="hoKhauTinh">Tỉnh/TP</label>
+								<select class="form-control" id="hoKhauTinh" required disabled>
+									@if (dc != null)
+									{
+										<option value="@dc.IDTTP" selected>@dc.NameTTP</option>
+									}
+									else
+									{
+										<option value="" disabled selected>Chọn tỉnh/thành phố</option>
+									}
+
+								</select>
+							</div>
+							<div class="form-group col">
+								<label class="fw-semibold" for="hoKhauQuan">Quận/Huyện</label>
+								<select class="form-control border-start-0" id="hoKhauQuan" required disabled>
+
+									@if (dc != null)
+									{
+										<option value="@dc.IDQH" selected>@dc.NameQH</option>
+									}
+									else
+									{
+										<option value="" disabled selected>Chọn quận/huyện</option>
+									}
+
+									<!-- Add other districts here -->
+								</select>
+							</div>
+							<div class="form-group col">
+								<label class="fw-semibold" for="hoKhauXa">Xã/Phường</label>
+								<!-- Chọn phường/xã -->
+								<select class="form-control border-start-0" id="hoKhauXa" name="hoKhauXa" required disabled>
+
+
+									@if (dc != null)
+									{
+										<option value="@dc.IDXP" selected>@dc.NameXP</option>
+									}
+									else
+									{
+										<option value="" disabled selected>Chọn phường/xã</option>
+									}
+
+									<!-- Add other wards here -->
+								</select>
+							</div>
+
+						</div>
+						<div class="row">
+							<div class="form-group col">
+								<label class="fw-semibold" for="diaChiChiTiet">Địa chỉ chi tiết</label>
+								<input type="text" class="form-control" id="diaChiChiTiet" name="diaChiChiTiet" placeholder="37 Đ. Phạm Văn Nghị" value="@if(nhanVien!=null){
+                                @nhanVien.DiaChi
+								}" required disabled>
+							</div>
+						</div>
+
+
+						<button id="targetButton" type="submit" style="display:none;">Nút bị kích hoạt</button>
+
+
+					</form>
+				</div>
+
+			</div>
+
+		</div>
+		<div class="p-3 pt-1">
+			<div class="border rounded-4 mt-1 ">
+				<div class="table-responsive p-2 ">
+					<table class="table table-bordered" id="khachHangTable">
+						<thead>
+							<tr>
+								<th></th>
+								<th>ID</th>
+								<th>Tên Khách Hàng</th>
+								<th>Ngày Sinh</th>
+								<th>Giới Tính</th>
+								<th>Địa Chỉ</th>
+								<th>Số Điện Thoại</th>
+								<th>Email</th>
+								<th>CCCD/MD</th>
+								<th>Dân Tộc</th>
+								<th>Địa Chỉ Đầy Đủ</th>
+							</tr>
+						</thead>
+						<tbody>
+							@if (khachHangJson != null)
+							{
+								@foreach (var item in khachHangJson)
+								{
+									<tr>
+										<td></td>
+										<td>@item.IDKH</td>
+										<td>@item.TenKhachHang</td>
+										<td>@item.NgaySinh</td>
+										<td>@item.GioiTinh</td>
+										<td>Địa Chỉ</td>
+										<td>@item.SoDienThoai</td>
+										<td>@item.Email</td>
+										<td>@item.CCCD_MDD</td>
+										<td>@item.DanToc</td>
+										<td>@item.FullAddress</td>
+									</tr>
+								}
+
+							}
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<script>
+
+				// Xử lý sự kiện khi nhấn nút "Thêm"
+
+
+				// Thêm mới
+				document.getElementById("addButton").addEventListener("click", function () {
+					const form = document.getElementById("customerForm");
+					form.querySelectorAll("input, select").forEach(el => {
+						el.disabled = false;
+					});
+				});
+
+				// Hủy
+				document.getElementById("CancelButton").addEventListener("click", function () {
+					const form = document.getElementById("customerForm");
+					form.reset(); // Reset tất cả các giá trị
+					form.querySelectorAll("input, select").forEach(el => {
+						el.disabled = true;
+					});
+				});
+
+
+				// Lấy phần tử button
+				const activateButton = document.getElementById('activateButton');
+				const targetButton = document.getElementById('targetButton');
+
+				// Thêm sự kiện click vào nút kích hoạt
+				activateButton.addEventListener('click', function () {
+					// Khi nút đầu tiên được nhấn, kích hoạt nút thứ hai
+					targetButton.click();
+				});
+
+				// Thêm sự kiện click vào nút bị kích hoạt
+				targetButton.addEventListener('click', function () {
+
+				});
+
+			</script>
+
+		</div>
+
+
+	</div>
+
+
+
 </div>

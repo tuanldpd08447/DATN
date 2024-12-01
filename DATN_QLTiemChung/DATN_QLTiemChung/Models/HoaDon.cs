@@ -24,7 +24,7 @@ namespace DATN_QLTiemChung.Models
         public bool TrangThai { get; set; }
         public string? GhiChu { get; set; }
 
-        public ICollection<HoaDonChiTiet> HoaDonChiTiets { get; set; } = new List<HoaDonChiTiet>();
+        public ICollection<HoaDonChiTiet>? HoaDonChiTiets { get; set; } = new List<HoaDonChiTiet>();
     }
 
 

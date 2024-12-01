@@ -3,6 +3,20 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DATN_CDCWebClient.Models
 {
+    public class KhachHangUpdateDTO
+    {
+        public string IDKH { get; set; }
+        public string IDXP { get; set; }
+        public string TenKhachHang { get; set; }
+        public DateTime NgaySinh { get; set; }
+        public string GioiTinh { get; set; }
+        public string DiaChi { get; set; }
+        public string SoDienThoai { get; set; }
+        public string Email { get; set; }
+        public string CCCD_MDD { get; set; }
+
+        public string DanToc { get; set; }
+    }
     public class HoaDonDTO
     {
         public string IDHD { get; set; }
@@ -44,7 +58,27 @@ namespace DATN_CDCWebClient.Models
         public string DanToc { get; set; }
         public string FullAddress { get; set; }
     }
-        public class KhachHangPreOder
+    public class KhachHangDTo2
+    {
+        public string IDKH { get; set; }
+
+        public string TenKhachHang { get; set; }
+        public DateTime NgaySinh { get; set; }
+        public string GioiTinh { get; set; }
+        public string DiaChi { get; set; }
+        public string SoDienThoai { get; set; }
+        public string Email { get; set; }
+        public string CCCD_MDD { get; set; }
+        public string DanToc { get; set; }
+        public string FullAddress { get; set; }
+        public string IDXP { get; set; }
+        public string NameXP { get; set; }
+        public string IDQH { get; set; }
+        public string NameQH { get; set; }
+        public string IDTTP { get; set; }
+        public string NameTTP { get; set; }
+    }
+    public class KhachHangPreOder
         {
             public string IDKH { get; set; }
 

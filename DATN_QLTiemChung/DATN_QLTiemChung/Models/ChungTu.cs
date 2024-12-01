@@ -11,12 +11,12 @@ namespace DATN_QLTiemChung.Models
         [Required]
         public string IDNV { get; set; } // ID nhân viên
         [ForeignKey(nameof(IDNV))]
-        public NhanVien NhanVien { get; set; } // Quan hệ với bảng NhanVien
+        public NhanVien? NhanVien { get; set; } // Quan hệ với bảng NhanVien
 
         [Required]
         public string IDOD { get; set; } // ID đơn hàng
         [ForeignKey(nameof(IDOD))]
-        public Order Order { get; set; } // Quan hệ với bảng Order (Đơn hàng)
+        public Order? Order { get; set; } // Quan hệ với bảng Order (Đơn hàng)
 
         public bool LoaiChungTu { get; set; } // Loại chứng từ
         public DateTime ThoiGian { get; set; } // Thời gian

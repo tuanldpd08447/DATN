@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\Img\\logo.png"
     },
     {
+      "Id": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\wwwroot\\Img\\pdf-2127829_640.png",
+      "PackagePath": "staticwebassets\\Img\\pdf-2127829_640.png"
+    },
+    {
       "Id": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
@@ -255,6 +259,18 @@
     {
       "Id": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\wwwroot\\pdf\\DAY-LA-FILE-MAU-PDF.pdf",
+      "PackagePath": "staticwebassets\\pdf\\DAY-LA-FILE-MAU-PDF.pdf"
+    },
+    {
+      "Id": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\wwwroot\\pdf\\Quy định Giáo trình(1).pdf",
+      "PackagePath": "staticwebassets\\pdf\\Quy định Giáo trình(1).pdf"
+    },
+    {
+      "Id": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\wwwroot\\pdf\\Quy định Giáo trình.pdf",
+      "PackagePath": "staticwebassets\\pdf\\Quy định Giáo trình.pdf"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.DATN_QLTiemChung.Microsoft.AspNetCore.StaticWebAssets.props",

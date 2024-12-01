@@ -16,7 +16,7 @@ namespace DATN_QLTiemChung_Api.Models
         [Required]
         public string IDVT { get; set; } 
         [ForeignKey(nameof(IDVT))]
-        public VatTuYTe VatTuYTe { get; set; }
+        public VatTuYTe? VatTuYTe { get; set; }
 
         public int SoLuong { get; set; }
         public Double DonGia { get; set; }

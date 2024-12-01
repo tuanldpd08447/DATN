@@ -1,65 +1,231 @@
-﻿<div class="container mt-5" style="min-height: 900px;">
+﻿@using Newtonsoft.Json
+@{
+    var kh = ViewBag.KhachHangs as KhachHangDTo2;
+    List<string> _danTocList = new List<string>
+    {
+        "Kinh", "Tày", "Mường", "Mông", "H'mông", "Khmer", "Hoa", "Nùng", "Thái",
+        "Dzao", "Cờ Lao", "Gian", "Ê Đê", "Ba Na", "Sán Dìu", "Sán Chay", "Cơ Tu",
+        "Sơ Đăng", "Tà Ôi", "Pà Thẻn", "Hà Nhì", "Chứt", "Lào", "Lự", "Tày",
+        "Chăm", "Dẻo", "Bố Y", "Rơ Măm", "Ra Glai", "Sak", "Xinh Mun", "Xơ Đăng",
+        "Bình Định", "Tày", "Tày", "Tày", "Chơ", "Chống", "Gieo", "Mai", "Gia Rai",
+        "Kon Tum", "Đồng Tháp", "Gyar", "Lý Tự", "Tư", "Chứt", "Vân Kiều"
+    };
+}
+
+<div class="container mt-5" style="min-height: 900px;">
     <div class="">
         <h2 class="card-header bg-body-secondary py-4 mb-5 row">
-            <div class="col-1 border-2 border-end">
-            </div>
             <div class="col fw-bold" style="color: #2fb388;">
                 Thông Tin Cá Nhân
             </div>
+           
         </h2>
 
         <div class="card-body">
-            <p>Thông Tin Bệnh Nhân</p>
-            <form>
+                
+            <form asp-action="SuaThongTin" asp-controller="TTCaNhan" method="post">
                 <div class="row">
+                    <p class="col-md-3">Thông Tin Bệnh Nhân</p>
+                    <div class="col text-end mb-4">
+                        <button type="button" class="btn btn-primary" id="editButton" style="background-color: #2fb388; border-color: #2fb388;" onclick="toggleEdit()">
+                            Sửa Thông Tin
+                        </button>
+                        <button type="submit" class="btn btn-primary" id="sumitbuton" style="display: none; background-color: #2fb388; border-color: #2fb388;">
+                            Lưu Thông Tin
+                        </button>
+                        <button type="button" class="btn btn-danger" id="cancelButton" style="display: none;" onclick="cancelEdit()">
+                            Hủy
+                        </button>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <input type="hidden" id="hiddenInput" name="IDKH" value="@kh?.IDKH">
                     <div class="col-md-6 mb-3">
                         <label for="hoTen" class="form-label">Họ và Tên</label>
-                        <input type="text" class="form-control" id="hoTen">
+                        <input type="text" class="form-control" id="hoTen" name="hoTen" value="@kh?.TenKhachHang" readonly disabled required />
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="ngaySinh" class="form-label">Ngày Tháng Năm Sinh</label>
-                        <input type="date" class="form-control" id="ngaySinh">
+                        <input type="datetime" class="form-control" id="ngaySinh" name="ngaySinh" value="@kh?.NgaySinh.ToString("yyyy-MM-dd")" readonly disabled required />
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="gioiTinh" class="form-label">Giới Tính</label>
+                        <select class="form-control" id="gioiTinh" name="gioiTinh" readonly disabled required>
+                            <option value="" disabled>Chọn giới tính</option>
+                            @if (kh != null)
+                            {
+                                if (kh.GioiTinh == "Nam")
+                                {
+                                    <option value="Nam" selected>Nam</option>
+                                    <option value="Nữ">Nữ</option>
+                                    <option value="Khác">Khác</option>
+                                }
+                                else if (kh.GioiTinh == "Nữ")
+                                {
+                                    <option value="Nam">Nam</option>
+                                    <option value="Nữ" selected>Nữ</option>
+                                    <option value="Khác">Khác</option>
+                                }
+                                else
+                                {
+                                    <option value="Nam">Nam</option>
+                                    <option value="Nữ">Nữ</option>
+                                    <option value="Khác" selected>Khác</option>
+                                }
+                            }
+                            else
+                            {
+                                <option value="Nam">Nam</option>
+                                <option value="Nữ">Nữ</option>
+                                <option value="Khác">Khác</option>
+                            }
+
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="Ethnic" class="form-label">Dân Tộc</label>
+                        <select class="form-control" id="Ethnic" placeholder="Dân tộc" name="danToc" readonly disabled required>
+                            <option value="" disabled selected>Chọn dân tộc</option>
+                            @foreach (var danToc in _danTocList)
+                            {
+                                if (kh != null && kh.DanToc == danToc)
+                                {
+                                    <option value="@danToc" selected>@danToc</option>
+                                }
+                                <option value="@danToc">@danToc</option>
+                            }
+                        </select>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="cmnd" class="form-label">Số CMND hoặc CCCD</label>
-                        <input type="text" class="form-control" id="cmnd">
+                        <input type="text" class="form-control" id="cmnd" name="cmnd" value="@kh?.CCCD_MDD" readonly disabled required />
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="soDienThoai" class="form-label">Số Điện Thoại</label>
-                        <input type="text" class="form-control" id="soDienThoai">
+                        <input type="text" class="form-control" id="soDienThoai" name="soDienThoai" value="@kh?.SoDienThoai" readonly disabled required />
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-4">
-                            <label for="city" class="form-label">Tỉnh thành</label>
-                            <select name="" class="form-control" id="city">
-                                <option value=""></option>
+                            <label for="hoKhauTinh" class="form-label">Tỉnh thành</label>
+                            <select class="form-control border-start-0" id="hoKhauTinh" required disabled>
+                                @if (kh != null)
+                                {
+                                    <option value="@kh.IDTTP" selected>@kh.NameTTP</option>
+                                }
+                                else
+                                {
+                                    <option value="" disabled selected>Chọn tỉnh/thành phố</option>
+                                }
+
+                                <!-- Add other provinces here -->
+                            </select>
+
+                        </div>
+                        <div class="col-md-4">
+                            <label for="hoKhauQuan" class="form-label">Quận huyện</label>
+                            <!-- Chọn quận/huyện -->
+                            <select class="form-control border-start-0" id="hoKhauQuan" required disabled>
+
+                                @if (kh != null)
+                                {
+                                    <option value="@kh.IDQH" selected>@kh.NameQH</option>
+                                }
+                                else
+                                {
+                                    <option value="" disabled selected>Chọn quận/huyện</option>
+                                }
+
+                                <!-- Add other districts here -->
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <label for="district" class="form-label">Quận huyện</label>
-                            <select name="" class="form-control" id="district">
-                                <option value=""></option>
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="ward" class="form-label">Phường xã</label>
-                            <select name="" class="form-control" id="ward">
-                                <option value=""></option>
+                            <label for="hoKhauXa" class="form-label">Phường xã</label>
+                            <select class="form-control border-start-0" id="hoKhauXa"  name="hoKhauXa" required disabled>
+
+
+                                @if (kh != null)
+                                {
+                                    <option value="@kh.IDXP" selected>@kh.NameXP</option>
+                                }
+                                else
+                                {
+                                    <option value="" disabled selected>Chọn phường/xã</option>
+                                }
+
+                                <!-- Add other wards here -->
                             </select>
                         </div>
                     </div>
 
                     <div class="col-md-6 mb-3">
                         <label for="address" class="form-label">Số nhà, tên đường</label>
-                        <input type="text" class="form-control" id="address" placeholder="Nhập số nhà, tên đường">
+                        <input type="text" class="form-control" id="diaChi" name="diaChi" value="@kh?.DiaChi" readonly disabled required />
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email">
+                        <input type="text" class="form-control" id="email"  name="email" value="@kh?.Email" readonly disabled required />
                     </div>
                 </div>
+                <script>
+                    // Lưu trạng thái ban đầu của các input
+                    let initialValues = {};
+
+                    function toggleEdit() {
+                        const editButton = document.getElementById("editButton");
+                        const sumitButton = document.getElementById("sumitbuton");
+                        const cancelButton = document.getElementById("cancelButton");
+                        const inputs = document.querySelectorAll("input, select");
+
+                        if (editButton.style.display !== "none") {
+                            // Lưu giá trị ban đầu
+                            inputs.forEach(input => {
+                                initialValues[input.id] = input.value;
+                                input.removeAttribute("readonly");
+                                input.removeAttribute("disabled");
+                            });
+
+                            editButton.style.display = "none";
+                            sumitButton.style.display = "inline-block";
+                            cancelButton.style.display = "inline-block";
+                        } else {
+                            // Lưu thông tin (nếu có logic lưu)
+                            inputs.forEach(input => {
+                                input.setAttribute("readonly", "true");
+                                input.setAttribute("disabled", "true");
+                            });
+
+                            editButton.style.display = "inline-block";
+                            sumitButton.style.display = "none";
+                            cancelButton.style.display = "none";
+                        }
+                    }
+
+                    function cancelEdit() {
+                        const editButton = document.getElementById("editButton");
+                        const sumitButton = document.getElementById("sumitbuton");
+                        const cancelButton = document.getElementById("cancelButton");
+                        const inputs = document.querySelectorAll("input, select");
+
+                        // Khôi phục giá trị ban đầu
+                        inputs.forEach(input => {
+                            if (initialValues[input.id] !== undefined) {
+                                input.value = initialValues[input.id];
+                            }
+                            input.setAttribute("readonly", "true");
+                            input.setAttribute("disabled", "true");
+                        });
+
+                        editButton.style.display = "inline-block";
+                        sumitButton.style.display = "none";
+                        cancelButton.style.display = "none";
+                    }
+
+                </script>
+
                 <h4>Thông Tin Bệnh Án</h4>
                 <div class="row">
+                    <!-- File upload fields (same as before) -->
                     <div class="col-md-6 mb-3">
                         <label for="hoSoBenhAn" class="form-label">Hồ Sơ Bệnh Án</label><br>
                         <label class="btn w-20" style=" background-color: #2fb388;color: white;border-color: #2fb388;">
@@ -93,7 +259,13 @@
                         <img id="previewKeHoachDieuTri" src="#" alt="Ảnh Xem Trước" style="max-width: 30%; display: none;">
                     </div>
                 </div>
+
+                
+
             </form>
+            <script>
+
+            </script>
         </div>
     </div>
 </div>

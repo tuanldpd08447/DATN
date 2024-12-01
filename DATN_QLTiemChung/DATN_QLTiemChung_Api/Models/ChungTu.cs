@@ -6,26 +6,25 @@ namespace DATN_QLTiemChung_Api.Models
     public class ChungTu
     {
         [Key]
-        public string IDXCT { get; set; } // ID chứng từ
+        public string IDXCT { get; set; } 
 
         [Required]
-        public string IDNV { get; set; } // ID nhân viên
+        public string IDNV { get; set; } 
         [ForeignKey(nameof(IDNV))]
-        public NhanVien NhanVien { get; set; } // Quan hệ với bảng NhanVien
+        public NhanVien? NhanVien { get; set; } 
 
         [Required]
-        public string IDOD { get; set; } // ID đơn hàng
+        public string IDOD { get; set; } 
         [ForeignKey(nameof(IDOD))]
-        public Order Order { get; set; } // Quan hệ với bảng Order (Đơn hàng)
+        public Order? Order { get; set; } 
 
-        public bool LoaiChungTu { get; set; } // Loại chứng từ
-        public DateTime ThoiGian { get; set; } // Thời gian
-        public double DonGia { get; set; } // Đơn giá
-        public double ThanhTien { get; set; } // Thành tiền
-        public bool TrangThai { get; set; } // Trạng thái
-        public string GhiChu { get; set; } // Ghi chú
-        public string HinhAnh { get; set; } // Ghi chú
-        public int SoLuong { get; set; }
+        public bool LoaiChungTu { get; set; } 
+        public DateTime ThoiGian { get; set; } 
+        public double DonGia { get; set; } 
+        public double ThanhTien { get; set; }
+        public bool TrangThai { get; set; } 
+        public string? GhiChu { get; set; } 
+        public string? HinhAnh { get; set; } 
     }
 
 }

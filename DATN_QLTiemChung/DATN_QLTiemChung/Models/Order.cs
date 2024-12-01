@@ -11,7 +11,7 @@ namespace DATN_QLTiemChung.Models
         [Required]
         public string IDVT { get; set; } // ID vật tư
         [ForeignKey(nameof(IDVT))]
-        public VatTuYTe VatTuYTe { get; set; }
+        public VatTuYTe? VatTuYTe { get; set; }
 
         public int SoLuong { get; set; } // Số lượng
         public string? GhiChu { get; set; } // Ghi chú

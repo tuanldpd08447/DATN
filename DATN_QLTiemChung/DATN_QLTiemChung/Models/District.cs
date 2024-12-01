@@ -25,7 +25,7 @@ namespace DATN_QLTiemChung.Models
 
         public int? administrative_unit_id { get; set; } // ID đơn vị hành chính
 
-        public ICollection<Ward> Wards { get; set; } // Danh sách phường/xã
+        public ICollection<Ward>? Wards { get; set; } // Danh sách phường/xã
     }
 
 }

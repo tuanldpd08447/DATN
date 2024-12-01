@@ -1,5 +1,6 @@
 ﻿@{
-    var login = false;
+    var login = TempData["ID"];
+    string role = TempData["Role"] as string;
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -7,6 +8,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - DATN_CDCWebClient</title>
+    <!-- Thêm PDF.js từ CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
 
     <!-- FontAwesome -->
     <script src="https://kit.fontawesome.com/e9c77e8100.js" crossorigin="anonymous"></script>
@@ -16,11 +19,23 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Custom CSS -->
+    <style>
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1030; /* Đảm bảo nằm trên các thành phần khác */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Tạo hiệu ứng bóng nhẹ */
+        }
 
+        body {
+            padding-top: 60px; /* Tạo khoảng cách giữa nội dung và navbar */
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
-    <nav class="navbar navbar-expand-lg navbar-light text-white" style="background-color: #2fb388;min-height: 0px;">
+    <nav class="navbar navbar-expand-lg navbar-light text-white" style="background-color: #2fb388; min-height: 0px;">
         <div class="container px-2">
             <div class="row align-items-center">
                 <!-- Button Offcanvas -->
@@ -36,16 +51,70 @@
                 </div>
 
                 <!-- Links -->
-                <div class="col text-end">
-                    <a class="text-light link-opacity-75-hover link-underline link-underline-opacity-0 py-2 fw-bold mx-2" asp-controller="QLTiepNhan" asp-action="QLTiepNhan">QUẢN LÝ TIẾP NHẬN </a>
+                @if (TempData["Role"] != null)
+                {
 
-                </div>
+                    if (role == "Bác Sĩ")
+                    {
+                        <div class="col-auto">
+                            <a asp-controller="Home" asp-action="KhamSanLoc" class="text-light link-opacity-75-hover link-underline link-underline-opacity-0 py-2 fw-bold mx-2">KHÁM SÀNG LỌC</a>
+                        </div>
+                        <div class="col-auto">
+                            <a asp-controller="QLTiemChung" asp-action="QLTiemChung" class="text-light link-opacity-75-hover link-underline link-underline-opacity-0 py-2 fw-bold mx-2">QUẢN LÝ TIÊM CHỦNG</a>
+                        </div>
+                    }
+                    else if (role == "Y Tá")
+                    {
+                        <div class="col-auto">
+                            <a asp-controller="QLTiemChung" asp-action="QLTiemChung" class="text-light link-opacity-75-hover link-underline link-underline-opacity-0 py-2 fw-bold mx-2">QUẢN LÝ TIÊM CHỦNG</a>
+                        </div>
+                        <div class="col-auto">
+                            <a asp-controller="QLKhoVaccine" asp-action="QLKhoVaccine" class="text-light link-opacity-75-hover link-underline link-underline-opacity-0 py-2 fw-bold mx-2">KHO VACCINE</a>
+                        </div>
+                    }
+                    else if (role == "Kế Toán")
+                    {
+                        <div class="col-auto">
+                            <a asp-controller="QLHoaDon" asp-action="QLHoaDon" class="text-light link-opacity-75-hover link-underline link-underline-opacity-0 py-2 fw-bold mx-2">QUẢN LÝ HÓA ĐƠN</a>
+                        </div>
+                        <div class="col-auto">
+                            <a asp-controller="QLXuatNhapKho" asp-action="QLXuatNhapKho" class="text-light link-opacity-75-hover link-underline link-underline-opacity-0 py-2 fw-bold mx-2">QUẢN LÝ XUẤT NHẬP KHO</a>
+                        </div>
+                        <div class="col-auto">
+                            <a asp-controller="QLHoanTra" asp-action="QLHoanTra" class="text-light link-opacity-75-hover link-underline link-underline-opacity-0 py-2 fw-bold mx-2">QUẢN LÝ HOÀN TRẢ</a>
+                        </div>
+                    }
+                    else if (role == "Thủ Kho")
+                    {
+                        <div class="col-auto">
+                            <a asp-controller="QLKhoVaccine" asp-action="QLKhoVaccine" class="text-light link-opacity-75-hover link-underline link-underline-opacity-0 py-2 fw-bold mx-2">QUẢN LÝ KHO VACCINE</a>
+                        </div>
+                    }
+                    else if (role == "Lễ Tân")
+                    {
+                        <div class="col-auto">
+                            <a asp-controller="QLTiepNhan" asp-action="QLTiepNhan" class="text-light link-opacity-75-hover link-underline link-underline-opacity-0 py-2 fw-bold mx-2">QUẢN LÝ TIẾP NHẬN</a>
+                        </div>
+                    }
+                    else if (role == "Nhân Sự")
+                    {
+                        <div class="col-auto">
+                            <a asp-controller="QLNhanVien" asp-action="QLNhanVien" class="text-light link-opacity-75-hover link-underline link-underline-opacity-0 py-2 fw-bold mx-2">QUẢN LÝ NHÂN VIÊN</a>
+                        </div>
+                        <div class="col-auto">
+                            <a asp-controller="QLKhachHang" asp-action="QLKhachHang" class="text-light link-opacity-75-hover link-underline link-underline-opacity-0 py-2 fw-bold mx-2">QUẢN LÝ KHÁCH HÀNG</a>
+                        </div>
+                        <div class="col-auto">
+                            <a asp-controller="QLTaiKhoan" asp-action="QLTaiKhoan" class="text-light link-opacity-75-hover link-underline link-underline-opacity-0 py-2 fw-bold mx-2">QUẢN LÝ TÀI KHOẢN</a>
+                        </div>
+                    }
+                }
             </div>
             <div class="btn-group">
-                @if (login)
+                @if (login != null)
                 {
                     <button type="button" class="btn fs-6 border-0 dropdown-toggle text-white" data-bs-toggle="dropdown" aria-expanded="false">
-                        Tunnd
+                        @TempData["Username"]
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li><a class="dropdown-item" href="#">Thông tin cá nhân</a></li>
@@ -60,6 +129,7 @@
             </div>
         </div>
     </nav>
+
     <!-- Sidebar Offcanvas -->
     <div class="offcanvas offcanvas-start" style="width: 20%;" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
         <div class="offcanvas-header">
@@ -67,46 +137,65 @@
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            <div class="row ">
-                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" asp-controller="QLTiepNhan" asp-action="QLTiepNhan">QUẢN LÝ TIẾP NHẬN</a>
-            </div>
-            <div class="row">
-                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" asp-controller="Home" asp-action="KhamSanLoc">KHÁM SÀNG LỌC</a>
-            </div>
-            <div class="row">
-                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" asp-controller="QLHoaDon" asp-action="QLHoaDon">QUẢN LÝ HÓA ĐƠN</a>
-            </div>
-            <div class="row">
-                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" asp-controller="Home" asp-action="QLTiemChung">QUẢN LÝ TIÊM CHỦNG</a>
-            </div>
-            <div class="row">
-                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" asp-controller="Home" asp-action="QLKhachHang">QUẢN LÝ KHÁCH HÀNG</a>
-            </div>
-            <div class="row">
-                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" asp-controller="Home" asp-action="QLNhanVien">QUẢN LÝ NHÂN VIÊN</a>
-            </div>
-            <div class="row">
-                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" asp-controller="QLKhoVaccine" asp-action="QLKhoVaccine">KHO VACCINE</a>
-            </div>
-            <div class="row">
-                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold" asp-controller="QLXuatNhapKho" asp-action="QLXuatNhapKho">QUẢN LÝ XUẤT NHẬP KHO</a>
-            </div>
-            <div class="row">
-                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold text-uppercase" asp-controller="Home" asp-action="TNTiemChungTheoHopDong">TN tiêm chủng theo hợp đồng</a>
-            </div>
-            <div class="row">
-                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold text-uppercase" asp-controller="Home" asp-action="XuatDuoc">Xuất dược</a>
-            </div>
-             <div class="row">
-                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold text-uppercase" asp-controller="Home"  asp-action="NhapDuoc">nhập dược</a>
+            @if (TempData["Role"] != null)
+            {
+                
 
-            </div>
-            <div class="row">
-                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold text-uppercase" asp-controller="Home" asp-action="QLTaiKhoan">Quản Lý Tài Khoản</a>
-            </div>
-            <div class="row">
-                <a class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold text-uppercase" asp-controller="Home" asp-action="QLHoanTra">Quản Lý Hoàn trả</a>
-            </div>
+                if (role == "Bác Sĩ")
+                {
+                    <div class="row">
+                        <a asp-controller="Home" asp-action="KhamSanLoc" class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold">KHÁM SÀNG LỌC</a>
+                    </div>
+                    <div class="row">
+                        <a asp-controller="QLTiemChung" asp-action="QLTiemChung" class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold">QUẢN LÝ TIÊM CHỦNG</a>
+                    </div>
+                }
+                else if (role == "Y Tá")
+                {
+                    <div class="row">
+                        <a asp-controller="QLTiemChung" asp-action="QLTiemChung" class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold">QUẢN LÝ TIÊM CHỦNG</a>
+                    </div>
+                    <div class="row">
+                        <a asp-controller="QLKhoVaccine" asp-action="QLKhoVaccine" class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold">KHO VACCINE</a>
+                    </div>
+                }
+                else if (role == "Kế Toán")
+                {
+                    <div class="row">
+                        <a asp-controller="QLHoaDon" asp-action="QLHoaDon" class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold">QUẢN LÝ HÓA ĐƠN</a>
+                    </div>
+                    <div class="row">
+                        <a asp-controller="QLXuatNhapKho" asp-action="QLXuatNhapKho" class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold">QUẢN LÝ XUẤT NHẬP KHO</a>
+                    </div>
+                    <div class="row">
+                        <a asp-controller="QLHoanTra" asp-action="QLHoanTra" class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold">QUẢN LÝ HOÀN TRẢ</a>
+                    </div>
+                }
+                else if (role == "Thủ Kho")
+                {
+                    <div class="row">
+                        <a asp-controller="QLKhoVaccine" asp-action="QLKhoVaccine" class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold">QUẢN LÝ KHO VACCINE</a>
+                    </div>
+                }
+                else if (role == "Lễ Tân")
+                {
+                    <div class="row">
+                        <a asp-controller="QLTiepNhan" asp-action="QLTiepNhan" class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold">QUẢN LÝ TIẾP NHẬN</a>
+                    </div>
+                }
+                else if (role == "Nhân Sự")
+                {
+                    <div class="row">
+                        <a asp-controller="QLNhanVien" asp-action="QLNhanVien" class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold">QUẢN LÝ NHÂN VIÊN</a>
+                    </div>
+                    <div class="row">
+                        <a asp-controller="QLKhachHang" asp-action="QLKhachHang" class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold">QUẢN LÝ KHÁCH HÀNG</a>
+                    </div>
+                    <div class="row">
+                        <a asp-controller="QLTaiKhoan" asp-action="QLTaiKhoan" class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold">QUẢN LÝ TÀI KHOẢN</a>
+                    </div>
+                }
+            }
         </div>
         <style>
             .custom-hover {
