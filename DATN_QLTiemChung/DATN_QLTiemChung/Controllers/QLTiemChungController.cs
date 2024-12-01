@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace DATN_QLTiemChung.Controllers
 {
-
+    [SessionActionFilter]
     public class QLTiemChungController : Controller
     {
         private readonly IWebHostEnvironment _webHostEnvironment;
@@ -14,6 +14,16 @@ namespace DATN_QLTiemChung.Controllers
         {
             _httpClientFactory = httpClientFactory;
             _webHostEnvironment = webHostEnvironment;
+        }
+          public void GetSession()
+        {
+            string userId = HttpContext.Session.GetString("ID");
+            string Username = HttpContext.Session.GetString("Username");
+            string userRole = HttpContext.Session.GetString("Role");
+
+            TempData["ID"] = userId;
+            TempData["Username"] = Username;
+            TempData["Role"] = userRole;
         }
             public async Task<IActionResult> QLTiemChung()
             {
@@ -43,7 +53,7 @@ namespace DATN_QLTiemChung.Controllers
                 }
 
 
-                return View("~/Views/Home/QLTiemChung.cshtml");
+                  GetSession(); return View("~/Views/Home/QLTiemChung.cshtml");
             }
 
         // Phương thức lấy thông tin kết quả khám sàng lọc của khách hàng từ cơ sở dữ liệu
@@ -81,7 +91,7 @@ namespace DATN_QLTiemChung.Controllers
                 }
                 if (screeningResult == null)
                 {
-                    return NotFound();
+                      GetSession(); return NotFound();
                 }
 
             // Lấy danh sách khách hàng đặt lịch
@@ -118,9 +128,9 @@ namespace DATN_QLTiemChung.Controllers
             }
             if (response2 == null)
             {
-                return NotFound();
+                  GetSession(); return NotFound();
             }
-            return View("~/Views/Home/QLTiemChung.cshtml"); 
+              GetSession(); return View("~/Views/Home/QLTiemChung.cshtml"); 
         }
     }
 }

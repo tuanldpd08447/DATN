@@ -48,24 +48,24 @@ namespace DATN_CDCWebClient.Controllers
                         if (khachHangs != null)
                         {
                             ViewBag.KhachHangs = khachHangs; // Pass data to the View
-                            return View("~/Views/Home/ThongTinCaNhan.cshtml");
+                              GetSession(); return View("~/Views/Home/ThongTinCaNhan.cshtml");
                         }
                         else
                         {
                             ViewBag.Error = "Dữ liệu khách hàng không hợp lệ.";
-                            return View("~/Views/Home/Home.cshtml");
+                              GetSession(); return View("~/Views/Home/Home.cshtml");
                         }
                     }
                     else
                     {
                         ViewBag.Error = "Không thể lấy thông tin khách hàng.";
-                        return View("~/Views/Home/Home.cshtml");
+                          GetSession(); return View("~/Views/Home/Home.cshtml");
                     }
                 }
                 catch (Exception ex)
                 {
                     ViewBag.Error = $"Đã xảy ra lỗi: {ex.Message}";
-                    return View("~/Views/Home/Home.cshtml");
+                      GetSession(); return View("~/Views/Home/Home.cshtml");
                 }
             }
         }
@@ -90,7 +90,7 @@ namespace DATN_CDCWebClient.Controllers
 
             if (khachHang == null || string.IsNullOrEmpty(khachHang.IDKH) || string.IsNullOrEmpty(khachHang.TenKhachHang))
             {
-                return BadRequest("Invalid customer data.");
+                  GetSession(); return BadRequest("Invalid customer data.");
             }
             var client = _httpClientFactory.CreateClient();
 
@@ -101,21 +101,21 @@ namespace DATN_CDCWebClient.Controllers
                 var error = await response.Content.ReadAsStringAsync();
                 Console.WriteLine($"API Error: {error}");
                 GetSession();
-                return RedirectToAction("ThongTinCaNhan", new { IDKH = khachHang.IDKH });
+                  GetSession(); return RedirectToAction("ThongTinCaNhan", new { IDKH = khachHang.IDKH });
             }
 
             if (response.IsSuccessStatusCode)
             {
                 var result = await response.Content.ReadAsStringAsync();
                 GetSession();
-                return RedirectToAction("Home","Home");
+                  GetSession(); return RedirectToAction("Home","Home");
             }
             else
             {
 
                 var error = await response.Content.ReadAsStringAsync();
                 GetSession();
-                return RedirectToAction("ThongTinCaNhan", new { IDKH = khachHang.IDKH });
+                  GetSession(); return RedirectToAction("ThongTinCaNhan", new { IDKH = khachHang.IDKH });
             }
 
         }

@@ -39,12 +39,12 @@ namespace DATN_CDCWebClient.Controllers
                 var diaChiTask = khTask.ContinueWith(async task =>
                 {
                     var response = await task;
-                    if (!response.IsSuccessStatusCode) return null;
+                    if (!response.IsSuccessStatusCode)    return null;
                     var apiResponse = await response.Content.ReadAsStringAsync();
                     var kh = JsonConvert.DeserializeObject<KhachHang>(apiResponse);
                     ViewBag.Thongtinkh = kh;
 
-                    return client.GetAsync($"https://localhost:7143/api/Data/GetWardByid/{kh?.IDXP}");
+                     return client.GetAsync($"https://localhost:7143/api/Data/GetWardByid/{kh?.IDXP}");
                 }).Unwrap();
                 var lichKhamTask = client.GetAsync($"https://localhost:7143/api/DKyLichKham/GetAll");
 
@@ -78,7 +78,7 @@ namespace DATN_CDCWebClient.Controllers
                 ViewBag.Error = "Đã xảy ra lỗi khi lấy dữ liệu.";
             }
 
-            return View("~/Views/Home/DKyLichKham.cshtml");
+              GetSession(); return View("~/Views/Home/DKyLichKham.cshtml");
         }
         public async Task<IActionResult> DKyLichKhamSumit(string IDKH, DateOnly NgayHen, string ThoiGianHen)
         {
@@ -97,14 +97,14 @@ namespace DATN_CDCWebClient.Controllers
 
             if (response.IsSuccessStatusCode)
             {
-                return RedirectToAction("Home", "Home");
+                  GetSession(); return RedirectToAction("Home", "Home");
             }
             else
             {
          
                 TempData["ErrorMessage"] = "Đã có lỗi xảy ra khi tạo lịch khám. Vui lòng thử lại!";
                 
-                return RedirectToAction("DKyLichKham");
+                  GetSession(); return RedirectToAction("DKyLichKham");
             }
         }
 

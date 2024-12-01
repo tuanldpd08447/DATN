@@ -5,6 +5,7 @@ using System.Text;
 
 namespace DATN_QLTiemChung.Controllers
 {
+    [SessionActionFilter]
     public class QLTiepNhanController : Controller
     {
         private readonly IWebHostEnvironment _webHostEnvironment;
@@ -16,7 +17,16 @@ namespace DATN_QLTiemChung.Controllers
 
 
         }
-        
+        public void GetSession()
+        {
+            string userId = HttpContext.Session.GetString("ID");
+            string Username = HttpContext.Session.GetString("Username");
+            string userRole = HttpContext.Session.GetString("Role");
+
+            TempData["ID"] = userId;
+            TempData["Username"] = Username;
+            TempData["Role"] = userRole;
+        }
         public async Task<IActionResult> QLTiepNhan()
         {
             var client = _httpClientFactory.CreateClient();
@@ -60,7 +70,7 @@ namespace DATN_QLTiemChung.Controllers
                 ViewBag.ErrorMessage = $"Đã xảy ra lỗi: {ex.Message}";
             }
 
-            return View("~/Views/Home/QLTiepNhan.cshtml");
+              GetSession(); return View("~/Views/Home/QLTiepNhan.cshtml");
         }
 
         [HttpPost]
@@ -78,7 +88,7 @@ namespace DATN_QLTiemChung.Controllers
             if (existingHangCho != null)
             {
                 // If an entry is found
-                return BadRequest("Đã có HangCho với IDKH và NgayCho trùng với hôm nay.");
+                  GetSession(); return BadRequest("Đã có HangCho với IDKH và NgayCho trùng với hôm nay.");
             }
            
             var response = await client.GetAsync($"https://localhost:7143/api/QLTiepNhan/GetAllKhachHangByIDKH/{IDKH}");
@@ -101,12 +111,12 @@ namespace DATN_QLTiemChung.Controllers
                 var content = new StringContent(JsonConvert.SerializeObject(hc), Encoding.UTF8, "application/json");
                 var response2 = await client.PostAsync("https://65b86c3a46324d531d562e3d.mockapi.io/HangCho", content);
 
-                return RedirectToAction("QLTiepNhan");
+                  GetSession(); return RedirectToAction("QLTiepNhan");
             }
             else
             {
                 // Handle failure response (if necessary)
-                return BadRequest("Failed to fetch customer data");
+                  GetSession(); return BadRequest("Failed to fetch customer data");
             }
         }
 
@@ -117,7 +127,7 @@ namespace DATN_QLTiemChung.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);  // Return error if data is invalid
+                  GetSession(); return BadRequest(ModelState);  //   GetSession(); return error if data is invalid
             }
 
             try
@@ -157,21 +167,21 @@ namespace DATN_QLTiemChung.Controllers
                         var allApiResponse = await allResponse.Content.ReadAsStringAsync();
                         List<KhachHangDTo> khachHangs = JsonConvert.DeserializeObject<List<KhachHangDTo>>(allApiResponse);
 
-                        return View("~/Views/Home/QLTiepNhan.cshtml");
+                          GetSession(); return View("~/Views/Home/QLTiepNhan.cshtml");
                     }
                     else
                     {
-                        return StatusCode((int)allResponse.StatusCode, "Không thể lấy danh sách khách hàng.");
+                          GetSession(); return StatusCode((int)allResponse.StatusCode, "Không thể lấy danh sách khách hàng.");
                     }
                 }
                 else
                 {
-                    return StatusCode((int)response.StatusCode, "Đã có lỗi xảy ra khi thêm khách hàng.");
+                      GetSession(); return StatusCode((int)response.StatusCode, "Đã có lỗi xảy ra khi thêm khách hàng.");
                 }
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Có lỗi khi kết nối với máy chủ: {ex.Message}");
+                  GetSession(); return StatusCode(500, $"Có lỗi khi kết nối với máy chủ: {ex.Message}");
             }
         }
 

@@ -18,6 +18,16 @@ namespace DATN_QLTiemChung.Controllers
 
 
         }
+        public void GetSession()
+        {
+            string userId = HttpContext.Session.GetString("ID");
+            string Username = HttpContext.Session.GetString("Username");
+            string userRole = HttpContext.Session.GetString("Role");
+
+            TempData["ID"] = userId;
+            TempData["Username"] = Username;
+            TempData["Role"] = userRole;
+        }
         [HttpPost]
         public async Task<IActionResult> HuyPhieu(string IDCT)
         {
@@ -36,7 +46,7 @@ namespace DATN_QLTiemChung.Controllers
                 TempData["NotificationType"] = "error";
             }
 
-            return RedirectToAction("QLXuatNhapKho");
+              GetSession(); return RedirectToAction("QLXuatNhapKho");
         }
 
 
@@ -89,7 +99,7 @@ namespace DATN_QLTiemChung.Controllers
             string IDctnew = apiResponses6;
             ViewBag.IDCTNew = IDctnew;
 
-            return View("~/Views/Home/QLXuatNhapKho.cshtml");
+              GetSession(); return View("~/Views/Home/QLXuatNhapKho.cshtml");
         }
         [HttpPost]
         public async Task<IActionResult> AddChungTu(string IDCT, string Loaiphieu, int soLuong, DateTime NgayXuatNhap, string IDVT,
@@ -116,7 +126,7 @@ namespace DATN_QLTiemChung.Controllers
                 TempData["NotificationType"] = "error";
                 TempData["NotificationTitle"] = "Cannot Send Mail";
 
-                return RedirectToAction("QLXuatNhapKho");
+                  GetSession(); return RedirectToAction("QLXuatNhapKho");
             }
 
 
@@ -132,7 +142,7 @@ namespace DATN_QLTiemChung.Controllers
                     {
                         Console.WriteLine($"Loại file không hợp lệ: {ChungtuFile.ContentType}");
                         ModelState.AddModelError("ChungtuFile", "Chỉ chấp nhận file PDF.");
-                        return RedirectToAction("QLXuatNhapKho");
+                          GetSession(); return RedirectToAction("QLXuatNhapKho");
                     }
 
                     fileName = ChungtuFile.FileName;
@@ -189,21 +199,21 @@ namespace DATN_QLTiemChung.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     Console.WriteLine("Request thành công! Redirect đến QLXuatNhapKho.");
-                    return RedirectToAction("QLXuatNhapKho");
+                      GetSession(); return RedirectToAction("QLXuatNhapKho");
                 }
                 else
                 {
                     var errorMessage = await response.Content.ReadAsStringAsync();
                     Console.WriteLine($"API lỗi: {errorMessage}");
                     ModelState.AddModelError("", $"API lỗi: {errorMessage}");
-                    return RedirectToAction("QLXuatNhapKho");
+                      GetSession(); return RedirectToAction("QLXuatNhapKho");
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Có lỗi khi kết nối với máy chủ: {ex.Message}");
                 ModelState.AddModelError("", $"Có lỗi khi kết nối với máy chủ: {ex.Message}");
-                return RedirectToAction("QLXuatNhapKho");
+                  GetSession(); return RedirectToAction("QLXuatNhapKho");
             }
         }
 
@@ -249,14 +259,14 @@ namespace DATN_QLTiemChung.Controllers
             string IDctnew = apiResponses6;
             ViewBag.IDCTNew = IDctnew;
 
-            return View("~/Views/Home/QLXuatNhapKho.cshtml");
+              GetSession(); return View("~/Views/Home/QLXuatNhapKho.cshtml");
         }
         /// <summary>
         /// Đảm bảo tên tệp là duy nhất trong thư mục lưu trữ.
         /// </summary>
         /// <param name="directory">Đường dẫn thư mục lưu trữ.</param>
         /// <param name="fileName">Tên tệp gốc.</param>
-        /// <returns>Tên tệp duy nhất.</returns>
+        /// <  GetSession(); returns>Tên tệp duy nhất.</  GetSession(); returns>
         private string EnsureUniqueFileName(string directory, string fileName)
         {
             string filePath = Path.Combine(directory, fileName);
@@ -271,7 +281,7 @@ namespace DATN_QLTiemChung.Controllers
                 counter++;
             }
 
-            return fileName;
+              GetSession(); return fileName;
         }
     }
 

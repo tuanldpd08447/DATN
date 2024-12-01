@@ -148,7 +148,11 @@ namespace DATN_CDCWebClient.Controllers
         }
 
 
-
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Home", "Home"); 
+        }
         public IActionResult Register()
         {
             return View("~/Views/Home/Register.cshtml"); ;

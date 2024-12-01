@@ -7,6 +7,7 @@ using System.Text;
 
 namespace DATN_QLTiemChung.Controllers
 {
+    [SessionActionFilter]
     [Route("QLNhanVien/[action]")]
     public class QLNhanVienController : Controller
     {
@@ -18,6 +19,16 @@ namespace DATN_QLTiemChung.Controllers
             _webHostEnvironment = webHostEnvironment;
 
 
+        }
+        public void GetSession()
+        {
+            string userId = HttpContext.Session.GetString("ID");
+            string Username = HttpContext.Session.GetString("Username");
+            string userRole = HttpContext.Session.GetString("Role");
+
+            TempData["ID"] = userId;
+            TempData["Username"] = Username;
+            TempData["Role"] = userRole;
         }
         public async Task<IActionResult> QLNhanVien()
         {
@@ -43,7 +54,7 @@ namespace DATN_QLTiemChung.Controllers
 
 
 
-            return View("/Views/Home/QLNhanVien.cshtml");
+              GetSession(); return View("/Views/Home/QLNhanVien.cshtml");
         }
 
 
@@ -53,7 +64,7 @@ namespace DATN_QLTiemChung.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                  GetSession(); return BadRequest(ModelState);
             }
             try
             {
@@ -97,23 +108,23 @@ namespace DATN_QLTiemChung.Controllers
                         var allApiResponse = await allResponse.Content.ReadAsStringAsync();
                         List<NhanVienDTO> nhanViens = JsonConvert.DeserializeObject<List<NhanVienDTO>>(allApiResponse);
 
-                        return RedirectToAction("QLNhanVien");
+                          GetSession(); return RedirectToAction("QLNhanVien");
                     }
                     else
                     {
-                        return StatusCode((int)allResponse.StatusCode, "Không thể lấy danh sách nhân viên.");
+                          GetSession(); return StatusCode((int)allResponse.StatusCode, "Không thể lấy danh sách nhân viên.");
                     }
                 }
                 else
                 {
-                    return StatusCode((int)response.StatusCode, "Đã có lỗi xảy ra khi thêm nhân viên.");
+                      GetSession(); return StatusCode((int)response.StatusCode, "Đã có lỗi xảy ra khi thêm nhân viên.");
 
                 }
 
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Có lỗi khi kết nối với máy chủ: {ex.Message}");
+                  GetSession(); return StatusCode(500, $"Có lỗi khi kết nối với máy chủ: {ex.Message}");
             }
         }
 
@@ -121,7 +132,7 @@ namespace DATN_QLTiemChung.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                  GetSession(); return BadRequest(ModelState);
             }
 
             try
@@ -150,16 +161,16 @@ namespace DATN_QLTiemChung.Controllers
 
                 if (response.IsSuccessStatusCode)
                 {
-                    return RedirectToAction("QLNhanVien");
+                      GetSession(); return RedirectToAction("QLNhanVien");
                 }
                 else
                 {
-                    return StatusCode((int)response.StatusCode, "Không thể cập nhật nhân viên.");
+                      GetSession(); return StatusCode((int)response.StatusCode, "Không thể cập nhật nhân viên.");
                 }
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Có lỗi khi kết nối với máy chủ: {ex.Message}");
+                  GetSession(); return StatusCode(500, $"Có lỗi khi kết nối với máy chủ: {ex.Message}");
             }
         }
 
@@ -206,12 +217,12 @@ namespace DATN_QLTiemChung.Controllers
                 DiaChi dc = JsonConvert.DeserializeObject<DiaChi>(apiResponse3);
                 ViewBag.DiaChi = dc;
 
-                return View("/Views/Home/QLNhanVien.cshtml");
+                  GetSession(); return View("/Views/Home/QLNhanVien.cshtml");
             }
             else
             {
                 ViewBag.ErrorMessage = "Không thể tải thông tin nhân viên";
-                return NotFound();
+                  GetSession(); return NotFound();
             }
          
 

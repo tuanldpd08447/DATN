@@ -6,6 +6,7 @@ using System.Text;
 
 namespace DATN_QLTiemChung.Controllers
 {
+    [SessionActionFilter]
     public class DNhapDKyController : Controller
     {
         private readonly IWebHostEnvironment _webHostEnvironment;
@@ -57,6 +58,11 @@ namespace DATN_QLTiemChung.Controllers
                 return View("~/Views/Home/Login.cshtml");
 
         }
-       
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+
+            return RedirectToAction("HomeQL", "Home"); 
+        }
     }
 }

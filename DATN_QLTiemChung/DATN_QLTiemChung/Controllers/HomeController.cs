@@ -4,6 +4,7 @@ using System.Diagnostics;
 
 namespace DATN_QLTiemChung.Controllers
 {
+    [SessionActionFilter]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -24,64 +25,63 @@ namespace DATN_QLTiemChung.Controllers
         }
         public IActionResult HomeQL()
         {
-            GetSession();
-  
-                return View();
+ 
+              GetSession(); return View();
         }
         public IActionResult KhamSanLoc()
         {
-            return View();
+              GetSession(); return View();
         }
         public IActionResult PhieuLinh()
         {
-            return View();
+              GetSession(); return View();
         }
      
         public IActionResult QLKhachHang()
         {
-            return View();
+              GetSession(); return View();
         }
         public IActionResult QLKho()
         {
-            return View();
+              GetSession(); return View();
         }
         public IActionResult QLNhanVien()
         {
-            return View();
+              GetSession(); return View();
         }
         public IActionResult QLTiemChung()
         {
-            return View();
+              GetSession(); return View();
         }
       
         public IActionResult QLXuatNhapKho()
         {
-            return View();
+              GetSession(); return View();
         }
         public IActionResult QLHoanTra()
         {
-            return View();
+              GetSession(); return View();
         }
         public IActionResult NhapDuoc()
         {
-            return View();
+              GetSession(); return View();
         }
         public IActionResult QLTaiKhoan()
         {
-            return View();
+              GetSession(); return View();
         }
         public IActionResult TNTiemChungTheoHopDong()
         {
-            return View();
+              GetSession(); return View();
         }
         public IActionResult XuatDuoc()
         {
-            return View();
+              GetSession(); return View();
         }
       
         public IActionResult Privacy()
         {
-            return View();
+              GetSession(); return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

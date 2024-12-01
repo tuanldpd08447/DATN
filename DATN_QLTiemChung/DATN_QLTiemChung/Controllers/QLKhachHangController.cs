@@ -5,6 +5,7 @@ using System.Text;
 
 namespace DATN_QLTiemChung.Controllers
 {
+    [SessionActionFilter]
     public class QLKhachHangController : Controller
     {
         private readonly IWebHostEnvironment _webHostEnvironment;
@@ -15,7 +16,16 @@ namespace DATN_QLTiemChung.Controllers
             _webHostEnvironment = webHostEnvironment;
             _httpClientFactory = httpClientFactory;
         }
+        public void GetSession()
+        {
+            string userId = HttpContext.Session.GetString("ID");
+            string Username = HttpContext.Session.GetString("Username");
+            string userRole = HttpContext.Session.GetString("Role");
 
+            TempData["ID"] = userId;
+            TempData["Username"] = Username;
+            TempData["Role"] = userRole;
+        }
         public async Task<IActionResult> QLKhachHang()
         {
             var client = _httpClientFactory.CreateClient();
@@ -27,7 +37,7 @@ namespace DATN_QLTiemChung.Controllers
                 List<KhachHangDTo> khachHangs = JsonConvert.DeserializeObject<List<KhachHangDTo>>(apiResponse);
                 ViewBag.KhachHangs = khachHangs;
             }
-            return View("~/Views/Home/QLKhachHang.cshtml");
+              GetSession(); return View("~/Views/Home/QLKhachHang.cshtml");
         }
 
 
@@ -36,7 +46,7 @@ namespace DATN_QLTiemChung.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);  // Return error if data is invalid
+                  GetSession(); return BadRequest(ModelState);  //   GetSession(); return error if data is invalid
             }
 
             try
@@ -76,21 +86,21 @@ namespace DATN_QLTiemChung.Controllers
                         var allApiResponse = await allResponse.Content.ReadAsStringAsync();
                         List<KhachHangDTo> khachHangs = JsonConvert.DeserializeObject<List<KhachHangDTo>>(allApiResponse);
 
-                        return View("~/Views/Home/QLKhachHang.cshtml");
+                          GetSession(); return View("~/Views/Home/QLKhachHang.cshtml");
                     }
                     else
                     {
-                        return StatusCode((int)allResponse.StatusCode, "Không thể lấy danh sách khách hàng.");
+                          GetSession(); return StatusCode((int)allResponse.StatusCode, "Không thể lấy danh sách khách hàng.");
                     }
                 }
                 else
                 {
-                    return StatusCode((int)response.StatusCode, "Đã có lỗi xảy ra khi thêm khách hàng.");
+                      GetSession(); return StatusCode((int)response.StatusCode, "Đã có lỗi xảy ra khi thêm khách hàng.");
                 }
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Có lỗi khi kết nối với máy chủ: {ex.Message}");
+                  GetSession(); return StatusCode(500, $"Có lỗi khi kết nối với máy chủ: {ex.Message}");
             }
         }
 

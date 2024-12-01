@@ -7,6 +7,7 @@ using System.Text;
 
 namespace DATN_QLTiemChung.Controllers
 {
+    [SessionActionFilter]
     public class QLHoaDonController : Controller
     {
         private readonly IWebHostEnvironment _webHostEnvironment;
@@ -19,6 +20,16 @@ namespace DATN_QLTiemChung.Controllers
             _webHostEnvironment = webHostEnvironment;
 
 
+        }
+        public void GetSession()
+        {
+            string userId = HttpContext.Session.GetString("ID");
+            string Username = HttpContext.Session.GetString("Username");
+            string userRole = HttpContext.Session.GetString("Role");
+
+            TempData["ID"] = userId;
+            TempData["Username"] = Username;
+            TempData["Role"] = userRole;
         }
         public async Task<IActionResult> ClickKhachHang(string IDKH)
         {
@@ -57,7 +68,7 @@ namespace DATN_QLTiemChung.Controllers
 
 
 
-            return View("~/Views/Home/QLHoaDon.cshtml");
+              GetSession(); return View("~/Views/Home/QLHoaDon.cshtml");
         }
         public async Task<IActionResult> QLHoaDon()
         {
@@ -84,7 +95,7 @@ namespace DATN_QLTiemChung.Controllers
             }
 
 
-            return View("~/Views/Home/QLHoaDon.cshtml");
+              GetSession(); return View("~/Views/Home/QLHoaDon.cshtml");
 
 
 
@@ -98,7 +109,7 @@ namespace DATN_QLTiemChung.Controllers
         { 
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);  // Return error if data is invalid
+                  GetSession(); return BadRequest(ModelState);  // Return error if data is invalid
             }
 
             try
@@ -114,7 +125,7 @@ namespace DATN_QLTiemChung.Controllers
                    KhachHang khachHang = khachHangs.FirstOrDefault(kh=>kh.IDKH ==MaKH);
                     if (khachHang!= null)
                     {
-                        return BadRequest("Không tìm thấy khách hàng"); 
+                          GetSession(); return BadRequest("Không tìm thấy khách hàng"); 
                     }
                 }
 
@@ -151,21 +162,21 @@ namespace DATN_QLTiemChung.Controllers
                         var allApiResponse = await allResponse.Content.ReadAsStringAsync();
                         List<HoaDonDTO> hoaDons = JsonConvert.DeserializeObject<List<HoaDonDTO>>(allApiResponse);
 
-                        return RedirectToAction("QLHoaDon");
+                          GetSession(); return RedirectToAction("QLHoaDon");
                     }
                     else
                     {
-                        return StatusCode((int)allResponse.StatusCode, "Không thể lấy danh sách khách hàng.");
+                          GetSession(); return StatusCode((int)allResponse.StatusCode, "Không thể lấy danh sách khách hàng.");
                     }
                 }
                 else
                 {
-                    return StatusCode((int)response.StatusCode, "Đã có lỗi xảy ra khi thêm khách hàng.");
+                      GetSession(); return StatusCode((int)response.StatusCode, "Đã có lỗi xảy ra khi thêm khách hàng.");
                 }
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Có lỗi khi kết nối với máy chủ: {ex.Message}");
+                  GetSession(); return StatusCode(500, $"Có lỗi khi kết nối với máy chủ: {ex.Message}");
             }
         }
         [HttpPut]
@@ -174,7 +185,7 @@ namespace DATN_QLTiemChung.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState); // Dữ liệu không hợp lệ
+                  GetSession(); return BadRequest(ModelState); // Dữ liệu không hợp lệ
             }
 
             try
@@ -205,16 +216,16 @@ namespace DATN_QLTiemChung.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     // Nếu thành công, có thể lấy lại danh sách hóa đơn để cập nhật giao diện
-                    return RedirectToAction("QLHoaDon"); // Chuyển hướng về danh sách hóa đơn
+                      GetSession(); return RedirectToAction("QLHoaDon"); // Chuyển hướng về danh sách hóa đơn
                 }
                 else
                 {
-                    return StatusCode((int)response.StatusCode, "Không thể cập nhật hóa đơn.");
+                      GetSession(); return StatusCode((int)response.StatusCode, "Không thể cập nhật hóa đơn.");
                 }
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Có lỗi xảy ra khi kết nối với máy chủ: {ex.Message}");
+                  GetSession(); return StatusCode(500, $"Có lỗi xảy ra khi kết nối với máy chủ: {ex.Message}");
             }
         }
     }
