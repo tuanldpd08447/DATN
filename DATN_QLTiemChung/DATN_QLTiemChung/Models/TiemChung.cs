@@ -23,7 +23,7 @@ namespace DATN_QLTiemChung.Models
         [ForeignKey(nameof(IDDK))]
         public DangKyTiemChung DangKyTiemChung { get; set; }
 
-        public TimeSpan ThoiGian { get; set; }
+        public DateTime ThoiGian { get; set; }
         public bool TrangThai { get; set; }
         public string? GhiChu { get; set; }
     }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using DATN_QLTiemChung.Models;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace DATN_QLTiemChung.Controllers
 {
@@ -79,10 +80,8 @@ namespace DATN_QLTiemChung.Controllers
                         GioiTinh =  kqKhamSangLoc.GioiTinh,
                         KhachHang = kqKhamSangLoc.KhachHang
                     };
-                    Console.WriteLine(kQKhamSangLocDTO.CanNang);
-                    Console.WriteLine(kQKhamSangLocDTO.ChieuCao);
+                   
                     ViewBag.KQKhamSangLocDTO  = kQKhamSangLocDTO;
-                    Console.WriteLine(apiResponse);
                 }
                 else
                 {
@@ -102,7 +101,7 @@ namespace DATN_QLTiemChung.Controllers
                 // Dùng Newtonsoft.Json
                 ViewBag.DSKhamSangLocDTO = KhachHangKSL;
 
-
+            string idDK = "";
             //Lấy chỉ vaccine được chỉ định
             var response2 = await client.GetAsync($"https://localhost:7143/api/QLTiemChung/CDVaccine/{IDKH}");
             if (response2.IsSuccessStatusCode)
@@ -124,13 +123,114 @@ namespace DATN_QLTiemChung.Controllers
                     
                 };
                 ViewBag.CDVaccineDTO = cdVaccineDTO;
+                idDK = cdVaccineDTO.IDDK;
                 Console.WriteLine(apiResponse2);
             }
             if (response2 == null)
             {
-                  GetSession(); return NotFound();
+                GetSession(); return NotFound();
             }
+            var response3 = await client.GetAsync($"https://localhost:7143/api/QLTiemChung/TheoDoiSauTiemByIDDK/{idDK}");
+            if (response3.IsSuccessStatusCode)
+            {
+                var apiResponse3 = await response3.Content.ReadAsStringAsync();
+                var TheoDoiSauTiem = JsonConvert.DeserializeObject<TheoDoiSauTiem>(apiResponse3);
+                ViewBag.TheoDoiSauTiem = TheoDoiSauTiem;
+            }
+
               GetSession(); return View("~/Views/Home/QLTiemChung.cshtml"); 
         }
+        public async Task<IActionResult> CreateTiemChung(string IDNV, string IDDK , string IDKH, DateTime thoiGian)
+        {
+            if (!ModelState.IsValid)
+            {
+                GetSession(); return BadRequest(ModelState);
+            }
+            try
+            {
+                //create HTTP client
+                var client = _httpClientFactory.CreateClient();
+
+                var createTiemChung = new createTiemChung 
+                { 
+                    IDDK = IDDK,
+                    IDNV = IDNV,
+                    IDKH = IDKH,
+                    ThoiGian = thoiGian,
+                    TrangThai = false,
+                    GhiChu = ""
+
+                };
+
+                var content = new StringContent(JsonConvert.SerializeObject(createTiemChung), Encoding.UTF8, "application/json");
+
+                var response = await client.PostAsync("https://localhost:7143/api/QLTiemChung/CreateTiemChung", content);
+
+
+                if (response.IsSuccessStatusCode)
+                {
+                    GetSession(); return RedirectToAction("QLTiemChung");
+                }
+                else
+                {
+                    GetSession(); return StatusCode((int)response.StatusCode, "Đã có lỗi xảy ra .");
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                GetSession(); return StatusCode(500, $"Có lỗi khi kết nối với máy chủ: {ex.Message}");
+            }
+        }
+        public async Task<IActionResult> UpdateTheoDoiSauTiem(string id, string idNV, string idKH, string idTC, DateTime thoiGian, bool trangThai, string? ghiChu)
+        {
+            if (!ModelState.IsValid)
+            {
+                GetSession();
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                // Tạo HTTP client
+                var client = _httpClientFactory.CreateClient();
+
+                // Tạo đối tượng DTO để gửi dữ liệu
+                var updateTheoDoi = new createTheoDoi
+                {
+                    IDST = id,
+                    IDNV = idNV,
+                    IDKH = idKH,
+                    IDTC = idTC,
+                    ThoiGian = thoiGian.TimeOfDay,
+                    TrangThai = trangThai,
+                    GhiChu = ghiChu
+                };
+
+                // Chuyển đổi dữ liệu thành JSON
+                var content = new StringContent(JsonConvert.SerializeObject(updateTheoDoi), Encoding.UTF8, "application/json");
+
+                // Gửi yêu cầu PUT đến API
+                var response = await client.PutAsync($"https://localhost:7143/api/QLTiemChung/UpdateTheoDoiSauTiem", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    GetSession();
+                    return RedirectToAction("QLTiemChung");
+                }
+                else
+                {
+                    GetSession();
+                    return StatusCode((int)response.StatusCode, "Đã có lỗi xảy ra khi cập nhật.");
+                }
+            }
+            catch (Exception ex)
+            {
+                GetSession();
+                return StatusCode(500, $"Có lỗi khi kết nối với máy chủ: {ex.Message}");
+            }
+        }
+
     }
 }

@@ -114,7 +114,7 @@ namespace DATN_QLTiemChung_Api.Controllers
             string newId;
             if (idTC == null || string.IsNullOrEmpty(idTC.IDTC))
             {
-                newId = "OD001";
+                newId = "TC001";
             }
             else
             {
@@ -126,22 +126,39 @@ namespace DATN_QLTiemChung_Api.Controllers
 
             return newId;
         }
+        private async Task<string> GenerateNewIDSTAsync()
+        {
+            // Lấy ID lớn nhất từ database
+            var idTC = await _context.TheoDoiSauTiem
+                .OrderByDescending(o => o.IDST)
+                .FirstOrDefaultAsync();
 
+            string newId;
+            if (idTC == null || string.IsNullOrEmpty(idTC.IDST))
+            {
+                newId = "ST001";
+            }
+            else
+            {
+                string idTCNumber = idTC.IDST.Substring(2);
+                int number = int.Parse(idTCNumber) + 1;
+
+                newId = $"ST{number:D3}";
+            }
+
+            return newId;
+        }
         [HttpPost("CreateTiemChung")]
         public async Task<IActionResult> CreateTiemChung([FromBody] createTiemChung request)
         {
-            if (request == null || string.IsNullOrEmpty(request.IDTC))
+            if (request == null )
             {
                 return BadRequest("Thông tin không hợp lệ.");
             }
 
             string newIDTC = await GenerateNewIDTCAsync();
 
-            TimeSpan thoiGian;
-            if (!TimeSpan.TryParse(request.ThoiGian, out thoiGian))
-            {
-                return BadRequest("Giá trị ThoiGian không hợp lệ.");
-            }
+           
 
             var tiemChung = new TiemChung
             {
@@ -149,15 +166,71 @@ namespace DATN_QLTiemChung_Api.Controllers
                 IDKH = request.IDKH,
                 IDDK = request.IDDK,
                 IDNV = request.IDNV,
-                ThoiGian = thoiGian,
+                ThoiGian = request.ThoiGian,
+                TrangThai = request.TrangThai
+            };
+            var TheoDoiSauTiem = new TheoDoiSauTiem
+            {
+                IDST = await GenerateNewIDSTAsync(),
+                IDTC = newIDTC,
+                IDKH = request.IDKH,
+                IDNV = request.IDNV,
+                ThoiGian = request.ThoiGian.TimeOfDay,
+                TrangThai = request.TrangThai
             };
             _context.TiemChung.Add(tiemChung);
+            _context.TheoDoiSauTiem.Add(TheoDoiSauTiem);
+
             await _context.SaveChangesAsync();
 
             return Ok(new
             {
                 TiemChung = tiemChung,
             });
+        }
+        [HttpPut("UpdateTheoDoiSauTiem")]
+        public async Task<IActionResult> UpdateTheoDoiSauTiem([FromBody] createTheoDoi request)
+        {
+            if (request == null || string.IsNullOrEmpty(request.IDST))
+            {
+                return BadRequest("Thông tin không hợp lệ hoặc thiếu IDST.");
+            }
+
+            // Tìm bản ghi TheoDoiSauTiem dựa trên IDST
+            var existingRecord = await _context.TheoDoiSauTiem.FindAsync(request.IDST);
+            if (existingRecord == null)
+            {
+                return NotFound($"Không tìm thấy TheoDoiSauTiem với IDST = {request.IDST}");
+            }
+
+            // Cập nhật thông tin từ request
+            existingRecord.IDTC = request.IDTC;
+            existingRecord.IDNV = request.IDNV;
+            existingRecord.IDKH = request.IDKH;
+            existingRecord.ThoiGian = request.ThoiGian;
+            existingRecord.TrangThai = request.TrangThai;
+            existingRecord.GhiChu = request.GhiChu;
+
+            // Lưu thay đổi vào cơ sở dữ liệu
+            _context.TheoDoiSauTiem.Update(existingRecord);
+            await _context.SaveChangesAsync();
+
+            return Ok(new
+            {
+                Message = "Cập nhật thành công",
+                TheoDoiSauTiem = existingRecord
+            });
+        }
+
+
+        [HttpGet("TheoDoiSauTiemByIDDK/{IDDK}")]
+        public async Task<ActionResult> TheoDoiSauTiemByIDDK( string IDDK)
+        {
+            var TiemChung = await _context.TheoDoiSauTiem.Include(st=>st.TiemChung)
+                .Include(st => st.KhachHang)
+                .Include(st => st.NhanVien)
+                .FirstOrDefaultAsync(st => st.TiemChung.IDDK == IDDK);
+            return Ok(TiemChung); 
         }
     }
 }

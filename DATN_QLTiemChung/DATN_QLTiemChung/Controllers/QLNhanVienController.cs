@@ -59,7 +59,7 @@ namespace DATN_QLTiemChung.Controllers
 
 
 
-        [HttpPost("AddNhanVien/AddNhanVien")]
+
         public async Task<IActionResult> AddNhanVien(string IDNV, string hoKhauXa, string hoTen, string chucVu, string IDCD, string IDPB, DateTime ngaySinh, string danToc, string gioiTinh, string cmt, string email, string sdt, string diaChiChiTiet)
         {
             if (!ModelState.IsValid)

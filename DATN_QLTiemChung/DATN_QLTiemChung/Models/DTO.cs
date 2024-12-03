@@ -236,26 +236,26 @@ namespace DATN_QLTiemChung.Models
 
     public class createTiemChung
     {
-        public string IDTC { get; set; }
         public string IDKH { get; set; }
+
         public string IDNV { get; set; }
         public string IDDK { get; set; }
-        public string ThoiGian { get; set; }
-        public KhachHang? khachHang { get; set; }
-        public NhanVien? nhanVien { get; set; }
-        public DangKyVaccine? dangKyVaccine { get; set; }
+
+        public DateTime ThoiGian { get; set; }
+        public bool TrangThai { get; set; }
+        public string? GhiChu { get; set; }
     }
 
     public class createTheoDoi
     {
         public string IDST { get; set; }
+        public string IDTC { get; set; }
         public string IDNV { get; set; }
         public string IDKH { get; set; }
-        public string ThoiGian { get; set; }
-        public string TrangThai { get; set; }
-        public string GhiChu { get; set; }
-        public NhanVien? nhanVien { get; set; }
-        public KhachHang? khachHang { get; set; }
+        public TimeSpan ThoiGian { get; set; }
+        public bool TrangThai { get; set; }
+        public string? GhiChu { get; set; }
+
     }
     public class NhanVienDTO
     {
