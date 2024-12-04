@@ -22,10 +22,10 @@ namespace DATN_QLTiemChung_Api.Models
         public string IDDK { get; set; } // ID đăng ký
         [ForeignKey(nameof(IDDK))]
         public DangKyTiemChung DangKyTiemChung { get; set; }
-
-        public DateTime ThoiGian { get; set; }
+		public DateTime ThoiGian { get; set; }
         public bool TrangThai { get; set; }
         public string? GhiChu { get; set; }
-    }
+		public int? SoMui { get; set; }
+	}
 
 }

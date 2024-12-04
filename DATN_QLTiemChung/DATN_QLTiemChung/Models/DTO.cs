@@ -137,6 +137,35 @@ namespace DATN_QLTiemChung.Models
         public string? IDNHC { get; set; }
         public string? IDXX { get; set; }
     }
+    public class VaccineCreateDTO
+    {
+
+        [Required]
+        public string IDTL { get; set; }
+        [Required]
+        public string TenVatTu { get; set; }
+        public string? IDNGC { get; set; }
+        public string IDXX { get; set; }
+        public string? IDNHC { get; set; }
+        [Required]
+        public double DonGia { get; set; }
+        [Required]
+        public DateTime HanSuDung { get; set; }
+
+        public string? GhiChu { get; set; }
+        [Required]
+        public int SoLuong { get; set; }
+    }
+    public class FindvattuDTO
+    {
+        public string? IDVT { get; set; }
+        public string? TenVatTu { get; set; }
+        public string? IDTL { get; set; }
+        public string? IDNGC { get; set; }
+        public string? IDNHC { get; set; }
+        public DateTime? HanSuDung { get; set; }
+
+    }
     public class HoaDonCreateDTO
     {
         [Required]
@@ -303,5 +332,46 @@ namespace DATN_QLTiemChung.Models
         public string IDTTP { get; set; }
         public string NameTTP { get; set; }
     }
+    public class KhachHangUpdateDTO
+    {
+        public string IDKH { get; set; }
+        public string IDXP { get; set; }
+        public string TenKhachHang { get; set; }
+        public DateTime NgaySinh { get; set; }
+        public string GioiTinh { get; set; }
+        public string DiaChi { get; set; }
+        public string SoDienThoai { get; set; }
+        public string Email { get; set; }
+        public string CCCD_MDD { get; set; }
 
+        public string DanToc { get; set; }
+    }
+    public class KhachHangDTo2
+    {
+        public string IDKH { get; set; }
+
+        public string TenKhachHang { get; set; }
+        public DateTime NgaySinh { get; set; }
+        public string GioiTinh { get; set; }
+        public string DiaChi { get; set; }
+        public string SoDienThoai { get; set; }
+        public string Email { get; set; }
+        public string CCCD_MDD { get; set; }
+        public string DanToc { get; set; }
+        public string FullAddress { get; set; }
+        public string IDXP { get; set; }
+        public string NameXP { get; set; }
+        public string IDQH { get; set; }
+        public string NameQH { get; set; }
+        public string IDTTP { get; set; }
+        public string NameTTP { get; set; }
+    }
+	public class FindKhachHang
+	{
+		public string? IDKH { get; set; }
+
+		public string? TenKhachHang { get; set; }
+		public string? SoDienThoai { get; set; }
+		public string? CCCD_MDD { get; set; }
+	}
 }

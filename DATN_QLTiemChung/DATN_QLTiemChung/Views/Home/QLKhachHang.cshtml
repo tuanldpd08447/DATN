@@ -1,7 +1,7 @@
 ﻿@using Newtonsoft.Json
 @{
 	var khachHangJson = ViewBag.KhachHangs as List<KhachHangDTo>;
-	var nhanVien = ViewBag.NhanVien as NhanVienDTO;
+	var khachHang = ViewBag.KhachHang as KhachHangDTo2;
 	List<string> _danTocList = new List<string>
 	{
 		"Kinh", "Tày", "Mường", "Mông", "H'mông", "Khmer", "Hoa", "Nùng", "Thái",
@@ -11,7 +11,7 @@
 		"Bình Định", "Tày", "Tày", "Tày", "Chơ", "Chống", "Gieo", "Mai", "Gia Rai",
 		"Kon Tum", "Đồng Tháp", "Gyar", "Lý Tự", "Tư", "Chứt", "Vân Kiều"
 	};
-	var dc = ViewBag.DiaChi as DiaChi;
+	var edit = ViewBag.edit as bool? ?? false;
 }
 <style>
 	.error-message {
@@ -29,70 +29,117 @@
 <div class="container mt-4">
 	<div class="d-flex justify-content-between align-items-center mb-4">
 		<h2 class="" style="color: #2fb388;">QUẢN LÝ KHÁCH HÀNG</h2>
-		<div class="Double-end ">
-			<button class="btn fw-bold custom-btn" id="addButton">
+		<div class="Double-end">
+			<button class="btn fw-bold custom-btn" id="addButton" data-action="@Url.Action("AddKhachHang", "QLKhachHang")" onclick="changeAction(this)">
 				<i class="fa-solid fa-plus"></i> Thêm
 			</button>
+
 			<button class="btn fw-bold custom-btn" id="activateButton">
 				<i class="fa-solid fa-floppy-disk"></i> Lưu
 			</button>
+
 			<button class="btn fw-bold custom-btn" id="CancelButton">
 				<i class="fa-solid fa-repeat"></i> Hủy
 			</button>
-			<button class="btn fw-bold custom-btn"><i class="fa-solid fa-print"></i> In</button>
-			<button class="btn fw-bold custom-btn"><i class="fa-solid fa-right-from-bracket"></i> Thoát</button>
+
+			<button class="btn fw-bold custom-btn" id="editButton" data-action="@Url.Action("UpdateKhachHang", "QLKhachHang")" onclick="changeAction(this)">
+				<i class="fa-solid fa-pen-to-square"></i> Sửa
+			</button>
+
+			<button class="btn fw-bold custom-btn">
+				<i class="fa-solid fa-right-from-bracket"></i> Thoát
+			</button>
 		</div>
 	</div>
-
+	<script>
+		function changeAction(button) {
+			var form = document.getElementById('customerForm');
+			if (form) {
+				var actionUrl = button.getAttribute('data-action');
+				if (actionUrl) {
+					// Kiểm tra và chỉ thay đổi action khi nó chưa đúng
+					if (form.action !== actionUrl) {
+						form.action = actionUrl; // Chỉ thay đổi action khi cần thiết
+					}
+				} else {
+					console.error('No action URL found');
+				}
+			} else {
+				console.error('Form not found');
+			}
+		}
+	</script>
 	<!-- Thông tin hóa đơn -->
 	<div class="row m-0 mb-3 border rounded-4 py-2  ">
 
 		<div class="col">
 			<div class=" ms-1 p-3 py-1 border rounded-4  h-100">
-				<form class="row " asp-action="AddKhachHang" asp-controller="QLKhachHang">
+				<form class="row " asp-action="FindKhachHang" asp-controller="QLKhachHang" method="post">
 					<div class="col-3">
 						<div class="form-group">
 							<label class="fw-bold" for="medicalCodeFind">Số y tế</label>
-							<input type="text" class="form-control" id="medicalCodeFind">
+							<input type="text" class="form-control" id="medicalCodeFind" name="FindCode">
 						</div>
 					</div>
 					<div class="col">
 						<div class="form-group">
 							<label class="fw-bold" for="UserNameFind">Tên bệnh nhân</label>
-							<input type="text" class="form-control" id="UserNameFind">
+							<input type="text" class="form-control" id="UserNameFind" name="FindName">
 						</div>
 					</div>
 					<div class="col">
 						<div class="form-group">
 							<label class="fw-bold" for="CMT/CCCD/MaDinhDanhFind">CMT/CCCD/Mã định danh</label>
-							<input type="text" class="form-control col" id="CMT/CCCD/MaDinhDanhFind">
+							<input type="text" class="form-control col" id="CMT/CCCD/MaDinhDanhFind" name="FindCCCD">
+						</div>
+					</div>
+					<div class="col">
+						<div class="form-group">
+							<label class="fw-bold" for="Sdtfind">SĐT</label>
+							<input type="text" class="form-control col" id="Sdtfind" name="FindSDT">
 						</div>
 					</div>
 					<div class="col-2">
-						<button class="btn btn-dark mt-4" type="button"><i class="fa-solid fa-magnifying-glass"></i>  Tìm</button>
+						<button class="btn fw-bold custom-btn mt-4" type="submit"><i class="fa-solid fa-magnifying-glass"></i>  Tìm</button>
 					</div>
 				</form>
 			</div>
+			@if (edit)
+			{
+				<script>
+					const edit = document.getElementById('editButton');
+					edit.disabled = false;
 
+				</script>
+			}
+			else
+			{
+				<script>
+					const edit = document.getElementById('editButton');
+					edit.disabled = true;
+
+				</script>
+			}
 
 		</div>
 
 		<div class="invoice-section col-md-12 mt-2  ">
 			<div class=" p-3 border rounded-4  ">
 				<div class="row ">
-					<form id="customerForm" asp-action="AddKhachHang" asp-controller="QLKhachHang">
+					<form id="customerForm" method="post" >
 						<div class="row">
+							<input type="text" name="IDKH" value="@khachHang?.IDKH" style="display: none;" />
 							<div class="form-group col">
 								<label class="fw-semibold" for="maYTe">Mã y tế</label>
-								<input type="text" class="form-control" id="maYTe" name="maYTe" required disabled>
+								<input type="text" class="form-control" id="maYTe" name="maYTe" required disabled value="@khachHang?.IDKH">
 							</div>
 							<div class="form-group col">
 								<label class="fw-semibold" for="hoTen">Họ tên</label>
-								<input type="text" class="form-control" id="hoTen" name="hoTen" required disabled>
+								<input type="text" class="form-control" id="hoTen" name="hoTen" required disabled value="@khachHang?.TenKhachHang">
 							</div>
 							<div class="form-group col">
 								<label class="fw-semibold" for="ngaySinh">Ngày sinh</label>
-								<input type="date" class="form-control" id="ngaySinh" name="ngaySinh" required disabled>
+								<input type="date" class="form-control" id="ngaySinh" name="ngaySinh" required disabled value="@(khachHang?.NgaySinh.ToString("yyyy-MM-dd") ?? "")">
 							</div>
 						</div>
 						<div class="row">
@@ -102,32 +149,64 @@
 									<option value="">Chọn dân tộc</option>
 									@foreach (var danToc in _danTocList)
 									{
-										<option value="@danToc">@danToc</option>
+										if (khachHang!=null && khachHang.DanToc == danToc)
+										{
+											<option value="@danToc" selected> @danToc</option>
+										}
+										else
+										{
+											<option value="@danToc"> @danToc</option>
+										}
 									}
 								</select>
 							</div>
 							<div class="form-group col">
 								<label class="fw-semibold" for="gioiTinh">Giới tính</label>
 								<select class="form-control" id="gioiTinh" name="gioiTinh" required disabled>
-									<option value="Nam">Nam</option>
-									<option value="Nữ">Nữ</option>
+									@if (khachHang != null)
+									{
+										if (khachHang.GioiTinh == "Nam")
+										{
+											<option value="Nam" selected>Nam</option>
+											<option value="Nữ">Nữ</option>
+											<option value="Khác">Khác</option>
+										}
+										else if (khachHang.GioiTinh == "Nữ")
+										{
+											<option value="Nam">Nam</option>
+											<option value="Nữ" selected>Nữ</option>
+											<option value="Khác">Khác</option>
+										}
+										else
+										{
+											<option value="Nam">Nam</option>
+											<option value="Nữ">Nữ</option>
+											<option value="Khác" selected>Khác</option>
+										}
+									}
+									else
+									{
+										<option value="Nam">Nam</option>
+										<option value="Nữ">Nữ</option>
+										<option value="Khác">Khác</option>
+									}
 								</select>
 							</div>
 							<div class="form-group col">
 								<label class="fw-semibold" for="cmt">CMT/CCCD/Mã định danh</label>
-								<input type="text" class="form-control" id="cmt" name="cmt" placeholder="Nhập số CMT/CCCD" required disabled>
+								<input type="text" class="form-control" id="cmt" name="cmt" placeholder="Nhập số CMT/CCCD" required disabled value="@khachHang?.CCCD_MDD">
 							</div>
 						</div>
 						<div class="row ">
 
 							<div class="form-group col">
 								<label class="fw-semibold" for="sdt">Sđt</label>
-								<input type="text" class="form-control" id="sdt" name="sdt" oninput="validatePhoneNumber()" placeholder="Nhập số điện thoại" required disabled>
+								<input type="text" class="form-control" id="sdt" name="sdt" oninput="validatePhoneNumber()" placeholder="Nhập số điện thoại" required disabled value="@khachHang?.SoDienThoai">
 								<span id="sdtError" class="error-message"></span>
 								<script>
 									function validatePhoneNumber() {
 										var phone = document.getElementById('sdt').value;
-										var phonePattern = /^[0-9]{10}$/; // Số điện thoại phải có 10 chữ số
+										var phonePattern = /^[0-9]{10}$/; 
 										var errorElement = document.getElementById('sdtError');
 
 										if (!phonePattern.test(phone)) {
@@ -144,7 +223,7 @@
 							</div>
 							<div class="form-group col">
 								<label class="fw-semibold" for="email">Email</label>
-								<input type="email" class="form-control" id="email" name="email" placeholder="Nhập email" title="Nhập đúng định dạng email (example@gmail.com)" required disabled>
+								<input type="email" class="form-control" id="email" name="email" placeholder="Nhập email" title="Nhập đúng định dạng email (example@gmail.com)" required disabled value="@khachHang?.Email">
 								<span id="emailError" class="error-message"></span>
 
 							</div>
@@ -154,9 +233,9 @@
 							<div class="form-group col">
 								<label class="fw-semibold" for="hoKhauTinh">Tỉnh/TP</label>
 								<select class="form-control" id="hoKhauTinh" required disabled>
-									@if (dc != null)
+									@if (khachHang != null)
 									{
-										<option value="@dc.IDTTP" selected>@dc.NameTTP</option>
+										<option value="@khachHang.IDTTP" selected>@khachHang.NameTTP</option>
 									}
 									else
 									{
@@ -169,9 +248,9 @@
 								<label class="fw-semibold" for="hoKhauQuan">Quận/Huyện</label>
 								<select class="form-control border-start-0" id="hoKhauQuan" required disabled>
 
-									@if (dc != null)
+									@if (khachHang != null)
 									{
-										<option value="@dc.IDQH" selected>@dc.NameQH</option>
+										<option value="@khachHang.IDQH" selected>@khachHang.NameQH</option>
 									}
 									else
 									{
@@ -187,9 +266,9 @@
 								<select class="form-control border-start-0" id="hoKhauXa" name="hoKhauXa" required disabled>
 
 
-									@if (dc != null)
+									@if (khachHang != null)
 									{
-										<option value="@dc.IDXP" selected>@dc.NameXP</option>
+										<option value="@khachHang.IDXP" selected>@khachHang.NameXP</option>
 									}
 									else
 									{
@@ -204,9 +283,7 @@
 						<div class="row">
 							<div class="form-group col">
 								<label class="fw-semibold" for="diaChiChiTiet">Địa chỉ chi tiết</label>
-								<input type="text" class="form-control" id="diaChiChiTiet" name="diaChiChiTiet" placeholder="37 Đ. Phạm Văn Nghị" value="@if(nhanVien!=null){
-                                @nhanVien.DiaChi
-								}" required disabled>
+								<input type="text" class="form-control" id="diaChiChiTiet" name="diaChiChiTiet" placeholder="37 Đ. Phạm Văn Nghị" value="@khachHang?.DiaChi"  required disabled>
 							</div>
 						</div>
 
@@ -226,7 +303,6 @@
 					<table class="table table-bordered" id="khachHangTable">
 						<thead>
 							<tr>
-								<th></th>
 								<th>ID</th>
 								<th>Tên Khách Hàng</th>
 								<th>Ngày Sinh</th>
@@ -244,13 +320,12 @@
 							{
 								@foreach (var item in khachHangJson)
 								{
-									<tr>
-										<td></td>
+									<tr onclick="location.href='@Url.Action("ClickKhachHang", "QLKhachHang", new { IDKH = @item.IDKH })' ">
 										<td>@item.IDKH</td>
 										<td>@item.TenKhachHang</td>
-										<td>@item.NgaySinh</td>
+										<td>@item.NgaySinh.ToString("dd/MM/yyyy")</td>
 										<td>@item.GioiTinh</td>
-										<td>Địa Chỉ</td>
+										<td>@item.DiaChi</td>
 										<td>@item.SoDienThoai</td>
 										<td>@item.Email</td>
 										<td>@item.CCCD_MDD</td>
@@ -260,48 +335,60 @@
 								}
 
 							}
+							else
+							{
+								<tr>
+									<td colspan="10" class="text-center fw-bold"> Không tìm thấy thông tin.... </td>
+								</tr>
+							}
+
 						</tbody>
 					</table>
 				</div>
 			</div>
 			<script>
+				// Khai báo các phần tử
+				const editButton = document.getElementById("editButton");
+				const activateButton = document.getElementById("activateButton");
+				const addButton = document.getElementById("addButton");
+				const cancelButton = document.getElementById("CancelButton");
+				const targetButton = document.getElementById("targetButton");
+				const customerForm = document.getElementById("customerForm");
 
-				// Xử lý sự kiện khi nhấn nút "Thêm"
-
-
-				// Thêm mới
-				document.getElementById("addButton").addEventListener("click", function () {
-					const form = document.getElementById("customerForm");
-					form.querySelectorAll("input, select").forEach(el => {
-						el.disabled = false;
+				activateButton.disabled = true;
+				// Hàm tiện ích: Bật/tắt trạng thái các phần tử trong form
+				function toggleFormElements(enable) {
+					customerForm.querySelectorAll("input, select").forEach(el => {
+						el.disabled = !enable;
 					});
+					activateButton.disabled = !enable;
+				}
+
+				// Xử lý nút "Thêm mới"
+				addButton.addEventListener("click", () => {
+					toggleFormElements(true); // Bật các trường trong form
+					const maYTe = document.getElementById("maYTe");
+					maYTe.disabled = true;
 				});
 
-				// Hủy
-				document.getElementById("CancelButton").addEventListener("click", function () {
-					const form = document.getElementById("customerForm");
-					form.reset(); // Reset tất cả các giá trị
-					form.querySelectorAll("input, select").forEach(el => {
-						el.disabled = true;
-					});
+				// Xử lý nút "Chỉnh sửa"
+				editButton.addEventListener("click", () => {
+					toggleFormElements(true); // Bật các trường trong form
 				});
 
-
-				// Lấy phần tử button
-				const activateButton = document.getElementById('activateButton');
-				const targetButton = document.getElementById('targetButton');
-
-				// Thêm sự kiện click vào nút kích hoạt
-				activateButton.addEventListener('click', function () {
-					// Khi nút đầu tiên được nhấn, kích hoạt nút thứ hai
-					targetButton.click();
+				// Xử lý nút "Hủy"
+				cancelButton.addEventListener("click", () => {
+					customerForm.reset(); // Đặt lại toàn bộ giá trị trong form
+					toggleFormElements(false); // Tắt các trường trong form
 				});
 
-				// Thêm sự kiện click vào nút bị kích hoạt
-				targetButton.addEventListener('click', function () {
-
+				// Xử lý sự kiện kích hoạt nút "activateButton"
+				activateButton.addEventListener("click", () => {
+					targetButton.click(); // Kích hoạt nút mục tiêu
 				});
 
+	
+				
 			</script>
 
 		</div>

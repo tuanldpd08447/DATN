@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DATN_QLTiemChung")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cb7758179c94b528e12f70e6723e57c1c4e19ff2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1fbe2fe7a92e96c86a576a78d268d1e1d680b64e")]
 [assembly: System.Reflection.AssemblyProductAttribute("DATN_QLTiemChung")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DATN_QLTiemChung")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

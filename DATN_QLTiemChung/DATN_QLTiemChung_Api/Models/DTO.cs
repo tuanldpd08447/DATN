@@ -201,6 +201,35 @@ namespace DATN_QLTiemChung_Api.Models
         public string? IDNHC { get; set; }
         public string? IDXX { get; set; }
     }
+    public class VaccineCreateDTO
+    {
+
+        [Required]
+        public string IDTL { get; set; }
+        [Required]
+        public string TenVatTu { get; set; }
+        public string? IDNGC { get; set; }
+        public string IDXX { get; set; }
+        public string? IDNHC { get; set; }
+        [Required]
+        public double DonGia { get; set; }
+        [Required]
+        public DateTime HanSuDung { get; set; }
+
+        public string? GhiChu { get; set; }
+        [Required]
+        public int SoLuong { get; set; }
+    }
+    public class FindvattuDTO
+    {
+        public string? IDVT { get; set; }
+        public string? TenVatTu { get; set; }
+        public string? IDTL { get; set; }
+        public string? IDNGC { get; set; }
+        public string? IDNHC { get; set; }
+        public DateTime? HanSuDung { get; set; }
+
+    }
     public class HoaDonCreateDTO
     {
         [Required]
@@ -379,8 +408,14 @@ namespace DATN_QLTiemChung_Api.Models
 
 
     }
+    public class FindKhachHang
+    {
+		public string? IDKH { get; set; }
+		public string? TenKhachHang { get; set; }
+		public string? SoDienThoai { get; set; }
+		public string? CCCD_MDD { get; set; }
+	}
 
-  
 
 
 }
