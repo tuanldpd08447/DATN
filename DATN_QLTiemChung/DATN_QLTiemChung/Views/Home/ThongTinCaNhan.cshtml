@@ -1,0 +1,226 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    var pb = ViewBag.PhongBans as List<PhongBan>;
+    var cd = ViewBag.ChucDanhs as List<ChucDanh>;
+    var dc = ViewBag.DiaChi as DiaChi;
+    var nhanVien = ViewBag.NhanVien as NhanVienDTO;
+    List<string> _danTocList = new List<string>
+    {
+        "Kinh", "Tày", "Mường", "Mông", "H'mông", "Khmer", "Hoa", "Nùng", "Thái",
+        "Dzao", "Cờ Lao", "Gian", "Ê Đê", "Ba Na", "Sán Dìu", "Sán Chay", "Cơ Tu",
+        "Sơ Đăng", "Tà Ôi", "Pà Thẻn", "Hà Nhì", "Chứt", "Lào", "Lự", "Tày",
+        "Chăm", "Dẻo", "Bố Y", "Rơ Măm", "Ra Glai", "Sak", "Xinh Mun", "Xơ Đăng",
+        "Bình Định", "Tày", "Tày", "Tày", "Chơ", "Chống", "Gieo", "Mai", "Gia Rai",
+        "Kon Tum", "Đồng Tháp", "Gyar", "Lý Tự", "Tư", "Chứt", "Vân Kiều"
+    };
+}
+<div class="container mt-5">
+    <div class="p-5 border border-2 rounded-4 w-75" style="margin: 0px 15% 0px 15%;">
+        <h2 class="text-center mb-5" style="color: #2fb388;">Thông Tin Cá Nhân Nhân Viên</h2>
+        <form>
+            <!-- Row 1 -->
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label for="IDNV" class="form-label fw-semibold">ID Nhân Viên</label>
+                    <input type="text" class="form-control" id="IDNV" placeholder="Nhập ID nhân viên" readonly value="@if(nhanVien!=null){
+                                @nhanVien.IDNV
+}">
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="TenNhanVien" class="form-label fw-semibold">Tên Nhân Viên</label>
+                    <input type="text" class="form-control" id="TenNhanVien" placeholder="Nhập tên nhân viên" readonly value="@if(nhanVien!=null){
+                                @nhanVien.TenNhanVien
+}">
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="NgaySinh" class="form-label fw-semibold">Ngày Sinh</label>
+                    <input type="date" class="form-control" id="NgaySinh" readonly value="@(nhanVien?.NgaySinh.ToString("yyyy-MM-dd") ?? "")">
+                </div>
+            </div>
+            <!-- Row 2 -->
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label for="DanToc" class="form-label fw-semibold">Dân Tộc</label>
+                    <select class="form-control" id="danToc" name="danToc" readonly required>
+                        <option value="">Chọn dân tộc</option>
+                        @foreach (var danToc in _danTocList)
+                        {
+                            if (nhanVien != null && danToc == nhanVien.DanToc)
+                            {
+                                <option value="@danToc" selected>@danToc</option>
+                            }
+                            else
+                            {
+                                <option value="@danToc">@danToc</option>
+
+                            }
+                        }
+                    </select>
+
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="GioiTinh" class="form-label fw-semibold">Giới Tính</label>
+                    <select class="form-control" id="gioiTinh" name="gioiTinh" placeholder="Nam" readonly required>
+                        <option value="" disabled>Chọn giới tính</option>
+                        @if (nhanVien != null)
+                        {
+                            if (nhanVien.GioiTinh == "Nam")
+                            {
+                                <option value="Nam" selected>Nam</option>
+                                <option value="Nữ">Nữ</option>
+                                <option value="Khác">Khác</option>
+                            }
+                            else if (nhanVien.GioiTinh == "Nữ")
+                            {
+                                <option value="Nam">Nam</option>
+                                <option value="Nữ" selected>Nữ</option>
+                                <option value="Khác">Khác</option>
+                            }
+                            else
+                            {
+                                <option value="Nam">Nam</option>
+                                <option value="Nữ">Nữ</option>
+                                <option value="Khác" selected>Khác</option>
+                            }
+                        }
+                        else
+                        {
+                            <option value="Nam">Nam</option>
+                            <option value="Nữ">Nữ</option>
+                            <option value="Khác">Khác</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="CCCD" class="form-label fw-semibold">Căn Cước Công Dân</label>
+                    <input type="text" class="form-control" id="CCCD" placeholder="Nhập số CCCD" readonly value="@if(nhanVien!=null){
+                                @nhanVien.CCCD
+}">
+                </div>
+            </div>
+            <!-- Row 3 -->
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label for="ChucVu" class="form-label fw-semibold">Chức Vụ</label>
+                    <input type="text" class="form-control" id="ChucVu" placeholder="Nhập chức vụ" readonly value="@if(nhanVien!=null){
+                                @nhanVien.ChucVu
+}">
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="IDCD" class="form-label fw-semibold">ID Chức Danh</label>
+                    <select class="form-control" name="IDCD" id="IDCD" readonly required>
+                        @if (cd != null)
+                        {
+                            foreach (var item in cd)
+                            {
+                                if (nhanVien != null && @nhanVien.TenChucDanh == item.IDCD)
+                                {
+                                    <option value="@item.IDCD" selected>@item.TenChucDanh </option>
+                                }
+                                else
+                                {
+                                    <option value="@item.IDCD">@item.TenChucDanh </option>
+                                }
+
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="IDPB" class="form-label fw-semibold">ID Phòng Ban</label>
+                    <select class="form-control" name="IDPB" id="IDPB" readonly required>
+                        @if (pb != null)
+                        {
+                            foreach (var item in pb)
+                            {
+                                if (nhanVien != null && @nhanVien.TenPhongBan == item.IDPB)
+                                {
+                                    <option value="@item.IDPB" selected>@item.TenPhongBan </option>
+                                }
+                                else
+                                {
+                                    <option value="@item.IDPB">@item.TenPhongBan </option>
+                                }
+
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <!-- Row 4 -->
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="SoDienThoai" class="form-label fw-semibold">Số Điện Thoại</label>
+                    <input type="text" class="form-control" id="SoDienThoai" placeholder="Nhập số điện thoại" readonly value="@if(nhanVien!=null){
+                                @nhanVien.SoDienThoai
+}">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="Email" class="form-label fw-semibold">Email</label>
+                    <input type="email" class="form-control" id="Email" placeholder="Nhập email" readonly value="@if(nhanVien!=null){
+                                @nhanVien.Email
+}">
+                </div>
+            </div>
+            <!-- Row 5 -->
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label for="XaPhuong" class="form-label fw-semibold">Xã/Phường</label>
+                    <select class="form-control " id="hoKhauXa" name="hoKhauXa" readonly>
+                        @if (dc != null)
+                        {
+                            <option value="@dc.IDXP" selected>@dc.NameXP</option>
+                        }
+                        else
+                        {
+                            <option value="" disabled selected>Chọn phường/xã</option>
+                        }
+
+                        <!-- Add other wards here -->
+                    </select>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="QuanHuyen" class="form-label fw-semibold">Quận/Huyện</label>
+                    <select class="form-control border-start-0" id="hoKhauQuan" readonly>
+
+                        @if (dc != null)
+                        {
+                            <option value="@dc.IDQH" selected>@dc.NameQH</option>
+                        }
+                        else
+                        {
+                            <option value="" disabled selected>Chọn quận/huyện</option>
+                        }
+
+                        <!-- Add other districts here -->
+                    </select>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="Tinh" class="form-label fw-semibold">Tỉnh/Thành phố</label>
+                    <select class="form-control" id="hoKhauTinh" readonly>
+                        @if (dc != null)
+                        {
+                            <option value="@dc.IDTTP" selected>@dc.NameTTP</option>
+                        }
+                        else
+                        {
+                            <option value="" disabled selected>Chọn tỉnh/thành phố</option>
+                        }
+
+                    </select>
+                </div>
+            </div>
+            <!-- Row 6 -->
+            <div class="row">
+                <div class="col-md-12 mb-3">
+                    <label for="DiaChi" class="form-label fw-semibold">Địa Chỉ</label>
+                    <input type="text" class="form-control" id="diaChiChiTiet" name="diaChiChiTiet" placeholder="37 Đ. Phạm Văn Nghị" readonly value="@if(nhanVien!=null){
+                                @nhanVien.DiaChi
+}"  >
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

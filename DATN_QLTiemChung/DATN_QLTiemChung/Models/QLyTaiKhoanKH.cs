@@ -11,7 +11,7 @@ namespace DATN_QLTiemChung.Models
         [Required]
         public string IDKH { get; set; } // ID khách hàng
         [ForeignKey(nameof(IDKH))]
-        public KhachHang KhachHang { get; set; }
+        public KhachHang? KhachHang { get; set; }
 
         public string SDT { get; set; }
         public string MatKhau { get; set; }

@@ -62,14 +62,15 @@
                         @if (login != null)
                         {
                         <div class="" style="padding-left: 6%;">
-                            <button type="button" class="btn fs-5 border-0 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="color: #2fb388;">
+                            <button type="button" class="btn border-0 dropdown-toggle fw-bold" data-bs-toggle="dropdown" aria-expanded="false" style="color: #2fb388; font-size: 1.1rem;">
                                 @TempData["Username"]
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end mt-1">
                                 <li><a class="dropdown-item" asp-action="ThongTinCaNhan" asp-controller="TTCaNhan" asp-route-IDKH="@login">Thông tin cá nhân</a></li>
+                                <li><a class="dropdown-item" asp-action="DoiMatKhau" asp-controller="DoiMatKhau" asp-route-IDKH="@login">Đổi mật khẩu</a></li>
                                 <li><a class="dropdown-item" asp-action="LichSuTiem">Lịch sử tiêm</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" asp-action="Logout" asp-controller="DNhapDKy" href="#">Đăng xuất</a></li>
+                                <li><a class="dropdown-item" asp-action="Logout" asp-controller="DNhapDKy">Đăng xuất</a></li> 
                             </ul>
                             <style>
                                 .custom-btn-login {

@@ -3,6 +3,20 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DATN_CDCWebClient.Models
 {
+    public class DoiMatKhauRequest
+    {
+        public string IDKH { get; set; }
+        public string MatKhauCu { get; set; }
+        public string MatKhauMoi { get; set; }
+    }
+    public class QLyTaiKhoanKHDTO
+    {
+        public string IDKH { get; set; }
+        public string IDTKKH { get; set; }
+        public string SDT { get; set; }
+        public string MatKhau { get; set; }
+        public string TenKhachHang { get; set; }
+    }
     public class KhachHangUpdateDTO
     {
         public string IDKH { get; set; }

@@ -11,7 +11,7 @@ namespace DATN_QLTiemChung.Models
         [Required]
         public string IDNV { get; set; } // ID nhân viên
         [ForeignKey(nameof(IDNV))]
-        public NhanVien NhanVien { get; set; }
+        public NhanVien? NhanVien { get; set; }
 
         public string Email { get; set; }
         public string MatKhau { get; set; }

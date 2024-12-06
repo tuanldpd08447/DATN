@@ -51,18 +51,29 @@ namespace DATN_QLTiemChung.Controllers
                 HttpContext.Session.SetString("Role", NhanVien.Role);
                 HttpContext.Session.SetString("ID", NhanVien.ID);
 
-                return RedirectToAction("HomeQL", "Home");
+                GetSession();
+                TempData["Notification"] = "Đăng nhập thành công.";
+                TempData["NotificationType"] = "success";
+                TempData["NotificationTitle"] = "Thông báo.";
+                return View("~/Views/Home/HomeQL.cshtml");
             }
- 
+                GetSession();
                 ViewBag.ErrorMessage = "Thông tin đăng nhập không chính xác.";
-                return View("~/Views/Home/Login.cshtml");
+            TempData["Notification"] = "Đăng nhập thất bại. Thông tin đăng nhập không chính xác.";
+            TempData["NotificationType"] = "error";
+            TempData["NotificationTitle"] = "Thông báo.";
+            return View("~/Views/Home/Login.cshtml");
 
         }
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
 
-            return RedirectToAction("HomeQL", "Home"); 
+            GetSession();
+            TempData["Notification"] = "Đăng xuất thành công.";
+            TempData["NotificationType"] = "success";
+            TempData["NotificationTitle"] = "Thông báo.";
+            return View("~/Views/Home/HomeQL.cshtml"); 
         }
     }
 }
