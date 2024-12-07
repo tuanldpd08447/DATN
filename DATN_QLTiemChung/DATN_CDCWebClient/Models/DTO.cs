@@ -3,6 +3,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DATN_CDCWebClient.Models
 {
+    public class EmailRequest
+    {
+        public string RecipientEmail { get; set; }
+        public string Subject { get; set; }
+        public string Body { get; set; }
+    }
     public class DoiMatKhauRequest
     {
         public string IDKH { get; set; }
@@ -41,6 +47,7 @@ namespace DATN_CDCWebClient.Models
 
         public Double TongTien { get; set; }
 
+        public bool ThanhToan { get; set; }
         public bool TrangThai { get; set; }
         public string GhiChu { get; set; }
 

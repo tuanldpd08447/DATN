@@ -82,64 +82,95 @@ namespace DATN_QLTiemChung_Api.Controllers
         [HttpGet("GetAllBYIDKh/{IDKH}")]
         public async Task<ActionResult<HoaDonDTO>> GetAllBYIDKh(string IDKH)
         {
-            var hoaDon = await _context.HoaDon
-                .Include(hd => hd.KhachHang)
-                .Include(hd => hd.NhanVien)
-                .Include(hd => hd.HoaDonChiTiets)
+            try
+            {
+                var hoaDon = await _context.HoaDon
+                    .AsNoTracking()
+                    .Include(hd => hd.KhachHang)
+                    .Include(hd => hd.NhanVien)
+                    .Include(hd => hd.HoaDonChiTiets)
+                    .FirstOrDefaultAsync(hd => hd.IDKH == IDKH);
+
+                if (hoaDon == null)
+                {
+                    return NotFound(new { message = "Hóa đơn không tồn tại" });
+                }
+
+                var dto = new HoaDonDTO
+                {
+                    IDHD = hoaDon.IDHD,
+                    IDKH = hoaDon.KhachHang?.IDKH,
+                    IDNV = hoaDon.NhanVien?.IDNV,
+                    ThoiGian = hoaDon.ThoiGian,
+                    GhiChu = hoaDon.GhiChu,
+                    NoiDung = hoaDon.NoiDung,
+                    TongTien = hoaDon.TongTien,
+                    TrangThai = hoaDon.TrangThai,
+                    ThanhToan = hoaDon.ThanhToan,
+                    KhachHang = hoaDon.KhachHang != null ? new KhachHang
+                    {
+                        IDKH = hoaDon.KhachHang.IDKH,
+                        TenKhachHang = hoaDon.KhachHang.TenKhachHang,
+                        SoDienThoai = hoaDon.KhachHang.SoDienThoai,
+                        NgaySinh = hoaDon.KhachHang.NgaySinh,
+                        IDXP = hoaDon.KhachHang.IDXP,
+                        DiaChi = hoaDon.KhachHang.DiaChi
+                    } : null,
+                    NhanVien = hoaDon.NhanVien != null ? new NhanVien
+                    {
+                        IDNV = hoaDon.NhanVien.IDNV
+                    } : null,
+                    HoaDonChiTiets = hoaDon.HoaDonChiTiets?.Select(hdct => new HoaDonChiTiet
+                    {
+                        IDHDCT = hdct.IDHDCT,
+                        IDVT = hdct.IDVT,
+                        SoLuong = hdct.SoLuong,
+                        DonGia = hdct.DonGia,
+                        ThanhTien = hdct.ThanhTien,
+                        GhiChu = hdct.GhiChu
+                    }).ToList() ?? new List<HoaDonChiTiet>()
+                };
+
+                return Ok(dto);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Lỗi hệ thống" });
+            }
+        }
+
+
+        [HttpGet("GetKHBYID/{IDKH}")]
+        public async Task<ActionResult<KhachHang>> GetKHBYID(string IDKH)
+        {
+            var khachhang = await _context.KhachHang
                 .FirstOrDefaultAsync(hd => hd.IDKH == IDKH);
 
 
-            if (hoaDon == null)
+            if (khachhang == null)
             {
-                return NotFound(new { message = "Hóa đơn không tồn tại" });
+                return NotFound(new { message = "Khách hàng không tồn tại" });
             }
 
 
-            var dto = new HoaDonDTO
+            var dto = new KHDTO
             {
 
-                IDHD = hoaDon.IDHD,
-                IDKH = hoaDon.KhachHang?.IDKH,
-                IDNV = hoaDon.NhanVien?.IDNV,
-                ThoiGian = hoaDon.ThoiGian,
-                GhiChu = hoaDon.GhiChu,
-                NoiDung = hoaDon.NoiDung,
-                TongTien = hoaDon.TongTien,
-                TrangThai = hoaDon.TrangThai,
+                IDKH = khachhang.IDKH,
+                IDXP = khachhang.IDXP,
+                TenKhachHang = khachhang.TenKhachHang,
+                NgaySinh = khachhang.NgaySinh,
+                GioiTinh = khachhang.GioiTinh,
+                DiaChi = khachhang.DiaChi,
+                SoDienThoai = khachhang.SoDienThoai,
+                Email = khachhang.Email,
+                CCCD_MDD = khachhang.CCCD_MDD,
+                DanToc = khachhang.DanToc,
 
-
-
-
-                // Ánh xạ các thuộc tính cần thiết cho Khách hàng
-                KhachHang = hoaDon.KhachHang != null ? new KhachHang
-                {
-                    IDKH = hoaDon.KhachHang.IDKH,
-                    TenKhachHang = hoaDon.KhachHang.TenKhachHang,
-                    SoDienThoai = hoaDon.KhachHang.SoDienThoai,
-                    NgaySinh = hoaDon.KhachHang.NgaySinh,
-                    IDXP = hoaDon.KhachHang.IDXP,
-
-                    DiaChi = hoaDon.KhachHang.DiaChi
-                } : null,
-
-                // Ánh xạ các thuộc tính cần thiết cho Nhân viên
-                NhanVien = hoaDon.NhanVien != null ? new NhanVien
-                {
-                    IDNV = hoaDon.NhanVien.IDNV,
-
-                } : null,
-
-                // Ánh xạ danh sách chi tiết hóa đơn
-                HoaDonChiTiets = hoaDon.HoaDonChiTiets?.Select(hdct => new HoaDonChiTiet
-                {
-                    IDHDCT = hdct.IDHDCT,
-                    IDVT = hdct.IDVT,
-                    SoLuong = hdct.SoLuong,
-                    DonGia = hdct.DonGia,
-                    ThanhTien = hdct.ThanhTien,
-                    GhiChu = hdct.GhiChu
-                }).ToList() ?? new List<HoaDonChiTiet>()
             };
+
+
+
 
             return Ok(dto);
         }
@@ -171,76 +202,52 @@ namespace DATN_QLTiemChung_Api.Controllers
         [HttpPost("AddHoaDon")]
         public async Task<IActionResult> AddHoaDon([FromBody] HoaDonCreateDTO HoaDonDto)
         {
-            if (!ModelState.IsValid)
+            // Kiểm tra dữ liệu đầu vào
+            if (HoaDonDto == null || !ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return BadRequest(new { Message = "Dữ liệu hóa đơn không hợp lệ." });
             }
 
+            // Kiểm tra hóa đơn có tồn tại không
 
-            var hd = await _context.HoaDon.FindAsync(HoaDonDto.IDHD);
-            if (hd == null)
+            // Tạo hóa đơn mới
+            string newIDHD = await GenerateNewIDHD();
+            var newHoaDon = new HoaDon
             {
-                string newIDHD = await GenerateNewIDHD();
+                IDHD = newIDHD,
+                IDKH = HoaDonDto.IDKH,
+                IDNV = HoaDonDto.IDNV,
+                ThoiGian = HoaDonDto.ThoiGian,
+                GhiChu = HoaDonDto.GhiChu, // Hình thức thanh toán
+                NoiDung = HoaDonDto.NoiDung, // Tên vaccine
+                TongTien = HoaDonDto.TongTien,
+                TrangThai = true,
+            };
 
-
-                var newHoaDon = new HoaDon
-                {
-
-                    IDHD = newIDHD,
-                    IDKH = HoaDonDto.IDKH,
-                    IDNV = HoaDonDto.IDNV,
-                    ThoiGian = HoaDonDto.ThoiGian,
-                    GhiChu = HoaDonDto.GhiChu,
-                    NoiDung = HoaDonDto.NoiDung,
-                    TongTien = HoaDonDto.TongTien,
-                    TrangThai = HoaDonDto.TrangThai,
-
-                };
-
-                // Thêm vào Database
-                await _context.HoaDon.AddAsync(newHoaDon);
-                await _context.SaveChangesAsync();
-
-                return CreatedAtAction(nameof(GetAll), new { id = newHoaDon.IDHD }, newHoaDon);
-            }
-
-
-
-            return NotFound(new { Message = "Hóa đơn không tồn tại." });
-        }
-
-        [HttpPut("UpdateHoaDon")]
-        public async Task<IActionResult> UpdateHoaDon(string IDHD, [FromBody] HoaDonDTO HoaDonDto)
-        {
-            // Kiểm tra dữ liệu hợp lệ
-            if (!ModelState.IsValid)
+            // Tạo hóa đơn chi tiết mới
+            string newIDHDCT = await GenerateNewIDHDCT();
+            var newHoaDonChiTiet = new HoaDonChiTiet
             {
-                return BadRequest(ModelState);
-            }
+                IDHDCT = newIDHDCT,
+                IDHD = newIDHD, // Liên kết đúng hóa đơn
+                IDVT = HoaDonDto.IDVT,
+                SoLuong = HoaDonDto.SoLuong,
+                DonGia = HoaDonDto.DonGia,
+                ThanhTien = HoaDonDto.ThanhTien,
+                GhiChu = HoaDonDto.GhiChu
+            };
 
-            // Tìm hóa đơn trong cơ sở dữ liệu theo ID
-            var hd = await _context.HoaDon.FindAsync(IDHD);
-            if (hd == null)
-            {
-                return NotFound(new { Message = "Hóa đơn không tồn tại." });
-            }
-
-            // Cập nhật các trường thông tin của hóa đơn từ DTO
-            hd.IDKH = HoaDonDto.IDKH;
-            hd.IDNV = HoaDonDto.IDNV;
-            hd.ThoiGian = HoaDonDto.ThoiGian;
-            hd.GhiChu = HoaDonDto.GhiChu;
-            hd.NoiDung = HoaDonDto.NoiDung;
-            hd.TongTien = HoaDonDto.TongTien;
-            hd.TrangThai = HoaDonDto.TrangThai;
-
-            // Lưu các thay đổi vào cơ sở dữ liệu
-            _context.HoaDon.Update(hd);
+            // Thêm dữ liệu vào cơ sở dữ liệu
+            await _context.HoaDon.AddAsync(newHoaDon);
+            await _context.HoaDonChiTiet.AddAsync(newHoaDonChiTiet);
             await _context.SaveChangesAsync();
 
-            // Trả về đối tượng hóa đơn đã cập nhật
-            return Ok(hd);
+            // Phản hồi thành công
+            return Ok(new { HoaDon = newHoaDon, HoaDonChiTiet = newHoaDonChiTiet });
         }
+
+
+
         private async Task<string> GenerateNewIDHD()
         {
             // Lấy khách hàng có IDHD lớn nhất hiện tại
@@ -264,6 +271,30 @@ namespace DATN_QLTiemChung_Api.Controllers
             }
 
             return newIDHD;
+        }
+        private async Task<string> GenerateNewIDHDCT()
+        {
+            // Lấy khách hàng có IDHD lớn nhất hiện tại
+            var lastHDKH = await _context.HoaDonChiTiet
+                .OrderByDescending(HD => HD.IDHDCT)
+                .FirstOrDefaultAsync();
+
+            string newIDHDCT;
+
+            if (lastHDKH != null)
+            {
+                // Lấy phần số cuối cùng từ IDHD (giả sử dạng HD001, HD002,...)
+                string lastNumber = lastHDKH.IDHD.Substring(2); // Lấy phần sau "HD"
+                int nextNumber = int.Parse(lastNumber) + 1; // Tăng số lên 1
+                newIDHDCT = "HDCT" + nextNumber.ToString("D3"); // Đảm bảo có 3 chữ số
+            }
+            else
+            {
+                // Nếu chưa có HDách hàng nào, bắt đầu từ HD001
+                newIDHDCT = "HDCT001";
+            }
+
+            return newIDHDCT;
         }
     }
 }

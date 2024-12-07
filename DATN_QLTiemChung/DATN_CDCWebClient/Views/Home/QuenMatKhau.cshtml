@@ -1,0 +1,141 @@
+﻿@{
+    Layout = null;
+    var successSendMail = ViewBag.SuccessSendMail as bool? ?? false;
+    string email = ViewBag.Email;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password</title>
+    <script src="https://kit.fontawesome.com/e9c77e8100.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+    <div class="bg-light d-flex justify-content-center align-items-center" style="height: 100vh;">
+        <div class="card p-4 shadow-lg" style="width: 100%; max-width: 50%; border-radius: 15px;">
+            <div class="row">
+                <div class="col-6">
+                    <img src="~/Img/CDC Đà Nẵng copy.png" class="pt-5" alt="" width="100%">
+                </div>
+                <div class="col">
+                    <div class="text-center mb-4">
+                        <img src="~/Img/Logo.png" alt="Avatar" class="rounded-circle" style="width: 80px; height: 80px;">
+                        <h4 class="mt-2 fw-bold">QUÊN MẬT KHẨU</h4>
+                    </div>
+
+                    <form asp-action="SendOtpEmail" asp-controller="DNhapDKy" method="post">
+                        <!-- Email Input -->
+                        @if (successSendMail)
+                        {
+                            <div class="form-group mt-2">
+                                <div class="input-group">
+                                    <span class="input-group-text border rounded-start" style="padding: 20px;">
+                                        <i class="fa-solid fa-envelope"></i>
+                                    </span>
+                                    <input type="email" class="form-control border-start-0 border-end-0" id="emailInput" name="email" placeholder="Email của bạn" required>
+                                    <a class="input-group-text border link-offset-2 link-underline link-underline-opacity-0 border rounded-end" type="button" id="sendButton"
+                                       asp-action="SendOtpEmail" asp-controller="DNhapDKy"
+                                       asp-route-email="@email">
+                                        <i class="fa-solid fa-repeat"></i>
+                                    </a>
+                                </div>
+                                <span class="text-danger" id="emailError" style="font-size: 0.875rem; display: none;"> </span>
+                            </div>
+
+
+                            <div class="form-group mt-2">
+                                <div class="input-group">
+                                    <span class="input-group-text border rounded-start" style="padding: 20px;">
+                                        <i class="fa-solid fa-key"></i>
+                                    </span>
+                                    <input type="text" class="form-control border-start-0" id="otpInput" name="otp" placeholder="Nhập mã OTP" required>
+                                </div>
+                                <!-- Error Message -->
+                                <span class="text-danger" id="otpError" style="font-size: 0.875rem; display: none;">Vui lòng nhập OTP hợp lệ.</span>
+                            </div>
+
+                            <div class="form-group mt-2">
+                                <div class="input-group">
+                                    <span class="input-group-text border rounded-start" style="padding: 20px;">
+                                        <i class="fa-solid fa-lock"></i>
+                                    </span>
+                                    <input type="password" class="form-control border-start-0" id="passwordInput" name="password" placeholder="Nhập mật khẩu" required>
+                                </div>
+                                <!-- Error Message -->
+                                <span class="text-danger" id="passwordError" style="font-size: 0.875rem; display: none;">Vui lòng nhập mật khẩu hợp lệ.</span>
+                            </div>
+
+                            <div class="form-group mt-2">
+                                <div class="input-group">
+                                    <span class="input-group-text border rounded-start" style="padding: 20px;">
+                                        <i class="fa-solid fa-lock"></i>
+                                    </span>
+                                    <input type="password" class="form-control border-start-0" id="confirmPasswordInput" name="confirmPassword" placeholder="Nhập lại mật khẩu" required>
+                                </div>
+                                <!-- Error Message -->
+                                <span class="text-danger" id="confirmPasswordError" style="font-size: 0.875rem; display: none;">Mật khẩu không khớp.</span>
+                            </div>
+
+                            <!-- Forgot Password Instruction -->
+                            <button type="submit" class="btn btn-block mt-4 fw-bold" style="width: 100%; background-color: #0099CF; color: white;">Xác nhận</button>
+                        }else
+                        {
+                            <div class="form-group mt-2">
+                                <div class="input-group">
+                                    <span class="input-group-text border rounded-start" style="padding: 20px;">
+                                        <i class="fa-solid fa-envelope"></i>
+                                    </span>
+                                    <input type="email" class="form-control border-start-0 border-end-0" id="emailInput" name="email" placeholder="Email của bạn" required>
+                                    <input type="button" class="form-control border-start-0" id="guilaiptp">
+
+                                </div>
+                                <!-- Error Message -->
+                                <span class="text-danger" id="emailError" style="font-size: 0.875rem; display: none;">Vui lòng nhập email hợp lệ.</span>
+                            </div>
+                            <p class="mt-3">Chúng tôi sẽ gửi mã xác nhận để bạn có thể đặt lại mật khẩu.</p>
+
+                            <button type="submit" class="btn btn-block mt-4 fw-bold" style="width: 100%; background-color: #0099CF; color: white;">Gửi mã xác nhận</button>
+                        }
+
+                        <!-- Submit Button -->
+                       
+
+                        <!-- Divider -->
+                        <div class="text-center my-3">
+                            <div class="row">
+                                <div class="col">
+                                    <hr>
+                                </div>
+                                <div class="col-2">
+                                    <span>or</span>
+                                </div>
+                                <div class="col">
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Social Login Buttons -->
+                        <div class="d-flex justify-content-between">
+                            <a href="#" class="btn btn-outline-danger w-100 me-2"><i class="fab fa-google"></i> Google</a>
+                            <a href="#" class="btn btn-outline-primary w-100 ms-2"><i class="fab fa-facebook-f"></i> Facebook</a>
+                        </div>
+
+                        <!-- Register Link -->
+                        <div class="text-center mt-3">
+                            <p>Quay lại trang <a asp-action="Login" asp-controller="DNhapDKy" >Đăng nhập</a></p>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

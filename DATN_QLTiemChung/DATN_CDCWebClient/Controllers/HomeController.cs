@@ -40,6 +40,11 @@ namespace DATN_CDCWebClient.Controllers
             GetSession();
             return View();
         }
+        public IActionResult QuenMatKhau()
+        {
+            GetSession();
+            return View();
+        }
         public IActionResult Privacy()
         {
             GetSession();

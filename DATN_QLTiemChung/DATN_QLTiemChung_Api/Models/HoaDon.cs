@@ -22,6 +22,7 @@ namespace DATN_QLTiemChung_Api.Models
         public string NoiDung { get; set; }
         public Double TongTien { get; set; }
         public bool TrangThai { get; set; }
+        public bool ThanhToan { get; set; }
         public string? GhiChu { get; set; }
 
         public ICollection<HoaDonChiTiet> HoaDonChiTiets { get; set; } = new List<HoaDonChiTiet>();

@@ -283,3 +283,7 @@ C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_QLTiemChung_Api\obj\D
 C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_QLTiemChung_Api\obj\Debug\net8.0\DATN_QLTiemChung_Api.pdb
 C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_QLTiemChung_Api\obj\Debug\net8.0\DATN_QLTiemChung_Api.genruntimeconfig.cache
 C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_QLTiemChung_Api\obj\Debug\net8.0\ref\DATN_QLTiemChung_Api.dll
+C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_QLTiemChung_Api\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
+C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_QLTiemChung_Api\bin\Debug\net8.0\MailKit.dll
+C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_QLTiemChung_Api\bin\Debug\net8.0\MimeKit.dll
+C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_QLTiemChung_Api\bin\Debug\net8.0\System.Formats.Asn1.dll

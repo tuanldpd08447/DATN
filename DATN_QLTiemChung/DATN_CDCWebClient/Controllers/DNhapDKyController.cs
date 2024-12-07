@@ -1,6 +1,7 @@
 ﻿using DATN_CDCWebClient.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Net.Http;
 using System.Reflection;
 using System.Text;
 
@@ -31,6 +32,54 @@ namespace DATN_CDCWebClient.Controllers
             TempData["Username"] = Username;
             TempData["Role"] = userRole;
         }
+        public async Task<bool> SendOtpViaApi(string email, string otp)
+        {
+            var otpRequest = new EmailRequest
+            {
+                RecipientEmail = email,
+                Subject = "Xác thực đăng nhập",
+                Body = $"Mã OTP của bạn là: {otp}. Vui lòng không chia sẻ mã này với bất kỳ ai. Đây là mã OTP duy nhất cho phiên đăng nhập của bạn."
+            };
+            var client = _httpClientFactory.CreateClient();
+            // Chuyển đối tượng OTP thành JSON
+            var content = new StringContent(JsonConvert.SerializeObject(otpRequest), Encoding.UTF8, "application/json");
+
+            // Thay thế URL dưới đây bằng URL của API gửi OTP của bạn
+            var response = await client.PostAsync("https://localhost:7143/api/DNhapDky/send", content);
+
+            return response.IsSuccessStatusCode;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SendOtpEmail(string email)
+        {
+            if (string.IsNullOrEmpty(email))
+            {
+                ViewBag.ErrorMessage = "Email không hợp lệ.";
+                return View();
+            }
+            HttpContext.Session.Remove("OTP");
+
+            // Tạo OTP ngẫu nhiên
+            var otp = new Random().Next(100000, 999999).ToString();  
+
+      
+            HttpContext.Session.SetString("OTP", otp);
+
+            bool isOtpSent = await SendOtpViaApi(email, otp);
+
+            if (isOtpSent)
+            {
+                ViewBag.SuccessMessage = "OTP đã được gửi vào email của bạn.";
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "Có lỗi khi gửi email. Vui lòng thử lại.";
+            }
+
+            return View();
+        }
+
         public async Task<IActionResult> LoginSumit(string sdt, string password)
         {
             LoginKhachHang login = new LoginKhachHang

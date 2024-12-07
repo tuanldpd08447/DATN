@@ -1,9 +1,10 @@
 ﻿@{
     var vatTu = ViewBag.vatTuYTe as List<VatTuYTe>;
     var hoaDon = ViewBag.HoaDons as HoaDonDTO;
-    var khachhang = ViewBag.Khachhang as KhachHangDTo;
+    var khachhang = ViewBag.Khachhang as KHDTO;
+    var dc = ViewBag.DiaChi as DiaChi;
     KhachHangDTo khachHangDTo = new KhachHangDTo();
-    if(hoaDon != null)
+    if (hoaDon != null)
     {
         khachHangDTo.IDKH = hoaDon.IDKH;
         khachHangDTo.TenKhachHang = hoaDon.KhachHang.TenKhachHang;
@@ -18,7 +19,8 @@
         khachHangDTo.TenKhachHang = khachhang.TenKhachHang;
         khachHangDTo.SoDienThoai = khachhang.SoDienThoai;
         khachHangDTo.NgaySinh = khachhang.NgaySinh;
-        khachHangDTo.FullAddress = khachhang.FullAddress;
+        khachHangDTo.DiaChi = khachhang.DiaChi;
+        khachHangDTo.NgaySinh = khachhang.NgaySinh;
     }
 
 
@@ -29,12 +31,12 @@
         <h2 class="" style="color: #2fb388;">QUẢN LÝ HÓA ĐƠN</h2>
         <div class="float-end ">
             <button class="btn fw-bold custom-btn" id="activateButton"><i class="fa-solid fa-plus"></i> Thêm</button>
-            <button class="btn fw-bold custom-btn" >
+            <button class="btn fw-bold custom-btn">
                 <i class="fa-solid fa-floppy-disk"></i> Lưu
             </button>
-            <button class="btn fw-bold custom-btn"><i class="fa-solid fa-repeat"></i> Hủy </button>
+            <a class="btn fw-bold custom-btn" asp-action="QLHoaDon" asp-controller="QLHoaDon"><i class="fa-solid fa-repeat"></i> Hủy </a>
             <button class="btn fw-bold custom-btn"><i class="fa-solid fa-print"></i> In</button>
-            <button class="btn fw-bold custom-btn"><i class="fa-solid fa-right-from-bracket"></i> </button>
+            <a class="btn fw-bold custom-btn" asp-action="HomeQL" asp-controller="Home"><i class="fa-solid fa-right-from-bracket"></i> </a>
         </div>
     </div>
 
@@ -42,7 +44,7 @@
     <div class="row m-0 mb-3 border rounded-4 py-2  ">
         <div class="col-4  ">
             <div class=" ms-1 p-3 py-1 border rounded-4 h-100">
-              
+
                 <div class="row">
                     <button class="col border  border-1 rounded-start btn "><i class="fa-solid fa-arrows-rotate"></i></button>
                     <input class="col-8  border border-1 rounded-2 mx-1" type="text">
@@ -65,16 +67,16 @@
                             @if (ViewBag.KhachHangs != null)
                             {
                                 @foreach (var item in ViewBag.KhachHangs)
-                                    {
-                                        <tr onclick="location.href='@Url.Action("ClickKhachHang", "QLHoaDon", new { IDKH = @item.IDKH })' ">
+                                {
+                                    <tr onclick="location.href='@Url.Action("ClickKhachHang", "QLHoaDon", new { IDKH = @item.IDKH })' ">
 
-                                            <td>@STT</td>
-                                            <td>@item.IDKH</td>
-                                            <td>@item.TenKhachHang</td>
+                                        <td>@STT</td>
+                                        <td>@item.IDKH</td>
+                                        <td>@item.TenKhachHang</td>
 
-                                        </tr>
-                                        STT++;
-                                    }
+                                    </tr>
+                                    STT++;
+                                }
                             }
                         </tbody>
                     </table>
@@ -87,7 +89,7 @@
                     <div class="row ">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label class="fw-semibold" for="medicalCode">Mã Khách Hàng</label>
+                                <label class="fw-semibold" for="makhachhang">Mã Khách Hàng</label>
                                 <input type="text" name="MaKH" class="form-control form-control-sm" id="medicalCode " value="@if(khachHangDTo!=null){
                                 @khachHangDTo.IDKH
 } ">
@@ -96,7 +98,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label class="fw-semibold" for="name">Họ tên</label>
-                                <input type="text"  class="form-control form-control-sm" id="name" value="@if(khachHangDTo!=null){
+                                <input type="text" class="form-control form-control-sm" id="name" value="@if(khachHangDTo!=null){
                                 @khachHangDTo.TenKhachHang
 }">
                             </div>
@@ -109,25 +111,12 @@
 }">
                             </div>
                         </div>
-                        <div class="col-md-1">
-                            <div class="form-group">
-                                <label class="fw-semibold" for="age">Tuổi</label>
-                                @if(hoaDon!=null)
-                                {
-                                    var tuoi = 0;
-                                    if (hoaDon.KhachHang?.NgaySinh != null)
-                                    {
-                                        tuoi = DateTime.Now.Year - hoaDon.KhachHang.NgaySinh.Year;
-                                    }
-                                }
-                                <input type="text" class="form-control form-control-sm" id="age" value="">
-                            </div>
-                        </div>
-                        <div class="col-md-2">
+
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label class="fw-semibold" for="birthYear">Năm sinh</label>
                                 <input type="number" class="form-control form-control-sm"
-                                       value="@if (hoaDon != null){ @hoaDon.KhachHang.NgaySinh.Year}"
+                                       value="@khachHangDTo?.NgaySinh.Year"
                                        min="1900" max="2100" />
                             </div>
                         </div>
@@ -138,29 +127,53 @@
                         <div class="form-group col">
                             <label class="fw-semibold" for="hoKhauTinh">Tỉnh/TP</label>
                             <select class="form-control" id="hoKhauTinh" required>
+
+                                @if (dc != null)
+                                {
+                                    <option value="@dc.IDTTP" selected>@dc.NameTTP</option>
+                                }
+                                else
+                                {
+                                    <option value="" disabled selected>Chọn tỉnh/thành phố</option>
+                                }
+
+
                             </select>
                         </div>
                         <div class="form-group col">
                             <label class="fw-semibold" for="hoKhauQuan">Quận/Huyện</label>
                             <select class="form-control" id="hoKhauQuan" required>
-                                <option>-- Chọn Quận/Huyện --</option>
+
+                                @if (dc != null)
+                                {
+                                    <option value="@dc.IDQH" selected>@dc.NameQH</option>
+                                }
+                                else
+                                {
+                                    <option value="" disabled selected>Chọn quận/huyện</option>
+                                }
                             </select>
                         </div>
                         <div class="form-group col">
                             <label class="fw-semibold" for="hoKhauXa">Xã/Phường</label>
                             <select class="form-control" id="hoKhauXa" name="hoKhauXa" required>
-                                <option>-- Chọn Xã/Phường --</option>
+                                @if (dc != null)
+                                {
+                                    <option value="@dc.IDXP" selected>@dc.NameXP</option>
+                                }
+                                else
+                                {
+                                    <option value="" disabled selected>Chọn phường/xã</option>
+                                }
                             </select>
                         </div>
-                        <script type="module" src="~/js/site.js"></script>
+
 
 
                         <div class="col">
                             <div class="form-group">
                                 <label class="fw-semibold" for="address">Địa chỉ</label>
-                                <input type="text" class="form-control form-control-sm" id="address" value=" @if (hoaDon != null)
-                                {@hoaDon.KhachHang.DiaChi}
-">
+                                <input type="text" class="form-control form-control-sm" id="address" value="@khachHangDTo?.DiaChi ">
                             </div>
                         </div>
 
@@ -169,52 +182,68 @@
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label class="fw-semibold" for="medicalCode">Mã nhân viên</label>
+                                <label class="fw-semibold" for="manhanvien">Mã nhân viên</label>
                                 <input type="text" name="MaNV" class="form-control form-control-sm" id="medicalCode" value=" @if (hoaDon != null)
-                                {@hoaDon.NhanVien.IDNV}
+                                {
+                                @hoaDon.NhanVien.IDNV
+}
 ">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label class="fw-semibold" for="invoiceNumber">Mã hóa đơn</label>
-                                <input type="text" name="MaHD" class="form-control form-control-sm" id="medicalCode" value=" @if (hoaDon != null)
-                                {@hoaDon.HoaDonChiTiets}
+                                <input type="text" name="MaHD" class="form-control form-control-sm" id="mahoadon" value=" @if (hoaDon != null)
+                                {
+                                @hoaDon.IDHD
+}
 ">
 
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label class="fw-semibold" for="medicalCode">Mã vaccine</label>
-
-                                <select class="form-control form-control-sm" id="medicalCode">
+                                <label class="fw-semibold" for="mavaccine">Mã vaccine</label>
+                                <select class="form-control form-control-sm" id="mavaccine" name="MaVT" onchange="updateDetails()">
+                                    <option></option>
                                     @if (vatTu != null)
                                     {
-                                        @foreach(var item in vatTu)
+                                        foreach (var item in vatTu)
                                         {
-                                             <option value="">@item.IDVT</option>
+                                            // Kiểm tra nếu hoaDon.HoaDonChiTiets không rỗng và mã đầu tiên trùng với mã này
+                                            bool isSelected = hoaDon?.HoaDonChiTiets != null && hoaDon.HoaDonChiTiets.Any()
+                                            && item.IDVT == hoaDon.HoaDonChiTiets.First().IDVT;
+                                            if (isSelected)
+                                            {
+                                                <option value="@item.IDVT" selected>@item.IDVT</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@item.IDVT">@item.IDVT</option>
+                                            }
+
                                         }
                                     }
-                                    
-                                 
                                 </select>
+
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label class="fw-semibold" for="medicalCode">Nội dung</label>
-                                <select class="form-control form-control-sm" name="NoiDung" id="medicalCode">
+                                <label class="fw-semibold" for="noidung">Nội dung</label>
+                                <select class="form-control form-control-sm" name="NoiDung" id="noidung">
+                                    <option></option>
                                     @if (vatTu != null)
                                     {
-                                            @foreach (var item in vatTu)
-                                            {
+                                        @foreach (var item in vatTu)
+                                        {
                                             <option value="@item.TenVatTu">@item.TenVatTu</option>
-                                            }
+                                        }
                                     }
                                 </select>
                             </div>
                         </div>
+
 
                     </div>
 
@@ -222,26 +251,20 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label class="fw-semibold" for="medicalCode">Số lượng</label>
-                                <input type="number" min="1" class="form-control form-control-sm" id="medicalCode" value=" @if (hoaDon != null)
-                                {@hoaDon.HoaDonChiTiets}
-">
+                                <label class="fw-semibold" for="soluong">Số lượng</label>
+                                <input type="number" name="SoLuong" min="1" class="form-control form-control-sm" id="soluong">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label class="fw-semibold" for="medicalCode">Đơn giá</label>
-                                <input type="text" class="form-control form-control-sm" id="medicalCode" value=" @if (hoaDon != null)
-                                {@hoaDon.HoaDonChiTiets}
-">
+                                <label class="fw-semibold" for="dongia">Đơn giá</label>
+                                <input type="text" name="DonGia" class="form-control form-control-sm" id="dongia">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label class="fw-semibold" for="medicalCode">Thành Tiền</label>
-                                <input type="text" class="form-control form-control-sm" id="medicalCode" value=" @if (hoaDon != null)
-                                {@hoaDon.HoaDonChiTiets}
-">
+                                <label class="fw-semibold" for="thanhtien">Thành tiền</label>
+                                <input type="text" name="ThanhTien" class="form-control form-control-sm" id="thanhtien">
                             </div>
                         </div>
                     </div>
@@ -250,14 +273,15 @@
                         <div class="col-md-3">
                             <label class="fw-semibold" for="paymentMethod">Hình thức thanh toán</label>
                             <select id="paymentMethod" name="GhiChu" class="form-control form-control-sm">
+                                <option></option>
                                 @if (hoaDon != null)
                                 {
-                                <option>@hoaDon.GhiChu</option>
-                               
+                                    <option selected>@hoaDon.GhiChu</option>
+
                                 }
                                 else
                                 {
-                                    
+
                                     <option>Tiền mặt</option>
                                     <option>Chuyển khoản</option>
                                 }
@@ -265,63 +289,40 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label class="fw-semibold" for="paymentMethod">Trạng thái</label>
-                                <select id="paymentMethod" name="TrangThai" class="form-control form-control-sm">
+                                <label class="fw-semibold" for="paymentMethod">Thành Tiền</label>
+                                <select id="paymentMethod" name="ThanhToan" class="form-control form-control-sm">
+                                    <option></option>
                                     @if (hoaDon != null)
                                     {
-                                        <option >@hoaDon.TrangThai</option>
-                                       
+                                        <option selected>@hoaDon.ThanhToan</option>
+
                                     }
                                     else
                                     {
-                                        <option value="True" selected>Đã thanh toán</option>
+                                        <option value="True">Đã thanh toán</option>
                                         <option value="False">Chưa thanh toán</option>
+
                                     }
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <label class="fw-semibold" for="medicalCode">Thời gian</label>
+                            <label class="fw-semibold" for="thoigian">Thời gian</label>
                             <input type="datetime-local" name="ThoiGian" class="form-control col-3 me-1">
                         </div>
                     </div>
 
-                    <div class="row">
 
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label class="fw-semibold" for="taxCode">Mã số thuế</label>
-                                <input type="text" class="form-control form-control-sm gray-bg" id="taxCode" >
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label class="fw-semibold" for="atmCode">Mã ATM</label>
-                                <input type="text" class="form-control form-control-sm gray-bg" id="atmCode" >
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label class="fw-semibold" for="companyName">Tên đơn vị</label>
-                                <input type="text" class="form-control form-control-sm gray-bg" id="companyName" >
-                            </div>
-                        </div>
-                    </div>
                     <div class="row p-2 ps-4">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <div class="radio-group row">
-                                    <div class="form-check col-2 pt-2">
-                                        <input type="radio" class="form-check-input" id="phieuThu" name="action">
-                                        <label class="form-check-label" for="phieuThu">Phiếu thu</label>
+
+                                    <div class="ms-2">
+                                        <button class="btn">Hoàn trả</button>
+                                        <button class="btn">Hủy hóa đơn</button>
                                     </div>
-                                    <div class="form-check col-2 pt-2">
-                                        <input type="radio" class="form-check-input" id="huyHoaDon" name="action">
-                                        <label class="form-check-label" for="huyHoaDon">Hủy hóa đơn</label>
-                                    </div>
-                                    <div class="col">
-                                        <button class="btn">Lựa chọn hoàn trả</button>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -341,16 +342,48 @@
                     const activateButton = document.getElementById('activateButton');
                     const targetButton = document.getElementById('targetButton');
 
+
+
                     // Thêm sự kiện click vào nút kích hoạt
                     activateButton.addEventListener('click', function () {
-                        // Khi nút đầu tiên được nhấn, kích hoạt nút thứ hai
+
                         targetButton.click();
                     });
 
-                    // Thêm sự kiện click vào nút bị kích hoạt
                     targetButton.addEventListener('click', function () {
 
                     });
+                    document.addEventListener('DOMContentLoaded', function () {
+                        updateDetails(); // Gọi hàm khi trang tải xong
+                    });
+
+                    function updateDetails() {
+                        const mavaccine = document.getElementById('mavaccine');
+                        const soluong = document.getElementById('soluong');
+                        const dongia = document.getElementById('dongia');
+                        const thanhtien = document.getElementById('thanhtien');
+                        const tableRows = document.querySelectorAll('#hoaDonTable tr');
+
+                        // Lấy IDHDCT được chọn
+                        const selectedID = mavaccine.value;
+
+                        // Tìm thông tin trong bảng
+                        tableRows.forEach(row => {
+                            if (row.dataset.id === selectedID) {
+                                soluong.value = row.dataset.soluong || '';
+                                dongia.value = row.dataset.dongia || '';
+                                thanhtien.value = row.dataset.thanhtien || '';
+                            }
+                            else {
+                                soluong.value = null;
+                                dongia.value = null;
+                                thanhtien.value = null;
+                            }
+                        });
+                    }
+
+
+
                 </script>
             </form>
         </div>
@@ -366,7 +399,7 @@
             <option value="3">Three</option>
         </select>
 
-        <div class="table-responsive p-2 ">
+        <div class="table-responsive p-2">
             <table class="table table-bordered table-sm">
                 <thead>
                     <tr>
@@ -377,16 +410,14 @@
                         <th>Đơn giá</th>
                         <th>Thành tiền</th>
                         <th>Ghi chú</th>
-
                     </tr>
                 </thead>
-                <tbody>
-
-                    @if (hoaDon!=null)
+                <tbody id="hoaDonTable">
+                    @if (hoaDon != null)
                     {
-                        @foreach (var item in hoaDon.HoaDonChiTiets)
+                        foreach (var item in hoaDon.HoaDonChiTiets)
                         {
-                            <tr>
+                            <tr data-id="@item.IDVT" data-soluong="@item.SoLuong" data-dongia="@item.DonGia" data-thanhtien="@item.ThanhTien">
                                 <td>@item.IDHDCT</td>
                                 <td>@hoaDon.IDHD</td>
                                 <td>@item.IDVT</td>
@@ -394,27 +425,17 @@
                                 <td>@item.DonGia</td>
                                 <td>@item.ThanhTien</td>
                                 <td>@item.GhiChu</td>
-
                             </tr>
                         }
                     }
                     else
                     {
                         <tr>
-                            <td></td>
-
+                            <td colspan="7">Không có dữ liệu</td>
                         </tr>
                     }
-
-
-
                 </tbody>
-                <tfoot>
-                    <tr>
-                    </tr>
-                </tfoot>
             </table>
-            <button type="button" class="float-end btn w-25 custom-btn ">Xác Nhận</button>
         </div>
     </div>
 

@@ -11,11 +11,20 @@ namespace DATN_QLTiemChung_Api.Controllers
     {
 
         private readonly DBContext _context;
+        private readonly EmailService _emailService;
 
-        public DNhapDkyController(DBContext context)
+        public DNhapDkyController(DBContext context, EmailService emailService)
         {
             _context = context;
+            _emailService = emailService;
         }
+        [HttpPost("send")]
+        public async Task<IActionResult> SendEmail([FromBody] EmailRequest request)
+        {
+            await _emailService.SendEmailAsync(request.RecipientEmail, request.Subject, request.Body);
+            return Ok("Email sent successfully!");
+        }
+
         [HttpGet("GetAllKhachHang")]
         public async Task<IActionResult> GetAllKhachHang()
         {
@@ -246,6 +255,6 @@ namespace DATN_QLTiemChung_Api.Controllers
 
             return newIDKH;
         }
-
+       
     }
 }

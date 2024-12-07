@@ -3,6 +3,21 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DATN_QLTiemChung.Models
 {
+    public class KHDTO
+    {
+        public string IDKH { get; set; }
+        public string IDXP { get; set; }
+        public string TenKhachHang { get; set; }
+        public DateTime NgaySinh { get; set; }
+        public string GioiTinh { get; set; }
+        public string DiaChi { get; set; }
+        public string SoDienThoai { get; set; }
+        public string Email { get; set; }
+        public string CCCD_MDD { get; set; }
+        public string DanToc { get; set; }
+
+    }
+
     public class HoaDonDTO
     {
         public string IDHD { get; set; }
@@ -12,7 +27,7 @@ namespace DATN_QLTiemChung.Models
         public string NoiDung { get; set; }
 
         public Double TongTien { get; set; }
-
+        public bool ThanhToan { get; set; }
         public bool TrangThai { get; set; }
         public string GhiChu { get; set; }
 
@@ -168,28 +183,25 @@ namespace DATN_QLTiemChung.Models
     }
     public class HoaDonCreateDTO
     {
-        [Required]
         public string IDHD { get; set; }
-        [Required]
+        public string IDHDCT { get; set; }
         public string IDKH { get; set; }
-        [Required]
         public string IDNV { get; set; }
-        [Required]
+        public string IDVT { get; set; }
         public DateTime ThoiGian { get; set; }
-        [Required]
         public string NoiDung { get; set; }
-        [Required]
+        public int SoLuong { get; set; }
+        public Double DonGia { get; set; }
+        public Double ThanhTien { get; set; }
         public Double TongTien { get; set; }
-        [Required]
-        public bool TrangThai { get; set; }
-        [Required]
+
         public string GhiChu { get; set; }
 
 
-        public KhachHang? KhachHang { get; set; }
-        public NhanVien? NhanVien { get; set; }
-        public List<HoaDonChiTiet> HoaDonChiTiets { get; set; } = new List<HoaDonChiTiet>();
+
+
     }
+
     public class ChungTuDetail
     {
         public string IDXCT { get; set; }
