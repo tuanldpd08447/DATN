@@ -18,6 +18,68 @@ namespace DATN_QLTiemChung_Api.Controllers
             _context = context;
             _emailService = emailService;
         }
+        [HttpGet("CheckEmailDaDK/{email}")]
+        public async Task<IActionResult> CheckEmailDaDK(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+            {
+                return BadRequest("Email không hợp lệ.");
+            }
+
+            // Kiểm tra email có tồn tại trong bảng KhachHang
+            var khachhang = await _context.KhachHang.FirstOrDefaultAsync(kh => kh.Email == email);
+            if (khachhang == null)
+            {
+                return BadRequest("Email không tồn tại.");
+            }
+            return Ok(khachhang.IDKH);
+        }
+        [HttpPost("update-password")]
+        public async Task<IActionResult> UpdatePassword([FromBody] UpdatePasswordRequest request)
+        {
+            // Kiểm tra xem tài khoản nhân viên có tồn tại không
+            var taiKhoan = await _context.QLyTaiKhoanKH
+                                          .Where(tk => tk.IDKH == request.IDKH)
+                                          .FirstOrDefaultAsync();
+
+            if (taiKhoan != null)
+            {
+                // Nếu tài khoản đã tồn tại, cập nhật mật khẩu
+                taiKhoan.MatKhau = request.MatKhau;
+                _context.QLyTaiKhoanKH.Update(taiKhoan);
+                await _context.SaveChangesAsync();
+
+                return Ok(new { message = "Cập nhật mật khẩu thành công." });
+            }
+            else
+            {
+                // Nếu tài khoản chưa tồn tại, tạo tài khoản mới
+                var kh = await _context.KhachHang
+                                        .Where(tk => tk.IDKH == request.IDKH)
+                                        .FirstOrDefaultAsync();
+
+                if (kh == null)
+                {
+                    return NotFound(new { message = "Khách hàng không tồn tại." });
+                }
+
+                string newId = await GenerateNewIDIKKH();  // Tạo ID mới cho tài khoản
+                var newTaiKhoan = new QLyTaiKhoanKH
+                {
+                    IDTKKH = newId,
+                    IDKH = request.IDKH,
+                    MatKhau = request.MatKhau,
+                    SDT = kh.SoDienThoai
+                };
+
+                await _context.QLyTaiKhoanKH.AddAsync(newTaiKhoan);
+                await _context.SaveChangesAsync();
+
+                return Ok(new { message = "Tạo tài khoản mới thành công.", IDTKNV = newId });
+            }
+        }
+
+
         [HttpPost("send")]
         public async Task<IActionResult> SendEmail([FromBody] EmailRequest request)
         {

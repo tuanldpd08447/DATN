@@ -32,6 +32,73 @@ namespace DATN_CDCWebClient.Controllers
             TempData["Username"] = Username;
             TempData["Role"] = userRole;
         }
+        [HttpPost]
+        public async Task<IActionResult> SumitQMK( string password, string otp, string email)
+        {
+            // Kiểm tra nếu các thông tin cần thiết không rỗng
+            if ( string.IsNullOrEmpty(password))
+            {
+                ModelState.AddModelError("", "Thông tin không hợp lệ");
+                return View();
+            }
+
+            // Lấy OTP từ session
+            string otpFromSession = HttpContext.Session.GetString("OTP");
+
+            if (string.IsNullOrEmpty(otpFromSession))
+            {
+                ModelState.AddModelError("", "OTP đã hết hạn hoặc không hợp lệ.");
+                return View();
+            }
+
+            // Kiểm tra OTP nhập vào
+            if (otp != otpFromSession)
+            {
+                TempData["ErrorMessage"] = "OTP không đúng!";
+                ViewBag.SuccessSendMail = true;
+                ViewBag.Email = email;
+                return View("~/Views/Home/QuenMatKhau.cshtml");
+            }
+
+            // Tạo đối tượng yêu cầu (DTO)
+            var updatePasswordRequest = new UpdatePasswordRequest
+            {
+                IDKH = HttpContext.Session.GetString("IDKH"),  // IDKH của người dùng
+                MatKhau = password
+            };
+
+            // Tạo client HTTP để gọi API
+            var client = _httpClientFactory.CreateClient();
+
+            try
+            {
+                // Gọi API để cập nhật mật khẩu
+                var response = await client.PostAsJsonAsync("https://localhost:7143/api/DNhapDky/update-password", updatePasswordRequest);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    // Nếu thành công, thông báo cho người dùng
+                    TempData["Message"] = "Cập nhật mật khẩu thành công!";
+                    return RedirectToAction("Login");  // Chuyển hướng đến trang đăng nhập
+                }
+                else
+                {
+                    // Nếu API trả về lỗi, thông báo lỗi
+                    TempData["ErrorMessage"] = "Cập nhật mật khẩu thất bại! Vui lòng thử lại sau.";
+                    ViewBag.SuccessSendMail = true;
+                    ViewBag.Email = email;
+                    return View("~/Views/Home/QuenMatKhau.cshtml");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Xử lý lỗi trong trường hợp không thể kết nối API
+                TempData["ErrorMessage"] = "Có lỗi xảy ra khi kết nối với máy chủ. Vui lòng thử lại sau.";
+                ViewBag.SuccessSendMail = true;
+                ViewBag.Email = email;
+                return View("~/Views/Home/QuenMatKhau.cshtml");
+            }
+        }
         public async Task<bool> SendOtpViaApi(string email, string otp)
         {
             var otpRequest = new EmailRequest
@@ -41,43 +108,88 @@ namespace DATN_CDCWebClient.Controllers
                 Body = $"Mã OTP của bạn là: {otp}. Vui lòng không chia sẻ mã này với bất kỳ ai. Đây là mã OTP duy nhất cho phiên đăng nhập của bạn."
             };
             var client = _httpClientFactory.CreateClient();
+
             // Chuyển đối tượng OTP thành JSON
             var content = new StringContent(JsonConvert.SerializeObject(otpRequest), Encoding.UTF8, "application/json");
 
             // Thay thế URL dưới đây bằng URL của API gửi OTP của bạn
             var response = await client.PostAsync("https://localhost:7143/api/DNhapDky/send", content);
 
-            return response.IsSuccessStatusCode;
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            else
+            {
+                var errorResponse = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"Lỗi gửi OTP: {errorResponse}");
+                return false;
+            }
         }
 
         [HttpPost]
         public async Task<IActionResult> SendOtpEmail(string email)
         {
-            if (string.IsNullOrEmpty(email))
+            if (string.IsNullOrWhiteSpace(email))
             {
                 ViewBag.ErrorMessage = "Email không hợp lệ.";
                 return View();
             }
-            HttpContext.Session.Remove("OTP");
 
-            // Tạo OTP ngẫu nhiên
-            var otp = new Random().Next(100000, 999999).ToString();  
+            var client = _httpClientFactory.CreateClient();
+            var response = await client.GetAsync($"https://localhost:7143/api/DNhapDky/CheckEmailDaDK/{email}");
 
-      
-            HttpContext.Session.SetString("OTP", otp);
-
-            bool isOtpSent = await SendOtpViaApi(email, otp);
-
-            if (isOtpSent)
+            // Kiểm tra phản hồi từ API
+            if (response.IsSuccessStatusCode)
             {
-                ViewBag.SuccessMessage = "OTP đã được gửi vào email của bạn.";
+                var apiResponse = await response.Content.ReadAsStringAsync();
+                Console.WriteLine("Phản hồi từ API: " + apiResponse);
+
+                // Deserialize chuỗi JSON trả về để lấy IDKH
+                string idKH = apiResponse;  // Nếu API trả về một chuỗi IDKH trực tiếp
+
+                if (!string.IsNullOrEmpty(idKH))
+                {
+                    // Lưu IDKH vào session hoặc xử lý tiếp
+                    HttpContext.Session.SetString("IDKH", idKH);
+
+                    // Tiến hành các bước tiếp theo
+                    HttpContext.Session.Remove("OTP");
+
+                    // Tạo OTP ngẫu nhiên
+                    var otp = new Random().Next(100000, 999999).ToString();
+
+                    // Lưu OTP vào session
+                    HttpContext.Session.SetString("OTP", otp);
+
+                    // Gửi OTP qua email
+                    bool isOtpSent = await SendOtpViaApi(email, otp);
+
+                    if (isOtpSent)
+                    {
+                        ViewBag.SuccessMessage = "OTP đã được gửi vào email của bạn.";
+                        ViewBag.SuccessSendMail = true;
+                    }
+                    else
+                    {
+                        ViewBag.ErrorMessage = "Có lỗi khi gửi email. Vui lòng thử lại.";
+                    }
+                }
+                else
+                {
+                    ViewBag.ErrorMessage = "Không tìm thấy IDKH từ API.";
+                }
+
+                ViewBag.Email = email;
             }
             else
             {
-                ViewBag.ErrorMessage = "Có lỗi khi gửi email. Vui lòng thử lại.";
+                var errorResponse = await response.Content.ReadAsStringAsync();
+                ViewBag.ErrorMessage = $"Lỗi từ API: {errorResponse}";
+                ViewBag.Email = email;
             }
 
-            return View();
+            return View("~/Views/Home/QuenMatKhau.cshtml");
         }
 
         public async Task<IActionResult> LoginSumit(string sdt, string password)

@@ -9,6 +9,11 @@ namespace DATN_CDCWebClient.Models
         public string Subject { get; set; }
         public string Body { get; set; }
     }
+    public class UpdatePasswordRequest
+    {
+        public string IDKH { get; set; }
+        public string MatKhau { get; set; }
+    }
     public class DoiMatKhauRequest
     {
         public string IDKH { get; set; }

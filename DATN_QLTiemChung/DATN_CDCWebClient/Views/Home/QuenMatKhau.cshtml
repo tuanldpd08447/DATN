@@ -2,6 +2,7 @@
     Layout = null;
     var successSendMail = ViewBag.SuccessSendMail as bool? ?? false;
     string email = ViewBag.Email;
+    var errorMessage = TempData["ErrorMessage"] as string;
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -25,8 +26,7 @@
                         <h4 class="mt-2 fw-bold">QUÊN MẬT KHẨU</h4>
                     </div>
 
-                    <form asp-action="SendOtpEmail" asp-controller="DNhapDKy" method="post">
-                        <!-- Email Input -->
+                    <form action="@Url.Action("SendOtpEmail", "DNhapDKy")" method="post" id="otpForm">
                         @if (successSendMail)
                         {
                             <div class="form-group mt-2">
@@ -34,25 +34,28 @@
                                     <span class="input-group-text border rounded-start" style="padding: 20px;">
                                         <i class="fa-solid fa-envelope"></i>
                                     </span>
-                                    <input type="email" class="form-control border-start-0 border-end-0" id="emailInput" name="email" placeholder="Email của bạn" required>
-                                    <a class="input-group-text border link-offset-2 link-underline link-underline-opacity-0 border rounded-end" type="button" id="sendButton"
-                                       asp-action="SendOtpEmail" asp-controller="DNhapDKy"
-                                       asp-route-email="@email">
+                                    <input type="email" class="form-control border-start-0 border-end-0" id="emailInput" name="email" placeholder="Email của bạn" required value="@if(email!=string.Empty){
+                                @email
+}">
+                                    <button class="input-group-text border link-offset-2 link-underline link-underline-opacity-0 border rounded-end" data-action="@Url.Action("SendOtpEmail", "DNhapDKy")" onclick="changeAction(this)" type="submit" id="sendButton">
                                         <i class="fa-solid fa-repeat"></i>
-                                    </a>
+                                    </button>
                                 </div>
-                                <span class="text-danger" id="emailError" style="font-size: 0.875rem; display: none;"> </span>
+                                <span class="text-danger" id="emailError" style="font-size: 0.875rem; display: none;">Vui lòng nhập email hợp lệ.</span>
+                                @if (ViewBag.SuccessMessage!= string.Empty)
+                                {
+                                    <span class="text-danger" id="emailError" style="font-size: 0.875rem;"> @ViewBag.SuccessMessage </span>
+                                }
+                               
                             </div>
-
 
                             <div class="form-group mt-2">
                                 <div class="input-group">
                                     <span class="input-group-text border rounded-start" style="padding: 20px;">
                                         <i class="fa-solid fa-key"></i>
                                     </span>
-                                    <input type="text" class="form-control border-start-0" id="otpInput" name="otp" placeholder="Nhập mã OTP" required>
+                                    <input type="text" class="form-control border-start-0" id="otpInput" name="otp" placeholder="Nhập mã OTP" >
                                 </div>
-                                <!-- Error Message -->
                                 <span class="text-danger" id="otpError" style="font-size: 0.875rem; display: none;">Vui lòng nhập OTP hợp lệ.</span>
                             </div>
 
@@ -61,10 +64,9 @@
                                     <span class="input-group-text border rounded-start" style="padding: 20px;">
                                         <i class="fa-solid fa-lock"></i>
                                     </span>
-                                    <input type="password" class="form-control border-start-0" id="passwordInput" name="password" placeholder="Nhập mật khẩu" required>
+                                    <input type="password" class="form-control border-start-0" id="passwordInput" name="password" placeholder="Nhập mật khẩu" >
                                 </div>
-                                <!-- Error Message -->
-                                <span class="text-danger" id="passwordError" style="font-size: 0.875rem; display: none;">Vui lòng nhập mật khẩu hợp lệ.</span>
+                                <span class="text-danger" id="passwordError" style="font-size: 0.875rem; display: none;">Mật khẩu phải dài hơn 6 ký tự.</span>
                             </div>
 
                             <div class="form-group mt-2">
@@ -72,37 +74,50 @@
                                     <span class="input-group-text border rounded-start" style="padding: 20px;">
                                         <i class="fa-solid fa-lock"></i>
                                     </span>
-                                    <input type="password" class="form-control border-start-0" id="confirmPasswordInput" name="confirmPassword" placeholder="Nhập lại mật khẩu" required>
+                                    <input type="password" class="form-control border-start-0" id="confirmPasswordInput" name="confirmPassword" placeholder="Nhập lại mật khẩu" >
                                 </div>
-                                <!-- Error Message -->
                                 <span class="text-danger" id="confirmPasswordError" style="font-size: 0.875rem; display: none;">Mật khẩu không khớp.</span>
                             </div>
 
-                            <!-- Forgot Password Instruction -->
-                            <button type="submit" class="btn btn-block mt-4 fw-bold" style="width: 100%; background-color: #0099CF; color: white;">Xác nhận</button>
-                        }else
+                            <button type="submit" data-action="@Url.Action("SumitQMK", "DNhapDKy")" onclick="changeAction(this)" id="Sumitform" class="btn btn-block mt-4 fw-bold" style="width: 100%; background-color: #0099CF; color: white;">Xác nhận</button>
+                            <script>
+                                function changeAction( button) {
+                                    var form = document.getElementById('otpForm');
+                                    if (form) {
+                                        var actionUrl = button.getAttribute('data-action');
+                                        if (actionUrl) {
+                                            // Kiểm tra và chỉ thay đổi action khi nó chưa đúng
+                                            if (form.action !== actionUrl) {
+                                                form.action = actionUrl; // Chỉ thay đổi action khi cần thiết
+                                            }
+                                        } else {
+                                            console.error('No action URL found');
+                                        }
+                                    } else {
+                                        console.error('Form not found');
+                                    }
+                                }
+                            </script>
+                        }
+                        else
                         {
                             <div class="form-group mt-2">
                                 <div class="input-group">
                                     <span class="input-group-text border rounded-start" style="padding: 20px;">
                                         <i class="fa-solid fa-envelope"></i>
                                     </span>
-                                    <input type="email" class="form-control border-start-0 border-end-0" id="emailInput" name="email" placeholder="Email của bạn" required>
-                                    <input type="button" class="form-control border-start-0" id="guilaiptp">
-
+                                    <input type="email" class="form-control border-start-0 border-end-0" id="emailInput" name="email" placeholder="Email của bạn" required value="@if(email!=string.Empty){
+                                @email
+}">
                                 </div>
-                                <!-- Error Message -->
                                 <span class="text-danger" id="emailError" style="font-size: 0.875rem; display: none;">Vui lòng nhập email hợp lệ.</span>
                             </div>
+
                             <p class="mt-3">Chúng tôi sẽ gửi mã xác nhận để bạn có thể đặt lại mật khẩu.</p>
 
                             <button type="submit" class="btn btn-block mt-4 fw-bold" style="width: 100%; background-color: #0099CF; color: white;">Gửi mã xác nhận</button>
                         }
 
-                        <!-- Submit Button -->
-                       
-
-                        <!-- Divider -->
                         <div class="text-center my-3">
                             <div class="row">
                                 <div class="col">
@@ -116,18 +131,115 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Social Login Buttons -->
+                        @if (!string.IsNullOrEmpty(errorMessage))
+                        {
+                            <span class="text-danger">@errorMessage</span>
+                        }
                         <div class="d-flex justify-content-between">
                             <a href="#" class="btn btn-outline-danger w-100 me-2"><i class="fab fa-google"></i> Google</a>
                             <a href="#" class="btn btn-outline-primary w-100 ms-2"><i class="fab fa-facebook-f"></i> Facebook</a>
                         </div>
 
-                        <!-- Register Link -->
                         <div class="text-center mt-3">
-                            <p>Quay lại trang <a asp-action="Login" asp-controller="DNhapDKy" >Đăng nhập</a></p>
+                            <p>Quay lại trang <a asp-action="Login" asp-controller="DNhapDKy">Đăng nhập</a></p>
                         </div>
                     </form>
+                    <script>
+                        document.getElementById('Sumitform').addEventListener('click', function (event) {
+                            var emailInput = document.getElementById('emailInput');
+                            var otpInput = document.getElementById('otpInput');
+                            var passwordInput = document.getElementById('passwordInput');
+                            var confirmPasswordInput = document.getElementById('confirmPasswordInput');
+
+                            var emailError = document.getElementById('emailError');
+                            var otpError = document.getElementById('otpError');
+                            var passwordError = document.getElementById('passwordError');
+                            var confirmPasswordError = document.getElementById('confirmPasswordError');
+
+                            // Reset error messages
+                            emailError.style.display = 'none';
+                            otpError.style.display = 'none';
+                            passwordError.style.display = 'none';
+                            confirmPasswordError.style.display = 'none';
+
+                            // Initialize validation flag
+                            var isValid = true;
+
+                            // Validate email
+                            if (!emailInput.value) {
+                                emailError.style.display = 'block';
+                                isValid = false;
+                            }
+                            // Validate OTP (must be a number and 6 digits)
+                            if (!otpInput.value) {
+                                otpError.style.display = 'block';
+                                otpError.textContent = 'Vui lòng nhập mã OTP.';
+                                isValid = false;
+                            } else if (isNaN(otpInput.value) || otpInput.value.length !== 6) {
+                                otpError.style.display = 'block';
+                                otpError.textContent = 'OTP phải là 6 chữ số.';
+                                isValid = false;
+                            }
+                            // Validate password (check length > 6 characters)
+                            if (!passwordInput.value) {
+                                passwordError.style.display = 'block';
+                                passwordError.textContent = 'Vui lòng nhập mật khẩu.';
+                                isValid = false;
+                            } else if (passwordInput.value.length <= 6) {
+                                passwordError.style.display = 'block';
+                                passwordError.textContent = 'Mật khẩu phải dài hơn 6 ký tự.';
+                                isValid = false;
+                            }
+                            // Validate confirm password
+                            if (!confirmPasswordInput.value) {
+                                confirmPasswordError.style.display = 'block';
+                                confirmPasswordError.textContent = 'Vui lòng nhập lại mật khẩu.';
+                                isValid = false;
+                            }
+
+                            // Check if password and confirm password match
+                            if (passwordInput.value !== confirmPasswordInput.value) {
+                                confirmPasswordError.style.display = 'block';
+                                confirmPasswordError.textContent = 'Mật khẩu không khớp.';
+                                isValid = false;
+                            }
+
+                            // Prevent form submission if invalid
+                            if (!isValid) {
+                                event.preventDefault();
+                            }
+                        });
+
+                        // Thêm sự kiện oninput để kiểm tra lại khi người dùng nhập
+                        document.getElementById('emailInput').oninput = function () {
+                            var emailError = document.getElementById('emailError');
+                            if (this.value) {
+                                emailError.style.display = 'none';
+                            }
+                        };
+
+                        document.getElementById('otpInput').oninput = function () {
+                            var otpError = document.getElementById('otpError');
+                            if (this.value) {
+                                otpError.style.display = 'none';
+                            }
+                        };
+
+                        document.getElementById('passwordInput').oninput = function () {
+                            var passwordError = document.getElementById('passwordError');
+                            if (this.value.length > 6) {
+                                passwordError.style.display = 'none';
+                            }
+                        };
+
+                        document.getElementById('confirmPasswordInput').oninput = function () {
+                            var confirmPasswordError = document.getElementById('confirmPasswordError');
+                            if (this.value && document.getElementById('passwordInput').value === this.value) {
+                                confirmPasswordError.style.display = 'none';
+                            }
+                        };
+
+                    </script>
 
                 </div>
             </div>

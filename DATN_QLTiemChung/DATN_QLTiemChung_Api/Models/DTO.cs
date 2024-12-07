@@ -15,6 +15,11 @@ namespace DATN_QLTiemChung_Api.Models
         public string MatKhauCu { get; set; }
         public string MatKhauMoi { get; set; }
     }
+    public class UpdatePasswordRequest
+    {
+        public string IDKH { get; set; }
+        public string MatKhau { get; set; }
+    }
     public class QLyTaiKhoanKHDTO
     {
         public string IDKH { get; set; }
