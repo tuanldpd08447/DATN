@@ -25,9 +25,10 @@ namespace DATN_QLTiemChung.Controllers
         }
         public IActionResult HomeQL()
         {
- 
-              GetSession(); return View();
+            GetSession();
+            return View();
         }
+
         public IActionResult KhamSanLoc()
         {
               GetSession(); return View();

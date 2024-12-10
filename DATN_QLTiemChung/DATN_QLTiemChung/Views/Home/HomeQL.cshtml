@@ -1,5 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    var login = TempData["ID"];
+    string role = TempData["Role"] as string;
 }
 <div class="container my-5 mt-4">
     <style>
@@ -22,68 +24,195 @@
             margin: 0 auto 15px;
             background-color: rgba(0, 123, 255, 0.1);
         }</style>
-    <h2 class="text-center mb-4">Lợi Ích Của Hệ Thống Quản Lý Tiêm Chủng </h2>
-    <p class="text-center text-muted">Hãy để chúng tôi đồng hành cùng thành công của bạn</p>
-    <div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
-        <!-- Feature 1 -->
-        <div class="col">
-            <div class="card feature-card shadow-sm p-3">
-                <div class="icon-circle bg-warning text-white">
-                    <i class="bi bi-diagram-3-fill fs-3"></i>
+    @if (TempData["Role"] != null)
+    {
+        <div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
+            @if (role == "Bác Sĩ")
+            {
+                <div class="col" onclick="window.location.href='@Url.Action("KhamSanLoc", "Home")'">
+                    <div class="card feature-card shadow-sm p-3">
+                        <div class="icon-circle bg-warning text-white">
+                            <i class="bi bi-heart-pulse-fill fs-3"></i>
+                        </div>
+                        <h5 class="text-center">Khám Sàng Lọc</h5>
+                        <p class="text-center text-muted">Thực hiện các nghiệp vụ khám sàng lọc nhanh chóng và chính xác.</p>
+                    </div>
                 </div>
-                <h5 class="text-center">Đầy đủ quy trình nghiệp vụ</h5>
-                <p class="text-center text-muted">Đáp ứng đầy đủ quy trình tiêm của cơ sở, giảm thiểu thao tác người dùng</p>
+                <div class="col" onclick="window.location.href='@Url.Action("QLTiemChung", "QLTiemChung")'">
+                    <div class="card feature-card shadow-sm p-3">
+                        <div class="icon-circle bg-success text-white">
+                            <i class="bi bi-shield-check fs-3"></i>
+                        </div>
+                        <h5 class="text-center">Quản Lý Tiêm Chủng</h5>
+                        <p class="text-center text-muted">Quản lý toàn bộ quy trình và lịch sử tiêm chủng tại cơ sở.</p>
+                    </div>
+                </div>
+            }
+            else if (role == "Y Tá")
+            {
+                <div class="col" onclick="window.location.href='@Url.Action("QLTiemChung", "QLTiemChung")'">
+                    <div class="card feature-card shadow-sm p-3">
+                        <div class="icon-circle bg-info text-white">
+                            <i class="bi bi-inbox-fill fs-3"></i>
+                        </div>
+                        <h5 class="text-center">Quản Lý Tiêm Chủng</h5>
+                        <p class="text-center text-muted">Hỗ trợ quản lý lịch tiêm và hồ sơ vaccine nhanh chóng.</p>
+                    </div>
+                </div>
+                <div class="col" onclick="window.location.href='@Url.Action("QLKhoVaccine", "QLKhoVaccine")'">
+                    <div class="card feature-card shadow-sm p-3">
+                        <div class="icon-circle bg-secondary text-white">
+                            <i class="bi bi-box2-fill fs-3"></i>
+                        </div>
+                        <h5 class="text-center">Kho Vaccine</h5>
+                        <p class="text-center text-muted">Quản lý thông tin kho vaccine chi tiết, cập nhật thường xuyên.</p>
+                    </div>
+                </div>
+            }
+            else if (role == "Kế Toán")
+            {
+                <div class="col" onclick="window.location.href='@Url.Action("QLHoaDon", "QLHoaDon")'">
+                    <div class="card feature-card shadow-sm p-3">
+                        <div class="icon-circle bg-danger text-white">
+                            <i class="bi bi-receipt fs-3"></i>
+                        </div>
+                        <h5 class="text-center">Quản Lý Hóa Đơn</h5>
+                        <p class="text-center text-muted">Theo dõi và quản lý hóa đơn nhanh chóng, chính xác.</p>
+                    </div>
+                </div>
+                <div class="col" onclick="window.location.href='@Url.Action("QLXuatNhapKho", "QLXuatNhapKho")'">
+                    <div class="card feature-card shadow-sm p-3">
+                        <div class="icon-circle bg-warning text-white">
+                            <i class="bi bi-box-arrow-in-up-right fs-3"></i>
+                        </div>
+                        <h5 class="text-center">Quản Lý Xuất Nhập Kho</h5>
+                        <p class="text-center text-muted">Kiểm tra và quản lý việc xuất nhập kho vaccine hiệu quả.</p>
+                    </div>
+                </div>
+            }
+            else @if (role == "Thủ Kho")
+            {
+                <div class="col" onclick="window.location.href='@Url.Action("QLKhoVaccine", "QLKhoVaccine")'">
+                    <div class="card feature-card shadow-sm p-3">
+                        <div class="icon-circle bg-primary text-white">
+                            <i class="bi bi-warehouse fs-3"></i>
+                        </div>
+                        <h5 class="text-center">Quản Lý Kho Vaccine</h5>
+                        <p class="text-center text-muted">Quản lý tình trạng, kiểm kê và nhập kho vaccine.</p>
+                    </div>
+                </div>
+            }
+            else if (role == "Lễ Tân")
+            {
+                <div class="col" onclick="window.location.href='@Url.Action("QLTiepNhan", "QLTiepNhan")'">
+                    <div class="card feature-card shadow-sm p-3">
+                        <div class="icon-circle bg-secondary text-white">
+                            <i class="bi bi-people-fill fs-3"></i>
+                        </div>
+                        <h5 class="text-center">Quản Lý Tiếp Nhận</h5>
+                        <p class="text-center text-muted">Quản lý việc tiếp nhận khách hàng và điều phối lịch hẹn.</p>
+                    </div>
+                </div>
+            }
+            else if (role == "Nhân Sự")
+            {
+                <div class="col" onclick="window.location.href='@Url.Action("QLNhanVien", "QLNhanVien")'">
+                    <div class="card feature-card shadow-sm p-3">
+                        <div class="icon-circle bg-info text-white">
+                            <i class="bi bi-briefcase-fill fs-3"></i>
+                        </div>
+                        <h5 class="text-center">Quản Lý Nhân Viên</h5>
+                        <p class="text-center text-muted">Quản lý danh sách và thông tin nhân sự của cơ sở.</p>
+                    </div>
+                </div>
+                <div class="col" onclick="window.location.href='@Url.Action("QLKhachHang", "QLKhachHang")'">
+                    <div class="card feature-card shadow-sm p-3">
+                        <div class="icon-circle bg-warning text-white">
+                            <i class="bi bi-people fs-3"></i>
+                        </div>
+                        <h5 class="text-center">Quản Lý Khách Hàng</h5>
+                        <p class="text-center text-muted">Quản lý thông tin khách hàng và lịch sử tương tác.</p>
+                    </div>
+                </div>
+                <div class="col" onclick="window.location.href='@Url.Action("QLTaiKhoan", "QLTaiKhoan")'">
+                    <div class="card feature-card shadow-sm p-3">
+                        <div class="icon-circle bg-danger text-white">
+                            <i class="bi bi-shield-lock-fill fs-3"></i>
+                        </div>
+                        <h5 class="text-center">Quản Lý Tài Khoản</h5>
+                        <p class="text-center text-muted">Quản lý tài khoản và phân quyền chi tiết.</p>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <h2 class="text-center mb-4">Lợi Ích Của Hệ Thống Quản Lý Tiêm Chủng </h2>
+        <p class="text-center text-muted">Hãy để chúng tôi đồng hành cùng thành công của bạn</p>
+        <div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
+            <!-- Feature 1 -->
+            <div class="col">
+                <div class="card feature-card feature-card shadow-sm p-3">
+                    <div class="icon-circle bg-warning text-white">
+                        <i class="bi bi-diagram-3-fill fs-3"></i>
+                    </div>
+                    <h5 class="text-center">Đầy đủ quy trình nghiệp vụ</h5>
+                    <p class="text-center text-muted">Đáp ứng đầy đủ quy trình tiêm của cơ sở, giảm thiểu thao tác người dùng</p>
+                </div>
+            </div>
+            <!-- Feature 2 -->
+            <div class="col">
+                <div class="card feature-card feature-card shadow-sm p-3">
+                    <div class="icon-circle bg-info text-white">
+                        <i class="bi bi-person-badge-fill fs-3"></i>
+                    </div>
+                    <h5 class="text-center">Quản lý và phân quyền</h5>
+                    <p class="text-center text-muted">Quản lý và phân quyền chi tiết theo vai trò từng bộ phận, giúp cơ sở hoạt động hiệu quả</p>
+                </div>
+            </div>
+            <!-- Feature 3 -->
+            <div class="col">
+                <div class="card feature-card feature-card shadow-sm p-3">
+                    <div class="icon-circle bg-primary text-white">
+                        <i class="bi bi-arrows-expand fs-3"></i>
+                    </div>
+                    <h5 class="text-center">Dễ dàng mở rộng</h5>
+                    <p class="text-center text-muted">Dễ dàng mở rộng các dịch vụ kết nối (thanh toán, hóa đơn điện tử, SMS...)</p>
+                </div>
+            </div>
+            <!-- Feature 4 -->
+            <div class="col">
+                <div class="card feature-card feature-card shadow-sm p-3">
+                    <div class="icon-circle bg-success text-white">
+                        <i class="bi bi-bar-chart-fill fs-3"></i>
+                    </div>
+                    <h5 class="text-center">Báo cáo thống kê</h5>
+                    <p class="text-center text-muted">Tổng hợp đầy đủ các báo cáo doanh thu, kho... theo thời gian thực</p>
+                </div>
+            </div>
+            <!-- Feature 5 -->
+            <div class="col">
+                <div class="card feature-card feature-card shadow-sm p-3">
+                    <div class="icon-circle bg-danger text-white">
+                        <i class="bi bi-cloud-fill fs-3"></i>
+                    </div>
+                    <h5 class="text-center">Nền tảng Cloud</h5>
+                    <p class="text-center text-muted">Nền tảng Cloud an toàn, bảo mật, khả năng mở rộng nhanh chóng</p>
+                </div>
+            </div>
+            <!-- Feature 6 -->
+            <div class="col">
+                <div class="card feature-card feature-card shadow-sm p-3">
+                    <div class="icon-circle bg-secondary text-white">
+                        <i class="bi bi-cash-stack fs-3"></i>
+                    </div>
+                    <h5 class="text-center">Tối ưu hóa chi phí</h5>
+                    <p class="text-center text-muted">Tối ưu hóa chi phí đầu tư, triển khai nhanh chóng tại cơ sở mới</p>
+                </div>
             </div>
         </div>
-        <!-- Feature 2 -->
-        <div class="col">
-            <div class="card feature-card shadow-sm p-3">
-                <div class="icon-circle bg-info text-white">
-                    <i class="bi bi-person-badge-fill fs-3"></i>
-                </div>
-                <h5 class="text-center">Quản lý và phân quyền</h5>
-                <p class="text-center text-muted">Quản lý và phân quyền chi tiết theo vai trò từng bộ phận, giúp cơ sở hoạt động hiệu quả</p>
-            </div>
-        </div>
-        <!-- Feature 3 -->
-        <div class="col">
-            <div class="card feature-card shadow-sm p-3">
-                <div class="icon-circle bg-primary text-white">
-                    <i class="bi bi-arrows-expand fs-3"></i>
-                </div>
-                <h5 class="text-center">Dễ dàng mở rộng</h5>
-                <p class="text-center text-muted">Dễ dàng mở rộng các dịch vụ kết nối (thanh toán, hóa đơn điện tử, SMS...)</p>
-            </div>
-        </div>
-        <!-- Feature 4 -->
-        <div class="col">
-            <div class="card feature-card shadow-sm p-3">
-                <div class="icon-circle bg-success text-white">
-                    <i class="bi bi-bar-chart-fill fs-3"></i>
-                </div>
-                <h5 class="text-center">Báo cáo thống kê</h5>
-                <p class="text-center text-muted">Tổng hợp đầy đủ các báo cáo doanh thu, kho... theo thời gian thực</p>
-            </div>
-        </div>
-        <!-- Feature 5 -->
-        <div class="col">
-            <div class="card feature-card shadow-sm p-3">
-                <div class="icon-circle bg-danger text-white">
-                    <i class="bi bi-cloud-fill fs-3"></i>
-                </div>
-                <h5 class="text-center">Nền tảng Cloud</h5>
-                <p class="text-center text-muted">Nền tảng Cloud an toàn, bảo mật, khả năng mở rộng nhanh chóng</p>
-            </div>
-        </div>
-        <!-- Feature 6 -->
-        <div class="col">
-            <div class="card feature-card shadow-sm p-3">
-                <div class="icon-circle bg-secondary text-white">
-                    <i class="bi bi-cash-stack fs-3"></i>
-                </div>
-                <h5 class="text-center">Tối ưu hóa chi phí</h5>
-                <p class="text-center text-muted">Tối ưu hóa chi phí đầu tư, triển khai nhanh chóng tại cơ sở mới</p>
-            </div>
-        </div>
-    </div>
+    }
+
+   
 </div>

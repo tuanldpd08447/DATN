@@ -55,14 +55,14 @@ namespace DATN_QLTiemChung.Controllers
                 TempData["Notification"] = "Đăng nhập thành công.";
                 TempData["NotificationType"] = "success";
                 TempData["NotificationTitle"] = "Thông báo.";
-                return View("~/Views/Home/HomeQL.cshtml");
+                return RedirectToAction("HomeQL", "Home");
             }
                 GetSession();
                 ViewBag.ErrorMessage = "Thông tin đăng nhập không chính xác.";
             TempData["Notification"] = "Đăng nhập thất bại. Thông tin đăng nhập không chính xác.";
             TempData["NotificationType"] = "error";
             TempData["NotificationTitle"] = "Thông báo.";
-            return View("~/Views/Home/Login.cshtml");
+            return RedirectToAction("HomeQL","Home");
 
         }
         public IActionResult Logout()
