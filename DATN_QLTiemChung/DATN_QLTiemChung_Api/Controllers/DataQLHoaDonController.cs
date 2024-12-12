@@ -89,7 +89,7 @@ namespace DATN_QLTiemChung_Api.Controllers
                     .Include(hd => hd.KhachHang)
                     .Include(hd => hd.NhanVien)
                     .Include(hd => hd.HoaDonChiTiets)
-                    .FirstOrDefaultAsync(hd => hd.IDKH == IDKH);
+                    .FirstOrDefaultAsync(hd => hd.IDKH == IDKH && hd.ThanhToan == false);
 
                 if (hoaDon == null)
                 {
@@ -221,7 +221,8 @@ namespace DATN_QLTiemChung_Api.Controllers
                 GhiChu = HoaDonDto.GhiChu, // Hình thức thanh toán
                 NoiDung = HoaDonDto.NoiDung, // Tên vaccine
                 TongTien = HoaDonDto.TongTien,
-                TrangThai = true,
+                TrangThai = HoaDonDto.TrangThai,
+                ThanhToan= HoaDonDto.ThanhToan,
             };
 
             // Tạo hóa đơn chi tiết mới
@@ -296,5 +297,65 @@ namespace DATN_QLTiemChung_Api.Controllers
 
             return newIDHDCT;
         }
+        [HttpPut("CancelHoaDon/{id}")]
+        public async Task<IActionResult> CancelHoaDon(string id, [FromBody] bool TrangThai)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var hd = await _context.HoaDon.FirstOrDefaultAsync(hd => hd.IDHD == id);
+            if (hd == null)
+            {
+                return NotFound(new { Message = "Hóa đơn không tồn tại." });
+            }
+
+            hd.TrangThai = TrangThai;
+
+            try
+            {
+                // Lưu thay đổi
+                _context.HoaDon.Update(hd);
+                await _context.SaveChangesAsync();
+                return Ok(new { Message = "Cập nhật trạng thái thành công." });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "Đã xảy ra lỗi khi cập nhật trạng thái.", Error = ex.Message });
+            }
+
+        }
+
+        [HttpPut("UpdateHoaDon/{id}")]
+        public async Task<IActionResult> UpdateHoaDon(string id, [FromBody] bool ThanhToan)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var hd = await _context.HoaDon.FirstOrDefaultAsync(hd => hd.IDHD == id);
+            if (hd == null)
+            {
+                return NotFound(new { Message = "Hóa đơn không tồn tại." });
+            }
+
+            hd.ThanhToan = ThanhToan;
+
+            try
+            {
+                // Lưu thay đổi
+                _context.HoaDon.Update(hd);
+                await _context.SaveChangesAsync();
+                return Ok(new { Message = "Cập nhật trạng thái thành công." });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "Đã xảy ra lỗi khi cập nhật trạng thái.", Error = ex.Message });
+            }
+
+        }
+
     }
 }

@@ -17,6 +17,7 @@ namespace DATN_QLTiemChung_Api.Controllers
         {
             _context = context;
         }
+
         [HttpGet("GetAllKhachHang")]
         public async Task<IActionResult> GetAllKhachHang()
         {

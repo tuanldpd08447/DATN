@@ -4,6 +4,7 @@
     var khachhang = ViewBag.Khachhang as KHDTO;
     var dc = ViewBag.DiaChi as DiaChi;
     KhachHangDTo khachHangDTo = new KhachHangDTo();
+    var hangcho = ViewBag.HangCho as List<HangCho>;
     if (hoaDon != null)
     {
         khachHangDTo.IDKH = hoaDon.IDKH;
@@ -31,17 +32,37 @@
         <h2 class="" style="color: #2fb388;">QUẢN LÝ HÓA ĐƠN</h2>
         <div class="float-end ">
             <button class="btn fw-bold custom-btn" id="activateButton"><i class="fa-solid fa-plus"></i> Thêm</button>
-            <button class="btn fw-bold custom-btn">
+            <button class="btn fw-bold custom-btn" id="updateButton" data-action="@Url.Action("UpdateHoaDon", "QLHoaDon")" onclick="changeAction(this)">
                 <i class="fa-solid fa-floppy-disk"></i> Lưu
             </button>
-            <a class="btn fw-bold custom-btn" asp-action="QLHoaDon" asp-controller="QLHoaDon"><i class="fa-solid fa-repeat"></i> Hủy </a>
-            <button class="btn fw-bold custom-btn"><i class="fa-solid fa-print"></i> In</button>
+            <button class="btn fw-bold custom-btn" id="cancelButton" data-action="@Url.Action("CancelHoaDon", "QLHoaDon")" onclick="changeAction(this)">
+                <i class="fa-solid fa-floppy-disk" ></i> Hủy
+            </button>
+
+            <a class="btn fw-bold custom-btn" asp-action="QLHoaDon" asp-controller="QLHoaDon"><i class="fa-solid fa-repeat"></i>  </a>
             <a class="btn fw-bold custom-btn" asp-action="HomeQL" asp-controller="Home"><i class="fa-solid fa-right-from-bracket"></i> </a>
         </div>
     </div>
-
+    <script>
+        function changeAction(button) {
+            var form = document.getElementById('vattuform');
+            if (form) {
+                var actionUrl = button.getAttribute('data-action');
+                if (actionUrl) {
+                    if (form.action !== actionUrl) {
+                        form.action = actionUrl; // Chỉ thay đổi action khi cần thiết
+                    }
+                } else {
+                    console.error('No action URL found');
+                }
+            } else {
+                console.error('Form not found');
+            }
+        }
+    </script>
     <!-- Thông tin hóa đơn -->
     <div class="row m-0 mb-3 border rounded-4 py-2  ">
+
         <div class="col-4  ">
             <div class=" ms-1 p-3 py-1 border rounded-4 h-100">
 
@@ -64,15 +85,15 @@
                             @{
                                 int STT = 1;
                             }
-                            @if (ViewBag.KhachHangs != null)
+                            @if (hangcho != null)
                             {
-                                @foreach (var item in ViewBag.KhachHangs)
+                                @foreach (var item in hangcho)
                                 {
                                     <tr onclick="location.href='@Url.Action("ClickKhachHang", "QLHoaDon", new { IDKH = @item.IDKH })' ">
 
                                         <td>@STT</td>
                                         <td>@item.IDKH</td>
-                                        <td>@item.TenKhachHang</td>
+                                        <td>@item.HoTen</td>
 
                                     </tr>
                                     STT++;
@@ -84,15 +105,16 @@
             </div>
         </div>
         <div class="invoice-section col-8  ">
-            <form asp-action="AddHoaDon" asp-controller="QLHoaDon" method="post">
+
+           
+
+            <form id="vattuform" method="post" action="@Url.Action("AddHoaDon", "QLHoaDon")">
                 <div class=" ms-2 p-3 border rounded-4 h-100">
                     <div class="row ">
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label class="fw-semibold" for="makhachhang">Mã Khách Hàng</label>
-                                <input type="text" name="MaKH" class="form-control form-control-sm" id="medicalCode " value="@if(khachHangDTo!=null){
-                                @khachHangDTo.IDKH
-} ">
+                                <input type="text" name="MaKH" class="form-control form-control-sm" id="medicalCode " value="@if(khachHangDTo!=null){@khachHangDTo.IDKH}">
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -183,21 +205,15 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label class="fw-semibold" for="manhanvien">Mã nhân viên</label>
-                                <input type="text" name="MaNV" class="form-control form-control-sm" id="medicalCode" value=" @if (hoaDon != null)
-                                {
-                                @hoaDon.NhanVien.IDNV
-}
-">
+                                <input type="text" name="MaNV" class="form-control form-control-sm" id="medicalCode" value="@if (hoaDon != null)
+                                {@hoaDon.NhanVien.IDNV}">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label class="fw-semibold" for="invoiceNumber">Mã hóa đơn</label>
-                                <input type="text" name="MaHD" class="form-control form-control-sm" id="mahoadon" value=" @if (hoaDon != null)
-                                {
-                                @hoaDon.IDHD
-}
-">
+                                <input type="text" name="MaHD" class="form-control form-control-sm" id="mahoadon" value="@if (hoaDon != null)
+                                { @hoaDon.IDHD}">
 
                             </div>
                         </div>
@@ -237,7 +253,17 @@
                                     {
                                         @foreach (var item in vatTu)
                                         {
-                                            <option value="@item.TenVatTu">@item.TenVatTu</option>
+                                            bool isSelected = hoaDon?.HoaDonChiTiets != null && hoaDon.HoaDonChiTiets.Any()
+                                        && item.IDVT == hoaDon.HoaDonChiTiets.First().IDVT;
+                                            if (isSelected)
+                                            {
+                                                <option value="@item.TenVatTu" selected>@item.TenVatTu</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@item.TenVatTu">@item.TenVatTu</option>
+                                            }
+                                           
                                         }
                                     }
                                 </select>
@@ -267,38 +293,49 @@
                                 <input type="text" name="ThanhTien" class="form-control form-control-sm" id="thanhtien">
                             </div>
                         </div>
+						<div class="col-md-3">
+							<label class="fw-semibold" for="paymentMethod">Hình thức thanh toán</label>
+							<select id="paymentMethod" name="GhiChu" class="form-control form-control-sm">
+								<option></option>
+								@if (hoaDon != null)
+								{
+									<option selected>@hoaDon.GhiChu</option>
+
+								}
+								else
+								{
+
+									<option>Tiền mặt</option>
+									<option>Chuyển khoản</option>
+								}
+							</select>
+						</div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-3">
-                            <label class="fw-semibold" for="paymentMethod">Hình thức thanh toán</label>
-                            <select id="paymentMethod" name="GhiChu" class="form-control form-control-sm">
-                                <option></option>
-                                @if (hoaDon != null)
-                                {
-                                    <option selected>@hoaDon.GhiChu</option>
-
-                                }
-                                else
-                                {
-
-                                    <option>Tiền mặt</option>
-                                    <option>Chuyển khoản</option>
-                                }
-                            </select>
-                        </div>
+                       
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label class="fw-semibold" for="paymentMethod">Thành Tiền</label>
+                                <label class="fw-semibold" for="paymentMethod">Thanh toán</label>
                                 <select id="paymentMethod" name="ThanhToan" class="form-control form-control-sm">
-                                    <option></option>
+                                   
                                     @if (hoaDon != null)
                                     {
-                                        <option selected>@hoaDon.ThanhToan</option>
+                                        if (hoaDon.ThanhToan)
+                                        {
+                                            <option value="True" selected>Đã thanh toán</option>
+                                            <option value="False">Chưa thanh toán</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="True" >Đã thanh toán</option>
+                                            <option value="False" selected>Chưa thanh toán</option>
+                                        }
 
                                     }
                                     else
                                     {
+                                        <option></option>
                                         <option value="True">Đã thanh toán</option>
                                         <option value="False">Chưa thanh toán</option>
 
@@ -308,7 +345,36 @@
                         </div>
                         <div class="col-md-3">
                             <label class="fw-semibold" for="thoigian">Thời gian</label>
-                            <input type="datetime-local" name="ThoiGian" class="form-control col-3 me-1">
+                            <input type="datetime-local" name="ThoiGian" value="@if (hoaDon != null)
+                                { @hoaDon.ThoiGian.ToString("yyyy-MM-ddTHH:mm")}" class="form-control form-control-sm">
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="fw-semibold" for="paymentMethod">Trạng thái</label>
+                                <select id="paymentMethod" name="TrangThai" class="form-control form-control-sm ">
+                                
+                                    @if (hoaDon != null)
+                                    {
+                                        if(hoaDon.TrangThai)
+                                        {
+                                            <option value="True" selected>Đã hủy</option>
+                                            <option value="False">Đã thực hiện</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="False" selected>Đã thực hiện</option>
+                                            <option value="True">Đã hủy</option>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <option></option>
+                                        <option value="True">Đã hủy</option>
+                                        <option value="False">Đã thực hiện</option>
+
+                                    }
+                                </select>
+                            </div>
                         </div>
                     </div>
 
@@ -320,7 +386,7 @@
 
                                     <div class="ms-2">
                                         <button class="btn">Hoàn trả</button>
-                                        <button class="btn">Hủy hóa đơn</button>
+                                      
                                     </div>
 
                                 </div>
@@ -341,7 +407,8 @@
                     // Lấy phần tử button
                     const activateButton = document.getElementById('activateButton');
                     const targetButton = document.getElementById('targetButton');
-
+                    const updateButton = document.getElementById('updateButton');
+                    const cancelButton = document.getElementById('cancelButton');
 
 
                     // Thêm sự kiện click vào nút kích hoạt
@@ -349,10 +416,15 @@
 
                         targetButton.click();
                     });
+                    updateButton.addEventListener('click', function () {
 
-                    targetButton.addEventListener('click', function () {
-
+                        targetButton.click();
                     });
+                    cancelButton.addEventListener('click', function () {
+
+                        targetButton.click();
+                    });
+                  
                     document.addEventListener('DOMContentLoaded', function () {
                         updateDetails(); // Gọi hàm khi trang tải xong
                     });

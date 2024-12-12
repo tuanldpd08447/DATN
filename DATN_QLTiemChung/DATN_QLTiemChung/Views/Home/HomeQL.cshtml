@@ -8,6 +8,12 @@
         .feature-card {
             transition: transform 0.3s ease;
             border: none;
+            aspect-ratio: 2 / 1; /* Tạo tỷ lệ 1:1 cho chiều rộng và chiều cao */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Đảm bảo nội dung không tràn ra ngoài */
         }
 
             .feature-card:hover {
@@ -23,13 +29,24 @@
             justify-content: center;
             margin: 0 auto 15px;
             background-color: rgba(0, 123, 255, 0.1);
-        }</style>
+        }
+
+        .row-cols-md-3 > .col {
+            display: flex;
+            justify-content: center; /* Căn giữa các card trong cột */
+        }
+
+        h5, p {
+            margin: 0; /* Loại bỏ margin để nội dung không chiếm quá nhiều không gian */
+            text-align: center;
+        }
+    </style>
     @if (TempData["Role"] != null)
     {
         <div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
             @if (role == "Bác Sĩ")
             {
-                <div class="col" onclick="window.location.href='@Url.Action("KhamSanLoc", "Home")'">
+                <div class="col" onclick="window.location.href='@Url.Action("KhamSanLoc", "KhamSanLoc")'">
                     <div class="card feature-card shadow-sm p-3">
                         <div class="icon-circle bg-warning text-white">
                             <i class="bi bi-heart-pulse-fill fs-3"></i>

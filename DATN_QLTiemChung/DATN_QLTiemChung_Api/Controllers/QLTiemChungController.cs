@@ -148,17 +148,18 @@ namespace DATN_QLTiemChung_Api.Controllers
 
             return newId;
         }
+       
         [HttpPost("CreateTiemChung")]
         public async Task<IActionResult> CreateTiemChung([FromBody] createTiemChung request)
         {
-            if (request == null )
+            if (request == null)
             {
                 return BadRequest("Thông tin không hợp lệ.");
             }
 
             string newIDTC = await GenerateNewIDTCAsync();
 
-           
+
 
             var tiemChung = new TiemChung
             {
@@ -196,30 +197,51 @@ namespace DATN_QLTiemChung_Api.Controllers
                 return BadRequest("Thông tin không hợp lệ hoặc thiếu IDST.");
             }
 
-            // Tìm bản ghi TheoDoiSauTiem dựa trên IDST
-            var existingRecord = await _context.TheoDoiSauTiem.FindAsync(request.IDST);
-            if (existingRecord == null)
+            try
             {
-                return NotFound($"Không tìm thấy TheoDoiSauTiem với IDST = {request.IDST}");
+                // Tìm bản ghi TheoDoiSauTiem dựa trên IDST
+                var existingRecord = await _context.TheoDoiSauTiem.FindAsync(request.IDST);
+                if (existingRecord == null)
+                {
+                    return NotFound($"Không tìm thấy TheoDoiSauTiem với IDST = {request.IDST}");
+                }
+
+                // Cập nhật thông tin từ request
+                existingRecord.IDTC = request.IDTC;
+                existingRecord.IDNV = request.IDNV;
+                existingRecord.IDKH = request.IDKH;
+                existingRecord.ThoiGian = request.ThoiGian;
+                existingRecord.TrangThai = request.TrangThai;
+                existingRecord.GhiChu = request.GhiChu;
+
+                // Tìm bản ghi TiemChung
+                var existingTC = await _context.TiemChung.FirstOrDefaultAsync(tc => tc.IDTC == request.IDTC);
+                if (existingTC == null)
+                {
+                    return NotFound($"Không tìm thấy TiemChung với IDTC = {request.IDTC}");
+                }
+
+                if (request.TrangThai)
+                {
+                    existingTC.TrangThai = true;
+                    _context.TiemChung.Update(existingTC);
+                }
+
+                // Lưu thay đổi vào cơ sở dữ liệu
+                _context.TheoDoiSauTiem.Update(existingRecord);
+                await _context.SaveChangesAsync();
+
+                return Ok(new
+                {
+                    Message = "Cập nhật thành công",
+                    TheoDoiSauTiem = existingRecord,
+                    TiemChung = existingTC
+                });
             }
-
-            // Cập nhật thông tin từ request
-            existingRecord.IDTC = request.IDTC;
-            existingRecord.IDNV = request.IDNV;
-            existingRecord.IDKH = request.IDKH;
-            existingRecord.ThoiGian = request.ThoiGian;
-            existingRecord.TrangThai = request.TrangThai;
-            existingRecord.GhiChu = request.GhiChu;
-
-            // Lưu thay đổi vào cơ sở dữ liệu
-            _context.TheoDoiSauTiem.Update(existingRecord);
-            await _context.SaveChangesAsync();
-
-            return Ok(new
+            catch (Exception ex)
             {
-                Message = "Cập nhật thành công",
-                TheoDoiSauTiem = existingRecord
-            });
+                return StatusCode(500, $"Đã xảy ra lỗi: {ex.Message}");
+            }
         }
 
 

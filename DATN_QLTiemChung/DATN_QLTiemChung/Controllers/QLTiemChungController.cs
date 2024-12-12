@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using DATN_QLTiemChung.Models;
 using Newtonsoft.Json;
 using System.Text;
+using System;
 
 namespace DATN_QLTiemChung.Controllers
 {
@@ -26,7 +27,26 @@ namespace DATN_QLTiemChung.Controllers
             TempData["Username"] = Username;
             TempData["Role"] = userRole;
         }
-            public async Task<IActionResult> QLTiemChung()
+        public async Task<List<HangCho>> GetHangCho()
+        {
+            using (var client = new HttpClient())
+            {
+                var response = await client.GetAsync("https://65b86c3a46324d531d562e3d.mockapi.io/HangCho");
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new List<HangCho>(); // Trả về danh sách rỗng nếu không thành công
+                }
+
+                var khachhangapiResponse = await response.Content.ReadAsStringAsync();
+                var hangChoList = JsonConvert.DeserializeObject<List<HangCho>>(khachhangapiResponse)
+                                   ?.Where(hc => hc.Step == "ThanhToan")
+                                   .ToList();
+
+                return hangChoList ?? new List<HangCho>(); // Trả về danh sách rỗng nếu dữ liệu null
+            }
+        }
+        public async Task<IActionResult> QLTiemChung()
             {
                 var client = _httpClientFactory.CreateClient();
                 try
@@ -39,7 +59,7 @@ namespace DATN_QLTiemChung.Controllers
                         var apiResponse = await response.Content.ReadAsStringAsync();
                         List<DSKhamSangLocDTO> KhachHangKSL = JsonConvert.DeserializeObject<List<DSKhamSangLocDTO>>(apiResponse);
                     // Dùng Newtonsoft.Json
-                    ViewBag.DSKhamSangLocDTO = KhachHangKSL;
+                        ViewBag.DSKhamSangLocDTO = KhachHangKSL;
                 }
                     else
                     {
@@ -53,8 +73,8 @@ namespace DATN_QLTiemChung.Controllers
                     ViewBag.ErrorMessage = $"Đã xảy ra lỗi: {ex.Message}";
                 }
 
-
-                  GetSession(); return View("~/Views/Home/QLTiemChung.cshtml");
+            ViewBag.HangCho = await GetHangCho();
+            GetSession(); return View("~/Views/Home/QLTiemChung.cshtml");
             }
 
         // Phương thức lấy thông tin kết quả khám sàng lọc của khách hàng từ cơ sở dữ liệu
@@ -137,8 +157,8 @@ namespace DATN_QLTiemChung.Controllers
                 var TheoDoiSauTiem = JsonConvert.DeserializeObject<TheoDoiSauTiem>(apiResponse3);
                 ViewBag.TheoDoiSauTiem = TheoDoiSauTiem;
             }
-
-              GetSession(); return View("~/Views/Home/QLTiemChung.cshtml"); 
+            ViewBag.HangCho = await GetHangCho();
+            GetSession(); return View("~/Views/Home/QLTiemChung.cshtml"); 
         }
         public async Task<IActionResult> CreateTiemChung(string IDNV, string IDDK , string IDKH, DateTime thoiGian)
         {
@@ -169,6 +189,7 @@ namespace DATN_QLTiemChung.Controllers
 
                 if (response.IsSuccessStatusCode)
                 {
+
                     GetSession(); return RedirectToAction("QLTiemChung");
                 }
                 else
@@ -193,8 +214,7 @@ namespace DATN_QLTiemChung.Controllers
 
             try
             {
-                // Tạo HTTP client
-                var client = _httpClientFactory.CreateClient();
+                using var client = _httpClientFactory.CreateClient();
 
                 // Tạo đối tượng DTO để gửi dữ liệu
                 var updateTheoDoi = new createTheoDoi
@@ -208,27 +228,49 @@ namespace DATN_QLTiemChung.Controllers
                     GhiChu = ghiChu
                 };
 
-                // Chuyển đổi dữ liệu thành JSON
-                var content = new StringContent(JsonConvert.SerializeObject(updateTheoDoi), Encoding.UTF8, "application/json");
-
                 // Gửi yêu cầu PUT đến API
-                var response = await client.PutAsync($"https://localhost:7143/api/QLTiemChung/UpdateTheoDoiSauTiem", content);
+                var content = new StringContent(JsonConvert.SerializeObject(updateTheoDoi), Encoding.UTF8, "application/json");
+                var response = await client.PutAsync("https://localhost:7143/api/QLTiemChung/UpdateTheoDoiSauTiem", content);
 
-                if (response.IsSuccessStatusCode)
+                if (!response.IsSuccessStatusCode)
                 {
-                    GetSession();
-                    return RedirectToAction("QLTiemChung");
+                    var errorContent = await response.Content.ReadAsStringAsync();
+                    return StatusCode((int)response.StatusCode, $"Lỗi khi cập nhật thông tin: {errorContent}");
                 }
-                else
+
+                // Lấy danh sách HangCho từ API
+                var response1 = await client.GetAsync("https://65b86c3a46324d531d562e3d.mockapi.io/HangCho");
+                if (!response1.IsSuccessStatusCode)
                 {
-                    GetSession();
-                    return StatusCode((int)response.StatusCode, "Đã có lỗi xảy ra khi cập nhật.");
+                    var errorResponse = await response1.Content.ReadAsStringAsync();
+                    return StatusCode((int)response1.StatusCode, $"Không thể lấy dữ liệu từ API HangCho: {errorResponse}");
                 }
+
+                var khachhangapiResponse = await response1.Content.ReadAsStringAsync();
+                var hangChoList = JsonConvert.DeserializeObject<List<HangCho>>(khachhangapiResponse);
+
+                // Tìm khách hàng trong danh sách HangCho
+                var hangCho = hangChoList.FirstOrDefault(hc => hc.IDKH == idKH);
+                if (hangCho == null)
+                {
+                    return BadRequest("Không tìm thấy thông tin khách hàng trong API HangCho.");
+                }
+
+                // Gửi yêu cầu DELETE để xóa khách hàng
+                var response2 = await client.DeleteAsync($"https://65b86c3a46324d531d562e3d.mockapi.io/HangCho/{hangCho.ID}");
+                if (!response2.IsSuccessStatusCode)
+                {
+                    var errorContent = await response2.Content.ReadAsStringAsync();
+                    return StatusCode((int)response2.StatusCode, $"Không thể xóa thông tin HangCho: {errorContent}");
+                }
+
+                TempData["Message"] = "Cập nhật và xóa dữ liệu thành công.";
+                GetSession();
+                return RedirectToAction("QLTiemChung");
             }
             catch (Exception ex)
             {
-                GetSession();
-                return StatusCode(500, $"Có lỗi khi kết nối với máy chủ: {ex.Message}");
+                return StatusCode(500, $"Có lỗi khi xử lý yêu cầu: {ex.Message}");
             }
         }
 

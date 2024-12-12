@@ -226,6 +226,25 @@ namespace DATN_QLTiemChung_Api.Models
         public string? IDNHC { get; set; }
         public string? IDXX { get; set; }
     }
+    public class VatTuDTOFull
+    {
+        public string IDVT { get; set; }
+        public string TenVatTu { get; set; }
+        public double? DonGia { get; set; }
+        public int SoLuong { get; set; }
+
+        public DateTime HanSuDung { get; set; }
+        public string? GhiChu { get; set; }
+        public string? IDTL { get; set; }
+        public string? TenLoai { get; set; }
+        public string? IDNGC { get; set; }
+        public string? TenNguon { get; set; }
+        public string? IDNHC { get; set; }
+        public string? TenNhaCungCap { get; set; }
+        public string? IDXX { get; set; }
+        public string? NoiXuatXu { get; set; }
+    }
+
     public class VaccineCreateDTO
     {
 
@@ -270,12 +289,14 @@ namespace DATN_QLTiemChung_Api.Models
         public Double TongTien { get; set; }
 
         public bool TrangThai { get; set; }
+        public bool ThanhToan { get; set; }
         public string GhiChu { get; set; }
 
 
 
 
     }
+
     public class KHDTO
     {
         public string IDKH { get; set; }
@@ -452,7 +473,19 @@ namespace DATN_QLTiemChung_Api.Models
 		public string? SoDienThoai { get; set; }
 		public string? CCCD_MDD { get; set; }
 	}
-
+    public class KhamSangLocDTO
+    {
+        public string IDVT { get; set; }
+        public int SoLuong { get; set; }
+        public string IDKH { get; set; }
+        public Double ChieuCao { get; set; }
+        public Double CanNang { get; set; }
+        public string IDNV { get; set; }
+        public string TinhTrangSucKhoe { get; set; }
+        public bool TrangThai { get; set; }
+        public bool KetQua { get; set; }
+        public string? GhiChu { get; set; }
+    }
 
 
 }

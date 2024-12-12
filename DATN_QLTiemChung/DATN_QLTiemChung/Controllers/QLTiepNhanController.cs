@@ -69,32 +69,36 @@ namespace DATN_QLTiemChung.Controllers
 
               GetSession(); return View("~/Views/Home/QLTiepNhan.cshtml");
         }
-
         [HttpPost]
         public async Task<IActionResult> AddHangCho(string IDKH)
         {
             var client = _httpClientFactory.CreateClient();
-            var response1 = await client.GetAsync("https://65b86c3a46324d531d562e3d.mockapi.io/HangCho");
-            var khachhangapiResponse = await response1.Content.ReadAsStringAsync();
-            List<HangCho> hangChoList = JsonConvert.DeserializeObject<List<HangCho>>(khachhangapiResponse);
 
-            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
-
-            var existingHangCho = hangChoList.FirstOrDefault(h => h.IDKH == IDKH && h.NgayCho == today);
-
-            if (existingHangCho != null)
+            try
             {
-                // If an entry is found
-                  GetSession(); return BadRequest("Đã có HangCho với IDKH và NgayCho trùng với hôm nay.");
-            }
-           
-            var response = await client.GetAsync($"https://localhost:7143/api/QLTiepNhan/GetAllKhachHangByIDKH/{IDKH}");
+                // Kiểm tra trùng lặp trong HangCho
+                var response1 = await client.GetAsync($"https://65b86c3a46324d531d562e3d.mockapi.io/HangCho?IDKH={IDKH}&NgayCho={DateOnly.FromDateTime(DateTime.Now)}");
+                if (response1.IsSuccessStatusCode)
+                {
+                    var hangChoList = JsonConvert.DeserializeObject<List<HangCho>>(await response1.Content.ReadAsStringAsync());
+                    if (hangChoList.Any())
+                    {
+                        GetSession();
+                        return BadRequest("Khách hàng đã có trong hàng chờ hôm nay.");
+                    }
+                }
 
-            if (response.IsSuccessStatusCode)
-            {
-                var apiResponse = await response.Content.ReadAsStringAsync();
-                KhachHangDTo kh = JsonConvert.DeserializeObject<KhachHangDTo>(apiResponse);
+                // Lấy thông tin khách hàng từ API
+                var response2 = await client.GetAsync($"https://localhost:7143/api/QLTiepNhan/GetAllKhachHangByIDKH/{IDKH}");
+                if (!response2.IsSuccessStatusCode)
+                {
+                    GetSession();
+                    return BadRequest("Không thể lấy thông tin khách hàng.");
+                }
 
+                var kh = JsonConvert.DeserializeObject<KhachHangDTo>(await response2.Content.ReadAsStringAsync());
+
+                // Tạo đối tượng HangCho
                 var hc = new HangCho
                 {
                     ID = null,
@@ -105,17 +109,25 @@ namespace DATN_QLTiemChung.Controllers
                     Step = "TiepNhan"
                 };
 
+                // Gửi yêu cầu POST thêm vào HangCho
                 var content = new StringContent(JsonConvert.SerializeObject(hc), Encoding.UTF8, "application/json");
-                var response2 = await client.PostAsync("https://65b86c3a46324d531d562e3d.mockapi.io/HangCho", content);
+                var response3 = await client.PostAsync("https://65b86c3a46324d531d562e3d.mockapi.io/HangCho", content);
+                if (!response3.IsSuccessStatusCode)
+                {
+                    GetSession();
+                    return StatusCode((int)response3.StatusCode, "Không thể thêm khách hàng vào hàng chờ.");
+                }
 
-                  GetSession(); return RedirectToAction("QLTiepNhan");
+                GetSession();
+                return RedirectToAction("QLTiepNhan");
             }
-            else
+            catch (Exception ex)
             {
-                // Handle failure response (if necessary)
-                  GetSession(); return BadRequest("Failed to fetch customer data");
+                GetSession();
+                return StatusCode(500, $"Đã xảy ra lỗi: {ex.Message}");
             }
         }
+
 
 
 

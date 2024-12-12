@@ -25,6 +25,14 @@
       "PackagePath": "staticwebassets\\Img\\CDC Đà Nẵng.png"
     },
     {
+      "Id": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_CDCWebClient\\wwwroot\\Img\\IMG_0624.png",
+      "PackagePath": "staticwebassets\\Img\\IMG_0624.png"
+    },
+    {
+      "Id": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_CDCWebClient\\wwwroot\\Img\\IMG_0626.png",
+      "PackagePath": "staticwebassets\\Img\\IMG_0626.png"
+    },
+    {
       "Id": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_CDCWebClient\\wwwroot\\Img\\address-book-solid.svg",
       "PackagePath": "staticwebassets\\Img\\address-book-solid.svg"
     },

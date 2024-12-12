@@ -1,13 +1,36 @@
-﻿    <div class="container mt-4" >
+﻿@{
+    Layout = "_Layout";
+    var hangCho = ViewBag.HangCho as List<HangCho>;
+    var kh = ViewBag.KhachHang as KhachHangDTo2;
+    var nguoncap = ViewBag.NguonCap as List<NguonCungCap>;
+    var nhacap = ViewBag.NhaCap as List<NhaCungCap>;
+    var xuatxu = ViewBag.Xuatxu as List<XuatXu>;
+    var login = TempData["ID"];
+}
+<div class="container mt-4 mb-4" >
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="" style="color: #2fb388;">KHÁM SÀNG LỌC</h2>
-            <div class="Double-end ">
-                <button class="btn fw-bold custom-btn"><i class="fa-solid fa-plus"></i> Thêm</button>
-                <button class="btn fw-bold custom-btn"><i class="fa-solid fa-floppy-disk"></i> Lưu</button>
-                <button class="btn fw-bold custom-btn"><i class="fa-solid fa-repeat"></i> Hủy </button>
-                <button class="btn fw-bold custom-btn"><i class="fa-solid fa-print"></i> In</button>
-                <button class="btn fw-bold custom-btn"><i class="fa-solid fa-right-from-bracket"></i> Thoát</button>
-              </div>
+              <div class="Double-end">
+            <button class="btn fw-bold custom-btn" id="addButton" >
+                <i class="fa-solid fa-plus"></i> Thêm
+            </button>
+
+            <button class="btn fw-bold custom-btn" id="activateButton">
+                <i class="fa-solid fa-floppy-disk"></i> Lưu
+            </button>
+
+            <button class="btn fw-bold custom-btn" id="CancelButton">
+                <i class="fa-solid fa-repeat"></i> Hủy
+            </button>
+
+            <button class="btn fw-bold custom-btn" id="editButton">
+                <i class="fa-solid fa-pen-to-square"></i> Sửa
+            </button>
+
+            <button class="btn fw-bold custom-btn">
+                <i class="fa-solid fa-right-from-bracket"></i> Thoát
+            </button>
+            </div>
         </div>
       
       <!-- Thông tin hóa đơn -->
@@ -15,12 +38,12 @@
         <div class="col-4">
             <div class=" ms-1 p-3 py-1 border rounded-4 ">
                 <div class="row">
-                    <button class="col border  border-1 rounded-start btn "><i class="fa-solid fa-arrows-rotate"></i></button>
+                    <button class="col border  border-1 rounded-start btn" type="button" onclick="reloadPage()"><i class="fa-solid fa-arrows-rotate"></i></button>
                     <input class="col-8  border border-1 rounded-2 mx-1" type="text">
                     <button type="button" class="col border border-1 rounded-end btn "><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div> 
                 <div class="row border rounded-4 border-1 mt-1 "style="height: 300px;">
-                <table class="table  table-hover h-25 m-0 text-center " >
+                <table class="table table1  table-hover h-25 m-0 text-center " style="text-align:center;  white-space: nowrap; " >
                     <thead class="rounded-4"> 
                       <tr>
                         <th class="col-2">STT</th>
@@ -29,16 +52,28 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td >Nguyễn Văn A</td>
-                        <td>1990</td>
-                      </tr>
-                      <tr>
-                        <td>1</td>
-                        <td>Nguyễn Văn A</td>
-                        <td>1990</td>
-                      </tr>
+                        @if(hangCho != null)
+                        {
+                                var stt = 0;
+                                foreach(var item in hangCho)
+                                {
+                                    stt++;
+                                    <tr onclick="location.href='@Url.Action("ClickHangCho", "KhamSanLoc", new { IDKH = @item.IDKH })' ">
+                                        <td>@stt</td>
+                                        <td >@item.HoTen</td>
+                                        <td>@item.NgaySinh.Year</td>
+                                    </tr>        
+                                }     
+                            }
+                          else
+                          {
+
+                               <tr>
+                           <td colspan="3">Trống</td>
+                                   
+                                  </tr>     
+                          }
+
                     </tbody>
                   </table>
                 </div>
@@ -47,35 +82,35 @@
                 <div class="col pt-2">
                     <div class="form-group row pb-2">
                         <label class="fw-semibold col-4" for="medical-id">Mã y tế:</label>
-                        <input type="text" id="medical-id"  class="form-control form-control-sm col">
+                        <input type="text" id="medical-id"  class="form-control form-control-sm col" value="@kh?.IDKH" >
                     </div>
                     <div class="form-group row pb-2">
                         <label class="fw-semibold col-4" for="name">Họ và tên:</label>
-                        <input type="text" id="name"  class="form-control form-control-sm col">
+                        <input type="text" id="name"  class="form-control form-control-sm col" value="@kh?.TenKhachHang">
                     </div>
                     <div class="form-group row pb-2">
                         <label class="fw-semibold col-4" for="gender">Giới tính:</label>
-                        <input type="text" id="gender"  class="form-control form-control-sm col">
+                        <input type="text" id="gender"  class="form-control form-control-sm col" value="@kh?.GioiTinh">
                     </div>
                     <div class="form-group row pb-2">
                         <label class="fw-semibold col-4" for="dob">Ngày sinh:</label>
-                        <input type="text" id="dob"  class="form-control form-control-sm col">
+                        <input type="text" id="dob"  class="form-control form-control-sm col" value="@kh?.NgaySinh">
                     </div>
                     <div class="form-group row pb-2">
                         <label class="fw-semibold col-4" for="phone">Số điện thoại:</label>
-                        <input type="text" id="phone"  class="form-control form-control-sm col">
+                        <input type="text" id="phone"  class="form-control form-control-sm col" value="@kh?.SoDienThoai">
                     </div>
                     <div class="form-group row pb-2">
                         <label class="fw-semibold col-4" for="address">Địa chỉ:</label>
-                        <input type="text" id="address" class="form-control form-control-sm col">
+                        <input type="text" id="address" class="form-control form-control-sm col" value="@kh?.FullAddress">
                     </div>
                     <div class="form-group row pb-2">
                         <label class="fw-semibold col-4" for="height">Chiều cao:</label>
-                        <input type="text" id="height" value="1m7"  class="form-control form-control-sm col">
+                        <input type="text" id="height" class="form-control form-control-sm col">
                     </div>
                     <div class="form-group row pb-2">
                         <label class="fw-semibold col-4" for="weight">Cân nặng:</label>
-                        <input type="text" id="weight" value="70kg"  class="form-control form-control-sm col">
+                        <input type="text" id="weight"  class="form-control form-control-sm col">
                     </div>
                 </div>
             </div>
@@ -91,141 +126,127 @@
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form class="mx-4" >
-                                    <div class="form-group row mb-1">
-                                        <label class="col-2 fw-bold" for="vaccineCode" >Mã Vaccine</label>
-                                        <input type="text" class="form-control col" id="vaccineCode" value="24URAD036">
-                                        <label class="col-2 fw-bold" for="vaccineName" >Tên Vaccine</label>
-                                        <input type="text" class="form-control col" id="vaccineName" value="Vắc-xin thủy đậu – VARILRIX (Bỉ)">
-                                    </div>
-                             
-                                    <div class="form-group row mb-1">
-                                        <label class="col-2 fw-bold" for="origin">Nguồn gốc</label>
-                                        <input type="text" class="form-control col" id="origin" value="Bỉ">
-                                        <label class="col-2 fw-bold" for="productionDate">Ngày sản xuất</label>
-                                        <input type="date" class="form-control col" id="productionDate" value="2023-02-03">
-                                    </div>
-                                    <div class="form-group row mb-1">
-                                        <label class="col-2 fw-bold" for="use">Công dụng</label>
-                                        <input type="text" class="form-control col" id="use" value="Phòng bệnh Thủy đậu">
-                                        <label class="col-2 fw-bold" for="expiryDate">Hạn sử dụng</label>
-                                        <input type="date" class="form-control col" id="expiryDate" value="2025-02-03">
-                                    </div>
-                        
-                                    <div class="form-group row mb-1">
-                                        <label class="col-2 fw-bold" for="composition">Thành phần</label>
-                                        <input type="text" class="form-control col" id="composition">
-                                        <label class="col-2 fw-bold" for="notes">Ghi chú</label>
-                                        <input type="text" class="form-control col" id="notes" value="Trẻ em từ 9 tháng tuổi đến 12 tuổi: Lịch tiêm 2 mũi">
-                                    </div>
-                            </form>
+                           
                             <div class="border rounded-4 p-3 mt-2">
-                                <form class="row ">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="vaccineCodeFind">Mã Vaccine</label>
-                                            <input type="text" class="form-control" id="vaccineCodeFind" value="24URAD036">
+                                    <form class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label class="fw-bold" for="vaccineCodeFind">Mã Vaccine</label>
+                                                <input type="text" class="form-control" id="vaccineCodeFind" placeholder="Nhập mã vaccine">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="vaccineNameFind">Tên Vaccine</label>
-                                            <input type="text" class="form-control" id="vaccineNameFind" value="Vắc-xin thủy đậu – VARILRIX (Bỉ)">
+
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label class="fw-bold" for="vaccineNameFind">Tên Vaccine</label>
+                                                <input type="text" class="form-control" id="vaccineNameFind" placeholder="Nhập tên vaccine">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label class="fw-bold" for="originFind">Nguồn gốc</label>
-                                            <input type="text" class="form-control col" id="originFind" value="Bỉ">
+
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label class="fw-bold" for="vaccineOriginFind">Xuất Xứ</label>
+                                                <select class="form-control" id="vaccineOriginFind">
+                                                    @if (xuatxu != null)
+                                                    {
+                                                        <option value=""></option>
+                                                        @foreach (var item in xuatxu)
+                                                        {
+
+                                                            <option value="@item.QuocGia">@item.QuocGia</option>
+                                                        }}
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
-                
-                                    <div class="col-3">
-                                        <div class="form-group">
-                                            <label for="useFind" >Công dụng</label>
-                                            <input type="text" class="form-control" id="useFind" value="Phòng bệnh Thủy đậu">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label class="fw-bold" for="vaccineSourceFind">Nguồn Cung</label>
+                                                <select class="form-control" id="vaccineSourceFind">
+                                                    @if (nguoncap != null)
+                                                    {
+                                                        <option value=""></option>
+                                                        @foreach (var item in nguoncap)
+                                                        {
+
+
+
+                                                            <option value="@item.TenNguonCungCap">@item.TenNguonCungCap</option>
+
+
+
+                                                        }}
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="productionDateFind">Ngày sản xuất</label>
-                                            <input type="date" class="form-control" id="productionDateFind" value="2023-02-03">
+
+       
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label class="fw-bold" for="supplierNameFind">Nhà Cung Cấp</label>
+                                                <select class="form-control" id="supplierNameFind">
+                                                    @if (nhacap != null)
+                                                    {
+                                                        <option value=""></option>
+                                                        @foreach (var item in nhacap)
+                                                        {
+
+
+                                                            <option value="@item.TenNhaCungCap">@item.TenNhaCungCap</option>
+
+
+
+                                                        }}
+                                            </select>
+                                            </div>
                                         </div>
-                                    </div class="col">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="expiryDateFind">Hạn sử dụng</label>
-                                            <input type="date" class="form-control" id="expiryDateFind" value="2025-02-03">
+
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label class="fw-bold" for="expiryDateFind">Hạn Sử Dụng</label>
+                                                <input type="date" class="form-control" id="expiryDateFind">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col">
-                                        <button class="btn custom-btn mt-4" type="button"><i class="fa-solid fa-magnifying-glass"></i>  Tìm</button>
-                                    </div>
-                                </form>
+
+                                        <div class="col">
+                                            <button class="btn custom-btn mt-4" id="findBtn" type="button">
+                                                <i class="fa-solid fa-magnifying-glass"></i> Tìm
+                                            </button>
+                                        </div>
+                                    </form>
+
                             </div>
-                            <div class="border rounded-4 mt-2" style="font-size: small;">
-                                <table class="table  m-0 mt-2 ">
+                            <div class="border rounded-4 mt-2 table-responsive" style="font-size: small; max-height: 400px; overflow-y: auto;">
+                                <table class="table m-0 mt-2" id="vatTuTable">
                                     <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th>Tên Vắc xin/Huyết thanh</th>
-                                            <th>Nguồn gốc</th>
-                                            <th>Số lượng tồn kho</th>
-                                            <th>Phòng bệnh</th>
-                                            <th>Đơn giá</th>
-                                            <th>Thành phần</th>
-                                            <th>Ghi chú</th>
-                                            <th>Ngày sản xuất</th>
-                                            <th>Ngày hết hạn</th>
-                                        </tr>
+                                       <tr>
+                                        <th></th>
+                                        <th>ID Vật Tư</th>
+                                        <th>Tên Vật Tư</th>
+                                        <th>Loại Vật Tư</th>
+                                        <th>Tên Nguồn Cung Cấp</th>
+                                        <th>Tên Nhà Cung Cấp</th>
+                                        <th>Nơi Xuất Xứ</th>
+                                        <th>Đơn Giá</th>
+                                        <th>Hạn Sử Dụng</th>
+                                        <th>Số Lượng</th>
+                                        <th>Ghi Chú</th>
+                                        <th>Số Mũi</th>
+                                        <th>Đề Nghị</th>
+                                    </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th><input type="checkbox"></th>
-                                            <td>Vắc-xin thủy đậu – VARILRIX (Bỉ)</td>
-                                            <td>Bỉ</td>
-                                            <td>68</td>
-                                            <td>Thủy đậu</td>
-                                            <td>919,000</td>
-                                            <td></td>
-                                            <td>trẻ từ 9 tháng</td>
-                                            <td>03-02-2023</td>
-                                            <td>03-02-2025</td>
-                                        </tr>
-                                        <tr>
-                                            <th><input type="checkbox"></th>
-                                            <td>Vắc-xin thủy đậu – Varivax (Mỹ)</td>
-                                            <td>Mỹ</td>
-                                            <td>72</td>
-                                            <td>Thủy đậu</td>
-                                            <td>1,085,000</td>
-                                            <td></td>
-                                            <td>trẻ từ 12 tháng</td>
-                                            <td>16-04-2023</td>
-                                            <td>16-04-2025</td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="10" class="font-weight-bold" >Đề Xuất Tiêm</td>
-                                        </tr>
-                                        <tr>
-                                            <th><input type="checkbox"></th>
-                                            <td>Vắc-xin thủy đậu – VARILRIX (Bỉ)</td>
-                                            <td>Bỉ</td>
-                                            <td>68</td>
-                                            <td>Thủy đậu</td>
-                                            <td>919,000</td>
-                                            <td></td>
-                                            <td>trẻ từ 9 tháng</td>
-                                            <td>03-02-2023</td>
-                                            <td>03-02-2025</td>
-                                        </tr>
+                                        
                                     </tbody>
                                 </table>
                             </div>
-                            
+
+                           
+
+
+
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-outline-danger border-2 " data-bs-dismiss="modal">Close</button>
                           <button type="button" class="btn custom-btn">Save changes</button>
                         </div>
                       </div>
@@ -233,11 +254,41 @@
                   </div>
             </div>
         </div>
+        <style>
+          
+                  .khamsanlocTable tbody tr td {
+            text-align: start;
+            white-space: normal; 
+            
+        }
+            .soMui {
+                max-width: 80px;         
+                width: 100%;          
+                max-height: 24px;
+
+                text-align: center;       
+                font-size: 14px;          
+                padding: 5px;             
+                border-radius: 4px;       
+                box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); 
+            }
+
+            td.text-center {
+                text-align: center; 
+            }
+
+            .soMui:focus {
+                outline: none;                          
+                border-color: #007bff;                  
+                box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /
+            }
+
+        </style>
         <div class="invoice-section col-8  ">
             <div class=" ms-1 p-3 border rounded-4 h-100">
                 <div class="row ">
                     <div class="col">
-                        <table class="table table-bordered">
+                        <table class="table khamsanlocTable table-bordered text-start ">
                             <thead class="table-light">
                                 <tr>
                                     <th>Sàng Lọc</th>
@@ -245,168 +296,613 @@
                                     <th>Có</th>
                                 </tr>
                             </thead>
-                            <tbody >
+                           <tbody>
                                 <tr>
-                                    <td>1. Bệnh cấp tính đang mắc</td>
-                                    <td><input type="checkbox" class="form-check-input"></td>
-                                    <td><input type="checkbox" class="form-check-input"></td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <span>1. Bệnh cấp tính đang mắc</span>
+                                            <input type="text" name="name" value="" class="form-control w-50 ms-2" id="benhCapTinhInput" disabled />
+                                        </div>
+                                    </td>
+                                    <td><input type="radio" name="BenhMac" class="form-check-input" value="Không" id="benhMacKhong"></td>
+                                    <td><input type="radio" name="BenhMac" class="form-check-input" value="Có" id="benhMacCo"></td>
                                 </tr>
                                 <tr>
-                                    <td>2. Tiền sử dị ứng (ghi rõ)</td>
-                                    <td><input type="checkbox" class="form-check-input"></td>
-                                    <td><input type="checkbox" class="form-check-input"></td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <span>2. Tiền sử dị ứng (ghi rõ)</span>
+                                            <input type="text" name="name" value="" class="form-control w-50 ms-4" id="tienSuDiUngInput" disabled />
+                                        </div>
+                                    </td>
+                                    <td><input type="radio" name="DiUng" class="form-check-input" value="Không" id="diUngKhong"></td>
+                                    <td><input type="radio" name="DiUng" class="form-check-input" value="Có" id="diUngCo"></td>
                                 </tr>
                                 <tr>
                                     <td>3. Tiền sử phản vệ tử độ 2 trở lên với bất kỳ tác nhân nào</td>
-                                    <td><input type="checkbox" class="form-check-input"></td>
-                                    <td><input type="checkbox" class="form-check-input"></td>
+                                    <td><input type="radio" name="PhanVe" class="form-check-input" value="Không" id="phanVeKhong"></td>
+                                    <td><input type="radio" name="PhanVe" class="form-check-input" value="Có" id="phanVeCo"></td>
                                 </tr>
                                 <tr>
                                     <td>4. Tiền sử tiêm vắc xin khác trong 14 ngày qua</td>
-                                    <td><input type="checkbox" class="form-check-input"></td>
-                                    <td><input type="checkbox" class="form-check-input"></td>
+                                    <td><input type="radio" name="DaTiem" class="form-check-input" value="Không" id="daTiemKhong"></td>
+                                    <td><input type="radio" name="DaTiem" class="form-check-input" value="Có" id="daTiemCo"></td>
                                 </tr>
                                 <tr>
                                     <td>5. Tiền sử bị COVID-19 trong vòng 6 tháng</td>
-                                    <td><input type="checkbox" class="form-check-input"></td>
-                                    <td><input type="checkbox" class="form-check-input"></td>
+                                    <td><input type="radio" name="Covid" class="form-check-input" value="Không" id="covidKhong"></td>
+                                    <td><input type="radio" name="Covid" class="form-check-input" value="Có" id="covidCo"></td>
                                 </tr>
                                 <tr>
                                     <td>6. Tiền sử điều trị huyết tương từ người đã được điều trị khỏi COVID-19 hoặc immunoglobulin trong vòng 90 ngày</td>
-                                    <td><input type="checkbox" class="form-check-input"></td>
-                                    <td><input type="checkbox" class="form-check-input"></td>
+                                    <td><input type="radio" name="DieuTriHt" class="form-check-input" value="Không" id="dieuTriHtKhong"></td>
+                                    <td><input type="radio" name="DieuTriHt" class="form-check-input" value="Có" id="dieuTriHtCo"></td>
                                 </tr>
                                 <tr>
                                     <td>7. Tiền sử suy giảm miễn dịch, ung thư, cắt lách, đang dùng thuốc ức chế miễn dịch, corticoid liều cao</td>
-                                    <td><input type="checkbox" class="form-check-input"></td>
-                                    <td><input type="checkbox" class="form-check-input"></td>
+                                    <td><input type="radio" name="DieuTriBenh" class="form-check-input" value="Không" id="dieuTriBenhKhong"></td>
+                                    <td><input type="radio" name="DieuTriBenh" class="form-check-input" value="Có" id="dieuTriBenhCo"></td>
                                 </tr>
                                 <tr>
                                     <td>8. Tiền sử rối loạn đông máu cầm máu hoặc đang dùng thuốc chống đông</td>
-                                    <td><input type="checkbox" class="form-check-input"></td>
-                                    <td><input type="checkbox" class="form-check-input"></td>
+                                    <td><input type="radio" name="DongMau" class="form-check-input" value="Không" id="dongMauKhong"></td>
+                                    <td><input type="radio" name="DongMau" class="form-check-input" value="Có" id="dongMauCo"></td>
                                 </tr>
                                 <tr>
                                     <td>9. Đang mang thai, phụ nữ đang nuôi con bằng sữa mẹ</td>
-                                    <td><input type="checkbox" class="form-check-input"></td>
-                                    <td><input type="checkbox" class="form-check-input"></td>
+                                    <td><input type="radio" name="MangThai" class="form-check-input" value="Không" id="mangThaiKhong"></td>
+                                    <td><input type="radio" name="MangThai" class="form-check-input" value="Có" id="mangThaiCo"></td>
                                 </tr>
                                 <tr>
                                     <td>10. Bất thường dấu hiệu sống (ghi rõ)
                                         <div class="row mb-1 pt-2">
                                             <label for="temp" class="form-label col">Nhiệt độ:</label>
-                                            <input type="text" class="form-control col me-3" id="temp" placeholder="Độ C">
+                                            <input type="text" class="form-control col me-3" id="temp" placeholder="Độ C" disabled>
                                             <label for="bp" class="form-label col">Huyết áp:</label>
-                                            <input type="text" class="form-control col me-3" id="bp" placeholder="mmHg">
+                                            <input type="text" class="form-control col me-3" id="bp" placeholder="mmHg" disabled>
                                         </div>
                                         <div class="row mb-1">
                                             <label for="spo2" class="form-label col">SpO2:</label>
-                                            <input type="text" class="form-control col me-3" id="spo2" placeholder="%">
+                                            <input type="text" class="form-control col me-3" id="spo2" placeholder="%" disabled>
                                             <label for="pulse" class="form-label col">Mạch:</label>
-                                            <input type="text" class="form-control col me-3" id="pulse" placeholder="lần/phút">
+                                            <input type="text" class="form-control col me-3" id="pulse" placeholder="lần/phút" disabled>
                                         </div>
                                         <div class="d-flex mb-1">
                                             <label for="breath" class="form-label flex-fill" style="width: 30%;">Nhịp thở:</label>
-                                            <input type="text" class="form-control flex-fill " style="width: 32%; margin-right: 52%;" id="breath" placeholder="lần/phút">
+                                            <input type="text" class="form-control flex-fill " style="width: 32%; margin-right: 52%;" id="breath" placeholder="lần/phút" disabled>
                                         </div>
                                     </td>
-                                    <td><input type="checkbox" class="form-check-input"></td>
-                                    <td><input type="checkbox" class="form-check-input"></td>
+                                    <td><input type="radio" name="DauHieuBT" class="form-check-input" value="Không" id="dauHieuBTKhong"></td>
+                                    <td><input type="radio" name="DauHieuBT" class="form-check-input" value="Có" id="dauHieuBTCo"></td>
                                 </tr>
                                 <tr>
                                     <td>11. Dấu hiệu bất thường khi nghe tim phổi</td>
-                                    <td><input type="checkbox" class="form-check-input"></td>
-                                    <td><input type="checkbox" class="form-check-input"></td>
+                                    <td><input type="radio" name="DauHieuBTTimPhoi" class="form-check-input" value="Không" id="dauHieuBTTimPhoiKhong"></td>
+                                    <td><input type="radio" name="DauHieuBTTimPhoi" class="form-check-input" value="Có" id="dauHieuBTTimPhoiCo"></td>
                                 </tr>
                                 <tr>
                                     <td>12. Rối loạn tri giác</td>
-                                    <td><input type="checkbox" class="form-check-input"></td>
-                                    <td><input type="checkbox" class="form-check-input"></td>
+                                    <td><input type="radio" name="RoiLoanTriGiac" class="form-check-input" value="Không" id="roiLoanTriGiacKhong"></td>
+                                    <td><input type="radio" name="RoiLoanTriGiac" class="form-check-input" value="Có" id="roiLoanTriGiacCo"></td>
                                 </tr>
                             </tbody>
                         </table>
-                        <div class="form-group px-5">
-                            <div class="form-check ">
+                           <div class="form-group px-5">
+                            <div class="form-check">
                                 <label class="form-check-label fw-bold fst-italic" for="option1">
                                     Đủ điều kiện tiêm chủng ngay (Tất cả điều KHÔNG có điểm bất thường)
                                 </label>
-                                <input class="form-check-input " type="checkbox" id="option1" checked>
+                                <input class="form-check-input" type="radio" name="XacNhan" id="option1" value="DuDieuKien" checked>
                             </div>
                             <div class="form-check">
                                 <label class="form-check-label fw-bold fst-italic" for="option2">
                                     Chống chỉ định tiêm chủng vắc xin cùng loại (Khi Có điểm bất thường tại mục 3)
                                 </label>
-                                <input class="form-check-input" type="checkbox" id="option2">
+                                <input class="form-check-input" type="radio" name="XacNhan" id="option2" value="ChongChiDinh" >
                             </div>
                             <div class="form-check">
                                 <label class="form-check-label fw-bold fst-italic" for="option3">
                                     Trì hoãn tiêm chủng (Khi Có bất kỳ một điểm bất thường tại các mục 1, 4, 5, 6, 7, 8, 9)
                                 </label>
-                                <input class="form-check-input" type="checkbox" id="option3">
+                                <input class="form-check-input" type="radio" name="XacNhan" id="option3" value="TriHoang">
                             </div>
                             <div class="form-check">
                                 <label class="form-check-label fw-bold fst-italic" for="option4">
                                     Chuyển tiêm chủng và theo dõi tại bệnh viện (Khi CÓ tại các mục 2, 10, 11, 12)
                                 </label>
-                                <input class="form-check-input" type="checkbox" id="option4">
+                                <input class="form-check-input" type="radio" name="XacNhan" id="option4" value="ChuyenVien">
                             </div>
-                            <div class="form-group d-flex ">
+                            <div class="form-group d-flex">
                                 <label class="flex-fill fw-bold fst-italic" style="width: 7%;" for="reason">Lý do</label>
-                                <textarea class="form-control flex-fill pe-5" id="reason" rows="1" ></textarea>
+                                <textarea class="form-control flex-fill pe-5" id="reason" rows="1"></textarea>
                             </div>
                         </div>
-                       
+
+
                     </div>
                 </div>      
             </div>
         </div>
     </div>
-    
+   
 
     <!-- Bảng chi tiết hóa đơn -->
     <div class="border rounded-4 ">
         <div class="table-responsive p-2 ">
-            <table class="table table-bordered table-sm">
+            <table class="table table-bordered table-sm" id="targetTable">
                 <thead>
-                    <tr>
-                        <th>Tên Vắc xin/Huyết thanh</th>
-                        <th>Nguồn gốc</th>
-                        <th>Số lượng tồn kho</th>
-                        <th>Phòng bệnh</th>
-                        <th>Đơn giá</th>
-                        <th>Số mũi</th>
-                        <th>Tình trạng</th>
-                        <th>Ngày sản xuất</th>
-                        <th>Ngày hết hạn</th>
+                     <tr>
+                        <th>ID Vật Tư</th>
+                        <th>Tên Vật Tư</th>
+                        <th>Loại Vật Tư</th>
+                        <th>Tên Nguồn Cung Cấp</th>
+                        <th>Tên Nhà Cung Cấp</th>
+                        <th>Nơi Xuất Xứ</th>
+                        <th>Đơn Giá</th>
+                        <th>Hạn Sử Dụng</th>
+                        <th>Số Lượng</th>
+                        <th>Ghi Chú</th>
+                        <th>Mũi</th> <!-- Cột mũi -->
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Vắc-xin thủy đậu – VARILRIX (Bỉ)</td>
-                        <td>Bỉ</td>
-                        <td>68</td>
-                        <td>Thủy đậu</td>
-                        <td>919.000</td>
-                        <td>Mũi 1</td>
-                        <td>Chưa tiêm</td>
-                        <td>03-02-2023</td>
-                        <td>03-02-2025</td>
-                    </tr>
-                    <tr>
-                        <td>Vắc-xin thủy đậu – VARILRIX (Bỉ)</td>
-                        <td>Bỉ</td>
-                        <td>68</td>
-                        <td>Thủy đậu</td>
-                        <td>919.000</td>
-                        <td>Mũi 2</td>
-                        <td>Chưa tiêm</td>
-                        <td>03-02-2023</td>
-                        <td>03-02-2025</td>
-                    </tr>
+                   
                 </tbody>
             </table>
-            <button type="button" class="Double-end btn custom-btn w-25" >Xác Nhận</button>
+            <button type="button" class="Double-end btn custom-btn w-25" id="xacNhan" >Xác Nhận</button>
         </div>
     </div>
  
 </div>
+<form asp-action="SubmitForm" asp-controller="KhamSanLoc" method="POST" style="display: none;">
+    <label for="IDVT">Mã Vật Tư:</label>
+    <input type="text" id="IDVT" name="IDVT" placeholder="Nhập mã vật tư" required>
+
+    <label for="SoLuong">Số Lượng:</label>
+    <input type="number" id="SoLuong" name="SoLuong" placeholder="Nhập số lượng" required>
+
+    <label for="IDKH">Mã Khách Hàng:</label>
+    <input type="text" id="IDKH" name="IDKH" placeholder="Nhập mã khách hàng" required value="@kh?.IDKH">
+
+    <label for="ChieuCao">Chiều Cao (cm):</label>
+    <input type="number" id="ChieuCao" name="ChieuCao" step="0.1" placeholder="Nhập chiều cao" required>
+
+    <label for="CanNang">Cân Nặng (kg):</label>
+    <input type="number" id="CanNang" name="CanNang" step="0.1" placeholder="Nhập cân nặng" required>
+
+    <label for="IDNV">Mã Nhân Viên:</label>
+    <input type="text" id="IDNV" name="IDNV" placeholder="Nhập mã nhân viên" required value="@login">
+
+    <label for="TinhTrangSucKhoe">Tình Trạng Sức Khỏe:</label>
+    <textarea id="TinhTrangSucKhoe" name="TinhTrangSucKhoe" placeholder="Mô tả tình trạng sức khỏe"></textarea>
+
+    <label for="TrangThai">Trạng Thái:</label>
+    <select id="TrangThai" name="TrangThai">
+        <option value="true">Đang hoạt động</option>
+        <option value="false">Không hoạt động</option>
+    </select>
+
+    <label for="KetQua">Kết Quả:</label>
+    <select id="KetQua" name="KetQua">
+        <option value="true">Thành công</option>
+        <option value="false">Thất bại</option>
+    </select>
+
+    <label for="GhiChu">Ghi Chú:</label>
+    <input type="hidden" id="jsonInput" name="GhiChu">
+
+    <button type="submit" id="targetButton">Gửi</button>
+</form>
+<script>
+    function reloadPage() {
+        location.reload(); // This reloads the current page
+    }
+    function getRadioValue(name) {
+        return document.querySelector(`input[name="${name}"]:checked`)?.value || "Chưa chọn";
+    }
+    function collectFormData() {
+        const ketQuaSangLoc = [
+            {
+                cauHoi: "Bệnh cấp tính đang mắc", traLoi: document.getElementById('benhCapTinhInput').value || "Chưa nhập",
+                radioTraLoi: getRadioValue("BenhMac") || "Chưa chọn"
+            },
+
+            {
+                cauHoi: "Tiền sử dị ứng (ghi rõ)", traLoi: document.getElementById('tienSuDiUngInput').value || "Chưa nhập",
+                radioTraLoi: getRadioValue("DiUng") || "Chưa chọn"
+            },
+
+            { cauHoi: "Tiền sử phản vệ từ độ 2 trở lên với bất kỳ tác nhân nào", traLoi: getRadioValue("PhanVe") || "Chưa chọn" },
+            { cauHoi: "Tiền sử tiêm vắc xin khác trong 14 ngày qua", traLoi: getRadioValue("DaTiem") || "Chưa chọn" },
+            { cauHoi: "Tiền sử bị COVID-19 trong vòng 6 tháng", traLoi: getRadioValue("Covid") || "Chưa chọn" },
+            { cauHoi: "Tiền sử điều trị huyết tương từ người đã được điều trị khỏi COVID-19 hoặc immunoglobulin trong vòng 90 ngày", traLoi: getRadioValue("DieuTriHt") || "Chưa chọn" },
+            { cauHoi: "Tiền sử suy giảm miễn dịch, ung thư, cắt lách, đang dùng thuốc ức chế miễn dịch, corticoid liều cao", traLoi: getRadioValue("DieuTriBenh") || "Chưa chọn" },
+            { cauHoi: "Tiền sử rối loạn đông máu cầm máu hoặc đang dùng thuốc chống đông", traLoi: getRadioValue("DongMau") || "Chưa chọn" },
+            { cauHoi: "Đang mang thai, phụ nữ đang nuôi con bằng sữa mẹ", traLoi: getRadioValue("MangThai") || "Chưa chọn" },
+            { cauHoi: "Bất thường dấu hiệu sống", traLoi: getRadioValue("DauHieuBT") || "Chưa chọn" },
+            { cauHoi: "Dấu hiệu bất thường khi nghe tim phổi", traLoi: getRadioValue("DauHieuBTTimPhoi") || "Chưa chọn" },
+            { cauHoi: "Rối loạn tri giác", traLoi: getRadioValue("RoiLoanTriGiac") || "Chưa chọn" },
+
+            // Các input type text mới
+            { cauHoi: "Nhiệt độ", traLoi: document.getElementById('temp').value || "Chưa nhập" },
+            { cauHoi: "Huyết áp", traLoi: document.getElementById('bp').value || "Chưa nhập" },
+            { cauHoi: "SpO2", traLoi: document.getElementById('spo2').value || "Chưa nhập" },
+            { cauHoi: "Mạch", traLoi: document.getElementById('pulse').value || "Chưa nhập" },
+            { cauHoi: "Nhịp thở", traLoi: document.getElementById('breath').value || "Chưa nhập" }
+        ];
+
+        const dieuKienTiemChung = {
+            xacNhan: getRadioValue("XacNhan") || "Chưa chọn",
+            lyDo: document.getElementById("reason").value.trim() || "Chưa nhập"
+        };
+
+        return { ketQuaSangLoc, dieuKienTiemChung };
+    }
+
+
+    function saveJsonToInput() {
+        const jsonData = collectFormData();
+        document.getElementById('jsonInput').value = JSON.stringify(jsonData);
+        console.log(jsonData);
+        const targetButton = document.getElementById('targetButton');
+        targetButton.click();
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('xacNhan').addEventListener('click', saveJsonToInput);
+    });
+
+
+    function toggleInputState(radioButton, inputElement) {
+        radioButton.addEventListener('change', function () {
+            inputElement.disabled = !this.checked;
+        });
+    }
+
+    function checkXacNhan() {
+        const conditions = {
+            benhMacCo: document.getElementById('benhMacCo'),
+            phanVeCo: document.getElementById('phanVeCo'),
+            dauHieuBTCo: document.getElementById('dauHieuBTCo'),
+            daTiemCo: document.getElementById('daTiemCo'),
+            covidCo: document.getElementById('covidCo'),
+            dieuTriHtCo: document.getElementById('dieuTriHtCo'),
+            dieuTriBenhCo: document.getElementById('dieuTriBenhCo'),
+            dongMauCo: document.getElementById('dongMauCo'),
+            mangThaiCo: document.getElementById('mangThaiCo'),
+            roiLoanTriGiacCo: document.getElementById('roiLoanTriGiacCo'),
+            dauHieuBTTimPhoiCo: document.getElementById('dauHieuBTTimPhoiCo'),
+            diUngCo: document.getElementById('diUngCo') // thêm điều kiện cho diUngCo
+        };
+
+        // Lấy các option radio hoặc checkbox điều khiển trạng thái
+        const option1 = document.getElementById('option1');
+        const option2 = document.getElementById('option2');
+        const option3 = document.getElementById('option3');
+        const option4 = document.getElementById('option4');
+
+        const TrangThai = document.getElementById('TrangThai');
+        const KetQua = document.getElementById('KetQua');
+        const TinhTrangSucKhoe = document.getElementById('TinhTrangSucKhoe');
+
+        // Kiểm tra nếu các điều kiện cho "option 4" đều được chọn
+        if (conditions.dauHieuBTCo.checked || conditions.diUngCo.checked || conditions.dauHieuBTTimPhoiCo.checked || conditions.roiLoanTriGiacCo.checked) {
+            option4.checked = true;
+            TrangThai.value = "false";  
+            KetQua.value = "false";   
+            TinhTrangSucKhoe.value = "Xấu"
+        }
+        // Nếu phanVeCo được chọn
+        else if (conditions.phanVeCo.checked) {
+            option2.checked = true;
+            TrangThai.value = "true";   
+            KetQua.value = "true";    
+            TinhTrangSucKhoe.value = "Tạm ổn"
+        }
+        // Kiểm tra các điều kiện còn lại
+        else if (Object.values(conditions).some(cond => cond.checked)) {
+            option3.checked = true;
+            TrangThai.value = "true";   
+            KetQua.value = "true";
+            TinhTrangSucKhoe.value = "Tạm ổn"
+        }
+        // Nếu không có điều kiện nào được chọn
+        else {
+            option1.checked = true;
+            TrangThai.value = "true";
+            KetQua.value = "true";       
+            TinhTrangSucKhoe.value = "Tốt"
+
+        }
+    }
+
+
+    document.querySelectorAll('input[type="radio"]').forEach((radio) => {
+        radio.addEventListener('change', checkXacNhan);
+    });
+
+    checkXacNhan();
+    const benhMacKhong = document.getElementById('benhMacKhong');
+    const benhMacCo = document.getElementById('benhMacCo');
+    const benhCapTinhInput = document.getElementById('benhCapTinhInput');
+
+    benhMacKhong.addEventListener('change', function () {
+        if (this.checked) {
+            benhCapTinhInput.disabled = true;
+        }
+    });
+
+    benhMacCo.addEventListener('change', function () {
+        if (this.checked) {
+            benhCapTinhInput.disabled = false;
+        }
+    });
+
+    const diUngKhong = document.getElementById('diUngKhong');
+    const diUngCo = document.getElementById('diUngCo');
+    const tienSuDiUngInput = document.getElementById('tienSuDiUngInput');
+
+    diUngKhong.addEventListener('change', function () {
+        if (this.checked) {
+            tienSuDiUngInput.disabled = true;
+        }
+    });
+
+    diUngCo.addEventListener('change', function () {
+        if (this.checked) {
+            tienSuDiUngInput.disabled = false;
+        }
+    });
+
+    const dauHieuBTKhong = document.getElementById('dauHieuBTKhong');
+    const dauHieuBTCo = document.getElementById('dauHieuBTCo');
+    const temp = document.getElementById('temp');
+    const bp = document.getElementById('bp');
+    const spo2 = document.getElementById('spo2');
+    const pulse = document.getElementById('pulse');
+    const breath = document.getElementById('breath');
+
+    dauHieuBTKhong.addEventListener('change', function () {
+        if (this.checked) {
+            temp.disabled = true;
+            bp.disabled = true;
+            spo2.disabled = true;
+            pulse.disabled = true;
+            breath.disabled = true;
+        }
+    });
+
+    dauHieuBTCo.addEventListener('change', function () {
+        if (this.checked) {
+            temp.disabled = false;
+            bp.disabled = false;
+            spo2.disabled = false;
+            pulse.disabled = false;
+            breath.disabled = false;
+        }
+    });
+</script>
+ <script>
+  const vatTuData = JSON.parse('@Html.Raw(@ViewBag.VatTus)'); // Giả sử bạn đã có dữ liệu vật tư
+
+    function renderVatTuTable(data) {
+        const tbody = document.querySelector("#vatTuTable tbody");
+        tbody.innerHTML = '';
+
+        if (data.length === 0) {
+            tbody.innerHTML = `
+                <tr>
+                    <td class="text-center fw-semibold" colspan="13">Không tìm thấy dữ liệu cần tìm</td>
+                </tr>
+            `;
+            return;
+        }
+
+        const currentDate = new Date(); // Lấy ngày hiện tại
+        const recommendedList = []; // Danh sách vật tư đề nghị
+        const normalList = []; // Danh sách vật tư không đề nghị
+
+        // Phân loại vật tư
+        data.forEach(vt => {
+            const expiryDate = vt.HanSuDung ? new Date(vt.HanSuDung) : null;
+            const isNearExpiry = expiryDate && (expiryDate - currentDate <= 30 * 24 * 60 * 60 * 1000); // 30 ngày
+            const isHighQuantity = vt.SoLuong > 100;
+
+            if (isNearExpiry || isHighQuantity) {
+                recommendedList.push({ ...vt, isNearExpiry, isHighQuantity });
+            } else {
+                normalList.push(vt);
+            }
+        });
+
+        // Render danh sách đề nghị
+        if (recommendedList.length > 0) {
+            const recommendationHeader = document.createElement('tr');
+            recommendationHeader.innerHTML = `
+                <td class="fw-bold text-primary" colspan="13">Danh sách vật tư đề nghị</td>
+            `;
+            tbody.appendChild(recommendationHeader);
+
+            recommendedList.forEach(vt => {
+                const tr = document.createElement("tr");
+                let recommendation = '';
+
+                if (vt.isNearExpiry && vt.isHighQuantity) {
+                    recommendation = 'Cân nhắc giảm giá hoặc xuất kho nhanh!';
+                } else if (vt.isNearExpiry) {
+                    recommendation = 'Lưu ý hạn sử dụng gần hết!';
+                } else if (vt.isHighQuantity) {
+                    recommendation = 'Số lượng lớn, cần quản lý hợp lý.';
+                }
+
+                tr.innerHTML = `
+                    <td><input type="checkbox" class="vatTuCheckbox" data-id="${vt.IDVT}"></td>
+                    <td>${vt.IDVT}</td>
+                    <td>${vt.TenVatTu}</td>
+                    <td>${vt.TenLoai}</td>
+                    <td>${vt.TenNguon}</td>
+                    <td>${vt.TenNhaCungCap}</td>
+                    <td>${vt.NoiXuatXu}</td>
+                    <td>${vt.DonGia}</td>
+                    <td>${vt.HanSuDung ? new Date(vt.HanSuDung).toLocaleDateString('vi-VN') : 'N/A'}</td>
+                    <td>${vt.SoLuong}</td>
+                    <td>${vt.GhiChu || ''}</td>
+                    <td><input type="number" class="soMui form-control" id="soMui-${vt.IDVT}" value="1" min="1" /></td>
+                    <td>${recommendation}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Render danh sách không đề nghị
+        if (normalList.length > 0) {
+            const normalHeader = document.createElement('tr');
+            normalHeader.innerHTML = `
+                <td class="fw-bold text-secondary " colspan="13">Danh sách vật tư khác</td>
+            `;
+            tbody.appendChild(normalHeader);
+
+            normalList.forEach(vt => {
+                const tr = document.createElement("tr");
+
+                tr.innerHTML = `
+                    <td><input type="checkbox" class="vatTuCheckbox" data-id="${vt.IDVT}"></td>
+                    <td>${vt.IDVT}</td>
+                    <td>${vt.TenVatTu}</td>
+                    <td>${vt.TenLoai}</td>
+                    <td>${vt.TenNguon}</td>
+                    <td>${vt.TenNhaCungCap}</td>
+                    <td>${vt.NoiXuatXu}</td>
+                    <td>${vt.DonGia}</td>
+                    <td>${vt.HanSuDung ? new Date(vt.HanSuDung).toLocaleDateString('vi-VN') : 'N/A'}</td>
+                    <td>${vt.SoLuong}</td>
+                    <td>${vt.GhiChu || ''}</td>
+                    <td><input type="number" class="soMui form-control" id="soMui-${vt.IDVT}" value="1" min="1" /></td>
+                    <td></td> <!-- Không có đề nghị -->
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+    }
+
+
+    function toggleTargetTable(checkbox, vt) {
+
+        console.log(vt); // Kiểm tra đối tượng vt
+        document.getElementById('IDVT').value = vt.IDVT ;
+      
+
+        const targetTableBody = document.querySelector("#targetTable tbody");
+        const soMuiInput = document.getElementById(`soMui-${vt.IDVT}`);
+        const soMui = parseInt(soMuiInput.value) || 1;
+
+        document.getElementById('SoLuong').value = soMui;
+
+        if (checkbox.checked) {
+            for (let i = 1; i <= soMui; i++) {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td>${vt.IDVT}</td>
+                    <td>${vt.TenVatTu}</td>
+                    <td>${vt.TenLoai}</td>
+                    <td>${vt.TenNguon}</td>
+                    <td>${vt.TenNhaCungCap}</td>
+                    <td>${vt.NoiXuatXu}</td>
+                    <td>${vt.DonGia}</td>
+                    <td>${vt.HanSuDung ? new Date(vt.HanSuDung).toLocaleDateString('vi-VN') : 'N/A'}</td>
+                    <td>${vt.SoLuong}</td>
+                    <td>${vt.GhiChu || ''}</td>
+                    <td>Mũi ${i}</td>
+                `;
+                targetTableBody.appendChild(tr);
+            }
+        } else {
+            const targetRows = targetTableBody.querySelectorAll('tr');
+            let hasRows = false;
+            targetRows.forEach((row) => {
+                if (row.cells[0].textContent === vt.IDVT.toString()) {
+                    const m = row.cells[10].textContent;
+                    if (m.startsWith('Mũi')) {
+                        row.remove();
+                    }
+                    hasRows = true;
+                }
+            });
+            document.getElementById('IDVT').value = "";
+            document.getElementById('SoLuong').value = "";
+            if (!hasRows) {
+                targetTableBody.innerHTML = `
+                    <tr>
+                        <td class="text-center" colspan="11">Danh Sách Chỉ Định trống</td>
+                    </tr>
+                `;
+            }
+        }
+    }
+
+
+    // Lắng nghe sự kiện thay đổi checkbox
+    document.querySelector("#vatTuTable").addEventListener('change', function (e) {
+        if (e.target && e.target.matches('.vatTuCheckbox')) {
+            const checkbox = e.target;
+            const row = checkbox.closest("tr");
+            const vt = {
+                IDVT: row.cells[1].textContent,
+                TenVatTu: row.cells[2].textContent,
+                TenLoai: row.cells[3].textContent,
+                TenNguon: row.cells[4].textContent,
+                TenNhaCungCap: row.cells[5].textContent,
+                NoiXuatXu: row.cells[6].textContent,
+                DonGia: row.cells[7].textContent,
+                HanSuDung: row.cells[8].textContent,
+                SoLuong: row.cells[9].textContent,
+                GhiChu: row.cells[10].textContent,
+            };
+            toggleTargetTable(checkbox, vt);
+        }
+    });
+    document.querySelector("#findBtn").addEventListener("click", function () {
+        // Lấy giá trị từ form tìm kiếm
+        const vaccineCode = document.querySelector("#vaccineCodeFind").value.trim().toLowerCase();
+        const vaccineName = document.querySelector("#vaccineNameFind").value.trim().toLowerCase();
+        const vaccineOrigin = document.querySelector("#vaccineOriginFind").value;
+        const vaccineSource = document.querySelector("#vaccineSourceFind").value;
+        const supplierName = document.querySelector("#supplierNameFind").value;
+        const expiryDate = document.querySelector("#expiryDateFind").value;
+
+        // Lọc dữ liệu theo các tiêu chí
+        const filteredData = vatTuData.filter(vt => {
+            const matchesCode = vaccineCode === "" || vt.IDVT.toLowerCase().includes(vaccineCode);
+            const matchesName = vaccineName === "" || vt.TenVatTu.toLowerCase().includes(vaccineName);
+            const matchesOrigin = vaccineOrigin === "" || vt.NoiXuatXu === vaccineOrigin;
+            const matchesSource = vaccineSource === "" || vt.TenNguon === vaccineSource;
+            const matchesSupplier = supplierName === "" || vt.TenNhaCungCap === supplierName;
+            const matchesExpiry = expiryDate === "" || (vt.HanSuDung && new Date(vt.HanSuDung).toISOString().split("T")[0] === expiryDate);
+
+            return matchesCode && matchesName && matchesOrigin && matchesSource && matchesSupplier && matchesExpiry;
+        });
+
+        // Render lại bảng với dữ liệu đã lọc
+        renderVatTuTable(filteredData);
+    });
+
+
+    // Render bảng vật tư với dữ liệu
+    renderVatTuTable(vatTuData);
+
+    document.getElementById('height').addEventListener('input', function () {
+        // Cập nhật giá trị từ "Chiều cao" (input text) vào "Chiều Cao (cm)" (input number)
+        const heightValue = parseFloat(this.value);
+        if (!isNaN(heightValue)) {
+            document.getElementById('ChieuCao').value = heightValue;
+        }
+    });
+
+    document.getElementById('weight').addEventListener('input', function () {
+        // Cập nhật giá trị từ "Cân nặng" (input text) vào "Cân Nặng (kg)" (input number)
+        const weightValue = parseFloat(this.value);
+        if (!isNaN(weightValue)) {
+            document.getElementById('CanNang').value = weightValue;
+        }
+    });
+
+ </script>

@@ -32,6 +32,48 @@
         body {
             padding-top: 60px; /* Tạo khoảng cách giữa nội dung và navbar */
         }
+
+        .custom-hover {
+            color: #2fb388;
+            text-decoration: none;
+            transition: color 0.3s, background-color 0.3s;
+        }
+
+            .custom-hover:hover {
+                color: #ffffff;
+                background-color: #2fb388;
+                text-decoration: underline;
+                padding: 5px;
+                border-radius: 5px;
+            }
+
+        .custom-btn {
+            color: #2fb388;
+            border: #2fb388 2px solid;
+        }
+
+            .custom-btn:hover {
+                color: #ffffff;
+                background-color: #2fb388;
+            }
+
+            .custom-btn:focus {
+                color: #ffffff;
+                background-color: #2fb388;
+            }
+
+        .table th {
+            background-color: #e8f5e9; /* Màu nền xanh nhạt cho tiêu đề */
+            color: #000; /* Màu chữ đen */
+            text-align: center;
+            white-space: nowrap; /* Ngăn chữ bị xuống hàng */
+        }
+
+        .table tbody tr td {
+            text-align: center;
+            white-space: nowrap; /* Ngăn chữ bị xuống hàng trong ô dữ liệu */
+        }
+
     </style>
 </head>
 <body>
@@ -40,25 +82,19 @@
         <div class="container px-2">
             <div class="row align-items-center">
                 <!-- Button Offcanvas -->
-                <div class="col-auto">
-                    <button class="btn btn-outline-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
-                        <i class="fa-solid fa-bars"></i>
-                    </button>
-                </div>
-
-                <!-- Title -->
-                <div class="col-auto">
-                    <a asp-controller="Home" asp-action="HomeQL" class="fs-3 text-light link-opacity-75-hover link-underline link-underline-opacity-0 py-2 fw-bold m-0">CDC</a>
-                </div>
                
-                <!-- Links -->
+                <div class="col-auto " onclick="window.location.href='@Url.Action("HomeQL", "Home")'">
+                    <img src="~/Img/IMG_0624.png" alt="Logo CDC" class="img-fluid" style="max-width: 100px;">
+                </div>
+                <!-- Title -->
+              
                 @if (TempData["Role"] != null && home != "ql")
                 {
 
                     if (role == "Bác Sĩ")
                     {
                         <div class="col-auto">
-                            <a asp-controller="Home" asp-action="KhamSanLoc" class="text-light link-opacity-75-hover link-underline link-underline-opacity-0 py-2 fw-bold mx-2">KHÁM SÀNG LỌC</a>
+                            <a asp-controller="KhamSanLoc" asp-action="KhamSanLoc" class="text-light link-opacity-75-hover link-underline link-underline-opacity-0 py-2 fw-bold mx-2">KHÁM SÀNG LỌC</a>
                         </div>
                         <div class="col-auto">
                             <a asp-controller="QLTiemChung" asp-action="QLTiemChung" class="text-light link-opacity-75-hover link-underline link-underline-opacity-0 py-2 fw-bold mx-2">QUẢN LÝ TIÊM CHỦNG</a>
@@ -131,118 +167,7 @@
         </div>
     </nav>
 
-    <!-- Sidebar Offcanvas -->
-    <div class="offcanvas offcanvas-start" style="width: 20%;" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Danh Mục</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            @if (TempData["Role"] != null)
-            {
-                
-
-                if (role == "Bác Sĩ")
-                {
-                    <div class="row">
-                        <a asp-controller="Home" asp-action="KhamSanLoc" class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold">KHÁM SÀNG LỌC</a>
-                    </div>
-                    <div class="row">
-                        <a asp-controller="QLTiemChung" asp-action="QLTiemChung" class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold">QUẢN LÝ TIÊM CHỦNG</a>
-                    </div>
-                }
-                else if (role == "Y Tá")
-                {
-                    <div class="row">
-                        <a asp-controller="QLTiemChung" asp-action="QLTiemChung" class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold">QUẢN LÝ TIÊM CHỦNG</a>
-                    </div>
-                    <div class="row">
-                        <a asp-controller="QLKhoVaccine" asp-action="QLKhoVaccine" class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold">KHO VACCINE</a>
-                    </div>
-                }
-                else if (role == "Kế Toán")
-                {
-                    <div class="row">
-                        <a asp-controller="QLHoaDon" asp-action="QLHoaDon" class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold">QUẢN LÝ HÓA ĐƠN</a>
-                    </div>
-                    <div class="row">
-                        <a asp-controller="QLXuatNhapKho" asp-action="QLXuatNhapKho" class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold">QUẢN LÝ XUẤT NHẬP KHO</a>
-                    </div>
-                    <div class="row">
-                        <a asp-controller="QLHoanTra" asp-action="QLHoanTra" class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold">QUẢN LÝ HOÀN TRẢ</a>
-                    </div>
-                }
-                else if (role == "Thủ Kho")
-                {
-                    <div class="row">
-                        <a asp-controller="QLKhoVaccine" asp-action="QLKhoVaccine" class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold">QUẢN LÝ KHO VACCINE</a>
-                    </div>
-                }
-                else if (role == "Lễ Tân")
-                {
-                    <div class="row">
-                        <a asp-controller="QLTiepNhan" asp-action="QLTiepNhan" class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold">QUẢN LÝ TIẾP NHẬN</a>
-                    </div>
-                }
-                else if (role == "Nhân Sự")
-                {
-                    <div class="row">
-                        <a asp-controller="QLNhanVien" asp-action="QLNhanVien" class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold">QUẢN LÝ NHÂN VIÊN</a>
-                    </div>
-                    <div class="row">
-                        <a asp-controller="QLKhachHang" asp-action="QLKhachHang" class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold">QUẢN LÝ KHÁCH HÀNG</a>
-                    </div>
-                    <div class="row">
-                        <a asp-controller="QLTaiKhoan" asp-action="QLTaiKhoan" class="link-opacity-75-hover link-underline link-underline-opacity-0 py-2 custom-hover fw-bold">QUẢN LÝ TÀI KHOẢN</a>
-                    </div>
-                }
-            }
-        </div>
-        <style>
-            .custom-hover {
-                color: #2fb388;
-                text-decoration: none;
-                transition: color 0.3s, background-color 0.3s;
-            }
-
-                .custom-hover:hover {
-                    color: #ffffff;
-                    background-color: #2fb388;
-                    text-decoration: underline;
-                    padding: 5px;
-                    border-radius: 5px;
-                }
-
-            .custom-btn {
-                color: #2fb388;
-                border: #2fb388 2px solid;
-            }
-
-                .custom-btn:hover {
-                    color: #ffffff;
-                    background-color: #2fb388;
-                }
-
-                .custom-btn:focus {
-                    color: #ffffff;
-                    background-color: #2fb388;
-                }
-
-            .table th {
-                background-color: #e8f5e9; /* Màu nền xanh nhạt cho tiêu đề */
-                color: #000; /* Màu chữ đen */
-                text-align: center;
-                white-space: nowrap; /* Ngăn chữ bị xuống hàng */
-            }
-
-            .table tbody tr td {
-                text-align: center;
-                white-space: nowrap; /* Ngăn chữ bị xuống hàng trong ô dữ liệu */
-            }
-
-        </style>
-    </div>
-
+ 
     <!-- Render Body -->
     <div>
         @RenderBody()

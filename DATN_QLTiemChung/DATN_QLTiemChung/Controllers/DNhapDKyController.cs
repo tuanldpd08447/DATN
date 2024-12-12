@@ -62,7 +62,7 @@ namespace DATN_QLTiemChung.Controllers
             TempData["Notification"] = "Đăng nhập thất bại. Thông tin đăng nhập không chính xác.";
             TempData["NotificationType"] = "error";
             TempData["NotificationTitle"] = "Thông báo.";
-            return RedirectToAction("HomeQL","Home");
+            return RedirectToAction("Login");
 
         }
         public IActionResult Logout()
