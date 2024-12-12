@@ -201,9 +201,11 @@
                 </div>  
                  
             </div>
-            <style>
-               
-            </style>
+            <form asp-action="AddHangCho" asp-controller="QLTiepNhan" style="display:none;" method="post">
+                <input type="AddHangCho" id="idinput" name="IDKH" value="" />
+
+                <button id="AddSumit" type="submit" style="display:none;">Nút bị kích hoạt</button>
+                </form>
             <div class="p-2 mt-2 border rounded-4 float-end" style="width: 35%;" >  
                     <div >
                         <button type="button" class="btn custom-btn rounded-pill font-weight-bold" data-bs-toggle="modal" data-bs-target="#vaccineModal" style="width: 100%;">Thêm hàng chờ</button>
@@ -297,6 +299,7 @@
                                         </table>
                                     </div>
                                 </div>
+
                             <script>
 
                                 const khachHangs = @Html.Raw(khachHangsJson ?? "null");
@@ -496,32 +499,23 @@
 
                                 function AddHangCho(id) {
                                     selectedID = id;
+                                    document.getElementById('idinput').value = id;
                                     console.log("Selected ID:", id);
                                 }
 
-                                // Hàm gửi ID đã chọn lên server
-                                function onSelectCustomer() {
-                                    if (!selectedID) {
-                                        console.error("Không có ID nào được chọn.");
-                                        return;
-                                    }
+                                document.addEventListener('DOMContentLoaded', function () {
+                                    const sumitadd = document.getElementById('sumitadd');
+                                    const AddSumit = document.getElementById('AddSumit');
 
-                                    fetch(`/QLTiepNhan/AddHangCho?IDKH=${selectedID}`, {
-                                        method: 'POST',
-                                       
-  
-                                    })
-                                        .then(response => {
-                                            if (response.ok) {
-                                                console.log("Selected ID:", selectedID);
-                                                console.log("ID khách hàng đã được gửi:", selectedID);
-                                            } else {
-                                                console.error("Lỗi khi gửi dữ liệu");
-                                                console.log("Selected ID:", selectedID);
-                                            }
-                                        })
-                                        .catch(error => console.error("Lỗi kết nối:", error));
-                                }
+                                    if (sumitadd && AddSumit) {
+                                        sumitadd.addEventListener('click', function () {
+                                            AddSumit.click();
+                                        });
+                                    } else {
+                                        console.error("Không tìm thấy một trong hai phần tử: 'sumitadd' hoặc 'AddSumit'");
+                                    }
+                                });
+
 
 
                             </script>
@@ -529,7 +523,7 @@
                                 <!-- Footer Modal -->
                                 <div class="modal-footer">
                                 <button type="button" class="btn btn-outline-danger border-2" data-bs-dismiss="modal">Thoát</button>
-                                <button type="button" class="btn custom-btn" onclick="onSelectCustomer()">Thêm hàng chờ</button>
+                                <button type="button" class="btn custom-btn" id="sumitadd" >Thêm hàng chờ</button>
                                 </div>
                             </div>
                         </div>
