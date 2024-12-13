@@ -67,7 +67,7 @@ public class QLTiepNhanController : ControllerBase
 
     // GET: api/DatLichKham/GetAllDatLichKhams
     [HttpGet("GetAllDatLichKhams")]
-    public async Task<ActionResult<IEnumerable<KhachHangPreOder>>> GetAllDatLichKhams([FromQuery] DateOnly? ngayHen = null)
+    public async Task<ActionResult<IEnumerable<KhachHangPreOder>>> GetAllDatLichKhams()
     {
         // Truy vấn dữ liệu từ bảng DatLichKham và các bảng liên quan
         var query = _context.DatLichKham
@@ -91,10 +91,9 @@ public class QLTiepNhanController : ControllerBase
                 FullAddress = $"{kh.KhachHang.DiaChi}, {kh.KhachHang.Ward.name}, {kh.KhachHang.Ward.District.name}, {kh.KhachHang.Ward.District.Province.name}"
             });
 
-        if (ngayHen.HasValue)
-        {
-            query = query.Where(kh => kh.NgayHen == ngayHen.Value);
-        }
+      
+            query = query.Where(kh => kh.NgayHen == DateOnly.FromDateTime(DateTime.Now));
+        
 
  
         var datLichKhams = await query.ToListAsync();
