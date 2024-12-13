@@ -486,6 +486,32 @@ namespace DATN_QLTiemChung_Api.Models
         public bool KetQua { get; set; }
         public string? GhiChu { get; set; }
     }
+    public class LichSuTiem
+    {
+        public string ID { get; set; } // ID Lịch sử tiêm
+        public string IDKH { get; set; } // ID Khách hàng
+        public string TenKhachHang { get; set; } // Tên khách hàng
+        public string IDVT { get; set; } // ID Vắc-xin
+        public string TenVacxin { get; set; } // Tên vắc-xin
+        public string XuatXu {  get; set; }
+        public DateTime NgayTiem { get; set; } // Ngày tiêm
+        public Double? DonGia { get; set; }
+        public Double? ThanhTien { get; set; }
+        public bool TrangThaiTiem { get; set; }
+        public bool TrangThaiSauTiem { get; set; }
+        public string LieuTiem { get; set; } // Liều tiêm (mũi 1, mũi 2, booster,...)
+        public string IDNV { get; set; } // ID Nhân viên
+        public string TenNhanVien { get; set; } // Tên nhân viên thực hiện
+        public string? GhiChu { get; set; } // Ghi chú
+    }
+    public class LichKham
+    {
+        public string ID { get; set; } // ID lịch khám
+        public string IDKH { get; set; } // ID khách hàng
+        public string TenKhachHang { get; set; } // Tên khách hàng
+        public DateOnly NgayKham { get; set; } // Ngày khám
+        public TimeOnly GioKham { get; set; } // Giờ khám
+    }
 
 
 }

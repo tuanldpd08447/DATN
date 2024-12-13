@@ -121,5 +121,32 @@ namespace DATN_QLTiemChung_Api.Controllers
 
             return Ok(khachHang);
         }
+
+        [HttpGet("LichKham/{id}")]
+        public async Task<ActionResult<IEnumerable<LichKham>>> LichKham(string id)
+        {
+            // Truy vấn dữ liệu lịch khám và bao gồm thông tin khách hàng
+            var lichKham = await _context.DatLichKham
+                                          .Where(lk => lk.IDKH == id)  // Lọc theo ID khách hàng
+                                          .Include(lk => lk.KhachHang) // Bao gồm thông tin khách hàng
+                                          .Select(lk => new LichKham
+                                          {
+                                              ID = lk.IDLK,                        // ID lịch khám
+                                              IDKH = lk.IDKH,                    // ID khách hàng
+                                              TenKhachHang = lk.KhachHang.TenKhachHang,   // Tên khách hàng
+                                              NgayKham = DateOnly.FromDateTime(lk.ThoiGian),  // Chuyển DateTime sang DateOnly
+                                              GioKham = TimeOnly.FromDateTime(lk.ThoiGian)     // Chuyển DateTime sang TimeOnly
+                                          })
+                                          .Where(lk=> lk.IDKH == id).ToListAsync();  // Chuyển sang danh sách
+
+            if (lichKham == null || !lichKham.Any())  // Kiểm tra nếu không có dữ liệu
+            {
+                return NotFound("Không tìm thấy thông tin.");
+            }
+
+            return Ok(lichKham); // Trả về dữ liệu
+        }
+
+
     }
 }

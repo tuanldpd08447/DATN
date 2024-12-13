@@ -14,6 +14,34 @@ namespace DATN_QLTiemChung_Api.Controllers
         {
             _context = context;
         }
+        [HttpGet("LsTiem/{IDKH}")]
+        public async Task<ActionResult> LsTiem(string IDKH)
+        {
+                    var lsTiem = _context.TheoDoiSauTiem
+               .Include(st => st.TiemChung)
+                   .ThenInclude(tc => tc.DangKyTiemChung)
+                   .ThenInclude(dktc => dktc.DangKyVaccine)
+               .Select(ls => new LichSuTiem
+               {
+                   ID = ls.IDST,
+                   IDKH = ls.IDKH, 
+                   TenKhachHang = ls.KhachHang.TenKhachHang, 
+                   IDVT = ls.TiemChung.DangKyTiemChung.DangKyVaccine.IDVT, 
+                   TenVacxin = ls.TiemChung.DangKyTiemChung.DangKyVaccine.TenVaccine, 
+                   XuatXu = ls.TiemChung.DangKyTiemChung.DangKyVaccine.VatTuYTe.XuatXu.QuocGia,
+                   NgayTiem = ls.TiemChung.ThoiGian, // Ngày tiêm
+                   DonGia = ls.TiemChung.DangKyTiemChung.DangKyVaccine.DonGia,
+                   ThanhTien = ls.TiemChung.DangKyTiemChung.DangKyVaccine.ThanhTien,
+                   LieuTiem = ls.GhiChu, 
+                   TrangThaiSauTiem = ls.TrangThai,
+                   TrangThaiTiem = ls.TiemChung.TrangThai,
+                   IDNV = ls.IDNV, // ID nhân viên thực hiện
+                   TenNhanVien = ls.NhanVien.TenNhanVien, // Tên nhân viên thực hiện
+                   GhiChu = ls.TiemChung.GhiChu // Ghi chú từ bảng TheoDoiSauTiem
+               }).Where(ls=>ls.IDKH == IDKH)
+               .ToList();
+            return Ok(lsTiem); ;
+        }
 
         [HttpGet("DSKhamSangLoc")]
         public async Task<ActionResult> DSKhamSangLoc()

@@ -71,7 +71,8 @@
                             <ul class="dropdown-menu dropdown-menu-end mt-1">
                                 <li><a class="dropdown-item" asp-action="ThongTinCaNhan" asp-controller="TTCaNhan" asp-route-IDKH="@login">Thông tin cá nhân</a></li>
                                 <li><a class="dropdown-item" asp-action="DoiMatKhau" asp-controller="DoiMatKhau" asp-route-IDKH="@login">Đổi mật khẩu</a></li>
-                                <li><a class="dropdown-item" asp-action="LichSuTiem">Lịch sử tiêm</a></li>
+                                <li><a class="dropdown-item" asp-action="LichKham" asp-controller="LichKham" asp-route-IDKH="@login">Lịch Khám</a></li>
+                                <li><a class="dropdown-item" asp-action="LichSuTiem" asp-controller="LichSuTiem" asp-route-IDKH="@login" >Lịch sử tiêm</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" asp-action="Logout" asp-controller="DNhapDKy">Đăng xuất</a></li> 
                             </ul>
@@ -147,7 +148,7 @@
                 <div class="col-lg-6 col-md-12 mb-4">
                     <div class="row">
                         <div class="col-2">
-                            <img src="Img/logo.png" alt="Logo CDC" style="width: 120%;">
+                            <img src="~/Img/logo.png" alt="Logo CDC" style="width: 120%;">
                         </div>
                         <div class="col">
                             <h6 class="text-uppercase font-weight-bold">Trung tâm Kiểm Soát Bệnh Tật Thành Phố Đà Nẵng</h6>

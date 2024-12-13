@@ -9,6 +9,7 @@ namespace DATN_CDCWebClient.Controllers
     {
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IHttpClientFactory _httpClientFactory;
+        private string id = null;
         public DKyLichKhamController(IWebHostEnvironment webHostEnvironment, IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
@@ -26,16 +27,21 @@ namespace DATN_CDCWebClient.Controllers
             TempData["ID"] = userId;
             TempData["Username"] = Username;
             TempData["Role"] = userRole;
+            id = userId;
         }
         public async Task<IActionResult> DKyLichKham()
         {
             GetSession();
+            if (id == null) 
+            {
+                return View("~/Views/Home/Login.cshtml");
+            }
 
             try
             {
                 var client = _httpClientFactory.CreateClient();
 
-                var khTask = client.GetAsync($"https://localhost:7143/api/DKyLichKham/GetThongtinCaNhan/KH001");
+                var khTask = client.GetAsync($"https://localhost:7143/api/DKyLichKham/GetThongtinCaNhan/{id}");
                 var diaChiTask = khTask.ContinueWith(async task =>
                 {
                     var response = await task;

@@ -1,0 +1,45 @@
+﻿
+@{
+    var lichKhamList = ViewBag.LichKham as List<LichKham>;
+}
+
+<div class="container mt-5" style="min-height: 900px;">
+    <h2 class="card-header bg-body-secondary py-4 mb-5 row">
+        <div class="col-1 border-2 border-end"></div>
+        <div class="col fw-bold" style="color: #2fb388;">LỊCH KHÁM</div>
+    </h2>
+
+    <!-- Table for appointments -->
+    <div class="table-responsive">
+        <table class="table table-bordered text-center align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Tên khách hàng</th>
+                    <th>Ngày khám</th>
+                    <th>Giờ khám</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (lichKhamList != null && lichKhamList.Any())
+                {
+                    foreach (var item in lichKhamList)
+                    {
+                        <tr>
+                            <td>@item.ID</td>
+                            <td>@item.TenKhachHang</td>
+                            <td>@item.NgayKham.ToString("dd/MM/yyyy")</td>
+                            <td>@item.GioKham</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="8">Không có dữ liệu.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

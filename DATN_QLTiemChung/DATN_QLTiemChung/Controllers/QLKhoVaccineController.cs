@@ -18,6 +18,16 @@ namespace DATN_QLTiemChung.Controllers
 
 
         }
+          public void GetSession()
+        {
+            string userId = HttpContext.Session.GetString("ID");
+            string Username = HttpContext.Session.GetString("Username");
+            string userRole = HttpContext.Session.GetString("Role");
+
+            TempData["ID"] = userId;
+            TempData["Username"] = Username;
+            TempData["Role"] = userRole;
+        }
         public async Task<IActionResult> Clickvaccine(string IDVT)
         {
             var hd = _httpClientFactory.CreateClient();
@@ -58,7 +68,7 @@ namespace DATN_QLTiemChung.Controllers
             List<XuatXu> Xuatxu = JsonConvert.DeserializeObject<List<XuatXu>>(apiResponses4);
             ViewBag.Xuatxu = Xuatxu;
 
-            return View("~/Views/Home/QLKho.cshtml");
+             GetSession(); return View("~/Views/Home/QLKho.cshtml");
         }
         public async Task<IActionResult> QLKhoVaccine()
         {
@@ -92,7 +102,7 @@ namespace DATN_QLTiemChung.Controllers
             ViewBag.Xuatxu = Xuatxu;
 
 
-            return View("~/Views/Home/QLKho.cshtml");
+             GetSession(); return View("~/Views/Home/QLKho.cshtml");
         }
 
         public async Task<IActionResult> Findvattu(string? IDVT, string? IDTL, string? TenVatTu,
@@ -153,7 +163,7 @@ namespace DATN_QLTiemChung.Controllers
             List<XuatXu> Xuatxu = JsonConvert.DeserializeObject<List<XuatXu>>(apiResponses4);
             ViewBag.Xuatxu = Xuatxu;
 
-            return View("~/Views/Home/QLKho.cshtml");
+             GetSession(); return View("~/Views/Home/QLKho.cshtml");
         }
         [HttpPost]
         public async Task<IActionResult> AddVaccine(string MaTL, string TenVatTu, string? MaNGC, string? MaNHC, string MaXX,
@@ -161,7 +171,7 @@ namespace DATN_QLTiemChung.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);  
+                 GetSession(); return BadRequest(ModelState);  
             }
 
             try
@@ -203,21 +213,21 @@ namespace DATN_QLTiemChung.Controllers
                         TempData["Notification"] = "Lấy danh sách thành công.";
                         TempData["NotificationType"] = "success";
                         TempData["NotificationTitle"] = "Thông báo.";
-                        return RedirectToAction("QLKhoVaccine");
+                         GetSession(); return RedirectToAction("QLKhoVaccine");
                     }
                     else
                     {
-                        return StatusCode((int)allResponse.StatusCode, "Không thể lấy danh sách khách hàng.");
+                         GetSession(); return StatusCode((int)allResponse.StatusCode, "Không thể lấy danh sách khách hàng.");
                     }
                 }
                 else
                 {
-                    return StatusCode((int)response.StatusCode, "Đã có lỗi xảy ra khi thêm khách hàng.");
+                     GetSession(); return StatusCode((int)response.StatusCode, "Đã có lỗi xảy ra khi thêm khách hàng.");
                 }
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Có lỗi khi kết nối với máy chủ: {ex.Message}");
+                 GetSession(); return StatusCode(500, $"Có lỗi khi kết nối với máy chủ: {ex.Message}");
             }
         }
 
@@ -229,7 +239,7 @@ namespace DATN_QLTiemChung.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);  // Return error if data is invalid
+                 GetSession(); return BadRequest(ModelState);  //  GetSession(); return error if data is invalid
             }
             try
             {
@@ -252,16 +262,16 @@ namespace DATN_QLTiemChung.Controllers
                 var response = await vt.PutAsync($"https://localhost:7143/api/DataQLKhoVaccine/UpdateVaccine/{MaVT}", content);
                 if (response.IsSuccessStatusCode)
                 {
-                    return RedirectToAction("QLKhoVaccine");
+                     GetSession(); return RedirectToAction("QLKhoVaccine");
                 }
                 else
                 {
-                    return StatusCode((int)response.StatusCode, "Không thể cập nhật nhân viên.");
+                     GetSession(); return StatusCode((int)response.StatusCode, "Không thể cập nhật nhân viên.");
                 }
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Có lỗi khi kết nối với máy chủ: {ex.Message}");
+                 GetSession(); return StatusCode(500, $"Có lỗi khi kết nối với máy chủ: {ex.Message}");
             }
 
         }

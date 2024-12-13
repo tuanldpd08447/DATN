@@ -29,11 +29,6 @@ namespace DATN_CDCWebClient.Controllers
             return View();
         }
      
-        public IActionResult LichSuTiem()
-        {
-            GetSession();
-            return View();
-        }
       
         public IActionResult ThongTinCaNhan()
         {

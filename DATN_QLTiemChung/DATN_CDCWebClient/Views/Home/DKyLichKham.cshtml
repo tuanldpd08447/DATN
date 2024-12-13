@@ -5,13 +5,10 @@
     var datLichKham = ViewBag.LichKhamList ;
 }
 <div class="container mt-5">
+    
     <h2 class="card-header bg-body-secondary py-4 mb-5 row">
-        <div class="col-1 border-2 border-end">
-
-        <div class="col fw-bold" style="color: #2fb388;">
-            Đăng Ký Lịch Khám
-        </div>
-        </div>
+        <div class="col-1 border-2 border-end"></div>
+        <div class="col fw-bold" style="color: #2fb388;">Đăng Ký Lịch Khám</div>
     </h2>
     <form class="pb-5" asp-action="DKyLichKhamSumit" asp-controller="DKyLichKham" asp-route-IDKH="@kh.IDKH" method="post">
         <!-- Personal Information -->
