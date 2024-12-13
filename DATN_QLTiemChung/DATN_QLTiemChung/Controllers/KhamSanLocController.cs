@@ -42,7 +42,11 @@ namespace DATN_QLTiemChung.Controllers
                 if (!response.IsSuccessStatusCode)
                 {
                     ModelState.AddModelError("", "Không thể lấy dữ liệu từ API HangCho.");
-                    GetSession(); return View("~/Views/Home/KhamSanLoc.cshtml");
+                    GetSession();
+                    TempData["Notification"] = "Không thể lấy dữ liệu từ Hàng Chờ.";
+                    TempData["NotificationType"] = "error";
+                    TempData["NotificationTitle"] = "Thông báo.";
+                    return View("~/Views/Home/KhamSanLoc.cshtml");
                 }
 
                 var khachhangapiResponse = await response.Content.ReadAsStringAsync();
@@ -65,7 +69,10 @@ namespace DATN_QLTiemChung.Controllers
                 if (!response1.IsSuccessStatusCode)
                 {
                     ModelState.AddModelError("", "Không thể lấy dữ liệu từ API VatTu.");
-                    GetSession(); return View("~/Views/Home/KhamSanLoc.cshtml");
+                    GetSession();
+                    TempData["Notification"] = "Không thể lấy dữ liệu từ Vật tư.";
+                    TempData["NotificationType"] = "Error";
+                    TempData["NotificationTitle"] = "Thông báo."; return View("~/Views/Home/KhamSanLoc.cshtml");
                 }
 
                 var apiResponse = await response1.Content.ReadAsStringAsync();
@@ -96,12 +103,18 @@ namespace DATN_QLTiemChung.Controllers
                 List<XuatXu> Xuatxu = JsonConvert.DeserializeObject<List<XuatXu>>(apiResponses4);
                 ViewBag.Xuatxu = Xuatxu;
 
-                GetSession(); return View("~/Views/Home/KhamSanLoc.cshtml");
+                GetSession();
+              
+                return View("~/Views/Home/KhamSanLoc.cshtml");
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("", "Đã xảy ra lỗi: " + ex.Message);
-                GetSession(); return View("~/Views/Home/KhamSanLoc.cshtml");
+                GetSession();
+                TempData["Notification"] = "Đã xảy ra lỗi.";
+                TempData["NotificationType"] = "error";
+                TempData["NotificationTitle"] = "Thông báo.";
+                return View("~/Views/Home/KhamSanLoc.cshtml");
             }
         }
 
@@ -154,7 +167,10 @@ namespace DATN_QLTiemChung.Controllers
                 if (!response1.IsSuccessStatusCode)
                 {
                     ModelState.AddModelError("", "Không thể lấy dữ liệu từ API VatTu.");
-                    GetSession(); return View("~/Views/Home/KhamSanLoc.cshtml");
+                    GetSession();
+                    TempData["Notification"] = "Không thể lấy dữ liệu từ Vật tư.";
+                    TempData["NotificationType"] = "error";
+                    TempData["NotificationTitle"] = "Thông báo."; return View("~/Views/Home/KhamSanLoc.cshtml");
                 }
 
                 var apiResponse = await response1.Content.ReadAsStringAsync();
@@ -185,20 +201,27 @@ namespace DATN_QLTiemChung.Controllers
                 List<XuatXu> Xuatxu = JsonConvert.DeserializeObject<List<XuatXu>>(apiResponses4);
                 ViewBag.Xuatxu = Xuatxu;
 
-                GetSession(); return View("~/Views/Home/KhamSanLoc.cshtml");
+                GetSession();
+                TempData["Notification"] = "Hiển thị thành công.";
+                TempData["NotificationType"] = "success";
+                TempData["NotificationTitle"] = "Thông báo.";
+                return View("~/Views/Home/KhamSanLoc.cshtml");
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("", $"Đã xảy ra lỗi: {ex.Message}");
                 ViewBag.HangCho = new List<HangCho>();
                 ViewBag.KhachHang = null;
-                GetSession(); return View("~/Views/Home/KhamSanLoc.cshtml");
+                GetSession();
+                TempData["Notification"] = "Đã xảy ra lỗi.";
+                TempData["NotificationType"] = "error";
+                TempData["NotificationTitle"] = "Thông báo."; return View("~/Views/Home/KhamSanLoc.cshtml");
             }
         }
         [HttpPost]
         public async Task<IActionResult> SubmitForm(
-    string IDVT,
-    int SoLuong,
+    string? IDVT,
+    int? SoLuong,
     string IDKH,
     double ChieuCao,
     double CanNang,
@@ -214,8 +237,8 @@ namespace DATN_QLTiemChung.Controllers
                 {
                     IDKH = IDKH,
                     IDNV = IDNV,
-                    IDVT = IDVT,
-                    SoLuong = SoLuong,
+                    IDVT = IDVT ?? "",
+                    SoLuong = SoLuong ?? 0,
                     CanNang = CanNang,
                     ChieuCao = ChieuCao,
                     TrangThai = TrangThai,
@@ -238,7 +261,10 @@ namespace DATN_QLTiemChung.Controllers
                         if (!response1.IsSuccessStatusCode)
                         {
                             ModelState.AddModelError("", "Không thể lấy dữ liệu từ API HangCho.");
-                            GetSession(); return View("~/Views/Home/KhamSanLoc.cshtml");
+                            GetSession();
+                            TempData["Notification"] = "Không thể lấy dữ liệu Hàng chờ.";
+                            TempData["NotificationType"] = "error";
+                            TempData["NotificationTitle"] = "Thông báo."; return View("~/Views/Home/KhamSanLoc.cshtml");
                         }
                         var khachhangapiResponse = await response1.Content.ReadAsStringAsync();
                         var hangChoList = JsonConvert.DeserializeObject<List<HangCho>>(khachhangapiResponse);
@@ -247,25 +273,57 @@ namespace DATN_QLTiemChung.Controllers
                         if (hangCho == null)
                         {
                             ModelState.AddModelError("", "Không tìm thấy thông tin khách hàng.");
-                            GetSession(); return View("~/Views/Home/KhamSanLoc.cshtml");
+                            GetSession();
+                            TempData["Notification"] = "Không thể tìm thấy thông tin khách hàng.";
+                            TempData["NotificationType"] = "error";
+                            TempData["NotificationTitle"] = "Thông báo.";
+                            return View("~/Views/Home/KhamSanLoc.cshtml");
                         }
-
-                        hangCho.Step = "KhamSanLoc";
-                        // Construct the PUT request with the data to be updated
-                        var content1 = new StringContent(JsonConvert.SerializeObject(hangCho), Encoding.UTF8, "application/json");
-
-                        // Make the PUT request
-                        var response2 = await client.PutAsync($"https://65b86c3a46324d531d562e3d.mockapi.io/HangCho/{hangCho.ID}", content1);
-
-                        var responseContent = await response2.Content.ReadAsStringAsync();
-                        if (response2.IsSuccessStatusCode)
+                        if (TrangThai == false)
                         {
-                            GetSession(); return RedirectToAction("KhamSanLoc");
+                            // Gửi yêu cầu DELETE để xóa khách hàng
+                            var response2 = await client.DeleteAsync($"https://65b86c3a46324d531d562e3d.mockapi.io/HangCho/{hangCho.ID}");
+                            if (!response2.IsSuccessStatusCode)
+                            {
+                                var errorContent = await response2.Content.ReadAsStringAsync();
+                                return StatusCode((int)response2.StatusCode, $"Không thể xóa thông tin HangCho: {errorContent}");
+                            }
+                            else
+                            {
+
+                                GetSession();
+                                TempData["Notification"] = "Cập nhật dữ liệu thành công.";
+                                TempData["NotificationType"] = "success";
+                                TempData["NotificationTitle"] = "Thông báo."; return RedirectToAction("KhamSanLoc");
+                            }
                         }
                         else
                         {
-                            ModelState.AddModelError("", $"Không thể cập nhật dữ liệu vào API HangCho. Lỗi: {responseContent}");
-                            GetSession(); return View("~/Views/Home/KhamSanLoc.cshtml");
+
+                            hangCho.Step = "KhamSanLoc";
+                            // Construct the PUT request with the data to be updated
+                            var content1 = new StringContent(JsonConvert.SerializeObject(hangCho), Encoding.UTF8, "application/json");
+
+                            // Make the PUT request
+                            var response2 = await client.PutAsync($"https://65b86c3a46324d531d562e3d.mockapi.io/HangCho/{hangCho.ID}", content1);
+
+                            var responseContent = await response2.Content.ReadAsStringAsync();
+                            if (response2.IsSuccessStatusCode)
+                            {
+                                GetSession();
+                                TempData["Notification"] = "Cập nhật dữ liệu thành công.";
+                                TempData["NotificationType"] = "success";
+                                TempData["NotificationTitle"] = "Thông báo."; return RedirectToAction("KhamSanLoc");
+                            }
+                            else
+                            {
+                                ModelState.AddModelError("", $"Không thể cập nhật dữ liệu vào API HangCho. Lỗi: {responseContent}");
+                                GetSession();
+                                TempData["Notification"] = "Không thể cập nhật dữ liệu.";
+                                TempData["NotificationType"] = "error";
+                                TempData["NotificationTitle"] = "Thông báo.";
+                                return View("~/Views/Home/KhamSanLoc.cshtml");
+                            }
                         }
 
 
@@ -285,7 +343,12 @@ namespace DATN_QLTiemChung.Controllers
             }
             else
             {
-                GetSession(); return View("Index");
+                TempData["Notification"] = "Vui Lòng Chọn đầy đủ thông tin.";
+                TempData["NotificationType"] = "error";
+                TempData["NotificationTitle"] = "Thông báo.";
+                GetSession();
+                return RedirectToAction("ClickHangCho", new { IDKH = IDKH });
+
             }
         }
 

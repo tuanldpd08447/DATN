@@ -48,24 +48,37 @@ namespace DATN_CDCWebClient.Controllers
                         if (khachHangs != null)
                         {
                             ViewBag.KhachHangs = khachHangs; // Pass data to the View
-                              GetSession(); return View("~/Views/Home/ThongTinCaNhan.cshtml");
+                              GetSession();
+                            TempData["Notification"] = "Lấy thông tin cá nhân khách hàng thành công.";
+                            TempData["NotificationType"] = "success";
+                            TempData["NotificationTitle"] = "Thông báo.";
+                            return View("~/Views/Home/ThongTinCaNhan.cshtml");
                         }
                         else
                         {
                             ViewBag.Error = "Dữ liệu khách hàng không hợp lệ.";
-                              GetSession(); return View("~/Views/Home/Home.cshtml");
+                            TempData["Notification"] = "Dữ liệu khách hàng không hợp lệ.";
+                            TempData["NotificationType"] = "error";
+                            TempData["NotificationTitle"] = "Thông báo.";
+                            GetSession(); return View("~/Views/Home/Home.cshtml");
                         }
                     }
                     else
                     {
                         ViewBag.Error = "Không thể lấy thông tin khách hàng.";
-                          GetSession(); return View("~/Views/Home/Home.cshtml");
+                        TempData["Notification"] = "Lấy thông tinh khách hàng thất bại.";
+                        TempData["NotificationType"] = "error";
+                        TempData["NotificationTitle"] = "Thông báo.";
+                        GetSession(); return View("~/Views/Home/Home.cshtml");
                     }
                 }
                 catch (Exception ex)
                 {
                     ViewBag.Error = $"Đã xảy ra lỗi: {ex.Message}";
-                      GetSession(); return View("~/Views/Home/Home.cshtml");
+                      GetSession();
+                    TempData["Notification"] = "Đã xảy ra lỗi.";
+                    TempData["NotificationType"] = "error";
+                    TempData["NotificationTitle"] = "Thông báo."; return View("~/Views/Home/Home.cshtml");
                 }
             }
         }
@@ -101,21 +114,33 @@ namespace DATN_CDCWebClient.Controllers
                 var error = await response.Content.ReadAsStringAsync();
                 Console.WriteLine($"API Error: {error}");
                 GetSession();
-                  GetSession(); return RedirectToAction("ThongTinCaNhan", new { IDKH = khachHang.IDKH });
+                  GetSession();
+                TempData["Notification"] = "Đổi thông tin thất bại.";
+                TempData["NotificationType"] = "error";
+                TempData["NotificationTitle"] = "Thông báo.";
+                return RedirectToAction("ThongTinCaNhan", new { IDKH = khachHang.IDKH });
             }
 
             if (response.IsSuccessStatusCode)
             {
                 var result = await response.Content.ReadAsStringAsync();
                 GetSession();
-                  GetSession(); return RedirectToAction("Home","Home");
+                  GetSession();
+                TempData["Notification"] = "Đổi thông tin thành công.";
+                TempData["NotificationType"] = "success";
+                TempData["NotificationTitle"] = "Thông báo.";
+                return RedirectToAction("Home","Home");
             }
             else
             {
 
                 var error = await response.Content.ReadAsStringAsync();
                 GetSession();
-                  GetSession(); return RedirectToAction("ThongTinCaNhan", new { IDKH = khachHang.IDKH });
+                  GetSession();
+                TempData["Notification"] = "Xảy ra lỗi.";
+                TempData["NotificationType"] = "error";
+                TempData["NotificationTitle"] = "Thông báo.";
+                return RedirectToAction("ThongTinCaNhan", new { IDKH = khachHang.IDKH });
             }
 
         }

@@ -11,6 +11,24 @@
         "Bình Định", "Tày", "Tày", "Tày", "Chơ", "Chống", "Gieo", "Mai", "Gia Rai",
         "Kon Tum", "Đồng Tháp", "Gyar", "Lý Tự", "Tư", "Chứt", "Vân Kiều"
     };
+        List<string> danhSachChucVu = new List<string>
+    {
+        "Trưởng phòng Lễ Tân",
+        "Trưởng phòng Kế Toán",
+        "Phó Trưởng phòng Kế Toán",
+        "Trưởng phòng Kho",
+        "Phó Trưởng phòng Kho",
+        "Trưởng phòng Theo Dõi",
+        "Phó Trưởng phòng Theo Dõi",
+        "Trưởng phòng Tiêm",
+        "Phó Trưởng phòng Tiêm",
+        "Trưởng phòng Khám",
+        "Phó Trưởng phòng Khám",
+        "Trưởng phòng Nhân Sự",
+        "Phó Trưởng phòng Nhân Sự",
+        "Chuyên viên Tuyển dụng",
+        "Nhân Viên"
+    };
 
     string emailtemplpe = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$/";
     var pb = ViewBag.PhongBans as List<PhongBan>;
@@ -65,9 +83,8 @@
             if (form) {
                 var actionUrl = button.getAttribute('data-action');
                 if (actionUrl) {
-                    // Kiểm tra và chỉ thay đổi action khi nó chưa đúng
                     if (form.action !== actionUrl) {
-                        form.action = actionUrl; // Chỉ thay đổi action khi cần thiết
+                        form.action = actionUrl; 
                     }
                 } else {
                     console.error('No action URL found');
@@ -103,19 +120,23 @@
                     </div>
                     <div class="form-group col">
                         <label class="fw-semibold" for="chucVu" id="chucVu">Chức Vụ</label>
-                        <select class="form-control" id="chucVu">
-                             <option value="value">-- Chọn Chức Vụ -- </option>
+                        <select class="form-control" id="chucVuFind">
+                             <option value="">-- Chọn Chức Vụ -- </option>
+                            @foreach (var item in danhSachChucVu)
+                            {
+                            <option value="@item">@item </option>
+                            }
                        </select>
                     </div>
                     <div class="form-group col">
                         <label class="fw-semibold" for="IDPB">Phòng Ban</label>
-                        <select class="form-control" id="IDPB">
-                            <option>-- Chọn Phòng Ban -- </option>
+                        <select class="form-control" id="IDPBFind">
+                            <option value="">-- Chọn Phòng Ban -- </option>
                             @if(pb != null)
                             {
                                 foreach (var item in pb)
                                 {
-                                    <option value="@item.IDPB">@item.TenPhongBan </option>
+                                    <option value="@item.TenPhongBan">@item.TenPhongBan </option>
                                 }
                             }
 
@@ -123,13 +144,13 @@
                     </div>
                     <div class="form-group col">
                         <label class="fw-semibold" for="chucDanh">Chức danh</label>
-                        <select class="form-control" id="chucDanh">
-                            <option>-- Chọn Chức Danh --</option>
+                        <select class="form-control" id="chucDanhFind">
+                            <option value="">-- Chọn Chức Danh --</option>
                             @if (cd != null)
                             {
                                 foreach (var item in cd)
                                 {
-                                    <option value="@item.IDCD">@item.TenChucDanh </option>
+                                    <option value="@item.TenChucDanh">@item.TenChucDanh </option>
                                 }
                             }
                         </select>
@@ -143,8 +164,6 @@
                   
                 </form>
             </div>
-
-
         </div>
 
 
@@ -172,8 +191,23 @@
                         <div class="row">
                             <div class="form-group col">
                                 <label class="fw-semibold" for="chucVu">Chức Vụ</label>
-                                <input type="text" class="form-control" name="chucVu" id="chucVu" placeholder="Y Tá" value="@if(nhanVien!=null){
-                                @nhanVien.ChucVu}" required disabled>  
+                                <select class="form-control" name="chucVu" id="chucVu" required disabled>
+                                    @if (cd != null)
+                                    {
+                                        foreach (var item in danhSachChucVu)
+                                        {
+                                            if (nhanVien != null && @nhanVien.ChucVu == item)
+                                            {
+                                                <option value="@item" selected >@item</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@item">@item </option>
+                                            }
+
+                                        }
+                                    }
+                                </select>
                             </div> 
                             <div class="form-group col">
                                 <label class="fw-semibold" for="IDCD">IDCD </label>
@@ -442,105 +476,86 @@
 
     </div>
     <script>
-       
-            const nh = JSON.parse('@Html.Raw(nhanViensJson)');
-            console.log(nh);
-            // Hàm để render lại bảng với dữ liệu mới
-            function renderTable(data) {
+        // Giả sử bạn đã có dữ liệu JSON nhân viên từ Razor
+        const nh = JSON.parse('@Html.Raw(nhanViensJson)');
+        console.log(nh);
+
+        // Hàm để render lại bảng với dữ liệu mới
+        function renderTable(data) {
             const tbody = document.querySelector("#nhanVienTable tbody");
-                tbody.innerHTML = ''; // Xóa dữ liệu cũ
+            tbody.innerHTML = ''; // Xóa dữ liệu cũ
 
-                if (data.length === 0) {
-                    // Hiển thị thông báo khi không có dữ liệu
-                    tbody.innerHTML = `
-                                                                                                            <tr>
-                                                                                        <td class="text-center fw-semibold" colspan="11">Không tìm thấy dữ liệu cần tìm</td>
-                                                                                    </tr>
-                                                                                `;
-                    return;
-                }
+            if (data.length === 0) {
+                // Hiển thị thông báo khi không có dữ liệu
+                tbody.innerHTML = `
+                    <tr>
+                        <td class="text-center fw-semibold" colspan="12">Không tìm thấy dữ liệu cần tìm</td>
+                    </tr>
+                `;
+                return;
+            }
 
-                // Sử dụng DocumentFragment để cải thiện hiệu năng
-                const fragment = document.createDocumentFragment();
+            // Sử dụng DocumentFragment để cải thiện hiệu năng
+            const fragment = document.createDocumentFragment();
 
-                data.forEach(kh => {
-                    const tr = document.createElement("tr");
+            data.forEach(kh => {
+                const tr = document.createElement("tr");
                 tr.onclick = () => {
                     location.href = '@Url.Action("ClickNhanVien", "QLNhanVien")' + `?IDNV=${kh.IDNV}`;
                 };
-                    tr.innerHTML = `
-                                                                                  
-                                                                                    <td>${kh.IDNV}</td>
-                                                                                    <td>${kh.TenNhanVien}</td>
-                                                                                    <td>${kh.ChucVu}</td>
-                                                                                    <td>${kh.TenChucDanh}</td>
-                                                                                    <td>${kh.TenPhongBan}</td>
-                                                                                    <td>${kh.NgaySinh ? new Date(kh.NgaySinh).toLocaleDateString('vi-VN') : 'N/A'}</td>
-                                                                                    <td>${kh.GioiTinh || ''}</td>
-                                                                                    <td>${kh.DiaChi || ''}</td>
-                                                                                    <td>${kh.SoDienThoai || ''}</td>
-                                                                                    <td>${kh.Email || ''}</td>
-                                                                                    <td>${kh.CCCD || ''}</td>
-                                                                                    <td>${kh.DanToc || ''}</td>
-                                                                                    <td>${kh.FullAddress || ''}</td>
-                                                                                `;
+                tr.innerHTML = `
+                    <td>${kh.IDNV}</td>
+                    <td>${kh.TenNhanVien}</td>
+                    <td>${kh.ChucVu}</td>
+                    <td>${kh.TenChucDanh}</td>
+                    <td>${kh.TenPhongBan}</td>
+                    <td>${kh.NgaySinh ? new Date(kh.NgaySinh).toLocaleDateString('vi-VN') : 'N/A'}</td>
+                    <td>${kh.GioiTinh || ''}</td>
+                    <td>${kh.DiaChi || ''}</td>
+                    <td>${kh.SoDienThoai || ''}</td>
+                    <td>${kh.Email || ''}</td>
+                    <td>${kh.CCCD || ''}</td>
+                    <td>${kh.DanToc || ''}</td>
+                    <td>${kh.FullAddress || ''}</td>
+                `;
 
-                    fragment.appendChild(tr);
-                });
+                fragment.appendChild(tr);
+            });
 
-                tbody.appendChild(fragment);
-            }
+            tbody.appendChild(fragment);
+        }
 
-            // Hàm tìm kiếm
-            document.getElementById('searchButton').addEventListener('click', function () {
-                const medicalCode = document.getElementById('medicalCodeFind').value.trim().toLowerCase();
-                const userName = document.getElementById('UserNameFind').value.trim().toLowerCase();
-                const identityCode = document.getElementById('identityCodeFind').value.trim().toLowerCase();
-              
+        // Hàm tìm kiếm
+        document.getElementById("searchButton").addEventListener("click", function () {
+            // Lấy giá trị từ các trường tìm kiếm
+            const medicalCode = document.getElementById("medicalCodeFind").value.toLowerCase();
+            const userName = document.getElementById("UserNameFind").value.toLowerCase();
+            const identityCode = document.getElementById("identityCodeFind").value.toLowerCase();
+            const chucVu = document.getElementById("chucVuFind").value.toLowerCase();
+            const phongBan = document.getElementById("IDPBFind").value.toLowerCase();
+            const chucDanh = document.getElementById("chucDanhFind").value.toLowerCase();
 
-
-                // Lọc dữ liệu theo các tiêu chí tìm kiếm
-                
-
-
-            const IDPB = document.getElementById('IDPB').value.trim();
-            const IDCD = document.getElementById('chucDanh').value.trim();
-            const chucVu = document.getElementById('chucVu').value.trim();
-
-            // Nếu giá trị là mặc định, để trống
-            const filteredData = nh.filter(kh => {
+            // Lọc danh sách nhân viên dựa trên các tiêu chí
+            const filteredNhanViens = nh.filter(nv => {
                 return (
-                    (medicalCode === '' || (kh.IDNV && kh.IDNV.toLowerCase().includes(medicalCode))) &&
-                    (userName === '' || (kh.TenNhanVien && kh.TenNhanVien.toLowerCase().includes(userName))) &&
-                    (identityCode === '' || (kh.CCCD && kh.CCCD.toLowerCase().includes(identityCode))) &&
-                    (IDPB === '-- Chọn Phòng Ban --' || (kh.PhongBan && kh.PhongBan.toLowerCase().includes(IDPB))) &&
-                    (IDCD === '-- Chọn Chức Danh --' || (kh.ChucDanh && kh.ChucDanh.toLowerCase().includes(IDCD))) &&
-                    (chucVu === '-- Chọn Chức Vụ --' || (kh.ChucVu && kh.ChucVu.toLowerCase().includes(chucVu)))
+                    (medicalCode === "" || nv.IDNV.toLowerCase().includes(medicalCode)) &&
+                    (userName === "" || nv.TenNhanVien.toLowerCase().includes(userName)) &&
+                    (identityCode === "" || nv.CCCD.toLowerCase().includes(identityCode)) &&
+                    (chucVu === "" || nv.ChucVu.toLowerCase().includes(chucVu)) &&
+                    (phongBan === "" || nv.TenPhongBan.toLowerCase().includes(phongBan)) &&
+                    (chucDanh === "" || nv.TenChucDanh.toLowerCase().includes(chucDanh))
                 );
             });
 
-                // Render lại bảng với dữ liệu đã lọc
-                renderTable(filteredData);
-            });
+            // Render lại bảng với dữ liệu đã lọc
+            renderTable(filteredNhanViens);
+        });
 
-            // Hiển thị dữ liệu mặc định khi trang tải
+
+
+
             renderTable(nh);
 
-        document.getElementById('searchButton').addEventListener('click', function () {
-            const medicalCode = document.getElementById('medicalCodeFind').value.trim().toLowerCase();
-            const userName = document.getElementById('UserNameFind').value.trim().toLowerCase();
-            const identityCode = document.getElementById('identityCodeFind').value.trim().toLowerCase();
-
-            const filteredData = nh.filter(kh => {
-                return (
-                    (medicalCode === '' || (kh.IDNV && kh.IDNV.toLowerCase().includes(medicalCode))) &&
-                    (userName === '' || (kh.TenNhanVien && kh.TenNhanVien.toLowerCase().includes(userName))) &&
-                    (identityCode === '' || (kh.CCCD && kh.CCCD.toLowerCase().includes(identityCode)))
-                );
-            });
-
-            renderTable(filteredData);
-        });
 
         // Xử lý sự kiện khi nhấn nút "Thêm"
         document.getElementById("addButton").addEventListener("click", function () {
@@ -614,11 +629,7 @@
         targetButton.addEventListener('click', function () {
             // Logic khi nút bị kích hoạt, nếu có
         });
-        document.getElementById('searchButton').addEventListener('click', function () {
-            console.log('Button clicked!');
-            alert('Button hoạt động!');
-        });
-
+      
         window.onload = function () {
             const form = document.getElementById("EmployeeForm");
             const inputs = form.querySelectorAll("input");

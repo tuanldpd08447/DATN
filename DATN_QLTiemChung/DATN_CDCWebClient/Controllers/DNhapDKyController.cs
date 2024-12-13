@@ -72,14 +72,16 @@ namespace DATN_CDCWebClient.Controllers
 
             try
             {
-                // Gọi API để cập nhật mật khẩu
                 var response = await client.PostAsJsonAsync("https://localhost:7143/api/DNhapDky/update-password", updatePasswordRequest);
 
                 if (response.IsSuccessStatusCode)
                 {
                     // Nếu thành công, thông báo cho người dùng
                     TempData["Message"] = "Cập nhật mật khẩu thành công!";
-                    return RedirectToAction("Login");  // Chuyển hướng đến trang đăng nhập
+                    TempData["Notification"] = "Cập nhật mật khẩu thành công.";
+                    TempData["NotificationType"] = "success";
+                    TempData["NotificationTitle"] = "Thông báo.";
+                    return RedirectToAction("Login");  
                 }
                 else
                 {
@@ -87,6 +89,9 @@ namespace DATN_CDCWebClient.Controllers
                     TempData["ErrorMessage"] = "Cập nhật mật khẩu thất bại! Vui lòng thử lại sau.";
                     ViewBag.SuccessSendMail = true;
                     ViewBag.Email = email;
+                    TempData["Notification"] = "Cập nhật mật khẩu thất bại.";
+                    TempData["NotificationType"] = "error";
+                    TempData["NotificationTitle"] = "Thông báo.";
                     return View("~/Views/Home/QuenMatKhau.cshtml");
                 }
             }
@@ -96,6 +101,9 @@ namespace DATN_CDCWebClient.Controllers
                 TempData["ErrorMessage"] = "Có lỗi xảy ra khi kết nối với máy chủ. Vui lòng thử lại sau.";
                 ViewBag.SuccessSendMail = true;
                 ViewBag.Email = email;
+                TempData["Notification"] = "Xảy ra lỗi.";
+                TempData["NotificationType"] = "error";
+                TempData["NotificationTitle"] = "Thông báo.";
                 return View("~/Views/Home/QuenMatKhau.cshtml");
             }
         }
@@ -188,7 +196,9 @@ namespace DATN_CDCWebClient.Controllers
                 ViewBag.ErrorMessage = $"Lỗi từ API: {errorResponse}";
                 ViewBag.Email = email;
             }
-
+            TempData["Notification"] = "Đã gửi mail.";
+            TempData["NotificationType"] = "success";
+            TempData["NotificationTitle"] = "Thông báo.";
             return View("~/Views/Home/QuenMatKhau.cshtml");
         }
 
@@ -215,6 +225,9 @@ namespace DATN_CDCWebClient.Controllers
             }
 
             ViewBag.ErrorMessage = "Thông tin đăng nhập không chính xác.";
+            TempData["Notification"] = "Đặng nhập thất bại.";
+            TempData["NotificationType"] = "error";
+            TempData["NotificationTitle"] = "Thông báo.";
             return View("~/Views/Home/Login.cshtml");
 
         }
@@ -269,6 +282,9 @@ namespace DATN_CDCWebClient.Controllers
                 {
                     TempData["errorConfirmpassword"] = "Mật khẩu xác nhận không khớp.";
                     ViewBag.register = registerDto;
+                    TempData["Notification"] = "Mật khẩu không khớp.";
+                    TempData["NotificationType"] = "error";
+                    TempData["NotificationTitle"] = "Thông báo.";
                     return View("~/Views/Home/Register.cshtml");
                 }
 
@@ -286,6 +302,9 @@ namespace DATN_CDCWebClient.Controllers
                 ViewBag.register = registerDto;
                 ViewBag.DiaChi = dc;
                 TempData["errorAPI"] = $"Đăng ký thất bại: {errorResponse}";
+                TempData["Notification"] = "Đặng ký thất bại.";
+                TempData["NotificationType"] = "error";
+                TempData["NotificationTitle"] = "Thông báo.";
                 return View("~/Views/Home/Register.cshtml");
             }
             catch (Exception ex)
@@ -293,6 +312,9 @@ namespace DATN_CDCWebClient.Controllers
                 ViewBag.register = registerDto;
                 ViewBag.DiaChi = dc;
                 TempData["errorAPI"] = $"Lỗi hệ thống: {ex.Message}";
+                TempData["Notification"] = "Lỗi hệ thống.";
+                TempData["NotificationType"] = "error";
+                TempData["NotificationTitle"] = "Thông báo.";
                 return View("~/Views/Home/Register.cshtml");
             }
         }

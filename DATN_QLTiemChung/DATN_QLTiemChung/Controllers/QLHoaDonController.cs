@@ -37,7 +37,9 @@ namespace DATN_QLTiemChung.Controllers
                                    ?.Where(hc => hc.Step == "KhamSanLoc")
                                    .ToList();
 
-               GetSession();  return hangChoList ?? new List<HangCho>(); // Trả về danh sách rỗng nếu dữ liệu null
+               GetSession(); 
+                
+                return hangChoList ?? new List<HangCho>(); // Trả về danh sách rỗng nếu dữ liệu null
             }
         }
         public void GetSession()
@@ -103,7 +105,11 @@ namespace DATN_QLTiemChung.Controllers
 
             ViewBag.HangCho = await GetHangCho();
 
-           GetSession();  return View("~/Views/Home/QLHoaDon.cshtml");
+           GetSession();
+            TempData["Notification"] = "Lấy hàng chờ thành công.";
+            TempData["NotificationType"] = "success";
+            TempData["NotificationTitle"] = "Thông báo.";
+            return View("~/Views/Home/QLHoaDon.cshtml");
         }
         public async Task<IActionResult> QLHoaDon()
         {
@@ -131,7 +137,9 @@ namespace DATN_QLTiemChung.Controllers
 
             ViewBag.HangCho = await GetHangCho();
 
-           GetSession();  return View("~/Views/Home/QLHoaDon.cshtml");
+           GetSession(); 
+
+           return View("~/Views/Home/QLHoaDon.cshtml");
 
 
 
@@ -182,7 +190,9 @@ namespace DATN_QLTiemChung.Controllers
                 {
                     var apiResponse = await response.Content.ReadAsStringAsync();
                     var addedHoaDon = JsonConvert.DeserializeObject<HoaDonDTO>(apiResponse);
-                   GetSession();  return RedirectToAction("QLHoaDon");
+                   GetSession(); 
+                    
+                    return RedirectToAction("QLHoaDon");
 
                 }
                 else
@@ -219,7 +229,11 @@ namespace DATN_QLTiemChung.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     TempData["Message"] = "Cập nhật trạng thái hóa đơn thành công.";
-                   GetSession();  return RedirectToAction("QLHoaDon");
+                   GetSession();
+                    TempData["Notification"] = "Cập nhật trạng thái hóa đơn thành công.";
+                    TempData["NotificationType"] = "success";
+                    TempData["NotificationTitle"] = "Thông báo.";
+                    return RedirectToAction("QLHoaDon");
                 }
                 else
                 {
@@ -263,7 +277,9 @@ namespace DATN_QLTiemChung.Controllers
                 {
                     var errorResponse = await response1.Content.ReadAsStringAsync();
                     ModelState.AddModelError("", $"Không thể lấy dữ liệu từ API HangCho: {errorResponse}");
-                   GetSession();  return RedirectToAction("QLHoaDon");
+                   GetSession(); TempData["Notification"] = "Không thể lấy dữ liệu từ Hàng chờ.";
+                    TempData["NotificationType"] = "error";
+                    TempData["NotificationTitle"] = "Thông báo."; return RedirectToAction("QLHoaDon");
                 }
 
                 var khachhangapiResponse = await response1.Content.ReadAsStringAsync();
@@ -289,7 +305,9 @@ namespace DATN_QLTiemChung.Controllers
 
                 // Thông báo thành công
                 TempData["Message"] = "Thanh Toán hóa đơn thành công.";
-               GetSession();  return RedirectToAction("QLHoaDon");
+               GetSession(); TempData["Notification"] = "Thanh toán hóa đơn thành công.";
+                TempData["NotificationType"] = "success";
+                TempData["NotificationTitle"] = "Thông báo."; return RedirectToAction("QLHoaDon");
             }
             catch (Exception ex)
             {

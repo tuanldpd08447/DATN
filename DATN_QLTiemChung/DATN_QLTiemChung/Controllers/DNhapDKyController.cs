@@ -59,10 +59,10 @@ namespace DATN_QLTiemChung.Controllers
             }
                 GetSession();
                 ViewBag.ErrorMessage = "Thông tin đăng nhập không chính xác.";
-            TempData["Notification"] = "Đăng nhập thất bại. Thông tin đăng nhập không chính xác.";
-            TempData["NotificationType"] = "error";
-            TempData["NotificationTitle"] = "Thông báo.";
-            return RedirectToAction("Login");
+                TempData["Notification"] = "Đăng nhập thất bại. Thông tin đăng nhập không chính xác.";
+                TempData["NotificationType"] = "error";
+                TempData["NotificationTitle"] = "Thông báo.";
+                return RedirectToAction("Login");
 
         }
         public IActionResult Logout()

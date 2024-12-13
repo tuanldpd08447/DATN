@@ -200,7 +200,9 @@ namespace DATN_QLTiemChung.Controllers
                     {
                         var allApiResponse = await allResponse.Content.ReadAsStringAsync();
                         List<VatTuYTe> vaccines = JsonConvert.DeserializeObject<List<VatTuYTe>>(allApiResponse);
-
+                        TempData["Notification"] = "Lấy danh sách thành công.";
+                        TempData["NotificationType"] = "success";
+                        TempData["NotificationTitle"] = "Thông báo.";
                         return RedirectToAction("QLKhoVaccine");
                     }
                     else

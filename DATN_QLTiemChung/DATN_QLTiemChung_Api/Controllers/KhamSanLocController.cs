@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿        using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DATN_QLTiemChung_Api.Models;
@@ -92,9 +92,10 @@ namespace DATN_QLTiemChung_Api.Controllers
             // Tạo IDKS tự động tăng
             var lastRecord = await _context.KhamSangLoc
                                             .OrderByDescending(x => x.IDKS)
+                                            .Select(x => x.IDKS)
                                             .FirstOrDefaultAsync();
 
-            string newIDKS = GenerateNextID(lastRecord?.IDKS);
+            string newIDKS = GenerateNextID(lastRecord);
 
             var ksl = new KhamSangLoc
             {
@@ -110,87 +111,105 @@ namespace DATN_QLTiemChung_Api.Controllers
                 TinhTrangSucKhoe = model.TinhTrangSucKhoe
             };
 
-            // Lấy thông tin vaccine
-            var vt = await _context.VatTuYTe.FirstOrDefaultAsync(vt => vt.IDVT == model.IDVT);
-
-            // Tạo IDDKVC tự động tăng cho DangKyVaccine
-            var lastIDDKVC = await _context.DangKyVaccine
-                                         .OrderByDescending(x => x.IDDKVC)
-                                         .FirstOrDefaultAsync();
-
-            string newIDDKVC = GenerateNextIDDKVC(lastIDDKVC?.IDDKVC);
-
-            var dkvt = new DangKyVaccine
+            if (model.TrangThai || model.KetQua)
             {
-                IDDKVC = newIDDKVC,
-                IDVT = model.IDVT,
-                TenVaccine = vt.TenVatTu,
-                SoLuong = model.SoLuong,
-                DonGia = vt.DonGia,
-                ThanhTien = vt.DonGia * model.SoLuong,
-                GhiChu = " ",
-            };
+  
+                var vt = await _context.VatTuYTe
+                                        .Where(vt => vt.IDVT == model.IDVT)
+                                        .Select(vt => new { vt.TenVatTu, vt.DonGia })
+                                        .FirstOrDefaultAsync();
 
-            // Tạo IDDK tự động tăng cho DangKyTiemChung
-            var lastIDDK = await _context.DangKyTiemChung
-                                      .OrderByDescending(x => x.IDDK)
-                                      .FirstOrDefaultAsync();
+                if (vt == null)
+                {
+                    return BadRequest("Không tìm thấy thông tin vật tư y tế.");
+                }
 
-            string newIDDK = GenerateNextIDDK(lastIDDK?.IDDK);
+                var lastIDDKVC = await _context.DangKyVaccine
+                                                .OrderByDescending(x => x.IDDKVC)
+                                                .Select(x => x.IDDKVC)
+                                                .FirstOrDefaultAsync();
 
-            var dktc = new DangKyTiemChung
-            {
-                IDDK = newIDDK,
-                IDDKVC = newIDDKVC,
-                IDKH = model.IDKH,
-                IDNV = model.IDNV,
-                ThoiGianDK = DateTime.Now,
-                ThoiGianTiem = DateTime.Now,
-                GhiChu = ""
-            };
+                string newIDDKVC = GenerateNextIDDKVC(lastIDDKVC);
 
-            var lastIDHD = await _context.HoaDon
-                                   .OrderByDescending(x => x.IDHD)
-                                   .FirstOrDefaultAsync();
-            string newIDHD = GenerateNextIDHD(lastIDHD?.IDHD);
-            var newHoaDon = new HoaDon
-            {
-                IDHD = newIDHD,
-                IDKH = model.IDKH,
-                IDNV = model.IDNV,
-                ThoiGian = DateTime.Now,
-                GhiChu = null, // Hình thức thanh toán
-                NoiDung = vt.TenVatTu, // Tên vaccine
-                TongTien = vt.DonGia * model.SoLuong ?? 0, // Tính tổng tiền
-                TrangThai = false,
-                ThanhToan = false,
-            };
+                var dkvt = new DangKyVaccine
+                {
+                    IDDKVC = newIDDKVC,
+                    IDVT = model.IDVT,
+                    TenVaccine = vt.TenVatTu,
+                    SoLuong = model.SoLuong,
+                    DonGia = vt.DonGia,
+                    ThanhTien = vt.DonGia * model.SoLuong,
+                    GhiChu = " "
+                };
 
-            var lastIDHDCT = await _context.HoaDonChiTiet
-                               .OrderByDescending(x => x.IDHDCT)
-                               .FirstOrDefaultAsync();
-            
-            // Tạo hóa đơn chi tiết mới
-            string newIDHDCT =  GenerateNextIDHDCT(lastIDHDCT?.IDHDCT);
-            var newHoaDonChiTiet = new HoaDonChiTiet
-            {
-                IDHDCT = newIDHDCT,
-                IDHD = newIDHD, // Liên kết đúng hóa đơn
-                IDVT = model.IDVT,
-                SoLuong = model.SoLuong,
-                DonGia = vt.DonGia ?? 0,
-                ThanhTien = (vt.DonGia * model.SoLuong) ?? 0,
-                GhiChu = null
-            };
+                // Tạo IDDK tự động tăng
+                var lastIDDK = await _context.DangKyTiemChung
+                                             .OrderByDescending(x => x.IDDK)
+                                             .Select(x => x.IDDK)
+                                             .FirstOrDefaultAsync();
+
+                string newIDDK = GenerateNextIDDK(lastIDDK);
+
+                var dktc = new DangKyTiemChung
+                {
+                    IDDK = newIDDK,
+                    IDDKVC = newIDDKVC,
+                    IDKH = model.IDKH,
+                    IDNV = model.IDNV,
+                    ThoiGianDK = DateTime.Now,
+                    ThoiGianTiem = DateTime.Now,
+                    GhiChu = ""
+                };
+
+                var lastIDHD = await _context.HoaDon
+                                             .OrderByDescending(x => x.IDHD)
+                                             .Select(x => x.IDHD)
+                                             .FirstOrDefaultAsync();
+
+                string newIDHD = GenerateNextIDHD(lastIDHD);
+
+                var newHoaDon = new HoaDon
+                {
+                    IDHD = newIDHD,
+                    IDKH = model.IDKH,
+                    IDNV = model.IDNV,
+                    ThoiGian = DateTime.Now,
+                    GhiChu = null, 
+                    NoiDung = vt.TenVatTu, 
+                    TongTien = vt.DonGia * model.SoLuong ?? 0,
+                    TrangThai = false,
+                    ThanhToan = false
+                };
+
+                var lastIDHDCT = await _context.HoaDonChiTiet
+                                               .OrderByDescending(x => x.IDHDCT)
+                                               .Select(x => x.IDHDCT)
+                                               .FirstOrDefaultAsync();
+
+                // Tạo hóa đơn chi tiết mới
+                string newIDHDCT = GenerateNextIDHDCT(lastIDHDCT);
+
+                var newHoaDonChiTiet = new HoaDonChiTiet
+                {
+                    IDHDCT = newIDHDCT,
+                    IDHD = newIDHD, 
+                    IDVT = model.IDVT,
+                    SoLuong = model.SoLuong,
+                    DonGia = vt.DonGia ?? 0,
+                    ThanhTien = (vt.DonGia * model.SoLuong) ?? 0,
+                    GhiChu = null
+                };
+
+                _context.DangKyVaccine.Add(dkvt);
+                _context.DangKyTiemChung.Add(dktc);
+                _context.HoaDon.Add(newHoaDon);
+                _context.HoaDonChiTiet.Add(newHoaDonChiTiet);
+            }
 
             try
             {
                 // Lưu vào cơ sở dữ liệu
                 _context.KhamSangLoc.Add(ksl);
-                _context.DangKyVaccine.Add(dkvt);
-                _context.DangKyTiemChung.Add(dktc);
-                _context.HoaDon.Add(newHoaDon);
-                _context.HoaDonChiTiet.Add(newHoaDonChiTiet);
                 await _context.SaveChangesAsync();
                 return Ok(new { success = true, message = "Thêm mới thành công!", data = model });
             }
@@ -199,6 +218,7 @@ namespace DATN_QLTiemChung_Api.Controllers
                 return StatusCode(500, new { success = false, message = ex.Message });
             }
         }
+
 
         private string GenerateNextIDHD(string lastID)
         {

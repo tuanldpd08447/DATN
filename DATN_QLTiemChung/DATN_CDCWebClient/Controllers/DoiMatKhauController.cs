@@ -54,7 +54,11 @@ namespace DATN_CDCWebClient.Controllers
             if (string.IsNullOrEmpty(IDKH))
             {
                 TempData["Error"] = "IDKH không hợp lệ.";
-                GetSession(); return View("~/Views/Home/DoiMatKhau.cshtml");
+                GetSession();
+                TempData["Notification"] = "IDKH không hợp lệ";
+                TempData["NotificationType"] = "error";
+                TempData["NotificationTitle"] = "Thông báo.";
+                return View("~/Views/Home/DoiMatKhau.cshtml");
             }
 
             var userInfo = await GetUserInfoAsync(IDKH);
@@ -67,7 +71,11 @@ namespace DATN_CDCWebClient.Controllers
                 TempData["Error"] = "Không thể lấy thông tin tài khoản khách hàng.";
             }
 
-            GetSession(); return View("~/Views/Home/DoiMatKhau.cshtml");
+            GetSession();
+            TempData["Notification"] = "Cập nhật trạng thái hóa đơn thành công.";
+            TempData["NotificationType"] = "success";
+            TempData["NotificationTitle"] = "Thông báo."; 
+            return View("~/Views/Home/DoiMatKhau.cshtml");
         }
 
 
@@ -78,7 +86,10 @@ namespace DATN_CDCWebClient.Controllers
             if (NewPassword != ConfirmPassword)
             {
                 TempData["Error"] = "Mật khẩu Nhập lại không đúng.";
-                GetSession(); return RedirectToAction("DoiMatKhau", new { IDKH = IDKH });
+                GetSession();
+                TempData["Notification"] = "Mật khẩu nhập lại không đúng.";
+                TempData["NotificationType"] = "error";
+                TempData["NotificationTitle"] = "Thông báo."; return RedirectToAction("DoiMatKhau", new { IDKH = IDKH });
             }
 
             var client = _httpClientFactory.CreateClient();
@@ -87,7 +98,11 @@ namespace DATN_CDCWebClient.Controllers
             if (!response.IsSuccessStatusCode)
             {
                 TempData["Error"] = "Không thể lấy thông tin tài khoản khách hàng. Vui lòng thử lại!";
-                GetSession(); return RedirectToAction("DoiMatKhau", new { IDKH = IDKH });
+                GetSession();
+                TempData["Notification"] = "Không thể lấy thông tin khách hàng.";
+                TempData["NotificationType"] = "error";
+                TempData["NotificationTitle"] = "Thông báo.";
+                return RedirectToAction("DoiMatKhau", new { IDKH = IDKH });
             }
 
             var apiResponse = await response.Content.ReadAsStringAsync();
@@ -96,7 +111,10 @@ namespace DATN_CDCWebClient.Controllers
             if (tk?.MatKhau != CurrentPassword)
             {
                 TempData["Error"] = "Mật khẩu cũ không đúng!";
-                GetSession(); return RedirectToAction("DoiMatKhau", new { IDKH = IDKH });
+                GetSession();
+                TempData["Notification"] = "Mật khẩu cũ không đúng.";
+                TempData["NotificationType"] = "error";
+                TempData["NotificationTitle"] = "Thông báo."; return RedirectToAction("DoiMatKhau", new { IDKH = IDKH });
             }
 
             DoiMatKhauRequest doiMatKhauRequest = new DoiMatKhauRequest
@@ -120,7 +138,10 @@ namespace DATN_CDCWebClient.Controllers
                 TempData["Error"] = "Lỗi khi thay đổi mật khẩu! Vui lòng thử lại.";
             }
 
-            GetSession(); return RedirectToAction("DoiMatKhau", new { IDKH = doiMatKhauRequest.IDKH });
+            GetSession();
+            TempData["Notification"] = "Đổi mật khẩu thành công.";
+            TempData["NotificationType"] = "success";
+            TempData["NotificationTitle"] = "Thông báo."; return RedirectToAction("DoiMatKhau", new { IDKH = doiMatKhauRequest.IDKH });
         }
 
     }

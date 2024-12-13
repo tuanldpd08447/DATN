@@ -48,33 +48,12 @@ namespace DATN_QLTiemChung.Controllers
         }
         public async Task<IActionResult> QLTiemChung()
             {
-                var client = _httpClientFactory.CreateClient();
-                try
-                {
-
-                    // Lấy danh sách khách hàng khám sàng lọc
-                    var response = await client.GetAsync("https://localhost:7143/api/QLTiemChung/DSKhamSangLoc");
-                    if (response.IsSuccessStatusCode)
-                    {
-                        var apiResponse = await response.Content.ReadAsStringAsync();
-                        List<DSKhamSangLocDTO> KhachHangKSL = JsonConvert.DeserializeObject<List<DSKhamSangLocDTO>>(apiResponse);
-                    // Dùng Newtonsoft.Json
-                        ViewBag.DSKhamSangLocDTO = KhachHangKSL;
-                }
-                    else
-                    {
-                        // Xử lý khi API không trả về thành công
-                        ViewBag.ErrorMessage = "Không thể tải danh sách khách hàng khám sàng lọc";
-                    }
-                }
-                catch (Exception ex)
-                {
-                    // Xử lý lỗi kết nối hoặc lỗi khác
-                    ViewBag.ErrorMessage = $"Đã xảy ra lỗi: {ex.Message}";
-                }
+               
 
             ViewBag.HangCho = await GetHangCho();
-            GetSession(); return View("~/Views/Home/QLTiemChung.cshtml");
+            GetSession();
+        
+            return View("~/Views/Home/QLTiemChung.cshtml");
             }
 
         // Phương thức lấy thông tin kết quả khám sàng lọc của khách hàng từ cơ sở dữ liệu
@@ -158,7 +137,9 @@ namespace DATN_QLTiemChung.Controllers
                 ViewBag.TheoDoiSauTiem = TheoDoiSauTiem;
             }
             ViewBag.HangCho = await GetHangCho();
-            GetSession(); return View("~/Views/Home/QLTiemChung.cshtml"); 
+            GetSession();
+
+            return View("~/Views/Home/QLTiemChung.cshtml"); 
         }
         public async Task<IActionResult> CreateTiemChung(string IDNV, string IDDK , string IDKH, DateTime thoiGian)
         {
@@ -190,7 +171,11 @@ namespace DATN_QLTiemChung.Controllers
                 if (response.IsSuccessStatusCode)
                 {
 
-                    GetSession(); return RedirectToAction("QLTiemChung");
+                    GetSession();
+                    TempData["Notification"] = "Tạo tiêm chủng thành công.";
+                    TempData["NotificationType"] = "success";
+                    TempData["NotificationTitle"] = "Thông báo.";
+                    return RedirectToAction("QLTiemChung");
                 }
                 else
                 {
@@ -266,6 +251,9 @@ namespace DATN_QLTiemChung.Controllers
 
                 TempData["Message"] = "Cập nhật và xóa dữ liệu thành công.";
                 GetSession();
+                TempData["Notification"] = "Cập nhật trạng thái hóa đơn thành công.";
+                TempData["NotificationType"] = "success";
+                TempData["NotificationTitle"] = "Thông báo.";
                 return RedirectToAction("QLTiemChung");
             }
             catch (Exception ex)

@@ -105,11 +105,14 @@ namespace DATN_QLTiemChung.Controllers
                     {
                         var allApiResponse = await allResponse.Content.ReadAsStringAsync();
                         List<KhachHangDTo> khachHangs = JsonConvert.DeserializeObject<List<KhachHangDTo>>(allApiResponse);
-
+                        TempData["Notification"] = "Lấy thành công danh sách khách hàng.";
+                        TempData["NotificationType"] = "success";
+                        TempData["NotificationTitle"] = "Thông báo.";
                         return View("~/Views/Home/QLKhachHang.cshtml");
                     }
                     else
                     {
+                      
                         return StatusCode((int)allResponse.StatusCode, "Không thể lấy danh sách khách hàng.");
                     }
                 }

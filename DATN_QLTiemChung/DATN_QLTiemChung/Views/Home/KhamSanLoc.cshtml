@@ -559,6 +559,7 @@
     }
 
     function checkXacNhan() {
+        // Các điều kiện cần kiểm tra
         const conditions = {
             benhMacCo: document.getElementById('benhMacCo'),
             phanVeCo: document.getElementById('phanVeCo'),
@@ -574,46 +575,67 @@
             diUngCo: document.getElementById('diUngCo') // thêm điều kiện cho diUngCo
         };
 
-        // Lấy các option radio hoặc checkbox điều khiển trạng thái
-        const option1 = document.getElementById('option1');
-        const option2 = document.getElementById('option2');
-        const option3 = document.getElementById('option3');
-        const option4 = document.getElementById('option4');
+        // Lấy các option
+        const options = {
+            option1: document.getElementById('option1'),
+            option2: document.getElementById('option2'),
+            option3: document.getElementById('option3'),
+            option4: document.getElementById('option4')
+        };
 
+        // Lấy các input khác
         const TrangThai = document.getElementById('TrangThai');
         const KetQua = document.getElementById('KetQua');
         const TinhTrangSucKhoe = document.getElementById('TinhTrangSucKhoe');
+        const IDVT = document.getElementById('IDVT');
+        const SoLuong = document.getElementById('SoLuong');
 
-        // Kiểm tra nếu các điều kiện cho "option 4" đều được chọn
-        if (conditions.dauHieuBTCo.checked || conditions.diUngCo.checked || conditions.dauHieuBTTimPhoiCo.checked || conditions.roiLoanTriGiacCo.checked) {
-            option4.checked = true;
-            TrangThai.value = "false";  
-            KetQua.value = "false";   
-            TinhTrangSucKhoe.value = "Xấu"
+        // Reset trạng thái mặc định
+        function setDefault(isRequired = false) {
+            if (isRequired) {
+                IDVT.setAttribute('required', true);
+                SoLuong.setAttribute('required', true);
+            } else {
+                IDVT.removeAttribute('required');
+                SoLuong.removeAttribute('required');
+            }
         }
-        // Nếu phanVeCo được chọn
-        else if (conditions.phanVeCo.checked) {
-            option2.checked = true;
-            TrangThai.value = "true";   
-            KetQua.value = "true";    
-            TinhTrangSucKhoe.value = "Tạm ổn"
-        }
-        // Kiểm tra các điều kiện còn lại
-        else if (Object.values(conditions).some(cond => cond.checked)) {
-            option3.checked = true;
-            TrangThai.value = "true";   
-            KetQua.value = "true";
-            TinhTrangSucKhoe.value = "Tạm ổn"
-        }
-        // Nếu không có điều kiện nào được chọn
-        else {
-            option1.checked = true;
+
+
+        // Kiểm tra điều kiện "xấu"
+        if (
+            conditions.dauHieuBTCo.checked ||
+            conditions.diUngCo.checked ||
+            conditions.dauHieuBTTimPhoiCo.checked ||
+            conditions.roiLoanTriGiacCo.checked
+        ) {
+            options.option4.checked = true;
+            TrangThai.value = "false";
+            KetQua.value = "false";
+            TinhTrangSucKhoe.value = "Xấu";
+            setDefault(false); // Đặt required
+        } else if (conditions.phanVeCo.checked) {
+            options.option2.checked = true;
             TrangThai.value = "true";
-            KetQua.value = "true";       
-            TinhTrangSucKhoe.value = "Tốt"
-
+            KetQua.value = "true";
+            TinhTrangSucKhoe.value = "Tạm ổn";
+            setDefault(true); // Gỡ bỏ required
+        } else if (Object.values(conditions).some(cond => cond.checked)) {
+            options.option3.checked = true;
+            TrangThai.value = "true";
+            KetQua.value = "true";
+            TinhTrangSucKhoe.value = "Tạm ổn";
+            setDefault(true); // Gỡ bỏ required
+        } else {
+            options.option1.checked = true;
+            TrangThai.value = "true";
+            KetQua.value = "true";
+            TinhTrangSucKhoe.value = "Tốt";
+            setDefault(true); // Gỡ bỏ required
         }
+
     }
+
 
 
     document.querySelectorAll('input[type="radio"]').forEach((radio) => {

@@ -142,7 +142,11 @@ namespace DATN_QLTiemChung.Controllers
                     {
                         Console.WriteLine($"Loại file không hợp lệ: {ChungtuFile.ContentType}");
                         ModelState.AddModelError("ChungtuFile", "Chỉ chấp nhận file PDF.");
-                          GetSession(); return RedirectToAction("QLXuatNhapKho");
+                          GetSession(); 
+                        TempData["Notification"] = "Thêm thất bại.";
+                        TempData["NotificationType"] = "error";
+                        TempData["NotificationTitle"] = "Thông báo."; 
+                        return RedirectToAction("QLXuatNhapKho");
                     }
 
                     fileName = ChungtuFile.FileName;
@@ -199,21 +203,33 @@ namespace DATN_QLTiemChung.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     Console.WriteLine("Request thành công! Redirect đến QLXuatNhapKho.");
-                      GetSession(); return RedirectToAction("QLXuatNhapKho");
+                      GetSession();
+                    TempData["Notification"] = "Thêm thành công.";
+                    TempData["NotificationType"] = "success";
+                    TempData["NotificationTitle"] = "Thông báo.";
+                    return RedirectToAction("QLXuatNhapKho");
                 }
                 else
                 {
                     var errorMessage = await response.Content.ReadAsStringAsync();
                     Console.WriteLine($"API lỗi: {errorMessage}");
                     ModelState.AddModelError("", $"API lỗi: {errorMessage}");
-                      GetSession(); return RedirectToAction("QLXuatNhapKho");
+                      GetSession();
+                    TempData["Notification"] = "Thêm thất bại.";
+                    TempData["NotificationType"] = "error";
+                    TempData["NotificationTitle"] = "Thông báo.";
+                    return RedirectToAction("QLXuatNhapKho");
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Có lỗi khi kết nối với máy chủ: {ex.Message}");
                 ModelState.AddModelError("", $"Có lỗi khi kết nối với máy chủ: {ex.Message}");
-                  GetSession(); return RedirectToAction("QLXuatNhapKho");
+                  GetSession();
+                TempData["Notification"] = "Xảy ra lỗi.";
+                TempData["NotificationType"] = "error";
+                TempData["NotificationTitle"] = "Thông báo.";
+                return RedirectToAction("QLXuatNhapKho");
             }
         }
 

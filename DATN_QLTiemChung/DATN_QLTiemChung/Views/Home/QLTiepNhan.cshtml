@@ -12,7 +12,7 @@
         "Kon Tum", "Đồng Tháp", "Gyar", "Lý Tự", "Tư", "Chứt", "Vân Kiều"
     };
     var temp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$";
-
+    var tg = DateOnly.FromDateTime(DateTime.Now);
 }
 <style>
     .error-message {
@@ -249,7 +249,7 @@
                     
                                     <!-- Bảng hẹn đặt trước -->
                                     <div class="border rounded-4 mt-4 p-3 table-responsive" style="font-size: small;">
-                                        <h4>Bảng hẹn đặt trước: Ngày 02/10/2024</h4>
+                                    <h4>Bảng hẹn đặt trước: Ngày @tg.ToString("dd/MM/yyyy")</h4>
                                     <table class="table table-bordered" id="khachHangPreoderTable">
                                             <thead >
                                                 <tr style="background-color: #2fb388;">

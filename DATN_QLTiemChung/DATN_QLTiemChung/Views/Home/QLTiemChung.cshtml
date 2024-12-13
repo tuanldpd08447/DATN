@@ -7,6 +7,9 @@
     int stt = 1;
     string idNv = TempData["ID"] as string;
     var TheoDoiSauTiem = ViewBag.TheoDoiSauTiem as TheoDoiSauTiem;
+    var hangcho = ViewBag.HangCho as List<HangCho>;
+
+
 }
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
@@ -43,15 +46,15 @@
                                 <th class="col-4">Năm sinh</th>
                             </tr>
                         </thead>
-                        @if (KhachHangKSL != null)
+                        @if (hangcho != null)
                         {
                             <tbody>
-                                @foreach (var item in KhachHangKSL)
+                                @foreach (var item in hangcho)
                                 {
                                     <tr onclick="location.href='@Url.Action("KQKhamSangLoc", "QLTiemChung", new { IDKH = @item.IDKH })' ">
                                         <td>@stt</td>
-                                        <td>@item.KhachHang.TenKhachHang</td>
-                                        <td>@item.KhachHang.NgaySinh.ToString("dd/MM/yyyy")</td>
+                                        <td>@item.HoTen</td>
+                                        <td>@item.NgaySinh.ToString("dd/MM/yyyy")</td>
                                         <a href="#" style="display:none;">@(stt++)</a>
                                     </tr>
 

@@ -78,7 +78,9 @@ namespace DATN_CDCWebClient.Controllers
                 ViewBag.Error = "Đã xảy ra lỗi khi lấy dữ liệu.";
             }
 
-              GetSession(); return View("~/Views/Home/DKyLichKham.cshtml");
+              GetSession(); TempData["Notification"] = "Đăng ký lịch khám thành công.";
+            TempData["NotificationType"] = "success";
+            TempData["NotificationTitle"] = "Thông báo."; return View("~/Views/Home/DKyLichKham.cshtml");
         }
         public async Task<IActionResult> DKyLichKhamSumit(string IDKH, DateOnly NgayHen, string ThoiGianHen)
         {
@@ -97,14 +99,18 @@ namespace DATN_CDCWebClient.Controllers
 
             if (response.IsSuccessStatusCode)
             {
-                  GetSession(); return RedirectToAction("Home", "Home");
+                  GetSession(); TempData["Notification"] = "Tạo lịch khám thành công.";
+                TempData["NotificationType"] = "success";
+                TempData["NotificationTitle"] = "Thông báo."; return RedirectToAction("Home", "Home");
             }
             else
             {
          
                 TempData["ErrorMessage"] = "Đã có lỗi xảy ra khi tạo lịch khám. Vui lòng thử lại!";
                 
-                  GetSession(); return RedirectToAction("DKyLichKham");
+                  GetSession(); TempData["Notification"] = "Tạo lịch khám thất bại.";
+                TempData["NotificationType"] = "error";
+                TempData["NotificationTitle"] = "Thông báo."; return RedirectToAction("DKyLichKham");
             }
         }
 

@@ -67,7 +67,9 @@ namespace DATN_QLTiemChung.Controllers
                 ViewBag.ErrorMessage = $"Đã xảy ra lỗi: {ex.Message}";
             }
 
-              GetSession(); return View("~/Views/Home/QLTiepNhan.cshtml");
+              GetSession();
+     
+            return View("~/Views/Home/QLTiepNhan.cshtml");
         }
         [HttpPost]
         public async Task<IActionResult> AddHangCho(string IDKH)
@@ -77,14 +79,18 @@ namespace DATN_QLTiemChung.Controllers
             try
             {
                 // Kiểm tra trùng lặp trong HangCho
-                var response1 = await client.GetAsync($"https://65b86c3a46324d531d562e3d.mockapi.io/HangCho?IDKH={IDKH}&NgayCho={DateOnly.FromDateTime(DateTime.Now)}");
+                var response1 = await client.GetAsync($"https://65b86c3a46324d531d562e3d.mockapi.io/HangCho");
                 if (response1.IsSuccessStatusCode)
                 {
                     var hangChoList = JsonConvert.DeserializeObject<List<HangCho>>(await response1.Content.ReadAsStringAsync());
-                    if (hangChoList.Any())
+                    var exitkh = hangChoList.Any(kh => kh.IDKH == IDKH && kh.NgayCho == DateOnly.FromDateTime(DateTime.Now));
+                    if (exitkh) // Kiểm tra trực tiếp biến boolean
                     {
                         GetSession();
-                        return BadRequest("Khách hàng đã có trong hàng chờ hôm nay.");
+                        TempData["Notification"] = "Khách hàng đã có trong hàng chờ hôm nay.";
+                        TempData["NotificationType"] = "error";
+                        TempData["NotificationTitle"] = "Thông báo.";
+                        return RedirectToAction("QLTiepNhan");
                     }
                 }
 
@@ -119,6 +125,9 @@ namespace DATN_QLTiemChung.Controllers
                 }
 
                 GetSession();
+                TempData["Notification"] = "Đã thêm khách hàng vào hàng chờ";
+                TempData["NotificationType"] = "success";
+                TempData["NotificationTitle"] = "Thông báo.";
                 return RedirectToAction("QLTiepNhan");
             }
             catch (Exception ex)
@@ -176,7 +185,11 @@ namespace DATN_QLTiemChung.Controllers
                         var allApiResponse = await allResponse.Content.ReadAsStringAsync();
                         List<KhachHangDTo> khachHangs = JsonConvert.DeserializeObject<List<KhachHangDTo>>(allApiResponse);
 
-                          GetSession(); return View("~/Views/Home/QLTiepNhan.cshtml");
+                          GetSession();
+                        TempData["Notification"] = "Thêm khách hàng thành công.";
+                        TempData["NotificationType"] = "success";
+                        TempData["NotificationTitle"] = "Thông báo.";
+                        return View("~/Views/Home/QLTiepNhan.cshtml");
                     }
                     else
                     {

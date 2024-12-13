@@ -16,7 +16,7 @@
         "Kon Tum", "Đồng Tháp", "Gyar", "Lý Tự", "Tư", "Chứt", "Vân Kiều"
     };
 }
-<div class="container mt-5">
+<div class="container mt-5 mb-5">
     <div class="p-5 border border-2 rounded-4 w-75" style="margin: 0px 15% 0px 15%;">
         <h2 class="text-center mb-5" style="color: #2fb388;">Thông Tin Cá Nhân Nhân Viên</h2>
         <form>
@@ -44,18 +44,13 @@
                 <div class="col-md-4 mb-3">
                     <label for="DanToc" class="form-label fw-semibold">Dân Tộc</label>
                     <select class="form-control" id="danToc" name="danToc" readonly required>
-                        <option value="">Chọn dân tộc</option>
                         @foreach (var danToc in _danTocList)
                         {
                             if (nhanVien != null && danToc == nhanVien.DanToc)
                             {
                                 <option value="@danToc" selected>@danToc</option>
                             }
-                            else
-                            {
-                                <option value="@danToc">@danToc</option>
-
-                            }
+                           
                         }
                     </select>
 
@@ -69,19 +64,14 @@
                             if (nhanVien.GioiTinh == "Nam")
                             {
                                 <option value="Nam" selected>Nam</option>
-                                <option value="Nữ">Nữ</option>
-                                <option value="Khác">Khác</option>
                             }
                             else if (nhanVien.GioiTinh == "Nữ")
                             {
-                                <option value="Nam">Nam</option>
                                 <option value="Nữ" selected>Nữ</option>
-                                <option value="Khác">Khác</option>
                             }
                             else
                             {
-                                <option value="Nam">Nam</option>
-                                <option value="Nữ">Nữ</option>
+   
                                 <option value="Khác" selected>Khác</option>
                             }
                         }
@@ -119,10 +109,7 @@
                                 {
                                     <option value="@item.IDCD" selected>@item.TenChucDanh </option>
                                 }
-                                else
-                                {
-                                    <option value="@item.IDCD">@item.TenChucDanh </option>
-                                }
+                        
 
                             }
                         }
@@ -139,10 +126,7 @@
                                 {
                                     <option value="@item.IDPB" selected>@item.TenPhongBan </option>
                                 }
-                                else
-                                {
-                                    <option value="@item.IDPB">@item.TenPhongBan </option>
-                                }
+                          
 
                             }
                         }
