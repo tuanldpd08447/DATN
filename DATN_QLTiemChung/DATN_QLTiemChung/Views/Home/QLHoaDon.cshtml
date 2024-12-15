@@ -71,7 +71,7 @@
                     <input class="col-8  border border-1 rounded-2 mx-1" type="text">
                     <button type="button" class="col border border-1 rounded-end btn "><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
-                <div class="row border rounded-4 border-1 mt-1 " style="min-height: 90%;">
+                <div class="row border rounded-4 border-1 mt-1 " style="min-height: 90%; max-height: 400px; overflow-y: auto;">
 
                     <table class="table  table-hover h-25 m-0 text-center ">
                         <thead class="rounded-4">
@@ -300,6 +300,8 @@
 								@if (hoaDon != null)
 								{
 									<option selected>@hoaDon.GhiChu</option>
+                                    <option>Tiền mặt</option>
+                                    <option>Chuyển khoản</option>
 
 								}
 								else

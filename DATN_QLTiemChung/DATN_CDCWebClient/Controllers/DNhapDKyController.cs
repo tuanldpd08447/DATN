@@ -221,9 +221,11 @@ namespace DATN_CDCWebClient.Controllers
                 HttpContext.Session.SetString("Role", khachHangs.Role);
                 HttpContext.Session.SetString("ID", khachHangs.ID);
 
+                TempData["Notification"] = "Đặng nhập thành công.";
+                TempData["NotificationType"] = "success";
+                TempData["NotificationTitle"] = "Thông báo.";
                 return RedirectToAction("Home", "Home");
             }
-
             ViewBag.ErrorMessage = "Thông tin đăng nhập không chính xác.";
             TempData["Notification"] = "Đặng nhập thất bại.";
             TempData["NotificationType"] = "error";
@@ -334,6 +336,9 @@ namespace DATN_CDCWebClient.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
+            TempData["Notification"] = "Đặng xuất thành công.";
+            TempData["NotificationType"] = "success";
+            TempData["NotificationTitle"] = "Thông báo.";
             return RedirectToAction("Home", "Home"); 
         }
         public IActionResult Register()

@@ -189,7 +189,7 @@ namespace DATN_QLTiemChung.Controllers
                         TempData["Notification"] = "Thêm khách hàng thành công.";
                         TempData["NotificationType"] = "success";
                         TempData["NotificationTitle"] = "Thông báo.";
-                        return View("~/Views/Home/QLTiepNhan.cshtml");
+                        return RedirectToAction("QLTiepNhan");
                     }
                     else
                     {

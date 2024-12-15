@@ -6,30 +6,18 @@
     var nhacap = ViewBag.NhaCap as List<NhaCungCap>;
     var xuatxu = ViewBag.Xuatxu as List<XuatXu>;
     var login = TempData["ID"];
+    bool MuiTiepTheo = false;
+    if (ViewBag.MuiTiepTheo != null)
+    {
+        bool.TryParse(ViewBag.MuiTiepTheo.ToString(), out MuiTiepTheo);
+    }
+
 }
 <div class="container mt-4 mb-4" >
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="" style="color: #2fb388;">KHÁM SÀNG LỌC</h2>
               <div class="Double-end">
-            <button class="btn fw-bold custom-btn" id="addButton" >
-                <i class="fa-solid fa-plus"></i> Thêm
-            </button>
-
-            <button class="btn fw-bold custom-btn" id="activateButton">
-                <i class="fa-solid fa-floppy-disk"></i> Lưu
-            </button>
-
-            <button class="btn fw-bold custom-btn" id="CancelButton">
-                <i class="fa-solid fa-repeat"></i> Hủy
-            </button>
-
-            <button class="btn fw-bold custom-btn" id="editButton">
-                <i class="fa-solid fa-pen-to-square"></i> Sửa
-            </button>
-
-            <button class="btn fw-bold custom-btn">
-                <i class="fa-solid fa-right-from-bracket"></i> Thoát
-            </button>
+          
             </div>
         </div>
       
@@ -42,7 +30,7 @@
                     <input class="col-8  border border-1 rounded-2 mx-1" type="text">
                     <button type="button" class="col border border-1 rounded-end btn "><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div> 
-                <div class="row border rounded-4 border-1 mt-1 "style="height: 300px;">
+                <div class="row border rounded-4 border-1 mt-1 " style="height: 300px; max-height: 400px; overflow-y: auto;">
                 <table class="table table1  table-hover h-25 m-0 text-center " style="text-align:center;  white-space: nowrap; " >
                     <thead class="rounded-4"> 
                       <tr>
@@ -105,12 +93,12 @@
                         <input type="text" id="address" class="form-control form-control-sm col" value="@kh?.FullAddress">
                     </div>
                     <div class="form-group row pb-2">
-                        <label class="fw-semibold col-4" for="height">Chiều cao:</label>
-                        <input type="text" id="height" class="form-control form-control-sm col">
+                        <label class="fw-semibold col-4" for="height">Chiều cao(cm):</label>
+                        <input type="text" id="height" class="form-control form-control-sm col" required>
                     </div>
                     <div class="form-group row pb-2">
-                        <label class="fw-semibold col-4" for="weight">Cân nặng:</label>
-                        <input type="text" id="weight"  class="form-control form-control-sm col">
+                        <label class="fw-semibold col-4" for="weight">Cân nặng(kg):</label>
+                        <input type="text" id="weight" class="form-control form-control-sm col" required>
                     </div>
                 </div>
             </div>
@@ -246,8 +234,8 @@
 
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-outline-danger border-2 " data-bs-dismiss="modal">Close</button>
-                          <button type="button" class="btn custom-btn">Save changes</button>
+                          <button type="button" class="btn btn-outline-danger border-2 " data-bs-dismiss="modal">Đóng</button>
+                          <button type="button" class="btn custom-btn" data-bs-dismiss="modal">Xác Nhận</button>
                         </div>
                       </div>
                     </div>
@@ -487,6 +475,20 @@
         <option value="false">Thất bại</option>
     </select>
 
+    <select id="MuiTiepTheo" name="MuiTiepTheo">
+        @if (MuiTiepTheo)
+        {
+            <option value="true" selected>Chưa tiêm xong</option>
+            <option value="false">Đã tiêm xong hoặc chưa tiêm</option>
+        }
+        else
+        {
+            <option value="true">Chưa tiêm xong</option>
+            <option value="false" selected>Đã tiêm xong hoặc chưa tiêm</option>
+        }
+    </select>
+
+    <button type="submit">Gửi</button>
     <label for="GhiChu">Ghi Chú:</label>
     <input type="hidden" id="jsonInput" name="GhiChu">
 
@@ -590,6 +592,8 @@
         const IDVT = document.getElementById('IDVT');
         const SoLuong = document.getElementById('SoLuong');
 
+        const MuiTiepTheo = document.getElementById('MuiTiepTheo');
+
         // Reset trạng thái mặc định
         function setDefault(isRequired = false) {
             if (isRequired) {
@@ -600,8 +604,13 @@
                 SoLuong.removeAttribute('required');
             }
         }
-
-
+        function disableAllCheckboxes() {
+            const checkboxes = document.querySelectorAll(".vatTuCheckbox"); // Lấy tất cả checkbox có class vatTuCheckbox
+            checkboxes.forEach(checkbox => {
+                checkbox.disabled = true; // Vô hiệu hóa checkbox
+                checkbox.title = "Không thể chọn vật tư này!"; // Gán tooltip khi hover vào checkbox
+            });
+        }
         // Kiểm tra điều kiện "xấu"
         if (
             conditions.dauHieuBTCo.checked ||
@@ -634,7 +643,13 @@
             setDefault(true); // Gỡ bỏ required
         }
 
+        // Kiểm tra MuiTiepTheo là 'true' và đặt trạng thái required
+        if (MuiTiepTheo && MuiTiepTheo.value === 'true') {
+            setDefault(false); // Nếu MuiTiepTheo là 'true', đặt lại trạng thái required cho IDVT và SoLuong
+            disableAllCheckboxes();
+        }
     }
+
 
 
 

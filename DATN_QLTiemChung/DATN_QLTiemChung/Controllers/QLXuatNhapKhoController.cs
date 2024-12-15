@@ -36,6 +36,7 @@ namespace DATN_QLTiemChung.Controllers
 
             if (response.IsSuccessStatusCode)
             {
+                TempData["NotificationTitle"] = "Thông báo.";
                 TempData["Notification"] = "Đã hủy phiếu thành công.";
                 TempData["NotificationType"] = "success";
             }
@@ -123,6 +124,7 @@ namespace DATN_QLTiemChung.Controllers
 
                 // Thêm thông báo vào TempData
                 TempData["Notification"] = erro;
+                TempData["NotificationTitle"] = "Thông báo.";
                 TempData["NotificationType"] = "error";
                 TempData["NotificationTitle"] = "Cannot Send Mail";
 

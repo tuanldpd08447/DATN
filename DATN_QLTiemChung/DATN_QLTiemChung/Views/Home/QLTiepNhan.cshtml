@@ -50,10 +50,7 @@
                 <div class="row ">
                     <form id="customerForm" asp-action="AddKhachHang" asp-controller="QLTiepNhan">
                         <div class="row">
-                            <div class="form-group col">
-                                <label class="fw-semibold" for="maYTe">Mã y tế</label>
-                                <input type="text" class="form-control" id="maYTe" placeholder="Nhập mã y tế" disabled>
-                            </div>
+               
                             <div class="form-group col">
                                 <label class="fw-semibold" for="hoTen">Họ tên</label>
                                 <input type="text" class="form-control" id="hoTen" name="hoTen" placeholder="Nhập họ tên" required disabled>
@@ -165,32 +162,7 @@
                             </div>
                         </div>
 
-                        <h5 class="mt-2">Nơi tạm trú</h5>
-                        <div class="row">
-                            <div class="form-group col">
-                                <label class="fw-semibold" for="tamTruTinh">Tỉnh/TP</label>
-                                <select class="form-control" id="tamTruTinh"  disabled>
-                                </select>
-                            </div>
-                            <div class="form-group col">
-                                <label class="fw-semibold" for="tamTruQuan">Quận/Huyện</label>
-                                <select class="form-control" id="tamTruQuan"   disabled>
-                                    <option>-- Chọn Quận/Huyện --</option>
-                                </select>
-                            </div>
-                            <div class="form-group col">
-                                <label class="fw-semibold" for="tamTruXa">Xã/Phường</label>
-                                <select class="form-control" id="tamTruXa"   disabled>
-                                    <option>-- Chọn Xã/Phường --</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col">
-                                <label class="fw-semibold" for="diaChiChiTietTamTru">Địa chỉ chi tiết</label>
-                                <input type="text" class="form-control" id="diaChiChiTietTamTru" placeholder="Nhập địa chỉ chi tiết tạm trú"   disabled>
-                            </div>
-                        </div>
+                      
                         
                         <button id="targetButton" type="submit" style="display:none;">Nút bị kích hoạt</button>
 

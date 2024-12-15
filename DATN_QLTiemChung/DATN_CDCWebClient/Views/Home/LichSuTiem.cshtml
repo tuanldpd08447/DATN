@@ -1,115 +1,182 @@
 ﻿@{
     var lstiem = ViewBag.LichSuTiem as List<LichSuTiem>;
-    var lstiemChua = lstiem?.Where(x => !x.TrangThaiTiem).ToList(); // "Chưa Tiêm"
+    var lstiemChua = lstiem?.Where(x => !x.TrangThaiTiem && !x.TrangThaiSauTiem).ToList(); // "Chưa Tiêm"
+    var lstiemHuy = lstiem?.Where(x => x.TrangThaiTiem && !x.TrangThaiSauTiem).ToList(); // "Đã Hủy"
+    var lstiemda = lstiem?.Where(x => x.TrangThaiTiem && x.TrangThaiSauTiem).ToList(); // "Đã Tiêm"
 }
 <div class="container mt-5" style="min-height: 900px;">
     <h2 class="card-header bg-body-secondary py-4 mb-5 row">
         <div class="col-1 border-2 border-end"></div>
         <div class="col fw-bold" style="color: #2fb388;">LỊCH SỬ TIÊM</div>
     </h2>
+
+    <!-- Nút lọc -->
     <div class="row mb-3" style="width: 50%;">
-        <button class="btn btn-outline custom-btn col border rounded-0">Tất cả</button>
-        <button class="btn btn-outline custom-btn col border rounded-0">Chưa Tiêm</button>
-        <button class="btn btn-outline custom-btn col border rounded-0">Đã Tiêm</button>
-        <button class="btn btn-outline custom-btn col border rounded-0">Đã Hủy</button>
+        <button class="btn btn-outline custom-btn col border rounded-0" onclick="filterData('all')">Tất cả</button>
+        <button class="btn btn-outline custom-btn col border rounded-0" onclick="filterData('chua')">Chưa Tiêm</button>
+        <button class="btn btn-outline custom-btn col border rounded-0" onclick="filterData('da')">Đã Tiêm</button>
+        <button class="btn btn-outline custom-btn col border rounded-0" onclick="filterData('huy')">Đã Hủy</button>
     </div>
 
-    <!-- Table for Chưa Tiêm -->
-    <h5 class="mb-3">Chưa Tiêm</h5>
-    <div class="table-responsive">
-        <table class="table table-bordered text-center align-middle">
-            <thead class="table-light">
-                <tr>
-                    <th>Ngày tiêm</th>
-                    <th>Tên Vắc xin/Huyết thanh</th>
-                    <th>Xuất xứ</th>
-                    <th>Phòng bệnh</th>
-                    <th>Đơn giá</th>
-                    <th>Thành tiền</th>
-                    <th>Số mũi</th>
-                    <th>Tình trạng</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if (lstiemChua != null && lstiemChua.Any())
-                {
-                    foreach (var item in lstiemChua)
-                    {
+    <!-- Bảng dữ liệu -->
+    <div id="data-table">
+        <!-- Table for Chưa Tiêm -->
+        <div id="chua" class="table-section">
+            <h5 class="mb-3">Chưa Tiêm</h5>
+            <div class="table-responsive">
+                <table class="table table-bordered text-center align-middle">
+                    <thead class="table-light">
                         <tr>
-                            <td>@item.NgayTiem.ToString("dd/MM/yyyy")</td>
-                            <td>@item.TenVacxin</td>
-                            <td>@item.XuatXu</td>
-                            <td>@item.LieuTiem</td>
-                            <td>@item.DonGia?.ToString("N0") VND</td>
-                            <td>@item.ThanhTien?.ToString("N0") VND</td>
-                            <td>@item.LieuTiem</td>
-                            <td>
-                                <span class="badge bg-warning">Chưa tiêm</span>
-                            </td>
+                            <th>Ngày đã ĐK</th>
+                            <th>Tên Vắc xin/Huyết thanh</th>
+                            <th>Xuất xứ</th>
+                            <th>Đơn giá</th>
+                            <th>Thành tiền</th>
+                            <th>Số mũi</th>
+                            <th>Tình trạng</th>
+                            <th>Người chỉ định</th>
                         </tr>
-                    }
-                }
-                else
-                {
-                    <tr>
-                        <td colspan="8">Không có dữ liệu.</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+                    </thead>
+                    <tbody>
+                        @if (lstiemChua != null && lstiemChua.Any())
+                        {
+                            foreach (var item in lstiemChua)
+                            {
+                                <tr>
+                                    <td>@item.NgayTiem.ToString("dd/MM/yyyy")</td>
+                                    <td>@item.TenVacxin</td>
+                                    <td>@item.XuatXu</td>
+                                    <td>@item.DonGia?.ToString("N0") VND</td>
+                                    <td>@item.ThanhTien?.ToString("N0") VND</td>
+                                    <td>@item.LieuTiem</td>
+                                    <td><span class="badge bg-warning">Chưa tiêm</span></td>
+                                    <td>@item.TenNhanVien</td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="8">Không có dữ liệu.</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
-    <!-- Table for Đã Tiêm -->
-    <h5 class="mb-3">Đã Tiêm</h5>
-    <div class="table-responsive">
-        <table class="table table-bordered text-center align-middle">
-            <thead class="table-light">
-                <tr>
-                    <th>Ngày tiêm</th>
-                    <th>Tên Vắc xin/Huyết thanh</th>
-                    <th>Xuất xứ</th>
-                    <th>Phòng bệnh</th>
-                    <th>Đơn giá</th>
-                    <th>Thành tiền</th>
-                    <th>Số mũi</th>
-                    <th>Tình trạng</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if (lstiem != null && lstiem.Any())
-                {
-                    foreach (var item in lstiem)
-                    {
+        <!-- Table for Đã Tiêm -->
+        <div id="da" class="table-section">
+            <h5 class="mb-3">Đã Tiêm</h5>
+            <div class="table-responsive">
+                <table class="table table-bordered text-center align-middle">
+                    <thead class="table-light">
                         <tr>
-                            <td>@item.NgayTiem.ToString("dd/MM/yyyy")</td>
-                            <td>@item.TenVacxin</td>
-                            <td>@item.XuatXu</td>
-                            <td>@item.LieuTiem</td>
-                            <td>@item.DonGia?.ToString("N0") VND</td>
-                            <td>@item.ThanhTien?.ToString("N0") VND</td>
-                            <td>@item.LieuTiem</td>
-                            <td>
-                                @if (item.TrangThaiTiem)
-                                {
-                                    <span class="badge bg-success">Đã tiêm</span>
-                                }
-                                else
-                                {
-                                    <span class="badge bg-warning">Chưa tiêm</span>
-                                }
-                            </td>
+                            <th>Ngày tiêm</th>
+                            <th>Tên Vắc xin/Huyết thanh</th>
+                            <th>Xuất xứ</th>
+                            <th>Đơn giá</th>
+                            <th>Thành tiền</th>
+                            <th>Số mũi</th>
+                            <th>Tình trạng</th>
+                            <th>Người Tiêm</th>
                         </tr>
-                    }
-                }
-                else
-                {
-                    <tr>
-                        <td colspan="8">Không có dữ liệu.</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+                    </thead>
+                    <tbody>
+                        @if (lstiemda != null && lstiemda.Any())
+                        {
+                            foreach (var item in lstiemda)
+                            {
+                                <tr>
+                                    <td>@item.NgayTiem.ToString("dd/MM/yyyy")</td>
+                                    <td>@item.TenVacxin</td>
+                                    <td>@item.XuatXu</td>
+                                    <td>@item.DonGia?.ToString("N0") VND</td>
+                                    <td>@item.ThanhTien?.ToString("N0") VND</td>
+                                    <td>@item.LieuTiem</td>
+                                    <td>
+                                        <span class="badge bg-success">Đã tiêm</span>
+                                    </td>
+                                    <td>@item.TenNhanVien</td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="8">Không có dữ liệu.</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
-  
+        <!-- Table for Đã Hủy -->
+        <div id="huy" class="table-section">
+            <h5 class="mb-3">Đã Hủy</h5>
+            <div class="table-responsive">
+                <table class="table table-bordered text-center align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Ngày tiêm</th>
+                            <th>Tên Vắc xin/Huyết thanh</th>
+                            <th>Xuất xứ</th>
+                            <th>Đơn giá</th>
+                            <th>Thành tiền</th>
+                            <th>Số mũi</th>
+                            <th>Tình trạng</th>
+                            <th>Người Tiêm</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (lstiemHuy != null && lstiemHuy.Any())
+                        {
+                            foreach (var item in lstiemHuy)
+                            {
+                                <tr>
+                                    <td>@item.NgayTiem.ToString("dd/MM/yyyy")</td>
+                                    <td>@item.TenVacxin</td>
+                                    <td>@item.XuatXu</td>
+                                    <td>@item.DonGia?.ToString("N0") VND</td>
+                                    <td>@item.ThanhTien?.ToString("N0") VND</td>
+                                    <td>@item.LieuTiem</td>
+                                    <td><span class="badge bg-danger">Đã hủy</span></td>
+                                    <td>@item.TenNhanVien</td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="8">Không có dữ liệu.</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
+
+<script>
+    function filterData(status) {
+        const sections = document.querySelectorAll('.table-section');
+        sections.forEach(section => {
+            section.style.display = 'none'; // Ẩn tất cả các bảng
+        });
+
+        if (status === 'all') {
+            sections.forEach(section => {
+                section.style.display = 'block'; // Hiển thị tất cả bảng
+            });
+        } else {
+            document.getElementById(status).style.display = 'block'; // Hiển thị bảng theo trạng thái
+        }
+    }
+
+    // Mặc định hiển thị tất cả bảng
+    window.onload = function () {
+        filterData('all');
+    };
+</script>

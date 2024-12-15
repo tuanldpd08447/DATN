@@ -262,7 +262,11 @@ namespace DATN_QLTiemChung.Controllers
                 var response = await vt.PutAsync($"https://localhost:7143/api/DataQLKhoVaccine/UpdateVaccine/{MaVT}", content);
                 if (response.IsSuccessStatusCode)
                 {
-                     GetSession(); return RedirectToAction("QLKhoVaccine");
+                    TempData["Notification"] = "Thêm thành công.";
+                    TempData["NotificationType"] = "success";
+                    TempData["NotificationTitle"] = "Thông báo.";
+
+                    GetSession(); return RedirectToAction("QLKhoVaccine");
                 }
                 else
                 {

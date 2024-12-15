@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Text.RegularExpressions;
 
 namespace DATN_QLTiemChung_Api.Controllers
 {
@@ -17,32 +18,73 @@ namespace DATN_QLTiemChung_Api.Controllers
         [HttpGet("LsTiem/{IDKH}")]
         public async Task<ActionResult> LsTiem(string IDKH)
         {
-                    var lsTiem = _context.TheoDoiSauTiem
-               .Include(st => st.TiemChung)
-                   .ThenInclude(tc => tc.DangKyTiemChung)
-                   .ThenInclude(dktc => dktc.DangKyVaccine)
-               .Select(ls => new LichSuTiem
-               {
-                   ID = ls.IDST,
-                   IDKH = ls.IDKH, 
-                   TenKhachHang = ls.KhachHang.TenKhachHang, 
-                   IDVT = ls.TiemChung.DangKyTiemChung.DangKyVaccine.IDVT, 
-                   TenVacxin = ls.TiemChung.DangKyTiemChung.DangKyVaccine.TenVaccine, 
-                   XuatXu = ls.TiemChung.DangKyTiemChung.DangKyVaccine.VatTuYTe.XuatXu.QuocGia,
-                   NgayTiem = ls.TiemChung.ThoiGian, // Ngày tiêm
-                   DonGia = ls.TiemChung.DangKyTiemChung.DangKyVaccine.DonGia,
-                   ThanhTien = ls.TiemChung.DangKyTiemChung.DangKyVaccine.ThanhTien,
-                   LieuTiem = ls.GhiChu, 
-                   TrangThaiSauTiem = ls.TrangThai,
-                   TrangThaiTiem = ls.TiemChung.TrangThai,
-                   IDNV = ls.IDNV, // ID nhân viên thực hiện
-                   TenNhanVien = ls.NhanVien.TenNhanVien, // Tên nhân viên thực hiện
-                   GhiChu = ls.TiemChung.GhiChu // Ghi chú từ bảng TheoDoiSauTiem
-               }).Where(ls=>ls.IDKH == IDKH)
-               .ToList();
-            return Ok(lsTiem); ;
+            // Lấy dữ liệu từ bảng TheoDoiSauTiem
+            var lsTiem = await _context.TheoDoiSauTiem
+                .Include(st => st.TiemChung)
+                    .ThenInclude(tc => tc.DangKyTiemChung)
+                    .ThenInclude(dktc => dktc.DangKyVaccine)
+                .Where(st => st.IDKH == IDKH)
+                .Select(st => st.TiemChung.IDDK) // Chỉ lấy danh sách IDDK đã tiêm
+                .ToListAsync();
+
+            // Lấy dữ liệu từ bảng DangKyTiemChung và loại bỏ các bản ghi đã xuất hiện trong lsTiem
+            var lsDK = await _context.DangKyTiemChung
+                .Include(dktc => dktc.DangKyVaccine)
+                .Where(dktc => dktc.IDKH == IDKH && !lsTiem.Contains(dktc.IDDK)) // Loại bỏ các IDDK đã tiêm
+                .Select(dktc => new LichSuTiem
+                {
+                    ID = dktc.IDDK, // ID của đăng ký
+                    IDKH = dktc.IDKH,
+                    TenKhachHang = dktc.KhachHang.TenKhachHang,
+                    IDVT = dktc.DangKyVaccine.IDVT,
+                    TenVacxin = dktc.DangKyVaccine.TenVaccine,
+                    XuatXu = dktc.DangKyVaccine.VatTuYTe.XuatXu.QuocGia,
+                    NgayTiem = dktc.ThoiGianTiem,
+                    DonGia = dktc.DangKyVaccine.DonGia,
+                    ThanhTien = dktc.DangKyVaccine.DonGia * dktc.DangKyVaccine.SoLuong,
+                    LieuTiem = dktc.DangKyVaccine.SoLuong.ToString(),
+                    TrangThaiTiem = false,
+                    IDNV = dktc.IDNV,
+                    TenNhanVien = dktc.NhanVien.TenNhanVien,
+                    GhiChu = dktc.GhiChu
+                })
+                .ToListAsync();
+
+            // Kết hợp danh sách đã tiêm từ TheoDoiSauTiem
+            var lsTiemDetails = await _context.TheoDoiSauTiem
+                .Include(st => st.TiemChung)
+                    .ThenInclude(tc => tc.DangKyTiemChung)
+                    .ThenInclude(dktc => dktc.DangKyVaccine)
+                .Where(st => st.IDKH == IDKH)
+                .Select(st => new LichSuTiem
+                {
+                    ID = st.IDST,
+                    IDKH = st.IDKH,
+                    TenKhachHang = st.KhachHang.TenKhachHang,
+                    IDVT = st.TiemChung.DangKyTiemChung.DangKyVaccine.IDVT,
+                    TenVacxin = st.TiemChung.DangKyTiemChung.DangKyVaccine.TenVaccine,
+                    XuatXu = st.TiemChung.DangKyTiemChung.DangKyVaccine.VatTuYTe.XuatXu.QuocGia,
+                    NgayTiem = st.TiemChung.ThoiGian,
+                    DonGia = st.TiemChung.DangKyTiemChung.DangKyVaccine.DonGia,
+                    ThanhTien = st.TiemChung.DangKyTiemChung.DangKyVaccine.ThanhTien,
+                    LieuTiem = st.GhiChu,
+                    TrangThaiTiem = st.TiemChung.TrangThai,
+                    TrangThaiSauTiem = st.TrangThai,
+                    IDNV = st.IDNV,
+                    TenNhanVien = st.NhanVien.TenNhanVien,
+                    GhiChu = st.TiemChung.GhiChu
+                })
+                .ToListAsync();
+
+            // Kết hợp danh sách và trả về
+            var combinedResult = lsDK.Concat(lsTiemDetails).ToList();
+
+            return Ok(combinedResult);
         }
 
+
+
+        
         [HttpGet("DSKhamSangLoc")]
         public async Task<ActionResult> DSKhamSangLoc()
         {
@@ -60,13 +102,17 @@ namespace DATN_QLTiemChung_Api.Controllers
                     } : null,
                 })
                 .ToListAsync();
-            return Ok(khachHangKSL); ;
+            return Ok(khachHangKSL);
         }
 
         [HttpGet("KQKhamSangLoc/{IDKH}")]
         public async Task<ActionResult> KQKhamSangLoc(string IDKH)
         {
-            var kQKhamSangLoc = await _context.KhamSangLoc.Include(kh => kh.KhachHang).FirstOrDefaultAsync(kh => kh.IDKH == IDKH);
+            var kQKhamSangLoc = await _context.KhamSangLoc
+                                           .Include(kh => kh.KhachHang)
+                                           .Where(kh => kh.IDKH == IDKH)
+                                           .OrderByDescending(kh => kh.ThoiGian)
+                                           .FirstOrDefaultAsync();
 
             if (kQKhamSangLoc == null)
             {
@@ -96,9 +142,13 @@ namespace DATN_QLTiemChung_Api.Controllers
         [HttpGet("CDVaccine/{IDKH}")]
         public async Task<ActionResult> CDVaccine(string IDKH)
         {
-            var cdVaccine = await _context.DangKyTiemChung.Include(kh => kh.KhachHang).
-                Include(kh => kh.DangKyVaccine).Include(kh => kh.NhanVien).
-                FirstOrDefaultAsync(kh => kh.IDKH == IDKH);
+            var cdVaccine = await _context.DangKyTiemChung
+                                       .Include(kh => kh.KhachHang)
+                                       .Include(kh => kh.DangKyVaccine)
+                                       .Include(kh => kh.NhanVien)
+                                       .Where(kh => kh.IDKH == IDKH)
+                                       .OrderByDescending(kh => kh.ThoiGianDK)
+                                       .FirstOrDefaultAsync();
             if (cdVaccine == null)
             {
                 return NotFound();
@@ -110,25 +160,26 @@ namespace DATN_QLTiemChung_Api.Controllers
                 IDKH = cdVaccine.IDKH,
                 IDDKVC = cdVaccine.IDDKVC,
                 IDNV = cdVaccine.IDNV,
+                GhiChu = cdVaccine.GhiChu,
                 KhachHang = cdVaccine.KhachHang != null ? new KhachHang
                 {
                     IDKH = cdVaccine.KhachHang.IDKH,
-                }: null,
+                } : null,
 
                 DangKyVaccine = cdVaccine.DangKyVaccine != null ? new DangKyVaccine
                 {
                     IDDKVC = cdVaccine.DangKyVaccine.IDDKVC,
                     TenVaccine = cdVaccine.DangKyVaccine.TenVaccine,
                     SoLuong = cdVaccine.DangKyVaccine.SoLuong,
-                }: null,
+                } : null,
 
                 NhanVien = cdVaccine.NhanVien != null ? new NhanVien
                 {
                     IDNV = cdVaccine.NhanVien.IDNV,
                     TenNhanVien = cdVaccine.NhanVien.TenNhanVien,
-                }: null
+                } : null
             };
-            
+
             return Ok(cdVaccineDTO);
         }
 
@@ -176,7 +227,7 @@ namespace DATN_QLTiemChung_Api.Controllers
 
             return newId;
         }
-       
+
         [HttpPost("CreateTiemChung")]
         public async Task<IActionResult> CreateTiemChung([FromBody] createTiemChung request)
         {
@@ -185,38 +236,81 @@ namespace DATN_QLTiemChung_Api.Controllers
                 return BadRequest("Thông tin không hợp lệ.");
             }
 
-            string newIDTC = await GenerateNewIDTCAsync();
 
-
-
-            var tiemChung = new TiemChung
+            try
             {
-                IDTC = newIDTC,
-                IDKH = request.IDKH,
-                IDDK = request.IDDK,
-                IDNV = request.IDNV,
-                ThoiGian = request.ThoiGian,
-                TrangThai = request.TrangThai
-            };
-            var TheoDoiSauTiem = new TheoDoiSauTiem
-            {
-                IDST = await GenerateNewIDSTAsync(),
-                IDTC = newIDTC,
-                IDKH = request.IDKH,
-                IDNV = request.IDNV,
-                ThoiGian = request.ThoiGian.TimeOfDay,
-                TrangThai = request.TrangThai
-            };
-            _context.TiemChung.Add(tiemChung);
-            _context.TheoDoiSauTiem.Add(TheoDoiSauTiem);
 
-            await _context.SaveChangesAsync();
+                // Sinh ID mới cho tiêm chủng và theo dõi sau tiêm
+                string newIDTC = await GenerateNewIDTCAsync();
+                string newIDST = await GenerateNewIDSTAsync();
 
-            return Ok(new
+                // Truy vấn đăng ký tiêm chủng
+                var dk = await _context.DangKyTiemChung
+                                      .FirstOrDefaultAsync(dk => dk.IDDK == request.IDDK);
+
+                if (dk == null)
+                {
+                    return NotFound($"Không tìm thấy đăng ký tiêm chủng với IDDK: {request.IDDK}");
+                }
+
+                // Thêm thông tin tiêm chủng
+                var tiemChung = new TiemChung
+                {
+                    IDTC = newIDTC,
+                    IDKH = request.IDKH,
+                    IDDK = request.IDDK,
+                    IDNV = request.IDNV,
+                    ThoiGian = request.ThoiGian,
+                    TrangThai = request.TrangThai
+                };
+
+                // Thêm thông tin theo dõi sau tiêm
+                var theoDoiSauTiem = new TheoDoiSauTiem
+                {
+                    IDST = newIDST,
+                    IDTC = newIDTC,
+                    IDKH = request.IDKH,
+                    IDNV = request.IDNV,
+                    ThoiGian = request.ThoiGian.TimeOfDay,
+                    TrangThai = request.TrangThai
+                };
+
+                // Cập nhật GhiChu cho đăng ký tiêm chủng
+                if (string.IsNullOrEmpty(dk.GhiChu))
+                {
+                    dk.GhiChu = "1";
+                }
+                else
+                {
+                    if (int.TryParse(dk.GhiChu, out int ghiChuValue))
+                    {
+                        dk.GhiChu = (ghiChuValue + 1).ToString();
+                        _context.DangKyTiemChung.Update(dk);
+                    }
+                    else
+                    {
+                        return BadRequest("Ghi chú không hợp lệ, không thể chuyển đổi sang số.");
+                    }
+                }
+
+                // Thêm vào database
+                _context.TiemChung.Add(tiemChung);
+                _context.TheoDoiSauTiem.Add(theoDoiSauTiem);
+
+                await _context.SaveChangesAsync();
+
+                return Ok(new
+                {
+                    TiemChung = tiemChung
+                });
+            }
+            catch (Exception ex)
             {
-                TiemChung = tiemChung,
-            });
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Đã xảy ra lỗi: {ex.Message}");
+            }
         }
+
+
         [HttpPut("UpdateTheoDoiSauTiem")]
         public async Task<IActionResult> UpdateTheoDoiSauTiem([FromBody] createTheoDoi request)
         {
@@ -252,6 +346,29 @@ namespace DATN_QLTiemChung_Api.Controllers
                 if (request.TrangThai)
                 {
                     existingTC.TrangThai = true;
+                    var ghiChu = existingRecord.GhiChu; // "Mũi 1", "Mũi 2", ...
+                    if (!string.IsNullOrEmpty(ghiChu))
+                    {
+                        // Sử dụng Regex để lấy số trong chuỗi
+                        var match = Regex.Match(ghiChu, @"\d+");
+                        if (match.Success && int.TryParse(match.Value, out int soMui))
+                        {
+                            existingTC.SoMui = soMui;
+                        }
+                        else
+                        {
+                            existingTC.SoMui = null;
+                        }
+                    }
+                    else
+                    {
+                        existingTC.SoMui = null;
+                    }
+                    _context.TiemChung.Update(existingTC);
+                }
+                else 
+                {
+                    existingTC.TrangThai = true;
                     _context.TiemChung.Update(existingTC);
                 }
 
@@ -274,13 +391,16 @@ namespace DATN_QLTiemChung_Api.Controllers
 
 
         [HttpGet("TheoDoiSauTiemByIDDK/{IDDK}")]
-        public async Task<ActionResult> TheoDoiSauTiemByIDDK( string IDDK)
+        public async Task<ActionResult> TheoDoiSauTiemByIDDK(string IDDK)
         {
-            var TiemChung = await _context.TheoDoiSauTiem.Include(st=>st.TiemChung)
+            var TiemChung = await _context.TheoDoiSauTiem.Include(st => st.TiemChung)
                 .Include(st => st.KhachHang)
                 .Include(st => st.NhanVien)
-                .FirstOrDefaultAsync(st => st.TiemChung.IDDK == IDDK);
-            return Ok(TiemChung); 
+                .Where(st => st.TiemChung.IDDK == IDDK && !st.TrangThai)
+                .OrderByDescending(kh => kh.TiemChung.ThoiGian)
+                .FirstOrDefaultAsync();
+
+            return Ok(TiemChung);
         }
     }
 }

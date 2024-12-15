@@ -71,17 +71,14 @@ namespace DATN_CDCWebClient.Controllers
                 TempData["Error"] = "Không thể lấy thông tin tài khoản khách hàng.";
             }
 
-            GetSession();
-            TempData["Notification"] = "Cập nhật trạng thái hóa đơn thành công.";
-            TempData["NotificationType"] = "success";
-            TempData["NotificationTitle"] = "Thông báo."; 
+            GetSession(); 
             return View("~/Views/Home/DoiMatKhau.cshtml");
         }
 
 
 
         [HttpPost]
-        public async Task<IActionResult> DoiMatKhau(string IDKH, string CurrentPassword, string NewPassword, string ConfirmPassword)
+        public async Task<IActionResult> DoiMatKhauSumit(string IDKH, string CurrentPassword, string NewPassword, string ConfirmPassword)
         {
             if (NewPassword != ConfirmPassword)
             {
@@ -141,7 +138,8 @@ namespace DATN_CDCWebClient.Controllers
             GetSession();
             TempData["Notification"] = "Đổi mật khẩu thành công.";
             TempData["NotificationType"] = "success";
-            TempData["NotificationTitle"] = "Thông báo."; return RedirectToAction("DoiMatKhau", new { IDKH = doiMatKhauRequest.IDKH });
+            TempData["NotificationTitle"] = "Thông báo.";
+            return RedirectToAction("DoiMatKhau", new { IDKH = doiMatKhauRequest.IDKH });
         }
 
     }

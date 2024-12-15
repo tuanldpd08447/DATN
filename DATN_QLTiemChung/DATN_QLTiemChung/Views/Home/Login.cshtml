@@ -22,74 +22,49 @@
                     <img src="~/Img/CDC Đà Nẵng copy.png" class="pt-5" alt="" width="100%">
                 </div>
                 <div class="col">
-                    <div class="text-center mb-4">
-                        <img src="~/Img/Logo.png " alt="Avatar" class="rounded-circle" style="width: 80px; height: 80px;">
-                        <h4 class="mt-2 fw-bold">ĐĂNG NHẬP</h4>
-                    </div>
-
-                    <form asp-action="LoginSumit" asp-controller="DNhapDKy">
-                        <!-- Phone Input -->
-                        <div class="form-group mt-2">
-                            <div class="input-group">
-                                <span class="input-group-text border rounded-start" style="padding: 20px;">
-                                    <i class="fa-solid fa-phone"></i>
-                                </span>
-                                <input type="text" class="form-control border-start-0" id="phoneInput" name="email" placeholder="Email">
-                            </div>
-                            <!-- Error Message -->
-                            <span class="text-danger" id="phoneError" style="font-size: 0.875rem; display: none;"></span>
+                   <div style="margin-top: 30%;">
+                        <div class="text-center mb-4">
+                            <img src="~/Img/Logo.png " alt="Avatar" class="rounded-circle" style="width: 80px; height: 80px;">
+                            <h4 class="mt-2 fw-bold">ĐĂNG NHẬP</h4>
                         </div>
 
-                        <!-- Password Input -->
-                        <div class="form-group mt-2">
-                            <div class="input-group">
-                                <span class="input-group-text border rounded-start" style="padding: 20px;">
-                                    <i class="fas fa-lock"></i>
-                                </span>
-                                <input type="password" class="form-control border-start-0" id="passwordInput" name="password" placeholder="Mật khẩu">
-                            </div>
-                            <!-- Error Message -->
-                            <span class="text-danger" id="passwordError" style="font-size: 0.875rem; display: none;">Mật khẩu phải có ít nhất 6 ký tự.</span>
-                        </div>
-                        @if (ViewBag.ErrorMessage != null)
-                        {
-                            <span class="text-danger" id="passwordError" style="font-size: 1rem;">@ViewBag.ErrorMessage</span>
-                        }
-
-                        <!-- Forgot Password -->
-                        <div class="form-group text-end mt-2">
-                            <a href="#">Quên mật khẩu?</a>
-                        </div>
-
-                        <!-- Login Button -->
-                        <button type="submit" class="btn btn-block mt-4 fw-bold" style="width: 100%; background-color: #0099CF; color: white;">Đăng nhập</button>
-
-                        <!-- Divider -->
-                        <div class="text-center my-3">
-                            <div class="row">
-                                <div class="col">
-                                    <hr>
+                        <form asp-action="LoginSumit" asp-controller="DNhapDKy">
+                            <!-- Phone Input -->
+                            <div class="form-group mt-2">
+                                <div class="input-group">
+                                    <span class="input-group-text border rounded-start" style="padding: 20px;">
+                                        <i class="fa-solid fa-envelope"></i>
+                                    </span>
+                                    <input type="text" class="form-control border-start-0" id="phoneInput" name="email" placeholder="Email">
                                 </div>
-                                <div class="col-2">
-                                    <span>or</span>
-                                </div>
-                                <div class="col">
-                                    <hr>
-                                </div>
+                                <!-- Error Message -->
+                                <span class="text-danger" id="phoneError" style="font-size: 0.875rem; display: none;"></span>
                             </div>
-                        </div>
 
-                        <!-- Social Login Buttons -->
-                        <div class="d-flex justify-content-between">
-                            <a href="#" class="btn btn-outline-danger w-100 me-2"><i class="fab fa-google"></i> Google</a>
-                            <a href="#" class="btn btn-outline-primary w-100 ms-2"><i class="fab fa-facebook-f"></i> Facebook</a>
-                        </div>
+                            <!-- Password Input -->
+                            <div class="form-group mt-2">
+                                <div class="input-group">
+                                    <span class="input-group-text border rounded-start" style="padding: 20px;">
+                                        <i class="fas fa-lock"></i>
+                                    </span>
+                                    <input type="password" class="form-control border-start-0" id="passwordInput" name="password" placeholder="Mật khẩu">
+                                </div>
+                                <!-- Error Message -->
+                                <span class="text-danger" id="passwordError" style="font-size: 0.875rem; display: none;">Mật khẩu phải có ít nhất 6 ký tự.</span>
+                            </div>
+                            @if (ViewBag.ErrorMessage != null)
+                            {
+                                <span class="text-danger" id="passwordError" style="font-size: 1rem;">@ViewBag.ErrorMessage</span>
+                            }
 
-                        <!-- Register Link -->
-                        <div class="text-center mt-3">
-                            <p>Bạn chưa có tài khoản? <a href="#">Đăng ký</a></p>
-                        </div>
-                    </form>
+
+
+                            <!-- Login Button -->
+                            <button type="submit" class="btn btn-block mt-4 fw-bold" style="width: 100%; background-color: #0099CF; color: white;">Đăng nhập</button>
+
+
+                        </form>
+                   </div>
 
                 </div>
             </div>

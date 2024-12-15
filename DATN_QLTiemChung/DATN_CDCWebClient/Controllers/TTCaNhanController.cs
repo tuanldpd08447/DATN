@@ -49,10 +49,8 @@ namespace DATN_CDCWebClient.Controllers
                         {
                             ViewBag.KhachHangs = khachHangs; // Pass data to the View
                               GetSession();
-                            TempData["Notification"] = "Lấy thông tin cá nhân khách hàng thành công.";
-                            TempData["NotificationType"] = "success";
-                            TempData["NotificationTitle"] = "Thông báo.";
-                            return View("~/Views/Home/ThongTinCaNhan.cshtml");
+                        
+                            return View("~/Views/Home/ThongTinCaNhan.cshtml" );
                         }
                         else
                         {
@@ -85,8 +83,6 @@ namespace DATN_CDCWebClient.Controllers
         [HttpPost]
         public async Task<IActionResult> SuaThongTin(string IDKH, string hoTen, DateTime ngaySinh, string cmnd, string soDienThoai, string hoKhauXa, string diaChi, string email, string gioiTinh, string danToc)
         {
-            Console.WriteLine($"IDKH: {IDKH}, HoTen: {hoTen}, NgaySinh: {ngaySinh.ToString("yyyy-MM-dd")}, CMND: {cmnd}, SoDienThoai: {soDienThoai}, HoKhauXa: {hoKhauXa}, DiaChi: {diaChi}, Email: {email}, GioiTinh: {gioiTinh}, DanToc: {danToc}");
-
             KhachHangUpdateDTO khachHang = new KhachHangUpdateDTO
             {
                IDKH = IDKH,
@@ -114,7 +110,6 @@ namespace DATN_CDCWebClient.Controllers
                 var error = await response.Content.ReadAsStringAsync();
                 Console.WriteLine($"API Error: {error}");
                 GetSession();
-                  GetSession();
                 TempData["Notification"] = "Đổi thông tin thất bại.";
                 TempData["NotificationType"] = "error";
                 TempData["NotificationTitle"] = "Thông báo.";
@@ -125,18 +120,16 @@ namespace DATN_CDCWebClient.Controllers
             {
                 var result = await response.Content.ReadAsStringAsync();
                 GetSession();
-                  GetSession();
                 TempData["Notification"] = "Đổi thông tin thành công.";
                 TempData["NotificationType"] = "success";
                 TempData["NotificationTitle"] = "Thông báo.";
-                return RedirectToAction("Home","Home");
+                return RedirectToAction("ThongTinCaNhan", new { IDKH = khachHang.IDKH });
             }
             else
             {
 
                 var error = await response.Content.ReadAsStringAsync();
                 GetSession();
-                  GetSession();
                 TempData["Notification"] = "Xảy ra lỗi.";
                 TempData["NotificationType"] = "error";
                 TempData["NotificationTitle"] = "Thông báo.";

@@ -184,6 +184,11 @@ namespace DATN_QLTiemChung.Controllers
                 {
                     ViewBag.VatTus = JsonConvert.SerializeObject(vatTuDTOFull);
                 }
+                var response = await client.GetAsync($"https://localhost:7143/api/KhamSanLoc/MuiTiepTheo/{IDKH}");
+                if (response.IsSuccessStatusCode)
+                {
+                    ViewBag.MuiTiepTheo = await response.Content.ReadFromJsonAsync<bool>();
+                }
 
                 var Response2 = await client.GetAsync("https://localhost:7143/api/KhamSanLoc/GetNguonCap");
                 var apiResponses2 = await Response2.Content.ReadAsStringAsync();
@@ -202,9 +207,6 @@ namespace DATN_QLTiemChung.Controllers
                 ViewBag.Xuatxu = Xuatxu;
 
                 GetSession();
-                TempData["Notification"] = "Hiển thị thành công.";
-                TempData["NotificationType"] = "success";
-                TempData["NotificationTitle"] = "Thông báo.";
                 return View("~/Views/Home/KhamSanLoc.cshtml");
             }
             catch (Exception ex)
@@ -228,7 +230,7 @@ namespace DATN_QLTiemChung.Controllers
     string IDNV,
     bool TrangThai,
     bool KetQua,
-    string GhiChu, string TinhTrangSucKhoe)
+    string GhiChu, string TinhTrangSucKhoe, bool MuiTiepTheo)
         {
             // Kiểm tra trạng thái của mô hình
             if (ModelState.IsValid)
@@ -244,7 +246,8 @@ namespace DATN_QLTiemChung.Controllers
                     TrangThai = TrangThai,
                     KetQua = KetQua,
                     GhiChu = GhiChu,
-                    TinhTrangSucKhoe = TinhTrangSucKhoe
+                    TinhTrangSucKhoe = TinhTrangSucKhoe,
+                    MuiTiepTheo = MuiTiepTheo
                 };
 
                 var client = _httpClientFactory.CreateClient();
@@ -299,8 +302,14 @@ namespace DATN_QLTiemChung.Controllers
                         }
                         else
                         {
-
-                            hangCho.Step = "KhamSanLoc";
+                            if (MuiTiepTheo)
+                            {
+                                hangCho.Step = "ThanhToan";
+                            }
+                            else
+                            {
+                                hangCho.Step = "KhamSanLoc";
+                            }
                             // Construct the PUT request with the data to be updated
                             var content1 = new StringContent(JsonConvert.SerializeObject(hangCho), Encoding.UTF8, "application/json");
 

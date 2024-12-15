@@ -23,8 +23,8 @@
     var currentRole = role; 
 
     var sortedFeatures = features
-        .OrderByDescending(f => f.Role == currentRole) 
-        .ThenBy(f => f.Title); 
+    .OrderByDescending(f => currentRole == "Admin" || f.Role == currentRole) // Admin luôn truy cập được
+    .ThenBy(f => f.Title);
     var colors = new[] { "bg-primary", "bg-secondary", "bg-success", "bg-danger", "bg-warning", "bg-info" };
     int colorIndex = 0; 
 }
@@ -75,7 +75,7 @@
         <div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
             @foreach (var feature in sortedFeatures)
             {
-                var isAccessible = feature.Role == currentRole;
+                var isAccessible = currentRole == "Admin" || feature.Role == currentRole;
                 var color = colors[colorIndex % colors.Length];
                 colorIndex++; 
 

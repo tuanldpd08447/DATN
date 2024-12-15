@@ -379,6 +379,7 @@ namespace DATN_QLTiemChung_Api.Models
         public string IDDKVC { get; set; }
         public string TenVaccine { get; set; }
         public int SoLuong { get; set; }
+        public string GhiChu { get; set; }
         public DangKyVaccine? DangKyVaccine { get; set; }
         public string IDNV { get; set; }
         public string TenNhanVien { get; set; }
@@ -485,6 +486,7 @@ namespace DATN_QLTiemChung_Api.Models
         public bool TrangThai { get; set; }
         public bool KetQua { get; set; }
         public string? GhiChu { get; set; }
+        public bool MuiTiepTheo { get; set; }
     }
     public class LichSuTiem
     {

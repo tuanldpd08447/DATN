@@ -81,6 +81,39 @@ namespace DATN_QLTiemChung_Api.Controllers
 
             return Ok(vatTu);
         }
+        [HttpGet("MuiTiepTheo/{IDKH}")]
+        public async Task<IActionResult> MuiTiepTheo(string IDKH)
+        {
+            var dk = await _context.DangKyTiemChung
+                                    .Include(kh => kh.DangKyVaccine)
+                                    .Where(kh => kh.IDKH == IDKH)
+                                    .OrderByDescending(kh => kh.ThoiGianDK)
+                                    .FirstOrDefaultAsync();
+
+            if (dk == null || dk.DangKyVaccine == null)
+            {
+                return Ok(false);
+            }
+
+            // Kiểm tra nếu GhiChu có thể chuyển thành số nguyên
+            if (int.TryParse(dk.GhiChu, out int ghiChuValue))
+            {
+                // Nếu số lượng tiêm đã đạt
+                if (ghiChuValue == dk.DangKyVaccine.SoLuong)
+                {
+                    return Ok(false);
+                }
+            }
+            else
+            {
+                // Trường hợp GhiChu không phải số hợp lệ
+                return BadRequest("Ghi chú không hợp lệ.");
+            }
+
+            return Ok(true);
+        }
+
+
         [HttpPost("AddKhamSangLoc")]
         public async Task<IActionResult> AddKhamSangLoc([FromBody] KhamSangLocDTO model)
         {
@@ -111,9 +144,8 @@ namespace DATN_QLTiemChung_Api.Controllers
                 TinhTrangSucKhoe = model.TinhTrangSucKhoe
             };
 
-            if (model.TrangThai || model.KetQua)
+            if ((model.TrangThai || model.KetQua) && !model.MuiTiepTheo)
             {
-  
                 var vt = await _context.VatTuYTe
                                         .Where(vt => vt.IDVT == model.IDVT)
                                         .Select(vt => new { vt.TenVatTu, vt.DonGia })
@@ -139,10 +171,9 @@ namespace DATN_QLTiemChung_Api.Controllers
                     SoLuong = model.SoLuong,
                     DonGia = vt.DonGia,
                     ThanhTien = vt.DonGia * model.SoLuong,
-                    GhiChu = " "
+                    GhiChu = ""
                 };
 
-                // Tạo IDDK tự động tăng
                 var lastIDDK = await _context.DangKyTiemChung
                                              .OrderByDescending(x => x.IDDK)
                                              .Select(x => x.IDDK)
@@ -158,7 +189,7 @@ namespace DATN_QLTiemChung_Api.Controllers
                     IDNV = model.IDNV,
                     ThoiGianDK = DateTime.Now,
                     ThoiGianTiem = DateTime.Now,
-                    GhiChu = ""
+                    GhiChu = null
                 };
 
                 var lastIDHD = await _context.HoaDon
@@ -174,8 +205,8 @@ namespace DATN_QLTiemChung_Api.Controllers
                     IDKH = model.IDKH,
                     IDNV = model.IDNV,
                     ThoiGian = DateTime.Now,
-                    GhiChu = null, 
-                    NoiDung = vt.TenVatTu, 
+                    GhiChu = null,
+                    NoiDung = vt.TenVatTu,
                     TongTien = vt.DonGia * model.SoLuong ?? 0,
                     TrangThai = false,
                     ThanhToan = false
@@ -186,13 +217,12 @@ namespace DATN_QLTiemChung_Api.Controllers
                                                .Select(x => x.IDHDCT)
                                                .FirstOrDefaultAsync();
 
-                // Tạo hóa đơn chi tiết mới
                 string newIDHDCT = GenerateNextIDHDCT(lastIDHDCT);
 
                 var newHoaDonChiTiet = new HoaDonChiTiet
                 {
                     IDHDCT = newIDHDCT,
-                    IDHD = newIDHD, 
+                    IDHD = newIDHD,
                     IDVT = model.IDVT,
                     SoLuong = model.SoLuong,
                     DonGia = vt.DonGia ?? 0,
@@ -208,7 +238,6 @@ namespace DATN_QLTiemChung_Api.Controllers
 
             try
             {
-                // Lưu vào cơ sở dữ liệu
                 _context.KhamSangLoc.Add(ksl);
                 await _context.SaveChangesAsync();
                 return Ok(new { success = true, message = "Thêm mới thành công!", data = model });
@@ -218,6 +247,7 @@ namespace DATN_QLTiemChung_Api.Controllers
                 return StatusCode(500, new { success = false, message = ex.Message });
             }
         }
+
 
 
         private string GenerateNextIDHD(string lastID)

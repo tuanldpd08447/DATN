@@ -16,13 +16,13 @@
         <div class="row mb-3">
             <div class="col-md-6">
                 <label for="fullName" class="form-label">Họ tên người tiêm</label>
-                <input type="text" class="form-control" id="fullName"  placeholder="Nhập họ và tên" value="@if(kh!=null){
+                <input type="text" class="form-control" id="fullName" disabled  placeholder="Nhập họ và tên" value="@if(kh!=null){
                 @kh.TenKhachHang
 }">
             </div>
             <div class="col-md-6">
                 <label for="dob" class="form-label">Ngày sinh người tiêm</label>
-                <input type="date" class="form-control" id="dob" value="@(kh?.NgaySinh.ToString("yyyy-MM-dd") ?? "")">
+                <input type="date" class="form-control" id="dob" disabled value="@(kh?.NgaySinh.ToString("yyyy-MM-dd") ?? "")">
             </div>
         </div>
 
@@ -31,11 +31,11 @@
                 <label class="form-label">Giới tính</label>
                 <div class="d-flex flex-column">
                     <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                        <input type="radio" class="btn-check" name="gender" id="male" value="Nam"
-                        @(kh?.GioiTinh == "Nam" ? "checked" : "") autocomplete="off">
+                        <input disabled type="radio" class="btn-check" name="gender" id="male" value="Nam"
+                        @(kh?.GioiTinh == "Nam" ? "checked" : "") autocomplete="off" >
                         <label class="btn btn-outline custom-btn" for="male">Nam</label>
 
-                        <input type="radio" class="btn-check" name="gender" id="female" value="Nữ"
+                        <input disabled type="radio" class="btn-check" name="gender" id="female" value="Nữ"
                         @(kh?.GioiTinh == "Nữ" ? "checked" : "") autocomplete="off">
                         <label class="btn btn-outline custom-btn" for="female">Nữ</label>
 
@@ -64,14 +64,16 @@
             </div>
             <div class="col-md-6">
                 <label for="medicalId" class="form-label">Mã y tế (nếu có)</label>
-                <input type="text" class="form-control" id="medicalId" placeholder="Nhập mã y tế" value="@if(kh!=null){@kh.IDKH}">
+                <input type="text" class="form-control" id="medicalId" placeholder="Nhập mã y tế" disabled value="@if(kh!=null){
+                @kh.IDKH
+}">
             </div>
         </div>
 
         <div class="row mb-3">
             <div class="col-md-4">
                 <label class="fw-semibold" for="hoKhauTinh">Tỉnh/TP</label>
-                <select class="form-control" id="hoKhauTinh" required >
+                <select class="form-control" id="hoKhauTinh" required disabled>
                         @if (diaChi != null)
                         {
                         <option value="@diaChi.IDTTP" selected>@diaChi.NameTTP</option>
@@ -84,7 +86,7 @@
             </div>
             <div class="col-md-4">
                 <label class="fw-semibold" for="hoKhauQuan">Quận/Huyện</label>
-                <select class="form-control" id="hoKhauQuan" required >
+                <select class="form-control" id="hoKhauQuan" required disabled>
                         @if (diaChi != null)
                         {
                         <option value="@diaChi.IDQH" selected>@diaChi.NameQH</option>
@@ -97,7 +99,7 @@
             </div>
             <div class="col-md-4">
                 <label class="fw-semibold" for="hoKhauXa">Xã/Phường</label>
-                <select class="form-control" id="hoKhauXa" name="hoKhauXa" required>
+                <select class="form-control" id="hoKhauXa" name="hoKhauXa" required disabled>
                         @if (diaChi != null)
                         {
                         <option value="@diaChi.IDXP" selected>@diaChi.NameXP</option>
@@ -112,7 +114,9 @@
         <script type="module" src="~/js/site.js" asp-append-version="true"></script>
         <div class="mb-3">
             <label for="address" class="form-label">Số nhà, tên đường</label>
-            <input type="text" class="form-control" id="address" placeholder="Nhập số nhà, tên đường" value="@if(kh!=null){@kh.DiaChi}">
+            <input type="text" class="form-control" id="address" placeholder="Nhập số nhà, tên đường" value="@if(kh!=null){
+            @kh.DiaChi
+}" disabled>
         </div>
 
         <!-- Contact Information -->

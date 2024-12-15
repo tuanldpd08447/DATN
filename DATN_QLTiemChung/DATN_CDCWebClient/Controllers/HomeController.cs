@@ -28,8 +28,7 @@ namespace DATN_CDCWebClient.Controllers
             GetSession();
             return View();
         }
-     
-      
+    
         public IActionResult ThongTinCaNhan()
         {
             GetSession();

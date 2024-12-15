@@ -142,6 +142,58 @@
     <!-- carousel -->
    
     @RenderBody()
+
+    @if (TempData["Notification"] != null)
+    {
+        var notificationType = TempData["NotificationType"] ?? "info"; // Loại thông báo
+        var notificationIcon = notificationType switch
+        {
+            "success" => "bi bi-check-circle ",
+            "error" => "bi bi-exclamation-triangle-fill text-danger",
+            "warning" => "bi bi-exclamation-triangle-fill text-warning",
+            _ => "bi bi-info-circle-fill text-info"
+        };
+        var notificationStyle = notificationType switch
+        {
+            "success" => "color: #45ce76;",
+            "error" => "color: #ef4444;",
+            "warning" => "color: #0066FF;",
+            _ => "color: #0066FF;"
+        };
+
+        <div class="position-fixed end-0 p-3" style="z-index: 11; top:7%;">
+            <div id="autoHideToast" class="toast align-items-center text-bg-info border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="5000">
+                <div class="d-flex flex-column bg-white border rounded p-3 mb-3 shadow-sm">
+                    <!-- Icon và nội dung -->
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                        <!-- Icon và nội dung -->
+                        <div class="d-flex align-items-center">
+                            <i class="@notificationIcon fs-2 me-3" style="@notificationStyle"></i>
+                            <div>
+                                <div class="fw-bold">@TempData["NotificationTitle"]</div>
+                                <div class="text-muted">@TempData["Notification"]</div>
+                            </div>
+                        </div>
+                        <!-- Nút đóng -->
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+
+                    <!-- Nút hành động -->
+
+                </div>
+            </div>
+        </div>
+
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const toastElement = document.getElementById('autoHideToast');
+                const toast = new bootstrap.Toast(toastElement);
+                toast.show();
+            });
+        </script>
+    }
+
     <footer class="bg-light text-center text-lg-start mt-3">
         <div class="container p-4">
             <div class="row">

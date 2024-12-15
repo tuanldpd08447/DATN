@@ -4,6 +4,7 @@ using DATN_QLTiemChung.Models;
 using Newtonsoft.Json;
 using System.Text;
 using System;
+using System.Net.Http;
 
 namespace DATN_QLTiemChung.Controllers
 {
@@ -119,6 +120,7 @@ namespace DATN_QLTiemChung.Controllers
                     DangKyVaccine = cdVaccine.DangKyVaccine,
                     KhachHang = cdVaccine.KhachHang,
                     NhanVien = cdVaccine.NhanVien,
+                    GhiChu = cdVaccine.GhiChu,
                     
                 };
                 ViewBag.CDVaccineDTO = cdVaccineDTO;
@@ -136,7 +138,17 @@ namespace DATN_QLTiemChung.Controllers
                 var TheoDoiSauTiem = JsonConvert.DeserializeObject<TheoDoiSauTiem>(apiResponse3);
                 ViewBag.TheoDoiSauTiem = TheoDoiSauTiem;
             }
+           
             ViewBag.HangCho = await GetHangCho();
+
+            var LStiemResult = await client.GetAsync($"https://localhost:7143/api/QLTiemChung/LsTiem/{IDKH}");
+
+            if (screeningResult.IsSuccessStatusCode)
+            {
+                var apiResponse4 = await LStiemResult.Content.ReadAsStringAsync();
+                var lstiem = JsonConvert.DeserializeObject<List<LichSuTiem>>(apiResponse4);
+                ViewBag.LichSuTiem = lstiem;
+            }
             GetSession();
 
             return View("~/Views/Home/QLTiemChung.cshtml"); 
@@ -172,10 +184,10 @@ namespace DATN_QLTiemChung.Controllers
                 {
 
                     GetSession();
-                    TempData["Notification"] = "Tạo tiêm chủng thành công.";
+                    TempData["Notification"] = "Xác Nhận tiêm thành công.";
                     TempData["NotificationType"] = "success";
                     TempData["NotificationTitle"] = "Thông báo.";
-                    return RedirectToAction("QLTiemChung");
+                    return RedirectToAction("KQKhamSangLoc", new { IDKH = IDKH });
                 }
                 else
                 {
@@ -251,7 +263,7 @@ namespace DATN_QLTiemChung.Controllers
 
                 TempData["Message"] = "Cập nhật và xóa dữ liệu thành công.";
                 GetSession();
-                TempData["Notification"] = "Cập nhật trạng thái hóa đơn thành công.";
+                TempData["Notification"] = "Xác nhận theo dõi sau tiêm thành công.";
                 TempData["NotificationType"] = "success";
                 TempData["NotificationTitle"] = "Thông báo.";
                 return RedirectToAction("QLTiemChung");

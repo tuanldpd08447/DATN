@@ -142,8 +142,6 @@ namespace DATN_QLTiemChung.Controllers
            return View("~/Views/Home/QLHoaDon.cshtml");
 
 
-
-
         }
 
 
@@ -153,14 +151,13 @@ namespace DATN_QLTiemChung.Controllers
         {
             if (!ModelState.IsValid)
             {
-               GetSession();  return BadRequest(ModelState);  //GetSession();  return error if data is invalid
+               GetSession();  return BadRequest(ModelState);  
             }
             try
             {
-                // Create HTTP client
+    
                 var client = _httpClientFactory.CreateClient();
 
-                // Map input parameters to the DTO
                 var hoadonCreateDTO = new HoaDonCreateDTO
                 {
                     IDHD = "",
@@ -180,10 +177,8 @@ namespace DATN_QLTiemChung.Controllers
                     
                 };
 
-                // Serialize the object to JSON
                 var content = new StringContent(JsonConvert.SerializeObject(hoadonCreateDTO), Encoding.UTF8, "application/json");
 
-                // Send the POST request
                 var response = await client.PostAsync("https://localhost:7143/api/DataQLHoaDon/AddHoaDon", content);
 
                 if (response.IsSuccessStatusCode)
@@ -214,16 +209,12 @@ namespace DATN_QLTiemChung.Controllers
 
             try
             {
-                // Chuyển đổi trạng thái từ string sang boolean
                 bool tt = TrangThai.Equals("true", StringComparison.OrdinalIgnoreCase);
 
-                // Khởi tạo HttpClient
                 var client = _httpClientFactory.CreateClient();
 
-                // Tạo nội dung gửi
                 var content = new StringContent(JsonConvert.SerializeObject(tt), Encoding.UTF8, "application/json");
 
-                // Gửi request PUT tới API
                 var response = await client.PutAsync($"https://localhost:7143/api/DataQLHoaDon/CancelHoaDon/{MaHD}", content);
 
                 if (response.IsSuccessStatusCode)
@@ -246,23 +237,17 @@ namespace DATN_QLTiemChung.Controllers
                GetSession();  return StatusCode(500, $"Có lỗi khi kết nối với máy chủ: {ex.Message}");
             }
         }
-        public async Task<IActionResult> UpdateHoaDon(string ThanhToan, string MaHD, string MaKH)
+        public async Task<IActionResult> UpdateHoaDon(bool ThanhToan, string MaHD, string MaKH)
         {
-            if (string.IsNullOrEmpty(ThanhToan) || string.IsNullOrEmpty(MaHD) || string.IsNullOrEmpty(MaKH))
+            if ( string.IsNullOrEmpty(MaHD) || string.IsNullOrEmpty(MaKH))
             {
                GetSession();  return BadRequest("ThanhToan, MaHD và MaKH không được để trống.");
             }
-            if (!bool.TryParse(ThanhToan, out bool tt))
-            {
-               GetSession();  return BadRequest("Giá trị ThanhToan không hợp lệ, chỉ chấp nhận 'true' hoặc 'false'.");
-            }
-
             try
             {
                 using var client = _httpClientFactory.CreateClient();
 
-                // Cập nhật trạng thái hóa đơn
-                var content = new StringContent(JsonConvert.SerializeObject(tt), Encoding.UTF8, "application/json");
+                var content = new StringContent(JsonConvert.SerializeObject(ThanhToan), Encoding.UTF8, "application/json");
                 var response = await client.PutAsync($"https://localhost:7143/api/DataQLHoaDon/UpdateHoaDon/{MaHD}", content);
 
                 if (!response.IsSuccessStatusCode)
@@ -271,39 +256,39 @@ namespace DATN_QLTiemChung.Controllers
                    GetSession();  return StatusCode((int)response.StatusCode, $"Không thể cập nhật trạng thái hóa đơn: {errorContent}");
                 }
 
-                // Lấy danh sách từ API HangCho
-                var response1 = await client.GetAsync("https://65b86c3a46324d531d562e3d.mockapi.io/HangCho");
-                if (!response1.IsSuccessStatusCode)
+                if(ThanhToan)
                 {
-                    var errorResponse = await response1.Content.ReadAsStringAsync();
-                    ModelState.AddModelError("", $"Không thể lấy dữ liệu từ API HangCho: {errorResponse}");
-                   GetSession(); TempData["Notification"] = "Không thể lấy dữ liệu từ Hàng chờ.";
-                    TempData["NotificationType"] = "error";
-                    TempData["NotificationTitle"] = "Thông báo."; return RedirectToAction("QLHoaDon");
+                    var response1 = await client.GetAsync("https://65b86c3a46324d531d562e3d.mockapi.io/HangCho");
+                    if (!response1.IsSuccessStatusCode)
+                    {
+                        var errorResponse = await response1.Content.ReadAsStringAsync();
+                        ModelState.AddModelError("", $"Không thể lấy dữ liệu từ API HangCho: {errorResponse}");
+                        GetSession(); TempData["Notification"] = "Không thể lấy dữ liệu từ Hàng chờ.";
+                        TempData["NotificationType"] = "error";
+                        TempData["NotificationTitle"] = "Thông báo."; return RedirectToAction("QLHoaDon");
+                    }
+
+                    var khachhangapiResponse = await response1.Content.ReadAsStringAsync();
+                    var hangChoList = JsonConvert.DeserializeObject<List<HangCho>>(khachhangapiResponse);
+
+                    var hangCho = hangChoList.FirstOrDefault(hc => hc.IDKH == MaKH);
+                    if (hangCho == null)
+                    {
+                        ModelState.AddModelError("", "Không tìm thấy thông tin khách hàng trong API HangCho.");
+                        GetSession(); return BadRequest("Không tìm thấy thông tin khách hàng trong API HangCho.");
+                    }
+
+                    hangCho.Step = "ThanhToan";
+                    var content1 = new StringContent(JsonConvert.SerializeObject(hangCho), Encoding.UTF8, "application/json");
+                    var response2 = await client.PutAsync($"https://65b86c3a46324d531d562e3d.mockapi.io/HangCho/{hangCho.ID}", content1);
+
+                    if (!response2.IsSuccessStatusCode)
+                    {
+                        var errorContent = await response2.Content.ReadAsStringAsync();
+                        GetSession(); return StatusCode((int)response2.StatusCode, $"Không thể cập nhật thông tin HangCho: {errorContent}");
+                    }
                 }
 
-                var khachhangapiResponse = await response1.Content.ReadAsStringAsync();
-                var hangChoList = JsonConvert.DeserializeObject<List<HangCho>>(khachhangapiResponse);
-
-                // Tìm thông tin khách hàng
-                var hangCho = hangChoList.FirstOrDefault(hc => hc.IDKH == MaKH);
-                if (hangCho == null)
-                {
-                    ModelState.AddModelError("", "Không tìm thấy thông tin khách hàng trong API HangCho.");
-                   GetSession();  return BadRequest("Không tìm thấy thông tin khách hàng trong API HangCho.");
-                }
-
-                hangCho.Step = "ThanhToan";
-                var content1 = new StringContent(JsonConvert.SerializeObject(hangCho), Encoding.UTF8, "application/json");
-                var response2 = await client.PutAsync($"https://65b86c3a46324d531d562e3d.mockapi.io/HangCho/{hangCho.ID}", content1);
-
-                if (!response2.IsSuccessStatusCode)
-                {
-                    var errorContent = await response2.Content.ReadAsStringAsync();
-                   GetSession();  return StatusCode((int)response2.StatusCode, $"Không thể cập nhật thông tin HangCho: {errorContent}");
-                }
-
-                // Thông báo thành công
                 TempData["Message"] = "Thanh Toán hóa đơn thành công.";
                GetSession(); TempData["Notification"] = "Thanh toán hóa đơn thành công.";
                 TempData["NotificationType"] = "success";

@@ -8,6 +8,11 @@
     string idNv = TempData["ID"] as string;
     var TheoDoiSauTiem = ViewBag.TheoDoiSauTiem as TheoDoiSauTiem;
     var hangcho = ViewBag.HangCho as List<HangCho>;
+   
+    var lstiem = ViewBag.LichSuTiem as List<LichSuTiem>;
+    var lstiemChua = lstiem?.Where(x => !x.TrangThaiTiem).ToList(); // "Chưa Tiêm"
+    var lstiemda = lstiem?.Where(x => x.TrangThaiTiem).ToList(); // "Chưa Tiêm"
+
 
 
 }
@@ -30,7 +35,7 @@
                     <input class="col-8  border border-1 rounded-2 mx-1" type="text">
                     <button type="button" class="col border border-1 rounded-end btn "><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
-                <div class="row border rounded-4 border-1 mt-1 " style="height: 300px;">
+                <div class="row border rounded-4 border-1 mt-1 " style="height: 300px; max-height: 400px; overflow-y: auto;">
                     @if (ViewBag.ErrorMessage != null)
                     {
                         <div class="alert alert-danger">
@@ -174,39 +179,80 @@
                         <h3>Tiêm chủng</h3>
                         <div class="form-group row mb-2">
                             <label class="col-1" style="width: 21%;" for="endTime">Thời gian tiêm xong:</label>
-                            <input type="datetime" class="form-control col-3 me-1" style="width: 28%;" name="thoiGian" id="endTime" value="@TheoDoiSauTiem?.TiemChung?.ThoiGian.ToString("yyyy-MM-dd HH:mm:ss")">
+                            <input type="datetime" class="form-control col-3 me-1" style="width: 28%;" name="thoiGian" id="endTime" value="@TheoDoiSauTiem?.TiemChung?.ThoiGian.ToString("yyyy-MM-dd HH:mm:ss")" readonly>
                             <label class="col-1" style="width: 20%;" for="Name">Người thực hiện:</label>
-                            <input type="text" class="form-control col-3 me-1" style="width: 29%;" id="Name"  value="@if(TheoDoiSauTiem !=null ){@TheoDoiSauTiem?.NhanVien?.TenNhanVien}else{@TempData["Username"]}">
+                            <input type="text" class="form-control col-3 me-1" style="width: 29%;" id="Name" value="@if(TheoDoiSauTiem !=null ){
+                            @TheoDoiSauTiem?.NhanVien?.TenNhanVien
+}else{
+                            @TempData["Username"]
+}" readonly>
                             <input type="text" name="IDDK" value="@cdVaccine?.IDDK" style="display: none;" />
                             <input type="text" name="IDNV" value="@idNv" style="display: none;" />
                             <input type="text" name="IDKH" value="@kqKhamSangLoc?.IDKH" style="display: none;" />
                         </div>
                         <div class="form-group row mb-2 d-flex justify-content-center">
-                            <button type="submit" id="SumitAction1" class="btn btn-outline col-3 fw-bold me-1" style="font-size: small; width: 30%; color: black ; background-color: #f0f0f0; border: 2px solid #f0f0f0 ;">Xác nhận đã tiêm hôm nay</button>
-                            <button type="button" class="btn btn-outline col-3 fw-bold" style="font-size: small; width: 30%; color: black ; background-color: #f0f0f0; border: 2px solid #f0f0f0 ;">Lịch sử tiêm chủng</button>
+                            @if (@TheoDoiSauTiem?.IDTC != null)
+                            {
+                                <button type="submit" id="SumitAction1" class="btn btn-outline col-3 fw-bold me-1" style="font-size: small; width: 30%; color: black ; background-color: #f0f0f0; border: 2px solid #f0f0f0 ;" disabled>Xác nhận đã tiêm hôm nay</button>
+                            }
+                            else
+                            {
+                                <button type="submit" id="SumitAction1" class="btn btn-outline col-3 fw-bold me-1" style="font-size: small; width: 30%; color: black ; background-color: #f0f0f0; border: 2px solid #f0f0f0 ;">Xác nhận đã tiêm hôm nay</button>
+                            }
+                            @if (@kqKhamSangLoc?.IDKH !=null)
+                            {
+                                <button type="button" class="btn btn-outline col-3 fw-bold" style="font-size: small; width: 30%; color: black ; background-color: #f0f0f0; border: 2px solid #f0f0f0 ;" data-bs-toggle="modal" data-bs-target="#vaccineHistoryModal">Lịch sử tiêm chủng</button>
+
+                            }
+                            else
+                            {
+                                <button type="button" class="btn btn-outline col-3 fw-bold" style="font-size: small; width: 30%; color: black ; background-color: #f0f0f0; border: 2px solid #f0f0f0 ;" data-bs-toggle="modal" data-bs-target="#vaccineHistoryModal" disabled>Lịch sử tiêm chủng</button>
+                            }
                         </div>
                     </form>
                     <form asp-action="UpdateTheoDoiSauTiem" asp-controller="QLTiemChung" method="post">
                         <h3>Theo dõi</h3>
                         <div class="form-group row mb-2">
-                            <label class="col-1" style="width: 15%;" for="status">Trạng thái:</label>
-                            <select id="status" class="form-control col-3 me-1" name="trangThai" style="width: 34%;">
-                                <option value="True">Ổn định</option>
-                                <option value="False">Có vấn đề</option>
+                            <label class="col-1" style="width: 15%;" for="statusOut">Trạng thái:</label>
+                            <select id="statusOut" class="form-control col-3 me-1" name="trangThai" style="width: 34%;">
+                                <option value="true">Ổn định</option>
+                                <option value="false">Có vấn đề</option>
                             </select>
+
                             <label class="col-1" style="width: 20%;" for="time">Thời gian hoàn tất:</label>
-                            <input type="datetime" name="thoiGian" id="time" class="form-control col-6 me-1" style="width: 29%;" value="@if(TheoDoiSauTiem !=null && !TheoDoiSauTiem.TrangThai ){@TheoDoiSauTiem?.TiemChung?.ThoiGian.ToString("HH:mm:ss")}">
+                            <input type="datetime" name="thoiGian" id="time" class="form-control col-6 me-1" style="width: 29%;" value="@if(TheoDoiSauTiem !=null && !TheoDoiSauTiem.TrangThai ){@TheoDoiSauTiem?.TiemChung?.ThoiGian.ToString("HH:mm:ss")}" readonly>
                         </div>
                         <div class="form-group row mb-2">
                             <label class="col-1" style="width: 15%;" for="note">Ghi chú:</label>
-                            <input type="text" name="ghiChu" id="note" class="form-control col-6 me-1" style="width: 34%;" value="@TheoDoiSauTiem?.GhiChu">
+                            <input type="text" name="ghiChu" id="note" class="form-control col-6 me-1"
+                                   style="width: 34%;"
+                                   value="@(
+           TheoDoiSauTiem != null && TheoDoiSauTiem.GhiChu != null
+               ? TheoDoiSauTiem.GhiChu
+               : (cdVaccine?.GhiChu != null ? $"Mũi {cdVaccine.GhiChu}" : "")
+       )">
+
+
 
                             <label class="col-1" style="width: 20%;" for="name">Người thực hiện:</label>
-                            <input type="text" name="" id="name" class="form-control col-6 me-1" style="width: 29%;" value="@if(TheoDoiSauTiem !=null ){@TheoDoiSauTiem?.NhanVien?.TenNhanVien}else{@TempData["Username"]}">
+                            <input type="text" name="" id="name" class="form-control col-6 me-1" style="width: 29%;" value="@if(TheoDoiSauTiem !=null ){
+                            @TheoDoiSauTiem?.NhanVien?.TenNhanVien
+}else{
+                            @TempData["Username"]
+}" readonly>
                         </div>
                         <div class="form-group row mb-2 d-flex justify-content-center">
-                            <button type="submit" id="SumitAction2" class="btn btn-outline col-3 fw-bold me-1" style="font-size: small; width: 30%; color: black ; background-color: #f0f0f0; border: 2px solid #f0f0f0 ;">Xác nhận hoàn tất tiêm</button>
-                            <button type="button" class="btn btn-outline col-3 fw-bold" style="font-size: small; width: 30%; color: black ; background-color: #f0f0f0; border: 2px solid #f0f0f0 ;">Huỷ xác nhận tiêm</button>
+                             @if (@TheoDoiSauTiem?.IDTC != null)
+                            {
+                                <button type="submit" id="SumitAction2" class="btn btn-outline col-3 fw-bold me-1" style="font-size: small; width: 30%; color: black ; background-color: #f0f0f0; border: 2px solid #f0f0f0 ;">Xác nhận hoàn tất tiêm</button>
+                                <button type="submit" id="SumitAction3" class="btn btn-outline col-3 fw-bold" style="font-size: small; width: 30%; color: black ; background-color: #f0f0f0; border: 2px solid #f0f0f0 ;">Huỷ xác nhận tiêm</button>
+                            }
+                            else
+                            {
+                                 <button type="submit" id="SumitAction2" class="btn btn-outline col-3 fw-bold me-1" style="font-size: small; width: 30%; color: black ; background-color: #f0f0f0; border: 2px solid #f0f0f0 ;" disabled>Xác nhận hoàn tất tiêm</button>
+                                <button type="submit" id="SumitAction3" class="btn btn-outline col-3 fw-bold" style="font-size: small; width: 30%; color: black ; background-color: #f0f0f0; border: 2px solid #f0f0f0 ;" disabled>Huỷ xác nhận tiêm</button>
+                            }
+
                         </div>
 
                         <input type="text" name="id" value="@TheoDoiSauTiem?.IDST" style="display: none;" />
@@ -250,6 +296,32 @@
                             startUpdatingTime('time', 'SumitAction2');
                         }
 
+                        document.addEventListener('DOMContentLoaded', () => {
+                            // Lấy các phần tử
+                            const statusSelect = document.getElementById('statusOut');
+                            const submitAction2 = document.getElementById('SumitAction2');
+                            const submitAction3 = document.getElementById('SumitAction3');
+
+                            // Hàm bật/tắt nút
+                            function toggleButtons() {
+                                if (statusSelect.value === 'false') {
+                                    submitAction2.disabled = true;  // Vô hiệu hóa nút Xác nhận
+                                    submitAction3.disabled = false; // Kích hoạt nút Hủy
+                                } else {
+                                    submitAction2.disabled = false; // Kích hoạt nút Xác nhận
+                                    submitAction3.disabled = true;  // Vô hiệu hóa nút Hủy
+                                }
+                            }
+
+                            // Gắn sự kiện 'change' vào select
+                            statusSelect.addEventListener('change', toggleButtons);
+
+                            // Gọi hàm ngay lập tức để thiết lập trạng thái ban đầu
+                            toggleButtons();
+                        });
+
+
+                       
                     </script>
 
                 </div>
@@ -271,7 +343,7 @@
                         <tr>
                             <td>@cdVaccine?.DangKyVaccine.TenVaccine</td>
                             <td>@cdVaccine?.DangKyVaccine.SoLuong</td>
-                            <td>@cdVaccine?.DangKyVaccine.SoLuong</td>
+                            <td>@cdVaccine?.GhiChu</td>
                             <td>@cdVaccine?.NhanVien.TenNhanVien</td>
                         </tr>
                         <!-- Add more rows as needed -->
@@ -281,6 +353,126 @@
         </div>
     </div>
 
+  
+
+    <!-- Modal -->
+    <div class="modal fade" id="vaccineHistoryModal" tabindex="-1" aria-labelledby="vaccineHistoryModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="vaccineHistoryModalLabel">Lịch Sử Tiêm Chủng</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    <!-- Table for Chưa Tiêm -->
+                    <h5 class="mb-3">Chưa Tiêm</h5>
+                    <div class="table-responsive">
+                        <table class="table table-bordered text-center align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Ngày đã ĐK</th>
+                                    <th>Tên Vắc xin/Huyết thanh</th>
+                                    <th>Xuất xứ</th>
+                                    <th>Đơn giá</th>
+                                    <th>Thành tiền</th>
+                                    <th>Số mũi</th>
+                                    <th>Tình trạng</th>
+                                    <th>Người chỉ định</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (lstiemChua != null && lstiemChua.Any())
+                                {
+                                    foreach (var item in lstiemChua)
+                                    {
+                                        <tr>
+                                            <td>@item.NgayTiem.ToString("dd/MM/yyyy")</td>
+                                            <td>@item.TenVacxin</td>
+                                            <td>@item.XuatXu</td>
+                                            <td>@item.DonGia?.ToString("N0") VND</td>
+                                            <td>@item.ThanhTien?.ToString("N0") VND</td>
+                                            <td>@item.LieuTiem</td>
+                                            <td>
+                                                <span class="badge bg-warning">Chưa tiêm</span>
+                                            </td>
+                                            <td>@item.TenNhanVien</td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="8">Không có dữ liệu.</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Table for Đã Tiêm -->
+                    <h5 class="mb-3">Đã Tiêm</h5>
+                    <div class="table-responsive">
+                        <table class="table table-bordered text-center align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Ngày tiêm</th>
+                                    <th>Tên Vắc xin/Huyết thanh</th>
+                                    <th>Xuất xứ</th>
+                                    <th>Đơn giá</th>
+                                    <th>Thành tiền</th>
+                                    <th>Số mũi</th>
+                                    <th>Tình trạng</th>
+                                    <th>Người Tiêm</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (lstiemda != null && lstiemda.Any())
+                                {
+                                    foreach (var item in lstiemda)
+                                    {
+                                        <tr>
+                                            <td>@item.NgayTiem.ToString("dd/MM/yyyy")</td>
+                                            <td>@item.TenVacxin</td>
+                                            <td>@item.XuatXu</td>
+
+                                            <td>@item.DonGia?.ToString("N0") VND</td>
+                                            <td>@item.ThanhTien?.ToString("N0") VND</td>
+                                            <td>@item.LieuTiem</td>
+                                            <td>
+                                                @if (item.TrangThaiTiem)
+                                                {
+                                                    <span class="badge bg-success">Đã tiêm</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-warning">Chưa tiêm</span>
+                                                }
+                                            </td>
+                                            <td>@item.TenNhanVien</td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="8">Không có dữ liệu.</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 </div>
