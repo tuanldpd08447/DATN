@@ -6,18 +6,20 @@
 
     // Danh sách chức năng với quyền truy cập tương ứng
     var features = new List<(string Title, string Description, string Icon, string Role, string Url)>
-    {
-        ("Khám Sàng Lọc", "Thực hiện các nghiệp vụ khám sàng lọc nhanh chóng và chính xác.", "bi bi-heart-pulse-fill", "Bác Sĩ", Url.Action("KhamSanLoc", "KhamSanLoc")),
-        ("Quản Lý Tiêm Chủng", "Quản lý toàn bộ quy trình và lịch sử tiêm chủng tại cơ sở.", "bi bi-shield-check", "Bác Sĩ", Url.Action("QLTiemChung", "QLTiemChung")),
-        ("Hỗ Trợ Tiêm Chủng", "Hỗ trợ quản lý lịch tiêm và hồ sơ vaccine nhanh chóng.", "bi bi-inbox-fill", "Y Tá", Url.Action("QLTiemChung", "QLTiemChung")),
-        ("Quản Lý Vaccine", "Quản lý danh sách vaccine và thông tin liên quan.", "bi bi-box-seam", "Quản Trị", Url.Action("QLKhoVaccine", "QLKhoVaccine")),
-        ("Quản Lý Hóa Đơn", "Theo dõi và quản lý hóa đơn nhanh chóng, chính xác.", "bi bi-receipt", "Kế Toán", Url.Action("QLHoaDon", "QLHoaDon")),
-        ("Quản Lý Xuất Nhập Kho", "Kiểm tra và quản lý việc xuất nhập kho vaccine hiệu quả.", "bi bi-box-arrow-in-up-right", "Kế Toán", Url.Action("QLXuatNhapKho", "QLXuatNhapKho")),
-        ("Quản Lý Tiếp Nhận", "Quản lý việc tiếp nhận khách hàng và điều phối lịch hẹn.", "bi bi-people-fill", "Lễ Tân", Url.Action("QLTiepNhan", "QLTiepNhan")),
-        ("Quản Lý Nhân Viên", "Quản lý danh sách và thông tin nhân sự của cơ sở.", "bi bi-briefcase-fill", "Nhân Sự", Url.Action("QLNhanVien", "QLNhanVien")),
-        ("Quản Lý Khách Hàng", "Quản lý thông tin khách hàng và lịch sử tương tác.", "bi bi-people", "Nhân Sự", Url.Action("QLKhachHang", "QLKhachHang")),
-        ("Quản Lý Tài Khoản", "Quản lý tài khoản và phân quyền chi tiết.", "bi bi-shield-lock-fill", "Nhân Sự", Url.Action("QLTaiKhoan", "QLTaiKhoan"))
-    };
+{
+    ("Khám Sàng Lọc", "Thực hiện các nghiệp vụ khám sàng lọc nhanh chóng và chính xác.", "bi bi-heart-pulse-fill", "Bác Sĩ", Url.Action("KhamSanLoc", "KhamSanLoc")),
+    ("Quản Lý Tiêm Chủng", "Quản lý toàn bộ quy trình và lịch sử tiêm chủng tại cơ sở.", "bi bi-shield-check", "Bác Sĩ", Url.Action("QLTiemChung", "QLTiemChung")),
+    //("Hỗ Trợ Tiêm Chủng", "Hỗ trợ quản lý lịch tiêm và hồ sơ vaccine nhanh chóng.", "bi bi-inbox-fill", "Y Tá", Url.Action("QLTiemChung", "QLTiemChung")),
+    ("Quản Lý Vaccine", "Quản lý danh sách vaccine và thông tin liên quan.", "bi bi-box-seam", "Quản Trị", Url.Action("QLKhoVaccine", "QLKhoVaccine")),
+    ("Quản Lý Hóa Đơn", "Theo dõi và quản lý hóa đơn nhanh chóng, chính xác.", "bi bi-receipt", "Kế Toán", Url.Action("QLHoaDon", "QLHoaDon")),
+    ("Quản Lý Xuất Nhập Kho", "Kiểm tra và quản lý việc xuất nhập kho vaccine hiệu quả.", "bi bi-box-arrow-in-up-right", "Kế Toán", Url.Action("QLXuatNhapKho", "QLXuatNhapKho")),
+    ("Quản Lý Hoàn Trả", "Quản lý và theo dõi các nghiệp vụ hoàn trả vaccine.", "bi bi-arrow-repeat", "Kế Toán", Url.Action("QLHoanTra", "QLHoanTra")),
+    ("Quản Lý Tiếp Nhận", "Quản lý việc tiếp nhận khách hàng và điều phối lịch hẹn.", "bi bi-people-fill", "Lễ Tân", Url.Action("QLTiepNhan", "QLTiepNhan")),
+    ("Quản Lý Nhân Viên", "Quản lý danh sách và thông tin nhân sự của cơ sở.", "bi bi-briefcase-fill", "Nhân Sự", Url.Action("QLNhanVien", "QLNhanVien")),
+    ("Quản Lý Khách Hàng", "Quản lý thông tin khách hàng và lịch sử tương tác.", "bi bi-people", "Nhân Sự", Url.Action("QLKhachHang", "QLKhachHang")),
+    ("Quản Lý Tài Khoản", "Quản lý tài khoản và phân quyền chi tiết.", "bi bi-shield-lock-fill", "Nhân Sự", Url.Action("QLTaiKhoan", "QLTaiKhoan"))
+};
+
 
 
     var currentRole = role; 
@@ -70,7 +72,7 @@
     </style>
     @if (TempData["Role"] != null)
     {
-        <h2 class="text-center mb-4">Chào mừng @Username đã đến</h2>
+        <h2 class="text-center mb-4">Chào mừng @Username </h2>
         <p class="text-center text-muted">Hãy để chúng tôi đồng hành cùng bạn trong công việc hàng ngày</p>
         <div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
             @foreach (var feature in sortedFeatures)

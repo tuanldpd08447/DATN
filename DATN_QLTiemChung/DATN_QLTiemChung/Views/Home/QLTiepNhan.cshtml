@@ -11,7 +11,7 @@
         "Bình Định", "Tày", "Tày", "Tày", "Chơ", "Chống", "Gieo", "Mai", "Gia Rai",
         "Kon Tum", "Đồng Tháp", "Gyar", "Lý Tự", "Tư", "Chứt", "Vân Kiều"
     };
-    var temp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$";
+
     var tg = DateOnly.FromDateTime(DateTime.Now);
 }
 <style>
@@ -113,25 +113,9 @@
                                        title="Nhập đúng định dạng email (example@gmail.com)" required disabled>
                                 <span id="emailError" class="error-message" style="color:red;"></span>
 
-                                <input type="hidden" id="emailPattern" value="@temp" />
 
-                                <script>
-                                    function validateEmail() {
-                                        var email = document.getElementById('email').value;
-                                        var emailPattern = document.getElementById('emailPattern').value; /
-                                        var regexPattern = new RegExp(emailPattern);
-                                        var errorElement = document.getElementById('emailError');
 
-                                        if (!regexPattern.test(email)) {
-                                            document.getElementById('email').classList.add('input-error');
-                                            errorElement.textContent = "Email không hợp lệ.";
-                                            errorElement.style.display = 'block';
-                                        } else {
-                                            document.getElementById('email').classList.remove('input-error');
-                                            errorElement.style.display = 'none';
-                                        }
-                                    }
-                                </script>
+                               
                             </div>
                         </div>
                         <h5 class="mt-2">Hộ khẩu</h5>
@@ -272,225 +256,7 @@
                                     </div>
                                 </div>
 
-                            <script>
-
-                                const khachHangs = @Html.Raw(khachHangsJson ?? "null");
-                                const khachHangList = khachHangs || [];
-
-                                const khachHangPreoder = @Html.Raw(khachHangPreoderJson ?? "null");
-                                const khachHangPreoderList = khachHangPreoder || [];
-
-                                // Hàm để render lại bảng với dữ liệu mới
-                                function renderTable(data) {
-                                    const tbody = document.querySelector("#khachHangTable tbody");
-                                    tbody.innerHTML = ''; // Xóa dữ liệu cũ
-
-                                    if (data.length === 0) {
-                                        // Hiển thị thông báo khi không có dữ liệu
-                                        tbody.innerHTML = `
-                                            <tr>
-                                                <td class="text-center fw-semibold" colspan="12">Không tìm thấy dữ liệu cần tìm</td>
-                                            </tr>
-                                        `;
-                                        return;
-                                    }
-
-                                    // Sử dụng DocumentFragment để cải thiện hiệu năng
-                                    const fragment = document.createDocumentFragment();
-
-                                    data.forEach(kh => {
-                                        const tr = document.createElement("tr");
-
-                                        tr.innerHTML = `
-                                    <td RadioCell${kh.IDKH}>
-                                        <div class="form-check">
-                                           <input class="form-check-input" type="radio" name="RadioKhachHang" id="Radio${kh.IDKH}" onchange="AddHangCho('${kh.IDKH}')" value="${kh.IDKH}">
-                                        </div>
-                                    </td>
-                                    <!-- Các cột dữ liệu khác với id riêng -->
-                                    <td id="IDKHCell${kh.IDKH}">${kh.IDKH}</td>
-                                    <td id="TenKhachHangCell${kh.IDKH}">${kh.TenKhachHang}</td>
-                                    <td id="NgaySinhCell${kh.IDKH}">
-                                        ${kh.NgaySinh ? new Date(kh.NgaySinh).toLocaleDateString('vi-VN') : ''}
-                                    </td>
-                                    <td id="GioiTinhCell${kh.IDKH}">${kh.GioiTinh || ''}</td>
-                                    <td id="DiaChiCell${kh.IDKH}">${kh.DiaChi || ''}</td>
-                                    <td id="SoDienThoaiCell${kh.IDKH}">${kh.SoDienThoai || ''}</td>
-                                    <td id="EmailCell${kh.IDKH}">${kh.Email || ''}</td>
-                                    <td id="CCCD_MDDCell${kh.IDKH}">${kh.CCCD_MDD || ''}</td>
-                                    <td id="DanTocCell${kh.IDKH}">${kh.DanToc || ''}</td>
-                                    <td id="FullAddressCell${kh.IDKH}">${kh.FullAddress || ''}</td>
-                                        `;
-
-                                        fragment.appendChild(tr);
-                                    });
-
-                                    tbody.appendChild(fragment);
-                                }
-                                function renderKhachHangPreoderTable(data) {
-                                    const tbody = document.querySelector("#khachHangPreoderTable tbody");
-                                    tbody.innerHTML = ''; // Xóa dữ liệu cũ
-
-                                    if (data.length === 0) {
-                                        tbody.innerHTML = `
-                                                <tr>
-                                                    <td colspan="13" class="text-center">Không có lịch hẹn nào</td>
-                                                </tr>
-                                            `;
-                                        return;
-                                    }
-
-                                    const fragment = document.createDocumentFragment();
-
-                                    data.forEach(order => {
-                                        const tr = document.createElement("tr");
-                                        tr.innerHTML = `
-                                          <td id="RadioCell${order.IDKH}">
-                                        <div class="form-check">
-                                          <input class="form-check-input" type="radio" name="RadioKhachHang" id="Radio${order.IDKH}" onchange="AddHangCho('${order.IDKH}')"  value="${order.IDKH}">
-                                        </div>
-                                    </td>
-                                    <!-- Các cột dữ liệu khác với id riêng -->
-                                    <td id="IDKHCell${order.IDKH}">${order.IDKH}</td>
-                                    <td id="NgayHenCell${order.IDKH}">${order.NgayHen}</td>
-                                    <td id="ThoiGianHenCell${order.IDKH}">${order.ThoiGianHen}</td>
-                                    <td id="TenKhachHangCell${order.IDKH}">${order.TenKhachHang}</td>
-                                    <td id="NgaySinhCell${order.IDKH}">
-                                        ${order.NgaySinh ? new Date(order.NgaySinh).toLocaleDateString('vi-VN') : ''}
-                                    </td>
-                                    <td id="GioiTinhCell${order.IDKH}">${order.GioiTinh || ''}</td>
-                                    <td id="DiaChiCell${order.IDKH}">${order.DiaChi || ''}</td>
-                                    <td id="SoDienThoaiCell${order.IDKH}">${order.SoDienThoai || ''}</td>
-                                    <td id="EmailCell${order.IDKH}">${order.Email || ''}</td>
-                                    <td id="CCCD_MDDCell${order.IDKH}">${order.CCCD_MDD || ''}</td>
-                                    <td id="DanTocCell${order.IDKH}">${order.DanToc || ''}</td>
-                                    <td id="FullAddressCell${order.IDKH}">${order.FullAddress || ''}</td>
-                                            `;
-                                        fragment.appendChild(tr);
-                                    });
-
-                                    tbody.appendChild(fragment);
-                                }
-                                // Hàm tìm kiếm
-                                document.getElementById('searchButton').addEventListener('click', function () {
-                                    const medicalCode = document.getElementById('medicalCodeFind').value.trim().toLowerCase();
-                                    const userName = document.getElementById('userNameFind').value.trim().toLowerCase();
-                                    const identityCode = document.getElementById('identityCodeFind').value.trim().toLowerCase();
-
-                                    // Lọc dữ liệu theo các tiêu chí tìm kiếm
-                                    const filteredData = khachHangs.filter(kh => {
-                                        return (
-                                            (medicalCode === '' || (kh.IDKH && kh.IDKH.toLowerCase().includes(medicalCode))) &&
-                                            (userName === '' || (kh.TenKhachHang && kh.TenKhachHang.toLowerCase().includes(userName))) &&
-                                            (identityCode === '' || (kh.CCCD_MDD && kh.CCCD_MDD.toLowerCase().includes(identityCode)))
-                                        );
-                                    });
-                                    const filteredData2 = khachHangPreoder.filter(kh => {
-                                        return (
-                                            (medicalCode === '' || (kh.IDKH && kh.IDKH.toLowerCase().includes(medicalCode))) &&
-                                            (userName === '' || (kh.TenKhachHang && kh.TenKhachHang.toLowerCase().includes(userName))) &&
-                                            (identityCode === '' || (kh.CCCD_MDD && kh.CCCD_MDD.toLowerCase().includes(identityCode)))
-                                        );
-                                    });
-
-                                    // Render lại bảng với dữ liệu đã lọc
-                                    renderTable(filteredData);
-                                    renderKhachHangPreoderTable(filteredData2);
-                                });
-
-                                // Hiển thị dữ liệu mặc định khi trang tải
-                                renderTable(khachHangList);
-                                renderKhachHangPreoderTable(khachHangPreoderList);
-
-
-                                // Xử lý sự kiện khi nhấn nút "Thêm"
-                                document.getElementById("addButton").addEventListener("click", function () {
-                                    // Lấy form
-                                    const form = document.getElementById("customerForm");
-
-                                    // Thực hiện kích hoạt lại các trường input và select trong form
-                                    const inputs = form.querySelectorAll("input");
-                                    const selects = form.querySelectorAll("select");
-
-                                    // Kích hoạt tất cả các trường input
-                                    inputs.forEach(input => {
-                                        input.disabled = false;  // Bỏ thuộc tính disabled
-                                    });
-
-                                    // Kích hoạt tất cả các trường select
-                                    selects.forEach(select => {
-                                        select.disabled = false;  // Bỏ thuộc tính disabled
-                                    });
-
-                                  
-                                });
-
-                                document.getElementById("CancelButton").addEventListener("click", function () {
-                                    // Lấy form
-                                    const form = document.getElementById("customerForm");
-
-                                 
-                                        // Thực hiện kích hoạt lại các trường input và select trong form
-                                        const inputs = form.querySelectorAll("input");
-                                        const selects = form.querySelectorAll("select");
-
-                                        // Kích hoạt tất cả các trường input và làm trống chúng
-                                        inputs.forEach(input => {
-                                            input.value = ""; // Làm trống nội dung
-                                            input.disabled = true;  // Thêm thuộc tính disabled
-                                        });
-
-                                        // Kích hoạt tất cả các trường select và đặt về giá trị mặc định
-                                        selects.forEach(select => {
-                                            select.selectedIndex = 0; // Đặt về tùy chọn đầu tiên (thường là tùy chọn mặc định)
-                                            select.disabled = true;  // Thêm thuộc tính disabled
-                                        });
-
-
-                                        
-                                 
-                                });
-
-
-                                // Lấy phần tử button
-                                const activateButton = document.getElementById('activateButton');
-                                const targetButton = document.getElementById('targetButton');
-
-                                // Thêm sự kiện click vào nút kích hoạt
-                                activateButton.addEventListener('click', function () {
-                                    // Khi nút đầu tiên được nhấn, kích hoạt nút thứ hai
-                                    targetButton.click();
-                                });
-
-                                // Thêm sự kiện click vào nút bị kích hoạt
-                                targetButton.addEventListener('click', function () {
-
-                                });
-
-                                let selectedID = null;
-
-                                function AddHangCho(id) {
-                                    selectedID = id;
-                                    document.getElementById('idinput').value = id;
-                                    console.log("Selected ID:", id);
-                                }
-
-                                document.addEventListener('DOMContentLoaded', function () {
-                                    const sumitadd = document.getElementById('sumitadd');
-                                    const AddSumit = document.getElementById('AddSumit');
-
-                                    if (sumitadd && AddSumit) {
-                                        sumitadd.addEventListener('click', function () {
-                                            AddSumit.click();
-                                        });
-                                    } else {
-                                        console.error("Không tìm thấy một trong hai phần tử: 'sumitadd' hoặc 'AddSumit'");
-                                    }
-                                });
-
-
-
-                            </script>
+                        
 
                                 <!-- Footer Modal -->
                                 <div class="modal-footer">
@@ -509,3 +275,212 @@
 
   
 </div>
+<script>
+
+        // Khởi tạo dữ liệu từ server với giá trị mặc định là mảng rỗng
+        const khachHangs = @Html.Raw(khachHangsJson ?? "null") || [];
+    const khachHangPreoder = @Html.Raw(khachHangPreoderJson ?? "null") || [];
+
+    // Hàm để render lại bảng với dữ liệu mới
+    function renderTable(data) {
+        const tbody = document.querySelector("#khachHangTable tbody");
+        tbody.innerHTML = ''; // Xóa dữ liệu cũ
+
+        if (!Array.isArray(data) || data.length === 0) {
+            // Hiển thị thông báo khi không có dữ liệu
+            tbody.innerHTML = `
+                    <tr>
+                        <td class="text-center fw-semibold" colspan="12">Không tìm thấy dữ liệu cần tìm</td>
+                    </tr>
+                `;
+            return;
+        }
+
+        const fragment = document.createDocumentFragment();
+
+        data.forEach(kh => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+                    <td RadioCell${kh.IDKH}>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="RadioKhachHang" id="Radio${kh.IDKH}" onchange="AddHangCho('${kh.IDKH}')" value="${kh.IDKH}">
+                        </div>
+                    </td>
+                    <td id="IDKHCell${kh.IDKH}">${kh.IDKH}</td>
+                    <td id="TenKhachHangCell${kh.IDKH}">${kh.TenKhachHang}</td>
+                    <td id="NgaySinhCell${kh.IDKH}">
+                        ${kh.NgaySinh ? new Date(kh.NgaySinh).toLocaleDateString('vi-VN') : ''}
+                    </td>
+                    <td id="GioiTinhCell${kh.IDKH}">${kh.GioiTinh || ''}</td>
+                    <td id="DiaChiCell${kh.IDKH}">${kh.DiaChi || ''}</td>
+                    <td id="SoDienThoaiCell${kh.IDKH}">${kh.SoDienThoai || ''}</td>
+                    <td id="EmailCell${kh.IDKH}">${kh.Email || ''}</td>
+                    <td id="CCCD_MDDCell${kh.IDKH}">${kh.CCCD_MDD || ''}</td>
+                    <td id="DanTocCell${kh.IDKH}">${kh.DanToc || ''}</td>
+                    <td id="FullAddressCell${kh.IDKH}">${kh.FullAddress || ''}</td>
+                `;
+            fragment.appendChild(tr);
+        });
+
+        tbody.appendChild(fragment);
+    }
+
+    function renderKhachHangPreoderTable(data) {
+        const tbody = document.querySelector("#khachHangPreoderTable tbody");
+        tbody.innerHTML = ''; // Xóa dữ liệu cũ
+
+        if (!Array.isArray(data) || data.length === 0) {
+            tbody.innerHTML = `
+                    <tr>
+                        <td colspan="13" class="text-center">Không có lịch hẹn nào</td>
+                    </tr>
+                `;
+            return;
+        }
+
+        const fragment = document.createDocumentFragment();
+
+        data.forEach(order => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+                    <td id="RadioCell${order.IDKH}">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="RadioKhachHang" id="Radio${order.IDKH}" onchange="AddHangCho('${order.IDKH}')" value="${order.IDKH}">
+                        </div>
+                    </td>
+                    <td id="IDKHCell${order.IDKH}">${order.IDKH}</td>
+                    <td id="NgayHenCell${order.IDKH}">${order.NgayHen}</td>
+                    <td id="ThoiGianHenCell${order.IDKH}">${order.ThoiGianHen}</td>
+                    <td id="TenKhachHangCell${order.IDKH}">${order.TenKhachHang}</td>
+                    <td id="NgaySinhCell${order.IDKH}">
+                        ${order.NgaySinh ? new Date(order.NgaySinh).toLocaleDateString('vi-VN') : ''}
+                    </td>
+                    <td id="GioiTinhCell${order.IDKH}">${order.GioiTinh || ''}</td>
+                    <td id="DiaChiCell${order.IDKH}">${order.DiaChi || ''}</td>
+                    <td id="SoDienThoaiCell${order.IDKH}">${order.SoDienThoai || ''}</td>
+                    <td id="EmailCell${order.IDKH}">${order.Email || ''}</td>
+                    <td id="CCCD_MDDCell${order.IDKH}">${order.CCCD_MDD || ''}</td>
+                    <td id="DanTocCell${order.IDKH}">${order.DanToc || ''}</td>
+                    <td id="FullAddressCell${order.IDKH}">${order.FullAddress || ''}</td>
+                `;
+            fragment.appendChild(tr);
+        });
+
+        tbody.appendChild(fragment);
+    }
+
+    // Hàm tìm kiếm
+    document.getElementById('searchButton').addEventListener('click', function () {
+        const medicalCode = document.getElementById('medicalCodeFind').value.trim().toLowerCase();
+        const userName = document.getElementById('userNameFind').value.trim().toLowerCase();
+        const identityCode = document.getElementById('identityCodeFind').value.trim().toLowerCase();
+
+        const filteredData = Array.isArray(khachHangs)
+            ? khachHangs.filter(kh => (
+                (medicalCode === '' || (kh.IDKH && kh.IDKH.toLowerCase().includes(medicalCode))) &&
+                (userName === '' || (kh.TenKhachHang && kh.TenKhachHang.toLowerCase().includes(userName))) &&
+                (identityCode === '' || (kh.CCCD_MDD && kh.CCCD_MDD.toLowerCase().includes(identityCode)))
+            ))
+            : [];
+
+        const filteredData2 = Array.isArray(khachHangPreoder)
+            ? khachHangPreoder.filter(kh => (
+                (medicalCode === '' || (kh.IDKH && kh.IDKH.toLowerCase().includes(medicalCode))) &&
+                (userName === '' || (kh.TenKhachHang && kh.TenKhachHang.toLowerCase().includes(userName))) &&
+                (identityCode === '' || (kh.CCCD_MDD && kh.CCCD_MDD.toLowerCase().includes(identityCode)))
+            ))
+            : [];
+
+        renderTable(filteredData);
+        renderKhachHangPreoderTable(filteredData2);
+    });
+
+    // Hiển thị dữ liệu mặc định khi tải trang
+    renderTable(khachHangs);
+    renderKhachHangPreoderTable(khachHangPreoder);
+
+
+    // Xử lý sự kiện khi nhấn nút "Thêm"
+    document.getElementById("addButton").addEventListener("click", function () {
+        // Lấy form
+        const form = document.getElementById("customerForm");
+
+        // Thực hiện kích hoạt lại các trường input và select trong form
+        const inputs = form.querySelectorAll("input");
+        const selects = form.querySelectorAll("select");
+
+        // Kích hoạt tất cả các trường input
+        inputs.forEach(input => {
+            input.disabled = false;  // Bỏ thuộc tính disabled
+        });
+
+        // Kích hoạt tất cả các trường select
+        selects.forEach(select => {
+            select.disabled = false;  // Bỏ thuộc tính disabled
+        });
+
+
+    });
+
+    document.getElementById("CancelButton").addEventListener("click", function () {
+        // Lấy form
+        const form = document.getElementById("customerForm");
+
+
+        // Thực hiện kích hoạt lại các trường input và select trong form
+        const inputs = form.querySelectorAll("input");
+        const selects = form.querySelectorAll("select");
+
+        // Kích hoạt tất cả các trường input và làm trống chúng
+        inputs.forEach(input => {
+            input.value = ""; // Làm trống nội dung
+            input.disabled = true;  // Thêm thuộc tính disabled
+        });
+
+        // Kích hoạt tất cả các trường select và đặt về giá trị mặc định
+        selects.forEach(select => {
+            select.selectedIndex = 0; // Đặt về tùy chọn đầu tiên (thường là tùy chọn mặc định)
+            select.disabled = true;  // Thêm thuộc tính disabled
+        });
+    });
+
+
+    // Lấy phần tử button
+    const activateButton = document.getElementById('activateButton');
+    const targetButton = document.getElementById('targetButton');
+
+    // Thêm sự kiện click vào nút kích hoạt
+    activateButton.addEventListener('click', function () {
+        // Khi nút đầu tiên được nhấn, kích hoạt nút thứ hai
+        targetButton.click();
+    });
+
+    // Thêm sự kiện click vào nút bị kích hoạt
+    targetButton.addEventListener('click', function () {
+
+    });
+
+    let selectedID = null;
+
+    function AddHangCho(id) {
+        selectedID = id;
+        document.getElementById('idinput').value = id;
+        console.log("Selected ID:", id);
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const sumitadd = document.getElementById('sumitadd');
+        const AddSumit = document.getElementById('AddSumit');
+
+        if (sumitadd && AddSumit) {
+            sumitadd.addEventListener('click', function () {
+                AddSumit.click();
+            });
+        } else {
+            console.error("Không tìm thấy một trong hai phần tử: 'sumitadd' hoặc 'AddSumit'");
+        }
+    });
+
+
+
+</script>

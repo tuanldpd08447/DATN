@@ -106,9 +106,7 @@ namespace DATN_QLTiemChung.Controllers
             ViewBag.HangCho = await GetHangCho();
 
            GetSession();
-            TempData["Notification"] = "Lấy hàng chờ thành công.";
-            TempData["NotificationType"] = "success";
-            TempData["NotificationTitle"] = "Thông báo.";
+ 
             return View("~/Views/Home/QLHoaDon.cshtml");
         }
         public async Task<IActionResult> QLHoaDon()
@@ -185,8 +183,8 @@ namespace DATN_QLTiemChung.Controllers
                 {
                     var apiResponse = await response.Content.ReadAsStringAsync();
                     var addedHoaDon = JsonConvert.DeserializeObject<HoaDonDTO>(apiResponse);
-                   GetSession(); 
-                    
+
+                    GetSession(); 
                     return RedirectToAction("QLHoaDon");
 
                 }
@@ -237,7 +235,7 @@ namespace DATN_QLTiemChung.Controllers
                GetSession();  return StatusCode(500, $"Có lỗi khi kết nối với máy chủ: {ex.Message}");
             }
         }
-        public async Task<IActionResult> UpdateHoaDon(bool ThanhToan, string MaHD, string MaKH)
+        public async Task<IActionResult> UpdateHoaDon(bool ThanhToan, string MaHD, string MaKH , string GhiChu)
         {
             if ( string.IsNullOrEmpty(MaHD) || string.IsNullOrEmpty(MaKH))
             {
@@ -246,8 +244,12 @@ namespace DATN_QLTiemChung.Controllers
             try
             {
                 using var client = _httpClientFactory.CreateClient();
-
-                var content = new StringContent(JsonConvert.SerializeObject(ThanhToan), Encoding.UTF8, "application/json");
+                UpdateHoaDonRequest request = new UpdateHoaDonRequest 
+                {
+                    GhiChu = GhiChu,
+                    ThanhToan = ThanhToan,
+                };
+                var content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
                 var response = await client.PutAsync($"https://localhost:7143/api/DataQLHoaDon/UpdateHoaDon/{MaHD}", content);
 
                 if (!response.IsSuccessStatusCode)

@@ -28,8 +28,12 @@ namespace DATN_QLTiemChung.Controllers
             GetSession();
             return View();
         }
+        public IActionResult TiepNhanTheoHD()
+        {
+            GetSession();
+            return View();
+        }
 
-       
         public IActionResult PhieuLinh()
         {
               GetSession(); return View();

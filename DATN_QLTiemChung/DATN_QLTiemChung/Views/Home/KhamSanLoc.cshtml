@@ -436,7 +436,7 @@
                    
                 </tbody>
             </table>
-            <button type="button" class="Double-end btn custom-btn w-25" id="xacNhan" >Xác Nhận</button>
+            <button type="button" class="float-end btn custom-btn w-25" id="xacNhan">Xác Nhận</button>
         </div>
     </div>
  
@@ -611,6 +611,13 @@
                 checkbox.title = "Không thể chọn vật tư này!"; // Gán tooltip khi hover vào checkbox
             });
         }
+        function enableAllCheckboxes() {
+            const checkboxes = document.querySelectorAll(".vatTuCheckbox"); // Lấy tất cả checkbox có class vatTuCheckbox
+            checkboxes.forEach(checkbox => {
+                checkbox.disabled = false; // Vô hiệu hóa checkbox
+                checkbox.title = "Không thể chọn vật tư này!"; // Gán tooltip khi hover vào checkbox
+            });
+        }
         // Kiểm tra điều kiện "xấu"
         if (
             conditions.dauHieuBTCo.checked ||
@@ -623,24 +630,28 @@
             KetQua.value = "false";
             TinhTrangSucKhoe.value = "Xấu";
             setDefault(false); // Đặt required
+            disableAllCheckboxes();
         } else if (conditions.phanVeCo.checked) {
             options.option2.checked = true;
             TrangThai.value = "true";
             KetQua.value = "true";
             TinhTrangSucKhoe.value = "Tạm ổn";
             setDefault(true); // Gỡ bỏ required
+            enableAllCheckboxes();
         } else if (Object.values(conditions).some(cond => cond.checked)) {
             options.option3.checked = true;
             TrangThai.value = "true";
             KetQua.value = "true";
             TinhTrangSucKhoe.value = "Tạm ổn";
             setDefault(true); // Gỡ bỏ required
+            enableAllCheckboxes();
         } else {
             options.option1.checked = true;
             TrangThai.value = "true";
             KetQua.value = "true";
             TinhTrangSucKhoe.value = "Tốt";
             setDefault(true); // Gỡ bỏ required
+            enableAllCheckboxes();
         }
 
         // Kiểm tra MuiTiepTheo là 'true' và đặt trạng thái required
@@ -773,6 +784,7 @@
 
                 tr.innerHTML = `
                     <td><input type="checkbox" class="vatTuCheckbox" data-id="${vt.IDVT}"></td>
+                        <td><input type="number" class="soMui form-control" id="soMui-${vt.IDVT}" value="1" min="1" /></td>
                     <td>${vt.IDVT}</td>
                     <td>${vt.TenVatTu}</td>
                     <td>${vt.TenLoai}</td>
@@ -783,7 +795,7 @@
                     <td>${vt.HanSuDung ? new Date(vt.HanSuDung).toLocaleDateString('vi-VN') : 'N/A'}</td>
                     <td>${vt.SoLuong}</td>
                     <td>${vt.GhiChu || ''}</td>
-                    <td><input type="number" class="soMui form-control" id="soMui-${vt.IDVT}" value="1" min="1" /></td>
+                        
                     <td>${recommendation}</td>
                 `;
                 tbody.appendChild(tr);
@@ -803,6 +815,7 @@
 
                 tr.innerHTML = `
                     <td><input type="checkbox" class="vatTuCheckbox" data-id="${vt.IDVT}"></td>
+                     <td><input type="number" class="soMui form-control" id="soMui-${vt.IDVT}" value="1" min="1" /></td>
                     <td>${vt.IDVT}</td>
                     <td>${vt.TenVatTu}</td>
                     <td>${vt.TenLoai}</td>
@@ -813,7 +826,7 @@
                     <td>${vt.HanSuDung ? new Date(vt.HanSuDung).toLocaleDateString('vi-VN') : 'N/A'}</td>
                     <td>${vt.SoLuong}</td>
                     <td>${vt.GhiChu || ''}</td>
-                    <td><input type="number" class="soMui form-control" id="soMui-${vt.IDVT}" value="1" min="1" /></td>
+                       
                     <td></td> <!-- Không có đề nghị -->
                 `;
                 tbody.appendChild(tr);
@@ -883,16 +896,16 @@
             const checkbox = e.target;
             const row = checkbox.closest("tr");
             const vt = {
-                IDVT: row.cells[1].textContent,
-                TenVatTu: row.cells[2].textContent,
-                TenLoai: row.cells[3].textContent,
-                TenNguon: row.cells[4].textContent,
-                TenNhaCungCap: row.cells[5].textContent,
-                NoiXuatXu: row.cells[6].textContent,
-                DonGia: row.cells[7].textContent,
-                HanSuDung: row.cells[8].textContent,
-                SoLuong: row.cells[9].textContent,
-                GhiChu: row.cells[10].textContent,
+                IDVT: row.cells[2].textContent,
+                TenVatTu: row.cells[3].textContent,
+                TenLoai: row.cells[4].textContent,
+                TenNguon: row.cells[5].textContent,
+                TenNhaCungCap: row.cells[6].textContent,
+                NoiXuatXu: row.cells[7].textContent,
+                DonGia: row.cells[8].textContent,
+                HanSuDung: row.cells[9].textContent,
+                SoLuong: row.cells[10].textContent,
+                GhiChu: row.cells[11].textContent,
             };
             toggleTargetTable(checkbox, vt);
         }

@@ -328,34 +328,38 @@ namespace DATN_QLTiemChung_Api.Controllers
         }
 
         [HttpPut("UpdateHoaDon/{id}")]
-        public async Task<IActionResult> UpdateHoaDon(string id, [FromBody] bool ThanhToan)
+        public async Task<IActionResult> UpdateHoaDon(string id, [FromBody] UpdateHoaDonRequest request)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return BadRequest(new { Message = "Dữ liệu không hợp lệ.", Errors = ModelState });
             }
-
-            var hd = await _context.HoaDon.FirstOrDefaultAsync(hd => hd.IDHD == id);
-            if (hd == null)
-            {
-                return NotFound(new { Message = "Hóa đơn không tồn tại." });
-            }
-
-            hd.ThanhToan = ThanhToan;
 
             try
             {
+                // Tìm hóa đơn
+                var hd = await _context.HoaDon.FirstOrDefaultAsync(h => h.IDHD == id);
+                if (hd == null)
+                {
+                    return NotFound(new { Message = "Hóa đơn không tồn tại." });
+                }
+
+                // Cập nhật thông tin
+                hd.ThanhToan = request.ThanhToan;
+                hd.GhiChu = request.GhiChu;
+
                 // Lưu thay đổi
                 _context.HoaDon.Update(hd);
                 await _context.SaveChangesAsync();
-                return Ok(new { Message = "Cập nhật trạng thái thành công." });
+
+                return Ok(new { Message = "Cập nhật hóa đơn thành công.", HoaDon = hd });
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { Message = "Đã xảy ra lỗi khi cập nhật trạng thái.", Error = ex.Message });
+                return StatusCode(500, new { Message = "Đã xảy ra lỗi khi cập nhật hóa đơn.", Error = ex.Message });
             }
-
         }
+
 
     }
 }

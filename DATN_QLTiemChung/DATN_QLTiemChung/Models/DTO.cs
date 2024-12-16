@@ -3,6 +3,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DATN_QLTiemChung.Models
 {
+    public class UpdateHoaDonRequest
+    {
+        public bool ThanhToan { get; set; }
+        public string GhiChu { get; set; }
+    }
     public class KHDTO
     {
         public string IDKH { get; set; }
@@ -438,4 +443,117 @@ namespace DATN_QLTiemChung.Models
         public string TenNhanVien { get; set; } // Tên nhân viên thực hiện
         public string? GhiChu { get; set; } // Ghi chú
     }
+    public class DSHoanTraDTO
+    {
+        public string IDKH { get; set; }
+        public string TenKhachHang { get; set; }
+        public DateOnly ThoiGian { get; set; }
+        public string GhiChu { get; set; }
+        public KhachHang? KhachHang { get; set; }
+    }
+
+    public class HoaDonHT
+    {
+        public string IDHT { get; set; }
+        public string HoaDonMoi { get; set; }
+        public string HoaDonCu { get; set; }
+        public string GhiChu { get; set; } // Lý do hoàn trả
+        public Double DonGia { get; set; } // Đơn giá
+        public bool TrangThai { get; set; } // Trạng thái
+        public string IDHD { get; set; }
+        public string IDKH { get; set; }
+        public string IDHDCT { get; set; }
+        public string TenKhachHang { get; set; }
+        public bool ThanhToan { get; set; }
+        public DateTime ThoiGian { get; set; }
+        public string IDVT { get; set; }
+        public string IDNV { get; set; }
+        public string NoiDung { get; set; }
+        public int SoLuong { get; set; }
+        public Double TongTien { get; set; }
+
+        public HoaDon? HoaDon { get; set; }
+        public KhachHang? KhachHang { get; set; }
+        public NhanVien? NhanVien { get; set; }
+        public ICollection<HoaDonChiTiet> HoaDonChiTiet { get; set; } = new List<HoaDonChiTiet>();
+    }
+    public class HoaDonChiTietDTO
+    {
+        public string IDVT { get; set; }
+        public string TenVT { get; set; }
+        public double DonGia { get; set; }
+        public int SoLuong { get; set; }
+        public double ThanhTien { get; set; }
+    }
+
+    public class HoaDonDTO2
+    {
+        public string IDHD { get; set; }
+        public string IDNV { get; set; }
+        public string KhachHang { get; set; }
+        public DateTime ThoiGian { get; set; }
+        public double TongTien { get; set; }
+        public string NoiDung { get; set; }
+        public List<HoaDonChiTietDTO> HoaDonChiTiets { get; set; }
+    }
+
+    public class HoanTraDTO
+    {
+        public string IDHT { get; set; }
+        public string IDKH { get; set; }
+        public string LyDo { get; set; }
+        public DateTime ThoiGian { get; set; }
+        public double DonGia { get; set; }
+        public double ThanhTien { get; set; }
+
+        // Sửa thành HoaDonDTO2
+        public HoaDonDTO2 HoaDonCu { get; set; }
+        public HoaDonDTO2 HoaDonMoi { get; set; }
+    }
+    public class QLTaiKhoanNVDTO
+    {
+        [Required]
+        public string IDTKNV { get; set; }
+        [Required]
+        public string IDNV { get; set; }
+        [Required]
+        public string Email { get; set; }
+        [Required]
+        public string MatKhau { get; set; }
+
+    }
+    public class CreateTaiKhoanNVDTO
+    {
+        public string IDTKNV { get; set; }
+        public string IDNV { get; set; }
+        public string Email { get; set; }
+        public string MatKhau { get; set; }
+    }
+    public class UpdateMatKhauNVDTO
+    {
+        public string NewPassword { get; set; }
+    }
+    public class QLTaiKhoanKHDTO
+    {
+        [Required]
+        public string IDTKKH { get; set; }
+        [Required]
+        public string IDKH { get; set; }
+        [Required]
+        public string SDT { get; set; }
+        [Required]
+        public string MatKhau { get; set; }
+    }
+    public class CreateTaiKhoanKHDTO
+    {
+
+        public string IDTKKH { get; set; }
+
+        public string IDKH { get; set; }
+
+        public string SDT { get; set; }
+
+        public string MatKhau { get; set; }
+    }
+
 }

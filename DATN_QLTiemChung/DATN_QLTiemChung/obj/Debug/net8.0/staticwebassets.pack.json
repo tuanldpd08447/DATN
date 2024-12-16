@@ -29,6 +29,10 @@
       "PackagePath": "staticwebassets\\Img\\pdf-2127829_640.png"
     },
     {
+      "Id": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\wwwroot\\Img\\sheet.png",
+      "PackagePath": "staticwebassets\\Img\\sheet.png"
+    },
+    {
       "Id": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
@@ -271,6 +275,10 @@
     {
       "Id": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\wwwroot\\pdf\\DAY-LA-FILE-MAU-PDF(1).pdf",
+      "PackagePath": "staticwebassets\\pdf\\DAY-LA-FILE-MAU-PDF(1).pdf"
     },
     {
       "Id": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\wwwroot\\pdf\\DAY-LA-FILE-MAU-PDF.pdf",

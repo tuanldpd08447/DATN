@@ -1,96 +1,115 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using Newtonsoft.Json
+@{
+    var qltknhanViensJson = ViewBag.QLTaiKhoanNVs;
+    var qltkkhachHangsJson = ViewBag.QLTaiKhoanKHs;
+
+    var qlTaiKhoanNV = ViewBag.QLTaiKhoanNV as QLTaiKhoanNVDTO;
+    var qltkkhachhang = ViewBag.QLyTaiKhoanKH as QLTaiKhoanKHDTO;
+    string emailtemplpe = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$/";
+}
+
 @{
 }
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="text-uppercase" style="color: #2fb388;">Quản Lý Tài Khoản </h2>
         <div class="Double-end ">
-            <button class="btn fw-bold custom-btn"><i class="fa-solid fa-plus"></i> Thêm</button>
-            <button class="btn fw-bold custom-btn"><i class="fa-solid fa-floppy-disk"></i> Lưu</button>
-            <button class="btn fw-bold custom-btn"><i class="fa-solid fa-repeat"></i> Hủy </button>
-            <button class="btn fw-bold custom-btn"><i class="fa-solid fa-print"></i> In</button>
-            <button class="btn fw-bold custom-btn"><i class="fa-solid fa-right-from-bracket"></i> Thoát</button>
+            <button class="btn fw-bold custom-btn" id="addButton" data-action="@Url.Action("CreateTaiKhoanNV", "QLTaiKhoan")" onclick="changeAction(this)">
+                <i class="fa-solid fa-plus" type="submit"></i> Thêm
+            </button>
+            <button class="btn fw-bold custom-btn" id="activateButton"><i class="fa-solid fa-floppy-disk"></i> Lưu</button>
+            <button class="btn fw-bold custom-btn" id="CancelButton"><i class="fa-solid fa-repeat"></i> Hủy </button>
+            <button class="btn fw-bold custom-btn" id="editButton" data-action="@Url.Action("UpdateMatKhauTKNV", "QLTaiKhoan")" onclick="changeAction(this)">
+                <i class="fa-solid fa-pen-to-square"></i> Sửa
+            </button>
+            <a class="btn fw-bold custom-btn" asp-action="HomeQL" asp-controller="Home"><i class="fa-solid fa-right-from-bracket"></i> Thoát</a>
+
         </div>
     </div>
+    <script>
+        function changeAction(button) {
+            var form = document.getElementById('QLTaiKhoanNVForm');
+            if (form) {
+                var actionUrl = button.getAttribute('data-action');
+                if (actionUrl) {
+                    // Kiểm tra và chỉ thay đổi action khi nó chưa đúng
+                    if (form.action !== actionUrl) {
+                        form.action = actionUrl; // Chỉ thay đổi action khi cần thiết
+                    }
+                } else {
+                    console.error('No action URL found');
+                }
+            } else {
+                console.error('Form not found');
+            }
+        }
+    </script>
 
     <!-- Thông tin hóa đơn -->
     <div class="row m-0 mb-3 border rounded-4 py-2  ">
         <div class="col">
             <div class=" ms-1 p-3 py-1 border rounded-4 ">
-                <form class=" col">
-                    <div class="row g-3 mt-1">
+                <form id="QLTaiKhoanNVForm" class=" col" method="post">
+
+                    <div class="row g-3 mt-1 ">
                         <!-- Cột 1: Thông tin Tài Khoản -->
-                        <div class="col-md-4">
+                        <div class="col-md-4 ">
                             <div class="mb-3">
-                                <label class="form-label">Tên Tài Khoản</label>
-                                <input type="text" class="form-control" id="accountName" placeholder="Nhập tên tài khoản" value="">
+                                <label class="form-label">Mã TK nhân viên</label>
+                                <input type="text" class=" form-control" name="IDTKNV" id="IDTKNV" placeholder="" value="@if(qlTaiKhoanNV != null){
+                                @qlTaiKhoanNV.IDTKNV}" disabled>
                             </div>
+
                             <div class="mb-3">
-                                <label class="form-label">Tên Đầy Đủ</label>
-                                <div class="row">
-                                    <input type="text" class="ms-3 col form-control" id="fullName" placeholder="Nhập tên đầy đủ" value="">
-                                    <div class="col-sm-2">
-                                        <button class="btn btn-success me-2" onclick="addAccount()"><i class="bi bi-search"></i></button>
-                                    </div>
-                                </div>
+                                <label class="form-label">Mã nhân viên</label>
+                                <input type="text" class=" form-control" id="IDNV" name="IDNV" placeholder="Nhập ID nhân viên" value="@if(qlTaiKhoanNV != null){
+                                @qlTaiKhoanNV.IDNV}" required disabled>
                             </div>
                         </div>
 
                         <!-- Cột 2: Thông tin Đăng Nhập -->
-                        <div class="col-md-4">
+                        <div class="col-md-4 ">
                             <div class="mb-3">
                                 <label class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" placeholder="Nhập email">
+                                <input type="email" class="form-control" name="email" id="email" placeholder="Nhập email" oninput="validateEmail()" value="@if(qlTaiKhoanNV != null){
+                                @qlTaiKhoanNV.Email}" required disabled>
+                                <span id="emailError" class="error-message"></span>
+                                <input type="hidden" id="emailPattern" value="@emailtemplpe" style="display:none;" />
+
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Mật Khẩu</label>
-                                <input type="password" class="form-control" id="password" placeholder="Nhập mật khẩu">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu" oninput="validatePassword()" value="@if(qlTaiKhoanNV != null){
+                                @qlTaiKhoanNV.MatKhau}" required disabled>
                             </div>
                         </div>
 
-                        <!-- Cột 3: Vai Trò và Ghi Chú -->
+                        <!-- Cột 3: Nhập lại mật khẩu -->
                         <div class="col-md-4">
-                            <div class="mb-3">
-                                <label class="form-label">Vai Trò</label>
-                                <select class="form-select" id="role">
-                                    <option value="">-- Chọn Vai Trò --</option>
-                                    <option value="Admin">Admin</option>
-                                    <option value="User">User</option>
-                                    <option value="Moderator">Moderator</option>
-                                </select>
-                            </div>
+
                             <div class="mb-3">
                                 <label class="form-label">Nhập Lại Mật Khẩu</label>
-                                <input type="password" class="form-control" id="enterpassword" placeholder="Nhập mật khẩu">
+                                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Nhập lại mật khẩu" oninput="validatePassword()" required disabled>
                             </div>
+                            <div id="errorMessage" style="color: red; display: none;">Mật khẩu không khớp!</div>
                         </div>
-                        <div class="row">
-                            <div class="mb-3">
-                                <label class="form-label">Ghi Chú</label>
-                                <textarea class="form-control" id="note" placeholder="Nhập ghi chú (tùy chọn)"></textarea>
-                            </div>
-                        </div>
+
                     </div>
 
 
 
 
+                    <button id="targetButton" type="submit" style="display:none;">Nút bị kích hoạt</button>
 
 
 
                 </form>
+
+                <script type="module" src="~/js/site.js" asp-append-version="true"></script>
+
             </div>
             <div class=" mt-2 p-3 py-1 border rounded-4">
-                <div class="row mb-3 mt-2">
-                    <div class="col-md-6">
-                        <input type="text" class="form-control" placeholder="Tìm Kiêm">
-                    </div>
-                    <div class="col-md-4 d-flex align-items-end">
-                        <button class="btn btn btn-outline-secondary me-2"><i class="bi bi-search"></i></button>
-                    </div>
-                </div>
+
                 <style>
                     .table th {
                         background-color: #e8f5e9; /* Màu nền xanh nhạt cho tiêu đề */
@@ -103,30 +122,189 @@
                         text-align: center;
                         white-space: nowrap; /* Ngăn chữ bị xuống hàng trong ô dữ liệu */
                     }
+
+
+                    /* Tạo khoảng cách giữa các cột */
+                    .table td, .table th {
+                        padding-left: 15px; /* Thêm khoảng cách bên trái */
+                        padding-right: 15px; /* Thêm khoảng cách bên phải */
+                    }
+
+                    /* Khoảng cách lớn hơn riêng cho cột đầu tiên và thứ hai */
+                    .table tbody td:first-child, .table tbody td:nth-child(2) {
+                        padding-right: 20px; /* Khoảng cách thêm giữa cột đầu và cột 2 */
+                    }
+
+                    .table th:first-child, .table th:nth-child(2) {
+                        padding-right: 20px; /* Khoảng cách thêm giữa tiêu đề cột đầu và cột 2 */
+                    }
                 </style>
+
                 <div class=" table-responsive">
-                    <table class="table table-bordered mt-3">
+                    <table class="table table-bordered  " id="qltknvTable">
                         <thead>
                             <tr>
-                                <th></th>
-                                <th>STT</th>
-                                <th>Tên Đăng Nhập</th>
+                                <th>Mã tài khoản nhân viên</th>
+                                <th>Mã nhân viên</th>
                                 <th>Email</th>
-                                <th>Vai Trò</th>
-                                <th>Hành Động</th>
+                                <th>Mật khẩu</th>
+
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><input type="checkbox" name="" id=""></td>
-                                <td colspan="6" class="text-center">Không có dữ liệu</td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
 
 
             </div>
+
+          
+
+
         </div>
     </div>
+    <div class="row m-0 mb-3 border rounded-4 py-2  ">
+        <div class="col">
+            <div class=" ms-1 p-3 py-1 border rounded-4  h-100">
+                <form class="row ">
+                    <div class="col">
+                        <div class="form-group">
+                            <label class="fw-bold" for="IDTKKH">Mã tài khoản khách hàng</label>
+                            <input type="text" class="form-control" id="IDTKKH">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label class="fw-bold" for="IDKH">Mã khách hàng</label>
+                            <input type="text" class="form-control" id="IDKH">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label class="fw-bold" for="sdt">SDT</label>
+                            <input type="text" class="form-control" id="sdt">
+                        </div>
+                    </div>
+                   
+
+                    <div class="col-2">
+                        <button class="btn btn-dark mt-4" type="button" id="searchButton">
+                            <i class="fa-solid fa-magnifying-glass"></i>  Tìm
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+
+
+        </div>
+        <div class=" table-responsive">
+            <table class="table table-bordered  " id="qltkkhTable">
+                <thead>
+                    <tr>
+                        <th>Mã tài khoản khách hàng</th>
+                        <th>Mã khách hàng</th>
+                        <th>SDT</th>
+                        <th>Mật khẩu</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+        </div>
+        <script>
+            const nvData = @Html.Raw(qltknhanViensJson);
+            const khData = @Html.Raw(qltkkhachHangsJson);
+
+            // Hàm render bảng chung
+            function renderTable(data, tableId) {
+                const tbody = document.querySelector(`#${tableId} tbody`);
+                tbody.innerHTML = '';
+
+                if (!data || data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="4" class="text-center fw-semibold">Không tìm thấy dữ liệu</td></tr>';
+                    return;
+                }
+
+                const fragment = document.createDocumentFragment();
+                data.forEach(item => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                            <td>${item.IDTKNV || item.IDTKKH}</td>
+                            <td>${item.IDNV || item.IDKH}</td>
+                            <td>${item.Email || item.SDT}</td>
+                            <td>${item.MatKhau}</td>
+                        `;
+
+                    // Thêm sự kiện click để chuyển hướng khi nhấp vào dòng
+                    tr.addEventListener('click', function () {
+                        location.href = `@Url.Action("ClickTK", "QLTaiKhoan")?IDTKNV=${item.IDTKNV || item.IDTKKH}`;
+                    });
+
+                    fragment.appendChild(tr);
+                });
+                tbody.appendChild(fragment);
+            }
+
+            // Khởi tạo bảng
+            renderTable(nvData, 'qltknvTable');
+            renderTable(khData, 'qltkkhTable');
+
+            // Hàm tìm kiếm
+            function handleSearch(inputIds, data, tableId) {
+                const filters = inputIds.map(id => document.getElementById(id).value.trim().toLowerCase());
+                const filteredData = data.filter(item => {
+                    return filters.every((filter, index) => {
+                        if (!filter) return true;
+                        const keys = Object.values(item).map(value => (value || '').toString().toLowerCase());
+                        return keys[index] && keys[index].includes(filter);
+                    });
+                });
+                renderTable(filteredData, tableId);
+            }
+
+            document.getElementById('searchButton').addEventListener('click', () => {
+                handleSearch(['IDTKKH', 'IDKH', 'sdt'], khData, 'qltkkhTable');
+            });
+
+            // Validation email
+            function validateEmail() {
+                const email = document.getElementById('email').value;
+                const emailError = document.getElementById('emailError');
+                if (!emailPattern.test(email)) {
+                    emailError.textContent = "Email không hợp lệ.";
+                    emailError.style.display = 'block';
+                } else {
+                    emailError.style.display = 'none';
+                }
+            }
+
+            // Validation mật khẩu
+            function validatePassword() {
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                const passwordError = document.getElementById('passwordError');
+                passwordError.style.display = password !== confirmPassword ? 'block' : 'none';
+            }
+
+            // Điều chỉnh trạng thái form
+            function toggleFormState(formId, isEnabled) {
+                const form = document.getElementById(formId);
+                const inputs = form.querySelectorAll('input, select');
+                inputs.forEach(input => input.disabled = !isEnabled);
+            }
+
+            // Sự kiện nút
+            document.getElementById('addButton').addEventListener('click', () => toggleFormState('QLTaiKhoanNVForm', true));
+            document.getElementById('cancelButton').addEventListener('click', () => toggleFormState('QLTaiKhoanNVForm', false));
+
+            // Khóa form khi tải trang
+            window.onload = () => toggleFormState('QLTaiKhoanNVForm', false);
+        </script>
+
+    </div>
+
 </div>

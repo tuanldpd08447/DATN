@@ -3,19 +3,19 @@
 *@
 @{
 }
-<div class="container mt-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="text-uppercase" style="color: #2fb388;">Tiếp nhận tiêm chủng hợp đồng</h2>
-        <div class="Double-end ">
-            <button class="btn fw-bold custom-btn"><i class="fa-solid fa-plus"></i> Thêm</button>
-            <button class="btn fw-bold custom-btn"><i class="fa-solid fa-floppy-disk"></i> Lưu</button>
-            <button class="btn fw-bold custom-btn"><i class="fa-solid fa-repeat"></i> Hủy </button>
-            <button class="btn fw-bold custom-btn"><i class="fa-solid fa-print"></i> In</button>
-            <button class="btn fw-bold custom-btn"><i class="fa-solid fa-right-from-bracket"></i> Thoát</button>
+  <div class="container mt-4" >
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="text-uppercase" style="color: #2fb388;">Tiếp nhận tiêm chủng hợp đồng</h2>
+            <div class="float-end ">
+                <button class="btn fw-bold custom-btn"><i class="fa-solid fa-plus"></i> Thêm</button>
+                <button class="btn fw-bold custom-btn"><i class="fa-solid fa-floppy-disk"></i> Lưu</button>
+                <button class="btn fw-bold custom-btn"><i class="fa-solid fa-repeat"></i> Hủy </button>
+                <button class="btn fw-bold custom-btn"><i class="fa-solid fa-print"></i> In</button>
+                <button class="btn fw-bold custom-btn"><i class="fa-solid fa-right-from-bracket"></i> Thoát</button>
+              </div>
         </div>
-    </div>
-
-    <!-- Thông tin hóa đơn -->
+      
+      <!-- Thông tin hóa đơn -->
     <div class="row m-0 mb-3 border rounded-4 py-2  ">
         <div class="col-7">
             <div class=" ms-1 p-3 py-1 border rounded-4 ">
@@ -86,7 +86,7 @@
                                 </div>
                             </div>
                         </div>
-
+        
                         <!-- Cột phải -->
                         <div class="col-md-6">
                             <div class="row align-items-center mt-2">
@@ -147,77 +147,122 @@
                     </div>
                 </form>
             </div>
-
-
+           
+            
         </div>
-        <div class="invoice-section col-5  ">
-            <div class=" p-3 border rounded-4 table-responsive">
-                <h5>Danh Sách Bệnh Nhân</h5>
-                <table class="table table-bordered mt-3">
-                    <thead>
-                        <tr>
-                            <th>Tên Bệnh Nhân</th>
-                            <th>Ngày Sinh</th>
-                            <th>Giới Tính</th>
-                            <th>Địa Chỉ</th>
-                            <th>Số Điện Thoại</th>
-                            <th>CCCD</th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td colspan="6" class="text-center">Không có dữ liệu</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-        </div>
-        <div class="ms-3 mt-2 p-3 py-1 border rounded-4" style="width: 98%;">
-            <div class=" mt-1">
-                <h5>Chỉ Định Tiêm Chủng</h5>
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <label class="form-label">Vắc Xin</label>
-                        <select class="form-select">
-                            <option>Chọn loại vắc xin</option>
-                            <option>Vắc xin A</option>
-                            <option>Vắc xin B</option>
-                        </select>
+        <div class="invoice-section col-5" >
+            <div class=" p-3 border rounded-4 " style="height: 100%;">
+                <div class="row">
+                    <div class="col">
+                        <h5 class="mt-2">Danh Sách Bệnh Nhân</h5>
                     </div>
-                    <div class="col-md-2">
-                        <label class="form-label">Số Lượng</label>
-                        <input type="number" class="form-control" value="1">
+                  
+                    <div class="col-5">
+                        <label class="btn custom-btn">
+                            <img src="~/Img/sheet.png" alt="" width="15%"> Import Excel
+                            <input type="file" class="form-control d-none" id="ImportExcel" accept=".xlsx, .xls">
+                        </label>
                     </div>
-                    <div class="col-md-4 d-flex align-items-end">
-                        <button class="btn btn-success me-2"><i class="bi bi-plus-lg"></i></button>
-                        <button class="btn btn-warning me-2"><i class="bi bi-pencil"></i></button>
-                        <button class="btn btn-danger"><i class="bi bi-x-lg"></i></button>
-                    </div>
+                    
                 </div>
-                <div class=" table-responsive">
+                <div class="table-responsive" style="min-height: 400px; max-height: 400px; overflow-y: auto;">
                     <table class="table table-bordered mt-3">
                         <thead>
                             <tr>
-                                <th>Loại Vắc Xin</th>
-                                <th>Số Lượng Vaccine cho 1 khách hàng</th>
+                                <th>Tên Bệnh Nhân</th>
+                                <th>Ngày Sinh</th>
+                                <th>Giới Tính</th>
+                                <th>Địa Chỉ</th>
+                                <th>Số Điện Thoại</th>
+                                <th>CCCD</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td colspan="2" class="text-center">Không có dữ liệu</td>
+                                <td colspan="6" class="text-center">Không có dữ liệu</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-
-                <button type="button" class="Double-end btn custom-btn w-25">Xác Nhận</button>
             </div>
         </div>
-
+        <div class="ms-3 mt-2 p-3 py-1 border rounded-4" style="width: 98%;">
+            <div class=" mt-1">
+                <h5>Chỉ Định Tiêm Chủng</h5>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label">Vắc Xin</label>
+                    <select class="form-select">
+                        <option>Chọn loại vắc xin</option>
+                        <option>Vắc xin A</option>
+                        <option>Vắc xin B</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Số Lượng</label>
+                    <input type="number" class="form-control" value="1">
+                </div>
+                <div class="col-md-4 d-flex align-items-end">
+                    <button class="btn btn-success me-2"><i class="bi bi-plus-lg"></i></button>
+                    <button class="btn btn-warning me-2"><i class="bi bi-pencil"></i></button>
+                    <button class="btn btn-danger"><i class="bi bi-x-lg"></i></button>
+                </div>
+            </div>
+            <div class=" table-responsive">
+                <table class="table table-bordered mt-3">
+                    <thead>
+                        <tr>
+                            <th>Loại Vắc Xin</th>
+                            <th>Số Lượng Vaccine cho 1 khách hàng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="2" class="text-center">Không có dữ liệu</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+           
+                <button type="button" class="float-end btn custom-btn w-25" >Xác Nhận</button>
+            </div>
+        </div>
+        
     </div>
+    
 
-
-
+  
 </div>
+<script src="https://cdn.sheetjs.com/xlsx-0.19.3/package/dist/xlsx.full.min.js"></script>
+<script>
+    document.getElementById('ImportExcel').addEventListener('change', function (event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const data = new Uint8Array(e.target.result);
+            const workbook = XLSX.read(data, { type: 'array' });
+            const firstSheetName = workbook.SheetNames[0];
+            const worksheet = workbook.Sheets[firstSheetName];
+            const jsonData = XLSX.utils.sheet_to_json(worksheet);
+
+            // Hiển thị dữ liệu trong bảng
+            const tableBody = document.querySelector('table tbody');
+            tableBody.innerHTML = ''; // Xóa dữ liệu cũ
+            jsonData.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                        <td>${row['Tên Bệnh Nhân'] || ''}</td>
+                        <td>${row['Ngày Sinh'] || ''}</td>
+                        <td>${row['Giới Tính'] || ''}</td>
+                        <td>${row['Địa Chỉ'] || ''}</td>
+                        <td>${row['Số Điện Thoại'] || ''}</td>
+                        <td>${row['CCCD'] || ''}</td>
+                    `;
+                tableBody.appendChild(tr);
+            });
+        };
+        reader.readAsArrayBuffer(file);
+    });
+</script>

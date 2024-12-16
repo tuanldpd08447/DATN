@@ -15,6 +15,9 @@ namespace DATN_QLTiemChung_Api.Controllers
         {
             _context = context;
         }
+       
+
+
         [HttpGet("LsTiem/{IDKH}")]
         public async Task<ActionResult> LsTiem(string IDKH)
         {
@@ -236,79 +239,75 @@ namespace DATN_QLTiemChung_Api.Controllers
                 return BadRequest("Thông tin không hợp lệ.");
             }
 
-
-            try
+            using (var transaction = await _context.Database.BeginTransactionAsync())
             {
-
-                // Sinh ID mới cho tiêm chủng và theo dõi sau tiêm
-                string newIDTC = await GenerateNewIDTCAsync();
-                string newIDST = await GenerateNewIDSTAsync();
-
-                // Truy vấn đăng ký tiêm chủng
-                var dk = await _context.DangKyTiemChung
-                                      .FirstOrDefaultAsync(dk => dk.IDDK == request.IDDK);
-
-                if (dk == null)
+                try
                 {
-                    return NotFound($"Không tìm thấy đăng ký tiêm chủng với IDDK: {request.IDDK}");
-                }
+                    // Sinh ID mới
+                    string newIDTC = await GenerateNewIDTCAsync();
+                    string newIDST = await GenerateNewIDSTAsync();
 
-                // Thêm thông tin tiêm chủng
-                var tiemChung = new TiemChung
-                {
-                    IDTC = newIDTC,
-                    IDKH = request.IDKH,
-                    IDDK = request.IDDK,
-                    IDNV = request.IDNV,
-                    ThoiGian = request.ThoiGian,
-                    TrangThai = request.TrangThai
-                };
+                    // Lấy thông tin đăng ký tiêm chủng và vật tư y tế
+                    var dk = await _context.DangKyTiemChung
+                                           .Include(dk => dk.DangKyVaccine.VatTuYTe)
+                                           .FirstOrDefaultAsync(dk => dk.IDDK == request.IDDK);
 
-                // Thêm thông tin theo dõi sau tiêm
-                var theoDoiSauTiem = new TheoDoiSauTiem
-                {
-                    IDST = newIDST,
-                    IDTC = newIDTC,
-                    IDKH = request.IDKH,
-                    IDNV = request.IDNV,
-                    ThoiGian = request.ThoiGian.TimeOfDay,
-                    TrangThai = request.TrangThai
-                };
-
-                // Cập nhật GhiChu cho đăng ký tiêm chủng
-                if (string.IsNullOrEmpty(dk.GhiChu))
-                {
-                    dk.GhiChu = "1";
-                }
-                else
-                {
-                    if (int.TryParse(dk.GhiChu, out int ghiChuValue))
+                    if (dk == null)
                     {
-                        dk.GhiChu = (ghiChuValue + 1).ToString();
-                        _context.DangKyTiemChung.Update(dk);
+                        return NotFound($"Không tìm thấy đăng ký tiêm chủng với IDDK: {request.IDDK}");
                     }
-                    else
+
+                    var vt = dk.DangKyVaccine.VatTuYTe;
+                    if (vt == null || vt.SoLuong <= 0)
                     {
-                        return BadRequest("Ghi chú không hợp lệ, không thể chuyển đổi sang số.");
+                        return BadRequest("Số lượng vật tư không đủ.");
                     }
+
+                    // Thêm tiêm chủng
+                    var tiemChung = new TiemChung
+                    {
+                        IDTC = newIDTC,
+                        IDKH = request.IDKH,
+                        IDDK = request.IDDK,
+                        IDNV = request.IDNV,
+                        ThoiGian = request.ThoiGian,
+                        TrangThai = request.TrangThai
+                    };
+
+                    // Thêm theo dõi sau tiêm
+                    var theoDoiSauTiem = new TheoDoiSauTiem
+                    {
+                        IDST = newIDST,
+                        IDTC = newIDTC,
+                        IDKH = request.IDKH,
+                        IDNV = request.IDNV,
+                        ThoiGian = request.ThoiGian.TimeOfDay,
+                        TrangThai = request.TrangThai
+                    };
+
+                    // Cập nhật GhiChu và vật tư y tế
+                    dk.GhiChu = (int.TryParse(dk.GhiChu, out int value) ? value + 1 : 1).ToString();
+                    vt.SoLuong--;
+
+                    // Lưu vào database
+                    _context.TiemChung.Add(tiemChung);
+                    _context.TheoDoiSauTiem.Add(theoDoiSauTiem);
+                    _context.DangKyTiemChung.Update(dk);
+                    _context.VatTuYTe.Update(vt);
+
+                    await _context.SaveChangesAsync();
+                    await transaction.CommitAsync();
+
+                    return Ok(new { TiemChung = tiemChung });
                 }
-
-                // Thêm vào database
-                _context.TiemChung.Add(tiemChung);
-                _context.TheoDoiSauTiem.Add(theoDoiSauTiem);
-
-                await _context.SaveChangesAsync();
-
-                return Ok(new
+                catch (Exception ex)
                 {
-                    TiemChung = tiemChung
-                });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Đã xảy ra lỗi: {ex.Message}");
+                    await transaction.RollbackAsync();
+                    return StatusCode(StatusCodes.Status500InternalServerError, $"Đã xảy ra lỗi: {ex.Message}");
+                }
             }
         }
+
 
 
         [HttpPut("UpdateTheoDoiSauTiem")]

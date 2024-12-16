@@ -295,7 +295,7 @@ namespace DATN_QLTiemChung.Controllers
                             {
 
                                 GetSession();
-                                TempData["Notification"] = "Cập nhật dữ liệu thành công.";
+                                TempData["Notification"] = "khám sàn lọc thành công.";
                                 TempData["NotificationType"] = "success";
                                 TempData["NotificationTitle"] = "Thông báo."; return RedirectToAction("KhamSanLoc");
                             }
@@ -320,7 +320,7 @@ namespace DATN_QLTiemChung.Controllers
                             if (response2.IsSuccessStatusCode)
                             {
                                 GetSession();
-                                TempData["Notification"] = "Cập nhật dữ liệu thành công.";
+                                TempData["Notification"] = "khám sàn lọc thành công.";
                                 TempData["NotificationType"] = "success";
                                 TempData["NotificationTitle"] = "Thông báo."; return RedirectToAction("KhamSanLoc");
                             }

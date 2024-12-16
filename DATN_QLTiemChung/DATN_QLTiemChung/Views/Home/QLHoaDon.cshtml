@@ -295,20 +295,24 @@
                         </div>
 						<div class="col-md-3">
 							<label class="fw-semibold" for="paymentMethod">Hình thức thanh toán</label>
-							<select id="paymentMethod" name="GhiChu" class="form-control form-control-sm">
+							<select id="paymentMethod" name="GhiChu" class="form-control form-control-sm" required>
 								<option></option>
-								@if (hoaDon != null)
+                                @if (hoaDon != null && @hoaDon.GhiChu == "Tiền mặt")
 								{
-									<option selected>@hoaDon.GhiChu</option>
-                                    <option>Tiền mặt</option>
-                                    <option>Chuyển khoản</option>
+                                    <option value="Tiền mặt" selected>Tiền mặt</option>
+                                    <option value="Chuyển khoản">Chuyển khoản</option>
 
 								}
+                                else if (hoaDon != null && @hoaDon.GhiChu == "Chuyển khoản")
+                                {
+                                    <option value="Tiền mặt" >Tiền mặt</option>
+                                    <option value="Chuyển khoản" selected>Chuyển khoản</option>
+                                }
 								else
 								{
 
-									<option>Tiền mặt</option>
-									<option>Chuyển khoản</option>
+                                    <option value="Tiền mặt">Tiền mặt</option>
+                                    <option value="Chuyển khoản">Chuyển khoản</option>
 								}
 							</select>
 						</div>
@@ -387,7 +391,7 @@
                                 <div class="radio-group row">
 
                                     <div class="ms-2">
-                                        <button class="btn">Hoàn trả</button>
+                                        <button class="btn" type="button">Hoàn trả</button>
                                       
                                     </div>
 
@@ -395,14 +399,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Trạng thái HĐ -->
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <p>Trạng thái HDDT Đã có hóa đơn điện tử - Số HĐ: <strong>HDDT/3007894</strong></p>
-                            </div>
-                        </div>
-                    </div>
+                   
                 </div>
                 <button id="targetButton" type="submit" style="display:none;">Nút bị kích hoạt</button>
                 <script>

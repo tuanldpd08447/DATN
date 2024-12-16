@@ -59,9 +59,7 @@ namespace DATN_QLTiemChung_Api.Controllers
                   .Include(hd => hd.NhaCungCap)
                   .Include(hd => hd.XuatXu)
                   .Select(hd => new VatTuDTOFull
-
                   {
-
                       IDVT = hd.IDVT.ToString(),
                       IDTL = hd.IDTL,
                       TenLoai = hd.LoaivatTu.LoaiVatTu,
@@ -81,6 +79,7 @@ namespace DATN_QLTiemChung_Api.Controllers
 
             return Ok(vatTu);
         }
+
         [HttpGet("MuiTiepTheo/{IDKH}")]
         public async Task<IActionResult> MuiTiepTheo(string IDKH)
         {
@@ -108,6 +107,28 @@ namespace DATN_QLTiemChung_Api.Controllers
             {
                 // Trường hợp GhiChu không phải số hợp lệ
                 return BadRequest("Ghi chú không hợp lệ.");
+            }
+            var ht = await _context.HoanTra.Where(ht => ht.IDKH == IDKH).FirstOrDefaultAsync();
+            if (ht != null)
+            {
+                // Sử dụng await để nhận kết quả thực sự từ Task<HoaDon?>
+                var hoadoncu = await _context.HoaDon
+                    .Include(hd => hd.HoaDonChiTiets)
+                    .Where(hd => hd.IDHD == ht.HoaDonCu)
+                    .FirstOrDefaultAsync();
+
+                if (hoadoncu != null)
+                {
+                    var hoaDonChiTiets = hoadoncu.HoaDonChiTiets
+                        .Where(hdct => hdct.IDVT == dk.DangKyVaccine.IDVT) 
+                        .ToList();
+                    if (hoaDonChiTiets != null)
+                    {
+                        return Ok(false);
+                    }
+                   
+                }
+               
             }
 
             return Ok(true);

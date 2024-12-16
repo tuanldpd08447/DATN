@@ -86,10 +86,11 @@ namespace DATN_QLTiemChung.Controllers
                     var exitkh = hangChoList.Any(kh => kh.IDKH == IDKH && kh.NgayCho == DateOnly.FromDateTime(DateTime.Now));
                     if (exitkh) // Kiểm tra trực tiếp biến boolean
                     {
-                        GetSession();
+                       
                         TempData["Notification"] = "Khách hàng đã có trong hàng chờ hôm nay.";
                         TempData["NotificationType"] = "error";
                         TempData["NotificationTitle"] = "Thông báo.";
+                        GetSession();
                         return RedirectToAction("QLTiepNhan");
                     }
                 }
@@ -124,10 +125,10 @@ namespace DATN_QLTiemChung.Controllers
                     return StatusCode((int)response3.StatusCode, "Không thể thêm khách hàng vào hàng chờ.");
                 }
 
-                GetSession();
                 TempData["Notification"] = "Đã thêm khách hàng vào hàng chờ";
                 TempData["NotificationType"] = "success";
                 TempData["NotificationTitle"] = "Thông báo.";
+                GetSession();
                 return RedirectToAction("QLTiepNhan");
             }
             catch (Exception ex)

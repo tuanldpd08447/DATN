@@ -14,6 +14,6 @@ namespace DATN_QLTiemChung_Api.Models
         public DateTime ThoiGian { get; set; } // Thời gian
         public Double DonGia { get; set; } // Đơn giá
         public Double ThanhTien { get; set; } // Thành tiền
-        public string TrangThai { get; set; } // Trạng thái
+        public bool TrangThai { get; set; }
     }
 }
