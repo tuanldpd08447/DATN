@@ -552,8 +552,6 @@
         });
 
 
-
-
             renderTable(nh);
 
 
@@ -576,6 +574,9 @@
             selects.forEach(select => {
                 select.disabled = false;  // Bỏ thuộc tính disabled
             });
+            const IDNV = document.getElementById("IDNV");
+
+            IDNV.disabled = true;
 
         });
 
@@ -638,12 +639,6 @@
             inputs.forEach(input => input.disabled = true);
             selects.forEach(select => select.disabled = true);
         };
-
-
-
-       
-
-       
 
     </script>
 

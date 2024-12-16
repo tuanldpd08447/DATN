@@ -60,7 +60,7 @@ namespace DATN_QLTiemChung.Controllers
 
 
 
-        public async Task<IActionResult> AddNhanVien(string IDNV, string hoKhauXa, string hoTen, string chucVu, string IDCD, string IDPB, DateTime ngaySinh, string danToc, string gioiTinh, string cmt, string email, string sdt, string diaChiChiTiet)
+        public async Task<IActionResult> AddNhanVien(string hoKhauXa, string hoTen, string chucVu, string IDCD, string IDPB, DateTime ngaySinh, string danToc, string gioiTinh, string cmt, string email, string sdt, string diaChiChiTiet)
         {
             if (!ModelState.IsValid)
             {
@@ -74,7 +74,7 @@ namespace DATN_QLTiemChung.Controllers
                 // map input parameters to the DTO 
                 var nhanVienCreateDTO = new NhanVienCreateDTO
                 {
-                    IDNV = IDNV,
+                    IDNV = "",
                     IDXP = hoKhauXa,
                     TenNhanVien = hoTen,
                     ChucVu = chucVu,

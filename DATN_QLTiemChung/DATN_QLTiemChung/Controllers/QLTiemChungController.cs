@@ -44,7 +44,7 @@ namespace DATN_QLTiemChung.Controllers
                                    ?.Where(hc => hc.Step == "ThanhToan")
                                    .ToList();
 
-                return hangChoList ?? new List<HangCho>(); // Trả về danh sách rỗng nếu dữ liệu null
+                return hangChoList ?? new List<HangCho>(); 
             }
         }
         public async Task<IActionResult> QLTiemChung()

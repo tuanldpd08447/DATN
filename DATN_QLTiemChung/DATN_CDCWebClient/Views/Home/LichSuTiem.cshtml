@@ -9,7 +9,19 @@
         <div class="col-1 border-2 border-end"></div>
         <div class="col fw-bold" style="color: #2fb388;">LỊCH SỬ TIÊM</div>
     </h2>
+    <style>
+        .custom-btn {
+            background-color: white;
+            color: black;
+            transition: all 0.3s ease;
+        }
 
+            .custom-btn.active {
+                background-color: #2fb388; /* Màu nền khi được chọn */
+                color: white; /* Màu chữ khi được chọn */
+                border-color: #2fb388; /* Màu viền */
+            }
+    </style>
     <!-- Nút lọc -->
     <div class="row mb-3" style="width: 50%;">
         <button class="btn btn-outline custom-btn col border rounded-0" onclick="filterData('all')">Tất cả</button>
@@ -162,16 +174,31 @@
 <script>
     function filterData(status) {
         const sections = document.querySelectorAll('.table-section');
+        const buttons = document.querySelectorAll('.custom-btn');
+
+        // Ẩn tất cả các bảng
         sections.forEach(section => {
-            section.style.display = 'none'; // Ẩn tất cả các bảng
+            section.style.display = 'none';
         });
 
+        // Hiển thị bảng theo trạng thái
         if (status === 'all') {
             sections.forEach(section => {
-                section.style.display = 'block'; // Hiển thị tất cả bảng
+                section.style.display = 'block';
             });
         } else {
-            document.getElementById(status).style.display = 'block'; // Hiển thị bảng theo trạng thái
+            document.getElementById(status).style.display = 'block';
+        }
+
+        // Xóa class active khỏi tất cả các nút
+        buttons.forEach(button => {
+            button.classList.remove('active');
+        });
+
+        // Thêm class active vào nút được chọn
+        const activeButton = document.querySelector(`.custom-btn[onclick="filterData('${status}')"]`);
+        if (activeButton) {
+            activeButton.classList.add('active');
         }
     }
 

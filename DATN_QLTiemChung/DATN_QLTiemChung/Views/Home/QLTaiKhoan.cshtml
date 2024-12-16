@@ -10,6 +10,35 @@
 
 @{
 }
+  <style>
+                    .table th {
+                        background-color: #e8f5e9; /* Màu nền xanh nhạt cho tiêu đề */
+                        color: #000; /* Màu chữ đen */
+                        text-align: center;
+                        white-space: nowrap; /* Ngăn chữ bị xuống hàng */
+                    }
+
+                    .table tbody tr td {
+                        text-align: center;
+                        white-space: nowrap; /* Ngăn chữ bị xuống hàng trong ô dữ liệu */
+                    }
+
+
+                    /* Tạo khoảng cách giữa các cột */
+                    .table td, .table th {
+                        padding-left: 15px; /* Thêm khoảng cách bên trái */
+                        padding-right: 15px; /* Thêm khoảng cách bên phải */
+                    }
+
+                    /* Khoảng cách lớn hơn riêng cho cột đầu tiên và thứ hai */
+                    .table tbody td:first-child, .table tbody td:nth-child(2) {
+                        padding-right: 20px; /* Khoảng cách thêm giữa cột đầu và cột 2 */
+                    }
+
+                    .table th:first-child, .table th:nth-child(2) {
+                        padding-right: 20px; /* Khoảng cách thêm giữa tiêu đề cột đầu và cột 2 */
+                   }
+                </style>
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="text-uppercase" style="color: #2fb388;">Quản Lý Tài Khoản </h2>
@@ -110,44 +139,14 @@
             </div>
             <div class=" mt-2 p-3 py-1 border rounded-4">
 
-                <style>
-                    .table th {
-                        background-color: #e8f5e9; /* Màu nền xanh nhạt cho tiêu đề */
-                        color: #000; /* Màu chữ đen */
-                        text-align: center;
-                        white-space: nowrap; /* Ngăn chữ bị xuống hàng */
-                    }
-
-                    .table tbody tr td {
-                        text-align: center;
-                        white-space: nowrap; /* Ngăn chữ bị xuống hàng trong ô dữ liệu */
-                    }
-
-
-                    /* Tạo khoảng cách giữa các cột */
-                    .table td, .table th {
-                        padding-left: 15px; /* Thêm khoảng cách bên trái */
-                        padding-right: 15px; /* Thêm khoảng cách bên phải */
-                    }
-
-                    /* Khoảng cách lớn hơn riêng cho cột đầu tiên và thứ hai */
-                    .table tbody td:first-child, .table tbody td:nth-child(2) {
-                        padding-right: 20px; /* Khoảng cách thêm giữa cột đầu và cột 2 */
-                    }
-
-                    .table th:first-child, .table th:nth-child(2) {
-                        padding-right: 20px; /* Khoảng cách thêm giữa tiêu đề cột đầu và cột 2 */
-                    }
-                </style>
+              
 
                 <div class=" table-responsive">
                     <table class="table table-bordered  " id="qltknvTable">
                         <thead>
                             <tr>
-                                <th>Mã tài khoản nhân viên</th>
                                 <th>Mã nhân viên</th>
                                 <th>Email</th>
-                                <th>Mật khẩu</th>
 
                             </tr>
                         </thead>
@@ -164,9 +163,10 @@
 
         </div>
     </div>
+
     <div class="row m-0 mb-3 border rounded-4 py-2  ">
         <div class="col">
-            <div class=" ms-1 p-3 py-1 border rounded-4  h-100">
+            <div class=" ms-1 p-3 py-1 border rounded-4  ">
                 <form class="row ">
                     <div class="col">
                         <div class="form-group">
@@ -196,115 +196,109 @@
 
                 </form>
             </div>
+          <div class=" mt-2 p-3 py-1 border rounded-4">
+            <div class=" table-responsive">
+                <table class="table table-bordered  " id="qltkkhTable">
+                    <thead>
+                        <tr>
+                            <th>Mã khách hàng</th>
+                            <th>SDT</th>
 
-
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                </div
+            </div>
         </div>
-        <div class=" table-responsive">
-            <table class="table table-bordered  " id="qltkkhTable">
-                <thead>
-                    <tr>
-                        <th>Mã tài khoản khách hàng</th>
-                        <th>Mã khách hàng</th>
-                        <th>SDT</th>
-                        <th>Mật khẩu</th>
+      
+    </div>
+</div>
+<script>
+    const nvData = @Html.Raw(qltknhanViensJson);
+    const khData = @Html.Raw(qltkkhachHangsJson);
 
-                    </tr>
-                </thead>
-                <tbody>
-                    
-                </tbody>
-            </table>
-        </div>
-        <script>
-            const nvData = @Html.Raw(qltknhanViensJson);
-            const khData = @Html.Raw(qltkkhachHangsJson);
+    // Hàm render bảng chung
+    function renderTable(data, tableId) {
+        const tbody = document.querySelector(`#${tableId} tbody`);
+        tbody.innerHTML = '';
 
-            // Hàm render bảng chung
-            function renderTable(data, tableId) {
-                const tbody = document.querySelector(`#${tableId} tbody`);
-                tbody.innerHTML = '';
+        if (!data || data.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="4" class="text-center fw-semibold">Không tìm thấy dữ liệu</td></tr>';
+            return;
+        }
 
-                if (!data || data.length === 0) {
-                    tbody.innerHTML = '<tr><td colspan="4" class="text-center fw-semibold">Không tìm thấy dữ liệu</td></tr>';
-                    return;
-                }
+        const fragment = document.createDocumentFragment();
+        data.forEach(item => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                                <td>${item.IDNV || item.IDKH}</td>
+                                <td>${item.Email || item.SDT}</td>
+                            `;
 
-                const fragment = document.createDocumentFragment();
-                data.forEach(item => {
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = `
-                            <td>${item.IDTKNV || item.IDTKKH}</td>
-                            <td>${item.IDNV || item.IDKH}</td>
-                            <td>${item.Email || item.SDT}</td>
-                            <td>${item.MatKhau}</td>
-                        `;
-
-                    // Thêm sự kiện click để chuyển hướng khi nhấp vào dòng
-                    tr.addEventListener('click', function () {
-                        location.href = `@Url.Action("ClickTK", "QLTaiKhoan")?IDTKNV=${item.IDTKNV || item.IDTKKH}`;
-                    });
-
-                    fragment.appendChild(tr);
-                });
-                tbody.appendChild(fragment);
-            }
-
-            // Khởi tạo bảng
-            renderTable(nvData, 'qltknvTable');
-            renderTable(khData, 'qltkkhTable');
-
-            // Hàm tìm kiếm
-            function handleSearch(inputIds, data, tableId) {
-                const filters = inputIds.map(id => document.getElementById(id).value.trim().toLowerCase());
-                const filteredData = data.filter(item => {
-                    return filters.every((filter, index) => {
-                        if (!filter) return true;
-                        const keys = Object.values(item).map(value => (value || '').toString().toLowerCase());
-                        return keys[index] && keys[index].includes(filter);
-                    });
-                });
-                renderTable(filteredData, tableId);
-            }
-
-            document.getElementById('searchButton').addEventListener('click', () => {
-                handleSearch(['IDTKKH', 'IDKH', 'sdt'], khData, 'qltkkhTable');
+            // Thêm sự kiện click để chuyển hướng khi nhấp vào dòng
+            tr.addEventListener('click', function () {
+                location.href = `@Url.Action("ClickTK", "QLTaiKhoan")?IDTKNV=${item.IDTKNV || item.IDTKKH}`;
             });
 
-            // Validation email
-            function validateEmail() {
-                const email = document.getElementById('email').value;
-                const emailError = document.getElementById('emailError');
-                if (!emailPattern.test(email)) {
-                    emailError.textContent = "Email không hợp lệ.";
-                    emailError.style.display = 'block';
-                } else {
-                    emailError.style.display = 'none';
-                }
-            }
+            fragment.appendChild(tr);
+        });
+        tbody.appendChild(fragment);
+    }
 
-            // Validation mật khẩu
-            function validatePassword() {
-                const password = document.getElementById('password').value;
-                const confirmPassword = document.getElementById('confirmPassword').value;
-                const passwordError = document.getElementById('passwordError');
-                passwordError.style.display = password !== confirmPassword ? 'block' : 'none';
-            }
+    // Khởi tạo bảng
+    renderTable(nvData, 'qltknvTable');
+    renderTable(khData, 'qltkkhTable');
 
-            // Điều chỉnh trạng thái form
-            function toggleFormState(formId, isEnabled) {
-                const form = document.getElementById(formId);
-                const inputs = form.querySelectorAll('input, select');
-                inputs.forEach(input => input.disabled = !isEnabled);
-            }
+    // Hàm tìm kiếm
+    function handleSearch(inputIds, data, tableId) {
+        const filters = inputIds.map(id => document.getElementById(id).value.trim().toLowerCase());
+        const filteredData = data.filter(item => {
+            return filters.every((filter, index) => {
+                if (!filter) return true;
+                const keys = Object.values(item).map(value => (value || '').toString().toLowerCase());
+                return keys[index] && keys[index].includes(filter);
+            });
+        });
+        renderTable(filteredData, tableId);
+    }
 
-            // Sự kiện nút
-            document.getElementById('addButton').addEventListener('click', () => toggleFormState('QLTaiKhoanNVForm', true));
-            document.getElementById('cancelButton').addEventListener('click', () => toggleFormState('QLTaiKhoanNVForm', false));
+    document.getElementById('searchButton').addEventListener('click', () => {
+        handleSearch(['IDTKKH', 'IDKH', 'sdt'], khData, 'qltkkhTable');
+    });
 
-            // Khóa form khi tải trang
-            window.onload = () => toggleFormState('QLTaiKhoanNVForm', false);
-        </script>
+    // Validation email
+    function validateEmail() {
+        const email = document.getElementById('email').value;
+        const emailError = document.getElementById('emailError');
+        if (!emailPattern.test(email)) {
+            emailError.textContent = "Email không hợp lệ.";
+            emailError.style.display = 'block';
+        } else {
+            emailError.style.display = 'none';
+        }
+    }
 
-    </div>
+    // Validation mật khẩu
+    function validatePassword() {
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        const passwordError = document.getElementById('passwordError');
+        passwordError.style.display = password !== confirmPassword ? 'block' : 'none';
+    }
 
-</div>
+    // Điều chỉnh trạng thái form
+    function toggleFormState(formId, isEnabled) {
+        const form = document.getElementById(formId);
+        const inputs = form.querySelectorAll('input, select');
+        inputs.forEach(input => input.disabled = !isEnabled);
+    }
+
+    // Sự kiện nút
+    document.getElementById('addButton').addEventListener('click', () => toggleFormState('QLTaiKhoanNVForm', true));
+    document.getElementById('cancelButton').addEventListener('click', () => toggleFormState('QLTaiKhoanNVForm', false));
+
+    // Khóa form khi tải trang
+    window.onload = () => toggleFormState('QLTaiKhoanNVForm', false);
+</script>

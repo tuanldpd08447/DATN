@@ -20,7 +20,16 @@ namespace DATN_QLTiemChung.Controllers
 
 
         }
+         public void GetSession()
+        {
+            string userId = HttpContext.Session.GetString("ID");
+            string Username = HttpContext.Session.GetString("Username");
+            string userRole = HttpContext.Session.GetString("Role");
 
+            TempData["ID"] = userId;
+            TempData["Username"] = Username;
+            TempData["Role"] = userRole;
+        }
         public async Task<IActionResult> QLTaiKhoan()
         {
             var client = _httpClientFactory.CreateClient();
@@ -43,7 +52,7 @@ namespace DATN_QLTiemChung.Controllers
 
             //GẤP ĐÔI PHẦN TRÊN ĐỂ QLKH
 
-            return View("/Views/Home/QLTaiKhoan.cshtml");
+            GetSession(); return View("/Views/Home/QLTaiKhoan.cshtml");
         }
 
         [HttpPost]
@@ -51,7 +60,7 @@ namespace DATN_QLTiemChung.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+               GetSession(); return BadRequest(ModelState);
             }
             try
             {
@@ -78,20 +87,22 @@ namespace DATN_QLTiemChung.Controllers
                     var apiResonse = await response.Content.ReadAsStringAsync();
                     var addedNhanVien = JsonConvert.DeserializeObject<QLTaiKhoanNVDTO>(apiResonse);
 
-
-                    return RedirectToAction("QLTaiKhoan");
+                    TempData["Notification"] = "Thêm tài khoản thành công.";
+                    TempData["NotificationType"] = "success";
+                    TempData["NotificationTitle"] = "Thông báo.";
+                    GetSession(); return RedirectToAction("QLTaiKhoan");
 
                 }
                 else
                 {
-                    return StatusCode((int)response.StatusCode, "Đã có lỗi xảy ra khi thêm tài khoản nhân viên.");
+                   GetSession(); return StatusCode((int)response.StatusCode, "Đã có lỗi xảy ra khi thêm tài khoản nhân viên.");
 
                 }
 
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Có lỗi khi kết nối với máy chủ: {ex.Message}");
+               GetSession(); return StatusCode(500, $"Có lỗi khi kết nối với máy chủ: {ex.Message}");
             }
         }
 
@@ -100,7 +111,7 @@ namespace DATN_QLTiemChung.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState); // Dữ liệu không hợp lệ
+               GetSession(); return BadRequest(ModelState); // Dữ liệu không hợp lệ
             }
             try
             {
@@ -122,17 +133,20 @@ namespace DATN_QLTiemChung.Controllers
 
                 if (response.IsSuccessStatusCode)
                 {
+                    TempData["Notification"] = "Cập nhật thành công.";
+                    TempData["NotificationType"] = "success";
+                    TempData["NotificationTitle"] = "Thông báo.";
                     // Nếu thành công, có thể lấy lại danh sách nhân viên để cập nhật giao diện
-                    return RedirectToAction("QLTaiKhoan"); // Chuyển hướng về danh sách nhân viên
+                    GetSession(); return RedirectToAction("QLTaiKhoan"); // Chuyển hướng về danh sách nhân viên
                 }
                 else
                 {
-                    return StatusCode((int)response.StatusCode, "Không thể cập nhật nhân viên.");
+                   GetSession(); return StatusCode((int)response.StatusCode, "Không thể cập nhật nhân viên.");
                 }
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Có lỗi khi kết nối với máy chủ: {ex.Message}");
+               GetSession(); return StatusCode(500, $"Có lỗi khi kết nối với máy chủ: {ex.Message}");
             }
         }
 
@@ -169,12 +183,12 @@ namespace DATN_QLTiemChung.Controllers
 
 
 
-                return View("/Views/Home/QLTaiKhoan.cshtml");
+               GetSession(); return View("/Views/Home/QLTaiKhoan.cshtml");
             }
             else
             {
                 ViewBag.ErrorMessage = "Không thể tải thông tin nhân viên";
-                return View("/Views/Home/QLTaiKhoan.cshtml");
+               GetSession(); return View("/Views/Home/QLTaiKhoan.cshtml");
             }
 
 
@@ -188,7 +202,7 @@ namespace DATN_QLTiemChung.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+               GetSession(); return BadRequest(ModelState);
             }
             try
             {
@@ -215,20 +229,22 @@ namespace DATN_QLTiemChung.Controllers
                     var apiResonse = await response.Content.ReadAsStringAsync();
                     var addedKhachhang = JsonConvert.DeserializeObject<QLTaiKhoanKHDTO>(apiResonse);
 
-
-                    return RedirectToAction("QLTaiKhoan");
+                    TempData["Notification"] = "Tạo tài khoản thành công.";
+                    TempData["NotificationType"] = "success";
+                    TempData["NotificationTitle"] = "Thông báo.";
+                    GetSession(); return RedirectToAction("QLTaiKhoan");
 
                 }
                 else
                 {
-                    return StatusCode((int)response.StatusCode, "Đã có lỗi xảy ra khi thêm tài khoản nhân viên.");
+                   GetSession(); return StatusCode((int)response.StatusCode, "Đã có lỗi xảy ra khi thêm tài khoản nhân viên.");
 
                 }
 
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Có lỗi khi kết nối với máy chủ: {ex.Message}");
+               GetSession(); return StatusCode(500, $"Có lỗi khi kết nối với máy chủ: {ex.Message}");
             }
         }
     }

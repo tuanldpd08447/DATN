@@ -16,6 +16,16 @@ namespace DATN_QLTiemChung.Controllers
             _httpClientFactory = httpClientFactory;
         }
 
+        public void GetSession()
+        {
+            string userId = HttpContext.Session.GetString("ID");
+            string Username = HttpContext.Session.GetString("Username");
+            string userRole = HttpContext.Session.GetString("Role");
+
+            TempData["ID"] = userId;
+            TempData["Username"] = Username;
+            TempData["Role"] = userRole;
+        }
         public async Task<IActionResult> QLKhachHang()
         {
             var client = _httpClientFactory.CreateClient();
@@ -27,7 +37,7 @@ namespace DATN_QLTiemChung.Controllers
                 List<KhachHangDTo> khachHangs = JsonConvert.DeserializeObject<List<KhachHangDTo>>(apiResponse);
                 ViewBag.KhachHangs = khachHangs;
             }
-            return View("~/Views/Home/QLKhachHang.cshtml");
+           GetSession(); return View("~/Views/Home/QLKhachHang.cshtml");
         }
 
 		public async Task<IActionResult> FindKhachHang(string? FindCode, string? FindName ,string? FindCCCD , string? FindSDT)
@@ -66,7 +76,7 @@ namespace DATN_QLTiemChung.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);  // Return error if data is invalid
+               GetSession(); return BadRequest(ModelState);  //GetSession(); return error if data is invalid
             }
 
             try
@@ -105,25 +115,26 @@ namespace DATN_QLTiemChung.Controllers
                     {
                         var allApiResponse = await allResponse.Content.ReadAsStringAsync();
                         List<KhachHangDTo> khachHangs = JsonConvert.DeserializeObject<List<KhachHangDTo>>(allApiResponse);
-                        TempData["Notification"] = "Lấy thành công danh sách khách hàng.";
+
+                        TempData["Notification"] = "Thêm khách hàng thành công.";
                         TempData["NotificationType"] = "success";
                         TempData["NotificationTitle"] = "Thông báo.";
-                        return View("~/Views/Home/QLKhachHang.cshtml");
+                        GetSession(); return RedirectToAction("QLKhachHang"); ;
                     }
                     else
                     {
                       
-                        return StatusCode((int)allResponse.StatusCode, "Không thể lấy danh sách khách hàng.");
+                       GetSession(); return StatusCode((int)allResponse.StatusCode, "Không thể lấy danh sách khách hàng.");
                     }
                 }
                 else
                 {
-                    return StatusCode((int)response.StatusCode, "Đã có lỗi xảy ra khi thêm khách hàng.");
+                   GetSession(); return StatusCode((int)response.StatusCode, "Đã có lỗi xảy ra khi thêm khách hàng.");
                 }
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Có lỗi khi kết nối với máy chủ: {ex.Message}");
+               GetSession(); return StatusCode(500, $"Có lỗi khi kết nối với máy chủ: {ex.Message}");
             }
         }
 
@@ -151,7 +162,7 @@ namespace DATN_QLTiemChung.Controllers
             }
 
             ViewBag.edit = true;
-            return View("~/Views/Home/QLKhachHang.cshtml");
+           GetSession(); return View("~/Views/Home/QLKhachHang.cshtml");
         }
 
 
@@ -174,7 +185,7 @@ namespace DATN_QLTiemChung.Controllers
 
             if (khachHang == null || string.IsNullOrEmpty(khachHang.IDKH) || string.IsNullOrEmpty(khachHang.TenKhachHang))
             {
-                return BadRequest("Invalid customer data.");
+               GetSession(); return BadRequest("Invalid customer data.");
             }
             var client = _httpClientFactory.CreateClient();
 
@@ -185,20 +196,22 @@ namespace DATN_QLTiemChung.Controllers
                 var error = await response.Content.ReadAsStringAsync();
                 Console.WriteLine($"API Error: {error}");
 
-                return RedirectToAction("ClickKhachHang", new { IDKH = khachHang.IDKH });
+               GetSession(); return RedirectToAction("ClickKhachHang", new { IDKH = khachHang.IDKH });
             }
 
             if (response.IsSuccessStatusCode)
             {
                 var result = await response.Content.ReadAsStringAsync();
 
-                return RedirectToAction("QLKhachHang");
+                TempData["Notification"] = "Cập nhật Thông tin khách hàng thành công.";
+                TempData["NotificationType"] = "success";
+                TempData["NotificationTitle"] = "Thông báo.";
+                GetSession(); return RedirectToAction("QLKhachHang");
             }
             else
             {
-
                 var error = await response.Content.ReadAsStringAsync();
-                return RedirectToAction("ClickKhachHang", new { IDKH = khachHang.IDKH });
+               GetSession(); return RedirectToAction("ClickKhachHang", new { IDKH = khachHang.IDKH });
             }
 
         }
