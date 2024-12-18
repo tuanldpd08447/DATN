@@ -279,12 +279,7 @@ namespace DATN_QLTiemChung.Controllers
 
               GetSession(); return View("~/Views/Home/QLXuatNhapKho.cshtml");
         }
-        /// <summary>
-        /// Đảm bảo tên tệp là duy nhất trong thư mục lưu trữ.
-        /// </summary>
-        /// <param name="directory">Đường dẫn thư mục lưu trữ.</param>
-        /// <param name="fileName">Tên tệp gốc.</param>
-        /// <  GetSession(); returns>Tên tệp duy nhất.</  GetSession(); returns>
+
         private string EnsureUniqueFileName(string directory, string fileName)
         {
             string filePath = Path.Combine(directory, fileName);

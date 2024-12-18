@@ -210,7 +210,7 @@ namespace DATN_QLTiemChung.Controllers
                     {
                         var allApiResponse = await allResponse.Content.ReadAsStringAsync();
                         List<VatTuYTe> vaccines = JsonConvert.DeserializeObject<List<VatTuYTe>>(allApiResponse);
-                        TempData["Notification"] = "Lấy danh sách thành công.";
+                        TempData["Notification"] = "Thêm vật tư thành công.";
                         TempData["NotificationType"] = "success";
                         TempData["NotificationTitle"] = "Thông báo.";
                          GetSession(); return RedirectToAction("QLKhoVaccine");
@@ -239,7 +239,7 @@ namespace DATN_QLTiemChung.Controllers
         {
             if (!ModelState.IsValid)
             {
-                 GetSession(); return BadRequest(ModelState);  //  GetSession(); return error if data is invalid
+                 GetSession(); return BadRequest(ModelState); 
             }
             try
             {
@@ -262,7 +262,7 @@ namespace DATN_QLTiemChung.Controllers
                 var response = await vt.PutAsync($"https://localhost:7143/api/DataQLKhoVaccine/UpdateVaccine/{MaVT}", content);
                 if (response.IsSuccessStatusCode)
                 {
-                    TempData["Notification"] = "Thêm thành công.";
+                    TempData["Notification"] = "Cập nhật vật tư thành công.";
                     TempData["NotificationType"] = "success";
                     TempData["NotificationTitle"] = "Thông báo.";
 

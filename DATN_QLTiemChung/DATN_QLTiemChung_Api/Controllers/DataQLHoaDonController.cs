@@ -218,7 +218,7 @@ namespace DATN_QLTiemChung_Api.Controllers
                 IDKH = HoaDonDto.IDKH,
                 IDNV = HoaDonDto.IDNV,
                 ThoiGian = HoaDonDto.ThoiGian,
-                GhiChu = HoaDonDto.GhiChu, // Hình thức thanh toán
+                GhiChu = HoaDonDto.GhiChu, 
                 NoiDung = HoaDonDto.NoiDung, // Tên vaccine
                 TongTien = HoaDonDto.TongTien,
                 TrangThai = HoaDonDto.TrangThai,

@@ -203,7 +203,7 @@ namespace DATN_QLTiemChung.Controllers
             {
                 var result = await response.Content.ReadAsStringAsync();
 
-                TempData["Notification"] = "Cập nhật Thông tin khách hàng thành công.";
+                TempData["Notification"] = "Cập nhật thông tin khách hàng thành công.";
                 TempData["NotificationType"] = "success";
                 TempData["NotificationTitle"] = "Thông báo.";
                 GetSession(); return RedirectToAction("QLKhachHang");

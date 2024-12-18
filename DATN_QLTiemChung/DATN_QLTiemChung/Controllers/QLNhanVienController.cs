@@ -107,7 +107,7 @@ namespace DATN_QLTiemChung.Controllers
                     {
                         var allApiResponse = await allResponse.Content.ReadAsStringAsync();
                         List<NhanVienDTO> nhanViens = JsonConvert.DeserializeObject<List<NhanVienDTO>>(allApiResponse);
-                        TempData["Notification"] = "Lấy danh sách nhân viên thành công thành công.";
+                        TempData["Notification"] = "Thêm nhân viên thành công.";
                         TempData["NotificationType"] = "success";
                         TempData["NotificationTitle"] = "Thông báo.";
                         GetSession(); return RedirectToAction("QLNhanVien");
@@ -164,7 +164,7 @@ namespace DATN_QLTiemChung.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                       GetSession();
-                    TempData["Notification"] = "update nhân viên thành công";
+                    TempData["Notification"] = "Cập nhật nhân viên thành công";
                     TempData["NotificationType"] = "success";
                     TempData["NotificationTitle"] = "Thông báo."; return RedirectToAction("QLNhanVien");
                 }
