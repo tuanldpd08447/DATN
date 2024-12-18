@@ -443,8 +443,8 @@ namespace DATN_QLTiemChung_Api.Models
 
         public string IDXP { get; set; }
 
-        [Required]
-        public string IDNV { set; get; }
+
+        public string? IDNV { set; get; }
 
         [Required]
         public string TenNhanVien { get; set; }

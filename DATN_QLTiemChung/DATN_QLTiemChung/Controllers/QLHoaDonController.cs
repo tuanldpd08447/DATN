@@ -106,7 +106,7 @@ namespace DATN_QLTiemChung.Controllers
             ViewBag.HangCho = await GetHangCho();
 
            GetSession();
- 
+            ViewBag.Disable = true;
             return View("~/Views/Home/QLHoaDon.cshtml");
         }
         public async Task<IActionResult> QLHoaDon()

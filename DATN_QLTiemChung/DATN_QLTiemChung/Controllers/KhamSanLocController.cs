@@ -295,7 +295,7 @@ namespace DATN_QLTiemChung.Controllers
                             {
 
                                 GetSession();
-                                TempData["Notification"] = "khám sàn lọc thành công.";
+                                TempData["Notification"] = "Khám sàn lọc thành công.";
                                 TempData["NotificationType"] = "success";
                                 TempData["NotificationTitle"] = "Thông báo."; return RedirectToAction("KhamSanLoc");
                             }

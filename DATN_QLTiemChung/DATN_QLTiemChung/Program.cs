@@ -13,7 +13,7 @@ builder.WebHost.ConfigureKestrel(serverOptions =>
 });
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(30); // Th?i gian h?t h?n
+    options.IdleTimeout = TimeSpan.FromMinutes(490); // Th?i gian h?t h?n
     options.Cookie.HttpOnly = true;                // Ch? cho phép truy c?p qua HTTP
     options.Cookie.IsEssential = true;             // B?t bu?c cho ho?t ??ng c?a ?ng d?ng
 });

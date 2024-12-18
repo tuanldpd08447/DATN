@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "UUhHRCGgnAIJfsf0x1k+mmzzQvu/Li7AXsAbILlYpwU=",
+  "Hash": "CthoQHUU2hmYp7Qsvy8PbkN13N2BGuMX9Jn0ZUeuyJQ=",
   "Source": "DATN_QLTiemChung",
   "BasePath": "_content/DATN_QLTiemChung",
   "Mode": "Default",
@@ -243,6 +243,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\diachi.js"
+    },
+    {
+      "Identity": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\wwwroot\\js\\EmaiVali.js",
+      "SourceId": "DATN_QLTiemChung",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\wwwroot\\",
+      "BasePath": "_content/DATN_QLTiemChung",
+      "RelativePath": "js/EmaiVali.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\EmaiVali.js"
     },
     {
       "Identity": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_QLTiemChung\\wwwroot\\js\\site.js",

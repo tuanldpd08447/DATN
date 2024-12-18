@@ -24,18 +24,18 @@
         khachHangDTo.NgaySinh = khachhang.NgaySinh;
     }
 
-
+    bool Disable = ViewBag.Disable ?? false;
 }
 
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="" style="color: #2fb388;">QUẢN LÝ HÓA ĐƠN</h2>
         <div class="float-end ">
-            <button class="btn fw-bold custom-btn" id="activateButton"><i class="fa-solid fa-plus"></i> Thêm</button>
+            <button class="btn fw-bold custom-btn" id="activateButton" ><i class="fa-solid fa-plus"></i> Thêm</button>
             <button class="btn fw-bold custom-btn" id="updateButton" data-action="@Url.Action("UpdateHoaDon", "QLHoaDon")" onclick="changeAction(this)">
                 <i class="fa-solid fa-floppy-disk"></i> Lưu
             </button>
-            <button class="btn fw-bold custom-btn" id="cancelButton" data-action="@Url.Action("CancelHoaDon", "QLHoaDon")" onclick="changeAction(this)">
+            <button class="btn fw-bold custom-btn" id="cancelButton"  data-action="@Url.Action("CancelHoaDon", "QLHoaDon")" onclick="changeAction(this)">
                 <i class="fa-solid fa-floppy-disk" ></i> Hủy
             </button>
 
@@ -105,16 +105,15 @@
             </div>
         </div>
         <div class="invoice-section col-8  ">
-
-           
-
-            <form id="vattuform" method="post" action="@Url.Action("AddHoaDon", "QLHoaDon")">
+            <form class=" h-100" id="vattuform" method="post" action="@Url.Action("AddHoaDon", "QLHoaDon")">
                 <div class=" ms-2 p-3 border rounded-4 h-100">
                     <div class="row ">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label class="fw-semibold" for="makhachhang">Mã Khách Hàng</label>
-                                <input type="text" name="MaKH" class="form-control form-control-sm" id="medicalCode " value="@if(khachHangDTo!=null){@khachHangDTo.IDKH}">
+                                <label class="fw-semibold" for="MaKH">Mã Khách Hàng</label>
+                                <input type="text" name="MaKH" class="form-control form-control-sm" disabled id="MaKH " value="@if(khachHangDTo!=null){
+                                @khachHangDTo.IDKH
+}">
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -137,7 +136,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label class="fw-semibold" for="birthYear">Năm sinh</label>
-                                <input type="number" class="form-control form-control-sm"
+                                <input type="number" id="NgaySinh" class="form-control form-control-sm"
                                        value="@khachHangDTo?.NgaySinh.Year"
                                        min="1900" max="2100" />
                             </div>
@@ -205,7 +204,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label class="fw-semibold" for="manhanvien">Mã nhân viên</label>
-                                <input type="text" name="MaNV" class="form-control form-control-sm" id="medicalCode" value="@if (hoaDon != null)
+                                <input type="text" name="MaNV" class="form-control form-control-sm" id="IDNV" value="@if (hoaDon != null)
                                 {@hoaDon.NhanVien.IDNV}">
                             </div>
                         </div>
@@ -294,8 +293,8 @@
                             </div>
                         </div>
 						<div class="col-md-3">
-							<label class="fw-semibold" for="paymentMethod">Hình thức thanh toán</label>
-							<select id="paymentMethod" name="GhiChu" class="form-control form-control-sm" required>
+                            <label class="fw-semibold" for="note">Hình thức thanh toán</label>
+							<select id="note" name="GhiChu" class="form-control form-control-sm" required>
 								<option></option>
                                 @if (hoaDon != null && @hoaDon.GhiChu == "Tiền mặt")
 								{
@@ -351,13 +350,13 @@
                         </div>
                         <div class="col-md-3">
                             <label class="fw-semibold" for="thoigian">Thời gian</label>
-                            <input type="datetime-local" name="ThoiGian" value="@if (hoaDon != null)
+                            <input type="datetime-local" name="ThoiGian" id="ThoiGian" value="@if (hoaDon != null)
                                 { @hoaDon.ThoiGian.ToString("yyyy-MM-ddTHH:mm")}" class="form-control form-control-sm">
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label class="fw-semibold" for="paymentMethod">Trạng thái</label>
-                                <select id="paymentMethod" name="TrangThai" class="form-control form-control-sm ">
+                                <label class="fw-semibold" for="status">Trạng thái</label>
+                                <select id="status" name="TrangThai" class="form-control form-control-sm ">
                                 
                                     @if (hoaDon != null)
                                     {
@@ -385,24 +384,32 @@
                     </div>
 
 
-                    <div class="row p-2 ps-4">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <div class="radio-group row">
-
-                                    <div class="ms-2">
-                                        <button class="btn" type="button">Hoàn trả</button>
-                                      
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                   
                    
                 </div>
                 <button id="targetButton" type="submit" style="display:none;">Nút bị kích hoạt</button>
                 <script>
+                    const disable = @Html.Raw(ViewBag.Disable?.ToString().ToLower() ?? "false"); // Lấy giá trị từ Razor view (ASP.NET) và gán vào biến disable
+
+                    function toggleDisable(disable) {
+                        const elements = [
+                            'activateButton', 'MaKH', 'name', 'phone',
+                            'NgaySinh', 'hoKhauTinh', 'hoKhauQuan', 'hoKhauXa',
+                            'address', 'IDNV', 'mahoadon', 'mavaccine',
+                            'noidung', 'soluong', 'dongia', 'thanhtien', 'ThoiGian'
+                        ];
+
+                        // Lặp qua danh sách các phần tử
+                        elements.forEach(id => {
+                            const element = document.getElementById(id);
+                            if (element) {
+                                element.disabled = disable; // Vô hiệu hóa hoặc kích hoạt phần tử
+                            }
+                        });
+                    }
+
+                    // Gọi hàm toggleDisable với giá trị từ biến disable
+                    toggleDisable(disable);
                     // Lấy phần tử button
                     const activateButton = document.getElementById('activateButton');
                     const targetButton = document.getElementById('targetButton');

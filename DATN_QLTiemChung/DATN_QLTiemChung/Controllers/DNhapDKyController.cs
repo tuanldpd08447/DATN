@@ -32,39 +32,43 @@ namespace DATN_QLTiemChung.Controllers
             TempData["Username"] = Username;
             TempData["Role"] = userRole;
         }
-        public async Task<IActionResult> LoginSumit(string email ,string password)
+        public async Task<IActionResult> LoginSubmit(string email, string password)
         {
-            LoginNhanVien login = new LoginNhanVien 
+            LoginNhanVien login = new LoginNhanVien
             {
                 Email = email,
                 Password = password
             };
+
             var client = _httpClientFactory.CreateClient();
             var content = new StringContent(JsonConvert.SerializeObject(login), Encoding.UTF8, "application/json");
             var response = await client.PostAsync("https://localhost:7143/api/DNhapDky/LoginNV", content);
+
             if (response.IsSuccessStatusCode)
             {
                 var apiResponse = await response.Content.ReadAsStringAsync();
-                LoginResult NhanVien = JsonConvert.DeserializeObject<LoginResult>(apiResponse);
+                LoginResult nhanVien = JsonConvert.DeserializeObject<LoginResult>(apiResponse);
 
-                HttpContext.Session.SetString("Username", NhanVien.Username);
-                HttpContext.Session.SetString("Role", NhanVien.Role);
-                HttpContext.Session.SetString("ID", NhanVien.ID);
+                HttpContext.Session.SetString("Username", nhanVien.Username);
+                HttpContext.Session.SetString("Role", nhanVien.Role);
+                HttpContext.Session.SetString("ID", nhanVien.ID);
 
-                GetSession();
                 TempData["Notification"] = "Đăng nhập thành công.";
                 TempData["NotificationType"] = "success";
                 TempData["NotificationTitle"] = "Thông báo.";
+
                 return RedirectToAction("HomeQL", "Home");
             }
-                GetSession();
-                ViewBag.ErrorMessage = "Thông tin đăng nhập không chính xác.";
-                TempData["Notification"] = "Đăng nhập thất bại. Thông tin đăng nhập không chính xác.";
-                TempData["NotificationType"] = "error";
-                TempData["NotificationTitle"] = "Thông báo.";
-                return RedirectToAction("Login");
 
+            // Đăng nhập thất bại
+            TempData["Notification"] = "Đăng nhập thất bại. Thông tin đăng nhập không chính xác.";
+            TempData["NotificationType"] = "error";
+            TempData["NotificationTitle"] = "Thông báo.";
+            ViewBag.ErrorMessage = "Thông tin đăng nhập không chính xác.";
+            ViewBag.Email = email;
+            return View("~/Views/Home/Login.cshtml");
         }
+
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();

@@ -13,7 +13,7 @@ builder.Services.AddDataProtection()
 // Thêm d?ch v? cho Session
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(30); // Th?i gian h?t h?n Session
+    options.IdleTimeout = TimeSpan.FromMinutes(490); // Th?i gian h?t h?n Session
     options.Cookie.HttpOnly = true;                // Ch? cho phép truy c?p qua HTTP
     options.Cookie.IsEssential = true;             // Cookie b?t bu?c
 });

@@ -38,17 +38,17 @@
 				<i class="fa-solid fa-floppy-disk"></i> Lưu
 			</button>
 
-			<button class="btn fw-bold custom-btn" id="CancelButton">
+			<a class="btn fw-bold custom-btn" id="CancelButton" asp-action="QLKhachHang" asp-controller="QLKhachHang">
 				<i class="fa-solid fa-repeat"></i> Hủy
-			</button>
+			</a>
 
 			<button class="btn fw-bold custom-btn" id="editButton" data-action="@Url.Action("UpdateKhachHang", "QLKhachHang")" onclick="changeAction(this)">
 				<i class="fa-solid fa-pen-to-square"></i> Sửa
 			</button>
 
-			<button class="btn fw-bold custom-btn">
+			<a class="btn fw-bold custom-btn" asp-action="Logout" asp-controller="DNhapDKy">
 				<i class="fa-solid fa-right-from-bracket"></i> Thoát
-			</button>
+			</a>
 		</div>
 	</div>
 	<script>
@@ -376,11 +376,7 @@
 					toggleFormElements(true); // Bật các trường trong form
 				});
 
-				// Xử lý nút "Hủy"
-				cancelButton.addEventListener("click", () => {
-					customerForm.reset(); // Đặt lại toàn bộ giá trị trong form
-					toggleFormElements(false); // Tắt các trường trong form
-				});
+				
 
 				// Xử lý sự kiện kích hoạt nút "activateButton"
 				activateButton.addEventListener("click", () => {

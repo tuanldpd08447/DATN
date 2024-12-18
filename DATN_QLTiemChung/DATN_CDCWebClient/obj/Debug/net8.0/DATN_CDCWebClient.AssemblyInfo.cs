@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DATN_CDCWebClient")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+92b8223b55c706e24347be5c59b12c32050faf66")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5b7aa1894f9de598a0debaa22ad297aef72044b1")]
 [assembly: System.Reflection.AssemblyProductAttribute("DATN_CDCWebClient")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DATN_CDCWebClient")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

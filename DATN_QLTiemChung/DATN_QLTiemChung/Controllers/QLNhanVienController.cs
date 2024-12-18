@@ -74,7 +74,7 @@ namespace DATN_QLTiemChung.Controllers
                 // map input parameters to the DTO 
                 var nhanVienCreateDTO = new NhanVienCreateDTO
                 {
-                    IDNV = "",
+                    IDNV = null,
                     IDXP = hoKhauXa,
                     TenNhanVien = hoTen,
                     ChucVu = chucVu,
@@ -181,11 +181,6 @@ namespace DATN_QLTiemChung.Controllers
 
 
 
-
-
-
-
-
         public async Task<IActionResult> ClickNhanVien(string IDNV)
         {
             var client = _httpClientFactory.CreateClient();
@@ -237,13 +232,6 @@ namespace DATN_QLTiemChung.Controllers
         }
 
         
-        /*
-        [HttpDelete("DeleteNhanVien")]
-        public async Task<IActionResult> DeleteNhanVien()
-        {
-
-        }
-        */
 
     }
 }

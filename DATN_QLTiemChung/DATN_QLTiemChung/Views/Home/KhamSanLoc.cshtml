@@ -103,7 +103,7 @@
                 </div>
             </div>
             <div class="row m-0 ms-1 mt-2 p-3 py-1 border rounded-4">
-                <button type="button" class="btn custom-btn rounded-pill px-4 py-2 font-weight-bold" data-bs-toggle="modal" data-bs-target="#vaccineModal">
+                <button type="button" id="ChiDinhVT" class="btn custom-btn rounded-pill px-4 py-2 font-weight-bold" data-bs-toggle="modal" data-bs-target="#vaccineModal" disabled>
                     Chỉ định vắc xin
                   </button>
                 <div class="modal fade" id="vaccineModal" tabindex="-1" aria-labelledby="vaccineModalLabel" aria-hidden="true" >
@@ -187,7 +187,6 @@
                                             </select>
                                             </div>
                                         </div>
-
                                         <div class="col">
                                             <div class="form-group">
                                                 <label class="fw-bold" for="expiryDateFind">Hạn Sử Dụng</label>
@@ -208,6 +207,7 @@
                                     <thead>
                                        <tr>
                                         <th></th>
+                                        <th>Số Lượng</th>
                                         <th>ID Vật Tư</th>
                                         <th>Tên Vật Tư</th>
                                         <th>Loại Vật Tư</th>
@@ -216,7 +216,6 @@
                                         <th>Nơi Xuất Xứ</th>
                                         <th>Đơn Giá</th>
                                         <th>Hạn Sử Dụng</th>
-                                        <th>Số Lượng</th>
                                         <th>Ghi Chú</th>
                                         <th>Số Mũi</th>
                                         <th>Đề Nghị</th>
@@ -227,11 +226,6 @@
                                     </tbody>
                                 </table>
                             </div>
-
-                           
-
-
-
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-outline-danger border-2 " data-bs-dismiss="modal">Đóng</button>
@@ -553,6 +547,14 @@
         document.getElementById('xacNhan').addEventListener('click', saveJsonToInput);
     });
 
+    function disabledChiDinh(idElement, isDisabled = false) {
+        const element = document.getElementById(idElement);
+        if (element) {
+            element.disabled = isDisabled;
+        }
+      
+    }
+
 
     function toggleInputState(radioButton, inputElement) {
         radioButton.addEventListener('change', function () {
@@ -574,10 +576,10 @@
             mangThaiCo: document.getElementById('mangThaiCo'),
             roiLoanTriGiacCo: document.getElementById('roiLoanTriGiacCo'),
             dauHieuBTTimPhoiCo: document.getElementById('dauHieuBTTimPhoiCo'),
-            diUngCo: document.getElementById('diUngCo') // thêm điều kiện cho diUngCo
+            diUngCo: document.getElementById('diUngCo')
         };
 
-        // Lấy các option
+        // Các option
         const options = {
             option1: document.getElementById('option1'),
             option2: document.getElementById('option2'),
@@ -585,13 +587,12 @@
             option4: document.getElementById('option4')
         };
 
-        // Lấy các input khác
+        // Các input khác
         const TrangThai = document.getElementById('TrangThai');
         const KetQua = document.getElementById('KetQua');
         const TinhTrangSucKhoe = document.getElementById('TinhTrangSucKhoe');
         const IDVT = document.getElementById('IDVT');
         const SoLuong = document.getElementById('SoLuong');
-
         const MuiTiepTheo = document.getElementById('MuiTiepTheo');
 
         // Reset trạng thái mặc định
@@ -604,62 +605,79 @@
                 SoLuong.removeAttribute('required');
             }
         }
-        function disableAllCheckboxes() {
-            const checkboxes = document.querySelectorAll(".vatTuCheckbox"); // Lấy tất cả checkbox có class vatTuCheckbox
+
+        // Vô hiệu hóa hoặc kích hoạt tất cả checkbox
+        function toggleCheckboxes(isDisabled) {
+            const checkboxes = document.querySelectorAll(".vatTuCheckbox");
             checkboxes.forEach(checkbox => {
-                checkbox.disabled = true; // Vô hiệu hóa checkbox
-                checkbox.title = "Không thể chọn vật tư này!"; // Gán tooltip khi hover vào checkbox
+                checkbox.disabled = isDisabled;
+                checkbox.title = isDisabled ? "Không thể chọn vật tư này!" : "Có thể chọn vật tư này!";
             });
         }
-        function enableAllCheckboxes() {
-            const checkboxes = document.querySelectorAll(".vatTuCheckbox"); // Lấy tất cả checkbox có class vatTuCheckbox
-            checkboxes.forEach(checkbox => {
-                checkbox.disabled = false; // Vô hiệu hóa checkbox
-                checkbox.title = "Không thể chọn vật tư này!"; // Gán tooltip khi hover vào checkbox
-            });
+
+        // Cập nhật trạng thái cho 'ChiDinhVT'
+        function toggleChiDinh(isDisabled) {
+            disabledChiDinh('ChiDinhVT', isDisabled);
         }
-        // Kiểm tra điều kiện "xấu"
-        if (
-            conditions.dauHieuBTCo.checked ||
-            conditions.diUngCo.checked ||
-            conditions.dauHieuBTTimPhoiCo.checked ||
-            conditions.roiLoanTriGiacCo.checked
-        ) {
+
+        // Kiểm tra các điều kiện về bệnh lý
+        const isBadCondition = conditions.dauHieuBTCo.checked || conditions.diUngCo.checked || conditions.dauHieuBTTimPhoiCo.checked || conditions.roiLoanTriGiacCo.checked;
+        const isPartiallyGoodCondition = conditions.phanVeCo.checked;
+        // Kiểm tra IDKH tồn tại và vô hiệu hóa 'ChiDinhVT' nếu không tồn tại
+        const IDKH = document.getElementById('IDKH');
+
+        // Kiểm tra nếu IDKH không tồn tại hoặc có giá trị trống
+        if (!IDKH || IDKH.value.trim() === '') {
+            toggleChiDinh(true); // Vô hiệu hóa 'ChiDinhVT' nếu IDKH trống hoặc không tồn tại
+        } 
+        else if (isBadCondition) {
+            // Điều kiện xấu: cập nhật thông tin và vô hiệu hóa các checkbox
             options.option4.checked = true;
             TrangThai.value = "false";
             KetQua.value = "false";
             TinhTrangSucKhoe.value = "Xấu";
-            setDefault(false); // Đặt required
-            disableAllCheckboxes();
-        } else if (conditions.phanVeCo.checked) {
+            setDefault(false); // Không yêu cầu các trường IDVT và SoLuong
+            toggleCheckboxes(true); // Vô hiệu hóa checkbox
+            toggleChiDinh(true); // Vô hiệu hóa 'ChiDinhVT'
+        } else if (isPartiallyGoodCondition) {
+            // Điều kiện tạm ổn
             options.option2.checked = true;
             TrangThai.value = "true";
             KetQua.value = "true";
             TinhTrangSucKhoe.value = "Tạm ổn";
-            setDefault(true); // Gỡ bỏ required
-            enableAllCheckboxes();
+            setDefault(true); // Đặt required
+            toggleCheckboxes(false); // Kích hoạt checkbox
+            toggleChiDinh(false); // Kích hoạt 'ChiDinhVT'
         } else if (Object.values(conditions).some(cond => cond.checked)) {
+            // Nếu có bất kỳ điều kiện nào được chọn
             options.option3.checked = true;
             TrangThai.value = "true";
             KetQua.value = "true";
             TinhTrangSucKhoe.value = "Tạm ổn";
-            setDefault(true); // Gỡ bỏ required
-            enableAllCheckboxes();
+            setDefault(true); // Đặt required
+            toggleCheckboxes(false); // Kích hoạt checkbox
+            toggleChiDinh(false); // Kích hoạt 'ChiDinhVT'
         } else {
+            // Điều kiện tốt
             options.option1.checked = true;
             TrangThai.value = "true";
             KetQua.value = "true";
             TinhTrangSucKhoe.value = "Tốt";
-            setDefault(true); // Gỡ bỏ required
-            enableAllCheckboxes();
+            setDefault(true); // Đặt required
+            toggleCheckboxes(false); // Kích hoạt checkbox
+            toggleChiDinh(false); // Kích hoạt 'ChiDinhVT'
         }
 
         // Kiểm tra MuiTiepTheo là 'true' và đặt trạng thái required
         if (MuiTiepTheo && MuiTiepTheo.value === 'true') {
-            setDefault(false); // Nếu MuiTiepTheo là 'true', đặt lại trạng thái required cho IDVT và SoLuong
-            disableAllCheckboxes();
+            setDefault(false);
+            toggleCheckboxes(true); // Vô hiệu hóa checkbox
+            toggleChiDinh(true); // Vô hiệu hóa 'ChiDinhVT'
         }
+
+       
     }
+
 
 
 
@@ -669,6 +687,7 @@
     });
 
     checkXacNhan();
+
     const benhMacKhong = document.getElementById('benhMacKhong');
     const benhMacCo = document.getElementById('benhMacCo');
     const benhCapTinhInput = document.getElementById('benhCapTinhInput');
@@ -783,8 +802,8 @@
                 }
 
                 tr.innerHTML = `
-                    <td><input type="checkbox" class="vatTuCheckbox" data-id="${vt.IDVT}"></td>
-                        <td><input type="number" class="soMui form-control" id="soMui-${vt.IDVT}" value="1" min="1" /></td>
+                    <td><input type="radio" class="vatTuCheckbox" name="vatTuCheckbox" data-id="${vt.IDVT}"></td>
+                    <td><input type="number" class="soMui form-control" id="soMui-${vt.IDVT}" value="1" min="1" /></td>
                     <td>${vt.IDVT}</td>
                     <td>${vt.TenVatTu}</td>
                     <td>${vt.TenLoai}</td>
@@ -835,21 +854,29 @@
     }
 
 
-    function toggleTargetTable(checkbox, vt) {
-
-        console.log(vt); // Kiểm tra đối tượng vt
-        document.getElementById('IDVT').value = vt.IDVT ;
-      
-
+    // Hàm toggle cập nhật bảng mục tiêu
+    function toggleTargetTable(checkbox, vt, soMui) {
         const targetTableBody = document.querySelector("#targetTable tbody");
-        const soMuiInput = document.getElementById(`soMui-${vt.IDVT}`);
-        const soMui = parseInt(soMuiInput.value) || 1;
-
-        document.getElementById('SoLuong').value = soMui;
-
+        clearTargetTable();
+        // Nếu radio được chọn, thêm hoặc cập nhật số mũi vào bảng mục tiêu
         if (checkbox.checked) {
-            for (let i = 1; i <= soMui; i++) {
+            // Xóa các dòng cũ trước khi thêm mới
+            const existingRows = targetTableBody.querySelectorAll(`tr[data-id="${vt.IDVT}"]`);
+            existingRows.forEach(row => row.remove());
+
+            // Kiểm tra đối tượng vt và cập nhật giá trị vào các input
+            console.log(vt);  // Kiểm tra đối tượng vt
+            document.getElementById('IDVT').value = vt.IDVT;
+            document.getElementById('SoLuong').value = soMui;  // Cập nhật số lượng mũi từ input
+
+            // Lấy số mũi từ ô nhập số mũi (trong trường hợp số mũi thay đổi)
+            const soMuiInput = document.getElementById(`soMui-${vt.IDVT}`);
+            let soMuiValue = parseInt(soMuiInput.value) || 1;  // Giá trị mặc định là 1 nếu không hợp lệ
+
+            // Cập nhật số mũi vào bảng mục tiêu
+            for (let i = 1; i <= soMuiValue; i++) {
                 const tr = document.createElement("tr");
+                tr.setAttribute("data-id", vt.IDVT); // Đánh dấu hàng với IDVT
                 tr.innerHTML = `
                     <td>${vt.IDVT}</td>
                     <td>${vt.TenVatTu}</td>
@@ -865,51 +892,68 @@
                 `;
                 targetTableBody.appendChild(tr);
             }
-        } else {
-            const targetRows = targetTableBody.querySelectorAll('tr');
-            let hasRows = false;
-            targetRows.forEach((row) => {
-                if (row.cells[0].textContent === vt.IDVT.toString()) {
-                    const m = row.cells[10].textContent;
-                    if (m.startsWith('Mũi')) {
-                        row.remove();
-                    }
-                    hasRows = true;
-                }
+
+            // Lắng nghe sự thay đổi số mũi trong ô nhập (input)
+            soMuiInput.addEventListener('input', function () {
+                let updatedSoMui = parseInt(soMuiInput.value) || 1; // Cập nhật giá trị số mũi
+                document.getElementById('SoLuong').value = updatedSoMui;
+                toggleTargetTable(checkbox, vt, updatedSoMui);  // Cập nhật lại bảng mục tiêu
             });
+
+        } else {
+            // Nếu radio không được chọn, xóa tất cả các dòng liên quan đến IDVT
             document.getElementById('IDVT').value = "";
             document.getElementById('SoLuong').value = "";
-            if (!hasRows) {
-                targetTableBody.innerHTML = `
-                    <tr>
-                        <td class="text-center" colspan="11">Danh Sách Chỉ Định trống</td>
-                    </tr>
-                `;
-            }
+            const targetRows = targetTableBody.querySelectorAll(`tr[data-id="${vt.IDVT}"]`);
+            targetRows.forEach(row => row.remove());
         }
     }
 
 
-    // Lắng nghe sự kiện thay đổi checkbox
     document.querySelector("#vatTuTable").addEventListener('change', function (e) {
+       
         if (e.target && e.target.matches('.vatTuCheckbox')) {
             const checkbox = e.target;
             const row = checkbox.closest("tr");
             const vt = {
-                IDVT: row.cells[2].textContent,
-                TenVatTu: row.cells[3].textContent,
-                TenLoai: row.cells[4].textContent,
-                TenNguon: row.cells[5].textContent,
-                TenNhaCungCap: row.cells[6].textContent,
-                NoiXuatXu: row.cells[7].textContent,
-                DonGia: row.cells[8].textContent,
-                HanSuDung: row.cells[9].textContent,
-                SoLuong: row.cells[10].textContent,
-                GhiChu: row.cells[11].textContent,
+                IDVT: row.cells[2]?.textContent.trim(),
+                TenVatTu: row.cells[3]?.textContent.trim(),
+                TenLoai: row.cells[4]?.textContent.trim(),
+                TenNguon: row.cells[5]?.textContent.trim(),
+                TenNhaCungCap: row.cells[6]?.textContent.trim(),
+                NoiXuatXu: row.cells[7]?.textContent.trim(),
+                DonGia: row.cells[8]?.textContent.trim(),
+                HanSuDung: row.cells[9]?.textContent.trim(),
+                SoLuong: row.cells[10]?.textContent.trim(),
+                GhiChu: row.cells[11]?.textContent.trim(),
             };
-            toggleTargetTable(checkbox, vt);
+
+            // Kiểm tra nếu radio được chọn
+            const isChecked = checkbox.checked;
+            const soMuiInput = document.getElementById(`soMui-${vt.IDVT}`);
+            let soMui = parseInt(soMuiInput.value) || 1;
+
+            // Cập nhật bảng mục tiêu khi chọn radio
+            toggleTargetTable(checkbox, vt, soMui);
+
+            // Lắng nghe sự kiện thay đổi số mũi
+            soMuiInput.addEventListener('input', function () {
+                soMui = parseInt(soMuiInput.value) || 1;
+                toggleTargetTable(checkbox, vt, soMui);
+            });
         }
     });
+
+
+    function clearTargetTable() {
+        const targetTableBody = document.querySelector("#targetTable tbody");
+        if (targetTableBody) {
+            targetTableBody.innerHTML = "";  // Xóa tất cả các hàng trong tbody
+        }
+    }
+
+
+
     document.querySelector("#findBtn").addEventListener("click", function () {
         // Lấy giá trị từ form tìm kiếm
         const vaccineCode = document.querySelector("#vaccineCodeFind").value.trim().toLowerCase();
@@ -954,5 +998,5 @@
             document.getElementById('CanNang').value = weightValue;
         }
     });
-
+    
  </script>

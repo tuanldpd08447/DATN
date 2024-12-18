@@ -45,9 +45,32 @@
                                     <span class="input-group-text border rounded-start" style="padding: 20px;">
                                         <i class="fa-solid fa-user"></i>
                                     </span>
-                                    <input type="text" class="form-control border-start-0" id="FullName" name="hoTen" placeholder="Họ và Tên" required value="@if(register!=null){@register.TenKhachHang}">
+                                    <input type="text" class="form-control border-start-0" id="FullName" name="hoTen" oninput="validateHoTen()" placeholder="Họ và Tên" required value="@if(register!=null){
+                                    @register.TenKhachHang
+}">
                                 </div>
                                 <span class="text-danger error-message" id="errorFullName" style="display: none;">Họ và Tên là bắt buộc.</span>
+                                <span id="hoTenError" class="text-danger error-message"></span>
+                                <script>
+                                    function validateHoTen() {
+                                        var hoTen = document.getElementById('FullName').value.trim();
+                                        var errorElement = document.getElementById('hoTenError');
+
+                                        if (hoTen === "") {
+                                            errorElement.textContent = "Họ tên không được để trống!";
+                                            errorElement.style.display = 'block';
+                                            document.getElementById('FullName').classList.add('input-error');
+                                        } else if (hoTen.length < 6) {
+                                            errorElement.textContent = "Họ tên phải có ít nhất 6 ký tự!";
+                                            errorElement.style.display = 'block';
+                                            document.getElementById('FullName').classList.add('input-error');
+                                        } else {
+                                            errorElement.textContent = "";
+                                            errorElement.style.display = 'none';
+                                            document.getElementById('FullName').classList.remove('input-error');
+                                        }
+                                    }
+                                </script>
                             </div>
 
                         <!-- Ngày sinh -->
@@ -56,8 +79,44 @@
                                     <span class="input-group-text border rounded-start" style="padding: 20px;">
                                         <i class="fa-solid fa-calendar"></i>
                                     </span>
-                                    <input type="date" class="form-control border-start-0" id="BirthDate" name="ngaySinh" required value="@(register?.NgaySinh.ToString("yyyy-MM-dd") ?? "")">
+                                    <input type="date" class="form-control border-start-0" id="BirthDate" name="ngaySinh" onchange="validatedate()" required value="@(register?.NgaySinh.ToString("yyyy-MM-dd") ?? "")">
                                 </div>
+                                <span id="ngaySinhError" class="error-message" style="display: none; color: red;"></span>
+
+                                <script>
+                                    function validatedate() {
+                                        var ngaySinh = document.getElementById('BirthDate').value.trim();
+                                        var errorElement = document.getElementById('ngaySinhError');
+
+                                        // Kiểm tra nếu trường ngày sinh để trống
+                                        if (ngaySinh === "") {
+                                            errorElement.textContent = "Ngày sinh không được để trống!";
+                                            errorElement.style.display = "block"; 
+                                            return; 
+                                        }
+
+                                        var currentDate = new Date();
+                                        var inputDate = new Date(ngaySinh);
+
+                                        // Kiểm tra nếu ngày sinh là ngày trong tương lai
+                                        if (inputDate > currentDate) {
+                                            errorElement.textContent = "Ngày sinh không thể là ngày trong tương lai!";
+                                            errorElement.style.display = "block";  // Hiển thị thông báo lỗi
+                                            return; // Dừng kiểm tra tiếp theo nếu có lỗi
+                                        }
+
+                                        // Kiểm tra nếu ngày sinh không hợp lệ
+                                        if (isNaN(inputDate.getTime())) {
+                                            errorElement.textContent = "Ngày sinh không hợp lệ!";
+                                            errorElement.style.display = "block";  // Hiển thị thông báo lỗi
+                                            return; // Dừng kiểm tra tiếp theo nếu có lỗi
+                                        }
+
+                                        // Nếu tất cả kiểm tra đều hợp lệ
+                                        errorElement.textContent = "";  // Xóa thông báo lỗi
+                                        errorElement.style.display = "none";   // Ẩn thông báo lỗi
+                                    }
+                                </script>
                                 <span class="text-danger error-message" id="errorBirthDate" style="display: none;">Ngày sinh là bắt buộc.</span>
                            </div>
                             
@@ -209,9 +268,24 @@
                                 </span>
 
                                 <!-- Số nhà/đường -->
-                                <input type="text" class="form-control border-start-0" id="Street" name="diaChiChiTiet" placeholder="Số nhà, tên đường" required value="@if(register!=null){@register.DiaChi}">
+                                <input type="text" class="form-control border-start-0" id="Street" name="diaChiChiTiet" placeholder="Số nhà, tên đường" oninput="validateStreet()" required value="@if(register!=null){
+                                @register.DiaChi
+}">
                             </div>
                             <span class="text-danger error-message" id="errorStreet" style="display: none;">Số nhà/đường là bắt buộc.</span>
+                            <script>
+                                function validateStreet() {
+                                    var street = document.getElementById('Street').value.trim();
+                                    var errorElement = document.getElementById('errorStreet');
+
+                                    // Kiểm tra nếu trường "Số nhà, tên đường" bị bỏ trống
+                                    if (street === '') {
+                                        errorElement.style.display = 'inline';  // Hiển thị thông báo lỗi
+                                    } else {
+                                        errorElement.style.display = 'none';  // Ẩn thông báo lỗi nếu có giá trị
+                                    }
+                                }
+                            </script>
                         </div>
 
                         <!-- Số điện thoại -->
@@ -221,8 +295,26 @@
                                     <span class="input-group-text border rounded-start" style="padding: 20px;">
                                         <i class="fa-solid fa-phone"></i>
                                     </span>
-                                    <input type="tel" class="form-control border-start-0" id="PhoneNumber" name="sdt" placeholder="Số điện thoại" pattern="[0-9]{10,11}" required value="@if(register!=null){@register.SoDienThoai}">
+                                    <input type="tel" class="form-control border-start-0" id="PhoneNumber" name="sdt" placeholder="Số điện thoại" pattern="[0-9]{10,11}" onclick="validatePhoneNumber()" required value="@if(register!=null){@register.SoDienThoai}">
                                 </div>
+                                <span id="sdtError" class="text-danger error-message"></span>
+                                <script>
+                                    function validatePhoneNumber() {
+                                        var phone = document.getElementById('PhoneNumber').value;
+                                        var phonePattern = /^[0-9]{10}$/;
+                                        var errorElement = document.getElementById('sdtError');
+
+                                        if (!phonePattern.test(phone)) {
+                                            document.getElementById('PhoneNumber').classList.add('input-error');
+                                            errorElement.textContent = "Số điện thoại phải có 10 chữ số.";
+                                            errorElement.style.display = 'block';
+                                        } else {
+                                            document.getElementById('PhoneNumber').classList.remove('input-error');
+                                            errorElement.style.display = 'none';
+                                        }
+                                    }
+
+                                </script>
                                 <span class="text-danger error-message" id="errorPhoneNumber" style="display: none;">Số điện thoại không hợp lệ.</span>
                                 @if (TempData["errorSdt"] != null)
                                 {
@@ -236,14 +328,17 @@
                                         <span class="input-group-text border rounded-start" style="padding: 20px;">
                                             <i class="fa-solid fa-envelope"></i>
                                         </span>
-                                    <input type="email" class="form-control border-start-0" id="Email" name="email" placeholder="Email" required value="@if(register!=null){@register.Email}">
+                                    <input type="email" class="form-control border-start-0" id="email" name="email" placeholder="Email" required onclick="validateEmail()" value="@if(register!=null){
+                                    @register.Email
+}">
                                     </div>
-                                    <span class="text-danger error-message" id="errorEmail" style="display: none;">Email không hợp lệ.</span>
+                                <span class="text-danger error-message" id="emailError" style="display: none;">Email không hợp lệ.</span>
                                     @if (TempData["errorEmail"] != null)
                                     {
                                         <span class="text-danger">@TempData["errorEmail"]</span>
                                     }
                                 </div>
+                            <script src="~/js/EmaiVali.js" asp-append-version="true"></script>
                         </div>
                         <!-- CCCD hoặc MDD -->
                         <div class="form-group mt-2">
@@ -251,8 +346,28 @@
                                 <span class="input-group-text border rounded-start" style="padding: 20px;">
                                     <i class="fa-solid fa-id-card"></i>
                                 </span>
-                                <input type="text" class="form-control border-start-0" id="CCCD_MDD" name="cmt" placeholder="CCCD hoặc Mã định danh" required value="@if(register!=null){@register.CCCD_MDD}">
+                                <input type="text" class="form-control border-start-0" id="CCCD_MDD" name="cmt" placeholder="CCCD hoặc Mã định danh" oninput="validateCMT()" required value="@if(register!=null){
+                                @register.CCCD_MDD
+}">
                             </div>
+                            <span id="cmtError" class="text-danger error-message"></span>
+                            <script>
+                                function validateCMT() {
+                                    var cmt = document.getElementById('CCCD_MDD').value.trim();
+                                    var cmtPattern = /^[0-9]{12}$/; // Phải gồm đúng 12 chữ số
+                                    var errorElement = document.getElementById('cmtError');
+
+                                    if (!cmtPattern.test(cmt)) {
+                                        errorElement.textContent = "CMT/CCCD phải gồm đúng 12 chữ số!";
+                                        document.getElementById('CCCD_MDD').classList.add('input-error');
+                                        errorElement.style.display = 'block';
+                                    } else {
+                                        errorElement.textContent = "";
+                                        document.getElementById('CCCD_MDD').classList.remove('input-error');
+                                        errorElement.style.display = 'none';
+                                    }
+                                }
+                            </script>
                             <span class="text-danger error-message" id="errorCCCD_MDD" style="display: none;">CCCD/Mã định danh là bắt buộc.</span>
                             @if (TempData["errorCCCD/MDD"] != null)
                             {
@@ -269,8 +384,22 @@
                                     <span class="input-group-text border rounded-start" style="padding: 20px;">
                                         <i class="fa-solid fa-lock"></i>
                                     </span>
-                                    <input type="password" class="form-control border-start-0" id="Password" name="password" placeholder="Mật khẩu" minlength="6" required>
+                                    <input type="password" class="form-control border-start-0" id="Password" name="password" placeholder="Mật khẩu" minlength="6" required oninput="validatePassword()">
                                 </div>
+                                <span class="text-danger" id="passwordError" style="display: none;">Mật khẩu phải có ít nhất 6 ký tự.</span>
+                                <script>
+                                    function validatePassword() {
+                                        var password = document.getElementById('Password').value;
+                                        var errorElement = document.getElementById('passwordError');
+
+                                        // Kiểm tra mật khẩu có ít nhất 6 ký tự và không để trống
+                                        if (password.length < 6) {
+                                            errorElement.style.display = 'inline';  // Hiển thị thông báo lỗi
+                                        } else {
+                                            errorElement.style.display = 'none';  // Ẩn thông báo lỗi
+                                        }
+                                    }
+                                </script>
                                 <span class="text-danger error-message" id="errorPassword" style="display: none;">Mật khẩu phải từ 6 ký tự trở lên.</span>
                             </div>
 
@@ -370,7 +499,138 @@
                 document.getElementById("errorConfirmPassword").style.display = "none";
             }
         });
+          // Hàm kiểm tra email hợp lệ
+  
 
+    // Hàm kiểm tra số điện thoại hợp lệ
+    function validatePhoneNumber() {
+        const phoneNumber = document.getElementById("PhoneNumber").value.trim();
+        const phoneError = document.getElementById("errorPhoneNumber");
+        const phonePattern = /^[0-9]{10,11}$/;
+        
+        if (!phonePattern.test(phoneNumber)) {
+            phoneError.style.display = "block"; // Hiển thị lỗi
+        } else {
+            phoneError.style.display = "none"; // Ẩn lỗi
+        }
+    }
+
+    // Hàm kiểm tra mật khẩu hợp lệ
+    function validatePassword() {
+        const password = document.getElementById("Password").value.trim();
+        const confirmPassword = document.getElementById("ConfirmPassword").value.trim();
+        const passwordError = document.getElementById("errorPassword");
+        const confirmPasswordError = document.getElementById("errorConfirmPassword");
+
+        if (password.length < 6) {
+            passwordError.style.display = "block"; // Hiển thị lỗi
+        } else {
+            passwordError.style.display = "none"; // Ẩn lỗi
+        }
+
+        if (password !== confirmPassword) {
+            confirmPasswordError.style.display = "block"; // Hiển thị lỗi
+        } else {
+            confirmPasswordError.style.display = "none"; // Ẩn lỗi
+        }
+    }
+
+    // Hàm kiểm tra xem các trường có được điền đầy đủ không
+    function validateForm(event) {
+        const fullName = document.getElementById("FullName").value.trim();
+        const birthDate = document.getElementById("BirthDate").value.trim();
+        const gender = document.getElementById("Gender").value.trim();
+        const ethnic = document.getElementById("Ethnic").value.trim();
+        const province = document.getElementById("hoKhauTinh").value.trim();
+        const district = document.getElementById("hoKhauQuan").value.trim();
+        const ward = document.getElementById("hoKhauXa").value.trim();
+        const street = document.getElementById("Street").value.trim();
+        const cccdMdd = document.getElementById("CCCD_MDD").value.trim();
+
+        const errorFullName = document.getElementById("errorFullName");
+        const errorBirthDate = document.getElementById("errorBirthDate");
+        const errorGender = document.getElementById("errorGender");
+        const errorEthnic = document.getElementById("errorEthnic");
+        const errorProvince = document.getElementById("errorProvince");
+        const errorDistrict = document.getElementById("errorDistrict");
+        const errorWard = document.getElementById("errorWard");
+        const errorStreet = document.getElementById("errorStreet");
+        const errorCCCD_MDD = document.getElementById("errorCCCD_MDD");
+
+        let valid = true;
+
+        // Kiểm tra các trường bắt buộc
+        if (!fullName) {
+            errorFullName.style.display = "block";
+            valid = false;
+        } else {
+            errorFullName.style.display = "none";
+        }
+
+        if (!birthDate) {
+            errorBirthDate.style.display = "block";
+            valid = false;
+        } else {
+            errorBirthDate.style.display = "none";
+        }
+
+        if (!gender) {
+            errorGender.style.display = "block";
+            valid = false;
+        } else {
+            errorGender.style.display = "none";
+        }
+
+        if (!ethnic) {
+            errorEthnic.style.display = "block";
+            valid = false;
+        } else {
+            errorEthnic.style.display = "none";
+        }
+
+        if (!province) {
+            errorProvince.style.display = "block";
+            valid = false;
+        } else {
+            errorProvince.style.display = "none";
+        }
+
+        if (!district) {
+            errorDistrict.style.display = "block";
+            valid = false;
+        } else {
+            errorDistrict.style.display = "none";
+        }
+
+        if (!ward) {
+            errorWard.style.display = "block";
+            valid = false;
+        } else {
+            errorWard.style.display = "none";
+        }
+
+        if (!street) {
+            errorStreet.style.display = "block";
+            valid = false;
+        } else {
+            errorStreet.style.display = "none";
+        }
+
+        if (!cccdMdd) {
+            errorCCCD_MDD.style.display = "block";
+            valid = false;
+        } else {
+            errorCCCD_MDD.style.display = "none";
+        }
+
+        // Nếu form không hợp lệ, ngừng việc gửi form
+        if (!valid) {
+            event.preventDefault();
+        }
+    }
+
+    // Gắn sự kiện submit vào form để validate
+    document.getElementById("registerForm").addEventListener("submit", validateForm);
     </script>
     
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

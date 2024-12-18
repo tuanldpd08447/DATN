@@ -345,7 +345,7 @@ namespace DATN_QLTiemChung.Models
     public class NhanVienCreateDTO()
     {
         public string IDXP { get; set; }
-        public string IDNV { get; set; }
+        public string? IDNV { get; set; }
         public string TenNhanVien { get; set; }
         public string ChucVu { get; set; }
         public string TenChucDanh { get; set; }

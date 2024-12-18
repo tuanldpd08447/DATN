@@ -70,11 +70,15 @@ public class QLTiepNhanController : ControllerBase
     public async Task<ActionResult<IEnumerable<KhachHangPreOder>>> GetAllDatLichKhams()
     {
         // Truy vấn dữ liệu từ bảng DatLichKham và các bảng liên quan
-        var query = _context.DatLichKham
+        var today = DateOnly.FromDateTime(DateTime.Now);
+
+        var query = await _context.DatLichKham
             .Include(d => d.KhachHang)
                 .ThenInclude(kh => kh.Ward)
                     .ThenInclude(w => w.District)
                         .ThenInclude(d => d.Province)
+            .Where(dlk => DateOnly.FromDateTime(dlk.ThoiGian) == today)
+            .OrderBy(dlk => dlk.ThoiGian)
             .Select(kh => new KhachHangPreOder
             {
                 IDKH = kh.KhachHang.IDKH.ToString(),
@@ -89,22 +93,17 @@ public class QLTiepNhanController : ControllerBase
                 CCCD_MDD = kh.KhachHang.CCCD_MDD,
                 DanToc = kh.KhachHang.DanToc,
                 FullAddress = $"{kh.KhachHang.DiaChi}, {kh.KhachHang.Ward.name}, {kh.KhachHang.Ward.District.name}, {kh.KhachHang.Ward.District.Province.name}"
-            });
+            })
+            .ToListAsync();
 
-      
-            query = query.Where(kh => kh.NgayHen == DateOnly.FromDateTime(DateTime.Now));
-        
-
- 
-        var datLichKhams = await query.ToListAsync();
-
-        if (datLichKhams == null || datLichKhams.Count == 0)
+        if (!query.Any())
         {
-            return NotFound("Không có lịch khám nào.");
+            return NotFound("Không có lịch khám nào hôm nay.");
         }
 
-        return Ok(datLichKhams);
+        return Ok(query);
     }
+
 
 
     [HttpPost("AddKhachHang")]

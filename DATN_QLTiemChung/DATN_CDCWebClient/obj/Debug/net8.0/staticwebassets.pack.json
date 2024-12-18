@@ -101,6 +101,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_CDCWebClient\\wwwroot\\js\\EmaiVali.js",
+      "PackagePath": "staticwebassets\\js\\EmaiVali.js"
+    },
+    {
       "Id": "C:\\Users\\ductu\\Documents\\Github\\DATN\\DATN_QLTiemChung\\DATN_CDCWebClient\\wwwroot\\js\\diachi.js",
       "PackagePath": "staticwebassets\\js\\diachi.js"
     },

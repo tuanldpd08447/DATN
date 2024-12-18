@@ -27,7 +27,7 @@ namespace DATN_QLTiemChung_Api.Controllers
                     .ThenInclude(tc => tc.DangKyTiemChung)
                     .ThenInclude(dktc => dktc.DangKyVaccine)
                 .Where(st => st.IDKH == IDKH)
-                .Select(st => st.TiemChung.IDDK) // Chỉ lấy danh sách IDDK đã tiêm
+                .Select(st => st.TiemChung.IDDK) 
                 .ToListAsync();
 
             // Lấy dữ liệu từ bảng DangKyTiemChung và loại bỏ các bản ghi đã xuất hiện trong lsTiem
@@ -85,9 +85,6 @@ namespace DATN_QLTiemChung_Api.Controllers
             return Ok(combinedResult);
         }
 
-
-
-        
         [HttpGet("DSKhamSangLoc")]
         public async Task<ActionResult> DSKhamSangLoc()
         {

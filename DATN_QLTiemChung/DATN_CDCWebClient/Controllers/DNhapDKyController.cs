@@ -262,10 +262,10 @@ namespace DATN_CDCWebClient.Controllers
                 // Check email, phone, and CCCD/MDD
                 var checks = new[]
                 {
-            CheckAvailability(client, "CheckEmail", email, "errorEmail", "Email đã được sử dụng."),
-            CheckAvailability(client, "CheckPhone", sdt, "errorSdt", "Số điện thoại đã được sử dụng."),
-            CheckAvailability(client, "CheckCCCD", cmt, "errorCCCD", "CCCD/MDD đã được sử dụng.")
-            };
+                CheckAvailability(client, "CheckEmail", email, "errorEmail", "Email đã được sử dụng."),
+                CheckAvailability(client, "CheckPhone", sdt, "errorSdt", "Số điện thoại đã được sử dụng."),
+                CheckAvailability(client, "CheckCCCD", cmt, "errorCCCD/MDD", "CCCD/MDD đã được sử dụng.")
+                };
 
                 var checkResults = await Task.WhenAll(checks);
                 foreach (var result in checkResults)
