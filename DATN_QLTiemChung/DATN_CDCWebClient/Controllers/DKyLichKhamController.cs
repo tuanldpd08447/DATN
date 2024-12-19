@@ -41,7 +41,7 @@ namespace DATN_CDCWebClient.Controllers
             {
                 var client = _httpClientFactory.CreateClient();
 
-                var khTask = client.GetAsync($"https://localhost:7143/api/DKyLichKham/GetThongtinCaNhan/{id}");
+                var khTask = client.GetAsync($"http://qltiemchungapi.runasp.net/api/DKyLichKham/GetThongtinCaNhan/{id}");
                 var diaChiTask = khTask.ContinueWith(async task =>
                 {
                     var response = await task;
@@ -50,9 +50,9 @@ namespace DATN_CDCWebClient.Controllers
                     var kh = JsonConvert.DeserializeObject<KhachHang>(apiResponse);
                     ViewBag.Thongtinkh = kh;
 
-                     return client.GetAsync($"https://localhost:7143/api/Data/GetWardByid/{kh?.IDXP}");
+                     return client.GetAsync($"http://qltiemchungapi.runasp.net/api/Data/GetWardByid/{kh?.IDXP}");
                 }).Unwrap();
-                var lichKhamTask = client.GetAsync($"https://localhost:7143/api/DKyLichKham/GetAll");
+                var lichKhamTask = client.GetAsync($"http://qltiemchungapi.runasp.net/api/DKyLichKham/GetAll");
 
                 await Task.WhenAll(khTask, diaChiTask, lichKhamTask);
 
@@ -100,7 +100,7 @@ namespace DATN_CDCWebClient.Controllers
 
             var content = new StringContent(JsonConvert.SerializeObject(datLichKham), Encoding.UTF8, "application/json");
 
-            var response = await client.PostAsync("https://localhost:7143/api/DKyLichKham/ThemLichKham", content);
+            var response = await client.PostAsync("http://qltiemchungapi.runasp.net/api/DKyLichKham/ThemLichKham", content);
 
             if (response.IsSuccessStatusCode)
             {

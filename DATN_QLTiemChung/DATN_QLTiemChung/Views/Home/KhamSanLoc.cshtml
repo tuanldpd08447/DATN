@@ -678,10 +678,6 @@
        
     }
 
-
-
-
-
     document.querySelectorAll('input[type="radio"]').forEach((radio) => {
         radio.addEventListener('change', checkXacNhan);
     });
@@ -998,5 +994,63 @@
             document.getElementById('CanNang').value = weightValue;
         }
     });
-    
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // Lấy danh sách các ID của các radio button
+        const radioIds = [
+            "benhMacKhong", "benhMacCo",
+            "diUngKhong", "diUngCo",
+            "phanVeKhong", "phanVeCo",
+            "daTiemKhong", "daTiemCo",
+            "covidKhong", "covidCo",
+            "dieuTriHtKhong", "dieuTriHtCo",
+            "dieuTriBenhKhong", "dieuTriBenhCo",
+            "dongMauKhong", "dongMauCo",
+            "mangThaiKhong", "mangThaiCo",
+            "dauHieuBTKhong", "dauHieuBTCo",
+            "dauHieuBTTimPhoiKhong", "dauHieuBTTimPhoiCo",
+            "roiLoanTriGiacKhong", "roiLoanTriGiacCo"
+        ];
+
+        // Lấy nút "Xác Nhận" và nút "Chỉ Định"
+        const xacNhanButton = document.getElementById('xacNhan');
+        const chiDinhVTButton = document.getElementById('ChiDinhVT');
+
+        // Hàm kiểm tra số lượng radio đã chọn
+        function checkRadioSelected() {
+            let selectedCount = 0;
+
+            // Kiểm tra từng radio button trong danh sách
+            radioIds.forEach(id => {
+                const radio = document.getElementById(id);
+                if (radio && radio.checked) {
+                    selectedCount++;
+                }
+            });
+
+            // Nếu đủ 12 radio được chọn, mở khóa nút
+            xacNhanButton.disabled = selectedCount < 12;
+            chiDinhVTButton.disabled = selectedCount < 12;
+
+            console.log(`Số lượng radio đã chọn: ${selectedCount}`); // Debugging
+        }
+
+        // Gắn sự kiện cho từng radio button
+        radioIds.forEach(id => {
+            const radio = document.getElementById(id);
+            if (radio) {
+                radio.addEventListener('click', checkRadioSelected);
+            }
+        });
+
+        // Khóa nút "Xác Nhận" và "Chỉ Định" khi tải trang
+        xacNhanButton.disabled = true;
+        chiDinhVTButton.disabled = true;
+    });
+
+
+
+
+
+
  </script>

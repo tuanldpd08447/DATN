@@ -42,7 +42,7 @@ namespace DATN_QLTiemChung.Controllers
 
             var client = _httpClientFactory.CreateClient();
             var content = new StringContent(JsonConvert.SerializeObject(login), Encoding.UTF8, "application/json");
-            var response = await client.PostAsync("https://localhost:7143/api/DNhapDky/LoginNV", content);
+            var response = await client.PostAsync("http://qltiemchungapi.runasp.net/api/DNhapDky/LoginNV", content);
 
             if (response.IsSuccessStatusCode)
             {

@@ -62,7 +62,7 @@ namespace DATN_QLTiemChung.Controllers
         {
             var client = _httpClientFactory.CreateClient();
 
-                var screeningResult = await client.GetAsync($"https://localhost:7143/api/QLTiemChung/KQKhamSangLoc/{IDKH}");
+                var screeningResult = await client.GetAsync($"http://qltiemchungapi.runasp.net/api/QLTiemChung/KQKhamSangLoc/{IDKH}");
 
                 if (screeningResult.IsSuccessStatusCode)
                 {
@@ -94,7 +94,7 @@ namespace DATN_QLTiemChung.Controllers
                 }
 
             // Lấy danh sách khách hàng đặt lịch
-            var response1 = await client.GetAsync("https://localhost:7143/api/QLTiemChung/DSKhamSangLoc");
+            var response1 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/QLTiemChung/DSKhamSangLoc");
            
                 var apiResponse1 = await response1.Content.ReadAsStringAsync();
                 List<DSKhamSangLocDTO> KhachHangKSL = JsonConvert.DeserializeObject<List<DSKhamSangLocDTO>>(apiResponse1);
@@ -103,7 +103,7 @@ namespace DATN_QLTiemChung.Controllers
 
             string idDK = "";
             //Lấy chỉ vaccine được chỉ định
-            var response2 = await client.GetAsync($"https://localhost:7143/api/QLTiemChung/CDVaccine/{IDKH}");
+            var response2 = await client.GetAsync($"http://qltiemchungapi.runasp.net/api/QLTiemChung/CDVaccine/{IDKH}");
             if (response2.IsSuccessStatusCode)
             {
                 var apiResponse2 = await response2.Content.ReadAsStringAsync();
@@ -131,7 +131,7 @@ namespace DATN_QLTiemChung.Controllers
             {
                 GetSession(); return NotFound();
             }
-            var response3 = await client.GetAsync($"https://localhost:7143/api/QLTiemChung/TheoDoiSauTiemByIDDK/{idDK}");
+            var response3 = await client.GetAsync($"http://qltiemchungapi.runasp.net/api/QLTiemChung/TheoDoiSauTiemByIDDK/{idDK}");
             if (response3.IsSuccessStatusCode)
             {
                 var apiResponse3 = await response3.Content.ReadAsStringAsync();
@@ -141,7 +141,7 @@ namespace DATN_QLTiemChung.Controllers
            
             ViewBag.HangCho = await GetHangCho();
 
-            var LStiemResult = await client.GetAsync($"https://localhost:7143/api/QLTiemChung/LsTiem/{IDKH}");
+            var LStiemResult = await client.GetAsync($"http://qltiemchungapi.runasp.net/api/QLTiemChung/LsTiem/{IDKH}");
 
             if (screeningResult.IsSuccessStatusCode)
             {
@@ -177,7 +177,7 @@ namespace DATN_QLTiemChung.Controllers
 
                 var content = new StringContent(JsonConvert.SerializeObject(createTiemChung), Encoding.UTF8, "application/json");
 
-                var response = await client.PostAsync("https://localhost:7143/api/QLTiemChung/CreateTiemChung", content);
+                var response = await client.PostAsync("http://qltiemchungapi.runasp.net/api/QLTiemChung/CreateTiemChung", content);
 
 
                 if (response.IsSuccessStatusCode)
@@ -227,7 +227,7 @@ namespace DATN_QLTiemChung.Controllers
 
                 // Gửi yêu cầu PUT đến API
                 var content = new StringContent(JsonConvert.SerializeObject(updateTheoDoi), Encoding.UTF8, "application/json");
-                var response = await client.PutAsync("https://localhost:7143/api/QLTiemChung/UpdateTheoDoiSauTiem", content);
+                var response = await client.PutAsync("http://qltiemchungapi.runasp.net/api/QLTiemChung/UpdateTheoDoiSauTiem", content);
 
                 if (!response.IsSuccessStatusCode)
                 {

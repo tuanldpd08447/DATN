@@ -109,7 +109,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label class="fw-bold" for="UserNameFind">Tên nhân viên</label>
-                            <input type="text" class="form-control" id="UserNameFind">
+                            <input type="text" class="form-control" id="UserNameFind" oninput="validateHoTen()">
                         </div>
                     </div>
                     <div class="col-3">
@@ -170,22 +170,81 @@
         <div class="invoice-section col-md-12 mt-2  ">
             <div class=" p-3 border rounded-4  ">
                 <div class="row ">
-                    <form id="EmployeeForm" method="post">
+                    <form id="EmployeeForm" method="post" onsubmit="return validateForm()">
                         <div class="row">
                             <div class="form-group col">
                                 <label class="fw-semibold" for="maYTe">Mã Nhân Viên</label>
                                 <input type="text" class="form-control" name="IDNV" id="IDNV" placeholder="NV002" value="@if(nhanVien!=null){
                                 @nhanVien.IDNV}" disabled>
+
                             </div>
                             <div class="form-group col">
                                 <label class="fw-semibold" for="hoTen">Họ tên</label>
-                                <input type="text" class="form-control" name="hoTen" id="hoTen" placeholder="Nguyễn Quang Trường" value="@if(nhanVien!=null){
+                                <input type="text" class="form-control" name="hoTen" id="hoTen" placeholder="Nguyễn Quang Trường" oninput="validateHoTen()" value="@if(nhanVien!=null){
                                 @nhanVien.TenNhanVien}" required disabled>
+                                <span id="hoTenError" class="error-message"></span>
+
+                                <script>
+                                    function validateHoTen() {
+                                        var hoTen = document.getElementById('hoTen').value.trim();
+                                        var errorElement = document.getElementById('hoTenError');
+
+                                        if (hoTen === "") {
+                                            errorElement.textContent = "Họ tên không được để trống!";
+                                            errorElement.style.display = 'block';
+                                            document.getElementById('hoTen').classList.add('input-error');
+                                        } else if (hoTen.length < 6) {
+                                            errorElement.textContent = "Họ tên phải có ít nhất 6 ký tự!";
+                                            errorElement.style.display = 'block';
+                                            document.getElementById('hoTen').classList.add('input-error');
+                                        } else {
+                                            errorElement.textContent = "";
+                                            errorElement.style.display = 'none';
+                                            document.getElementById('hoTen').classList.remove('input-error');
+                                        }
+                                    }
+                                </script>
                             </div>
                             <div class="form-group col">
                                 <label class="fw-semibold" for="ngaySinh">Ngày sinh</label>
-                                <input type="date" class="form-control" name="ngaySinh" id="ngaySinh" placeholder="1999-02-08" value="@(nhanVien?.NgaySinh.ToString("yyyy-MM-dd") ?? "")"
+                                <input type="date" class="form-control" name="ngaySinh" id="ngaySinh" placeholder="1999-02-08" oninput="validatedate()" value="@(nhanVien?.NgaySinh.ToString("yyyy-MM-dd") ?? "")"
                                 required disabled>
+                                <span id="ngaySinhError" class="error-message" style="display: none; color: red;"></span>
+
+                                <script>
+                                    function validatedate() {
+                                        var ngaySinh = document.getElementById('ngaySinh').value.trim();
+                                        var errorElement = document.getElementById('ngaySinhError');
+
+                                        // Kiểm tra nếu trường ngày sinh để trống
+                                        if (ngaySinh === "") {
+                                            errorElement.textContent = "Ngày sinh không được để trống!";
+                                            errorElement.style.display = "inline";  // Hiển thị thông báo lỗi
+                                            return; // Dừng kiểm tra tiếp theo nếu có lỗi
+                                        }
+
+                                        var currentDate = new Date();
+                                        var inputDate = new Date(ngaySinh);
+
+                                        // Kiểm tra nếu ngày sinh là ngày trong tương lai
+                                        if (inputDate > currentDate) {
+                                            errorElement.textContent = "Ngày sinh không thể là ngày trong tương lai!";
+                                            errorElement.style.display = "inline";  // Hiển thị thông báo lỗi
+                                            return; // Dừng kiểm tra tiếp theo nếu có lỗi
+                                        }
+
+                                        // Kiểm tra nếu ngày sinh không hợp lệ
+                                        if (isNaN(inputDate.getTime())) {
+                                            errorElement.textContent = "Ngày sinh không hợp lệ!";
+                                            errorElement.style.display = "inline";  // Hiển thị thông báo lỗi
+                                            return; // Dừng kiểm tra tiếp theo nếu có lỗi
+                                        }
+
+                                        // Nếu tất cả kiểm tra đều hợp lệ
+                                        errorElement.textContent = "";  // Xóa thông báo lỗi
+                                        errorElement.style.display = "none";   // Ẩn thông báo lỗi
+                                    }
+                                </script>
                             </div>
                         </div>
                         <div class="row">
@@ -270,6 +329,8 @@
                                         }
                                     }
                                 </select>
+                                <span id="danTocError" class="error-message" style="color:red; display:none;">Vui lòng chọn dân tộc!</span>
+
                             </div>
                             <div class="form-group col">
                                 <label class="fw-semibold" for="gioiTinh">Giới tính</label>
@@ -303,11 +364,30 @@
                                         <option value="Khác">Khác</option>
                                     }
                                 </select> 
+
                             </div>
                             <div class="form-group col">
                                 <label class="fw-semibold" for="cmt">CMT/CCCD/Mã định danh</label>
-                                <input type="text" class="form-control" name="cmt" id="cmt" placeholder="001082946357" value="@if(nhanVien!=null){
+                                <input type="text" class="form-control" name="cmt" id="cmt" placeholder="001082946357" oninput="validateCMT()" value="@if(nhanVien!=null){
                                 @nhanVien.CCCD}" required disabled>
+                                <span id="cmtError" class="error-message"></span>
+                                <script>
+                                    function validateCMT() {
+                                        var cmt = document.getElementById('cmt').value.trim();
+                                        var cmtPattern = /^[0-9]{12}$/; // Phải gồm đúng 12 chữ số
+                                        var errorElement = document.getElementById('cmtError');
+
+                                        if (!cmtPattern.test(cmt)) {
+                                            errorElement.textContent = "CMT/CCCD phải gồm đúng 12 chữ số!";
+                                            document.getElementById('cmt').classList.add('input-error');
+                                            errorElement.style.display = 'block';
+                                        } else {
+                                            errorElement.textContent = "";
+                                            document.getElementById('cmt').classList.remove('input-error');
+                                            errorElement.style.display = 'none';
+                                        }
+                                    }
+                                </script>
                             </div>
                         </div>
                         <div class="row ">
@@ -333,32 +413,20 @@
                                     }
 
                                 </script>
+                                <span id="sdtError" class="error-message"></span>
+
                             </div>
                             <div class="form-group col">
                                 <label class="fw-semibold" for="email">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="example@gmail.com"  placeholder="Nhập email"
+                                <input type="email" class="form-control" id="email" name="email" placeholder="example@gmail.com" oninput="validateEmail()" placeholder="Nhập email"
                                        title="Nhập đúng định dạng email (example@gmail.com)" value="@if(nhanVien!=null){
                                 @nhanVien.Email}" required disabled>
                                 <span id="emailError" class="error-message"></span>
                                 <input type="hidden" id="emailPattern" value="@emailtemplpe" style="display:none;" />
-                                <script>
-                                    function validateEmail() {
-                                        var email = document.getElementById('email').value;
-                                        var emailPattern = document.getElementById('emailPattern').value;  // Lấy pattern từ thuộc tính HTML
-                                        var regexPattern = new RegExp(emailPattern);
-                                        var errorElement = document.getElementById('emailError');
 
-                                        if (!regexPattern.test(email)) {
-                                            document.getElementById('email').classList.add('input-error');
-                                            errorElement.textContent = "Email không hợp lệ.";
-                                            errorElement.style.display = 'block';
-                                        } else {
-                                            document.getElementById('email').classList.remove('input-error');
-                                            errorElement.style.display = 'none';
-                                        }
-                                    }
-                                </script>
+                                <script src="~/js/EmaiVali.js" asp-append-version="true"></script>
 
+                                <span id="emailError" class="error-message" style="display: none;"></span> <!-- Thêm thẻ span để hiển thị lỗi -->
 
 
                             </div>
@@ -378,6 +446,8 @@
                                     }
 
                                 </select>
+                                <span id="hoKhauTinhError" class="error-message" style="color:red; display:none;">Vui lòng chọn Tỉnh/TP!</span>
+
                             </div>
                             <div class="form-group col">
                                 <label class="fw-semibold" for="hoKhauQuan">Quận/Huyện</label>
@@ -394,6 +464,8 @@
 
                                     <!-- Add other districts here -->
                                 </select>
+                                <span id="hoKhauQuanError" class="error-message" style="color:red; display:none;">Vui lòng chọn Quận/Huyện!</span>
+
                             </div>
                             <div class="form-group col">
                                 <label class="fw-semibold" for="hoKhauXa">Xã/Phường</label>
@@ -412,6 +484,8 @@
 
                                     <!-- Add other wards here -->
                                 </select>
+                                <span id="hoKhauXaError" class="error-message" style="color:red; display:none;">Vui lòng chọn Xã/Phường!</span>
+
                             </div>
                            
                         </div>
@@ -420,6 +494,8 @@
                                 <label class="fw-semibold" for="diaChiChiTiet">Địa chỉ chi tiết</label>
                                 <input type="text" class="form-control" id="diaChiChiTiet" name="diaChiChiTiet" placeholder="37 Đ. Phạm Văn Nghị" value="@if(nhanVien!=null){
                                 @nhanVien.DiaChi}" required disabled>
+                                <span id="diaChiChiTietError" class="error-message" style="color:red; display:none;">Địa chỉ chi tiết không được để trống!</span>
+
                             </div>
                         </div>
 
@@ -428,6 +504,163 @@
 
                         <button id="targetButton" type="submit" style="display:none;">Nút bị kích hoạt</button>
                         <script type="module" src="~/js/site.js" asp-append-version="true"></script>
+
+                        <script>
+                            function validateForm(event) {
+                                var valid = true;
+
+                                // Kiểm tra Họ tên
+                                var hoTen = document.getElementById('hoTen').value.trim();
+                                var hoTenError = document.getElementById('hoTenError');
+                                if (hoTen === "") {
+                                    hoTenError.textContent = "Họ tên không được để trống!";
+                                    hoTenError.style.display = 'block';
+                                    document.getElementById('hoTen').classList.add('input-error');
+                                    valid = false;
+                                } else if (hoTen.length < 6) {
+                                    hoTenError.textContent = "Họ tên phải có ít nhất 6 ký tự!";
+                                    hoTenError.style.display = 'block';
+                                    document.getElementById('hoTen').classList.add('input-error');
+                                    valid = false;
+                                } else {
+                                    hoTenError.textContent = "";
+                                    hoTenError.style.display = 'none';
+                                    document.getElementById('hoTen').classList.remove('input-error');
+                                }
+
+                                // Kiểm tra Ngày sinh
+                                var ngaySinh = document.getElementById('ngaySinh').value.trim();
+                                var ngaySinhError = document.getElementById('ngaySinhError');
+                                if (ngaySinh === "") {
+                                    ngaySinhError.textContent = "Ngày sinh không được để trống!";
+                                    ngaySinhError.style.display = 'block';
+                                    document.getElementById('ngaySinh').classList.add('input-error');
+                                    valid = false;
+                                } else {
+                                    var currentDate = new Date();
+                                    var inputDate = new Date(ngaySinh);
+                                    if (inputDate > currentDate) {
+                                        ngaySinhError.textContent = "Ngày sinh không thể là ngày trong tương lai!";
+                                        ngaySinhError.style.display = 'block';
+                                        document.getElementById('ngaySinh').classList.add('input-error');
+                                        valid = false;
+                                    } else {
+                                        ngaySinhError.textContent = "";
+                                        ngaySinhError.style.display = 'none';
+                                        document.getElementById('ngaySinh').classList.remove('input-error');
+                                    }
+                                }
+                                if (!validateEmailSumit()) {  // Gọi validateEmail và nếu nó trả về false thì valid = false
+                                    valid = false;
+                                }
+                                // Kiểm tra CMT/CCCD
+                                var cmt = document.getElementById('cmt').value.trim();
+                                var cmtPattern = /^[0-9]{12}$/; // Phải gồm đúng 12 chữ số
+                                var cmtError = document.getElementById('cmtError');
+                                if (!cmtPattern.test(cmt)) {
+                                    cmtError.textContent = "CMT/CCCD phải gồm đúng 12 chữ số!";
+                                    cmtError.style.display = 'block';
+                                    document.getElementById('cmt').classList.add('input-error');
+                                    valid = false;
+                                } else {
+                                    cmtError.textContent = "";
+                                    cmtError.style.display = 'none';
+                                    document.getElementById('cmt').classList.remove('input-error');
+                                }
+
+                                // Kiểm tra Số điện thoại
+                                var phone = document.getElementById('sdt').value.trim();
+                                var phonePattern = /^[0-9]{10}$/;
+                                var sdtError = document.getElementById('sdtError');
+                                if (!phonePattern.test(phone)) {
+                                    sdtError.textContent = "Số điện thoại phải có 10 chữ số.";
+                                    sdtError.style.display = 'block';
+                                    document.getElementById('sdt').classList.add('input-error');
+                                    valid = false;
+                                } else {
+                                    sdtError.textContent = "";
+                                    sdtError.style.display = 'none';
+                                    document.getElementById('sdt').classList.remove('input-error');
+                                }
+
+                                // Kiểm tra Dân tộc
+                                var danToc = document.getElementById('danToc').value;
+                                var danTocError = document.getElementById('danTocError');
+                                if (danToc === "") {
+                                    danTocError.textContent = "Dân tộc không được để trống!";
+                                    danTocError.style.display = 'block';
+                                    document.getElementById('danToc').classList.add('input-error');
+                                    valid = false;
+                                } else {
+                                    danTocError.textContent = "";
+                                    danTocError.style.display = 'none';
+                                    document.getElementById('danToc').classList.remove('input-error');
+                                }
+
+                                // Kiểm tra Tỉnh/TP
+                                var hoKhauTinh = document.getElementById('hoKhauTinh').value;
+                                var hoKhauTinhError = document.getElementById('hoKhauTinhError');
+                                if (hoKhauTinh === "") {
+                                    hoKhauTinhError.textContent = "Tỉnh/TP không được để trống!";
+                                    hoKhauTinhError.style.display = 'block';
+                                    document.getElementById('hoKhauTinh').classList.add('input-error');
+                                    valid = false;
+                                } else {
+                                    hoKhauTinhError.textContent = "";
+                                    hoKhauTinhError.style.display = 'none';
+                                    document.getElementById('hoKhauTinh').classList.remove('input-error');
+                                }
+
+                                // Kiểm tra Quận/Huyện
+                                var hoKhauQuan = document.getElementById('hoKhauQuan').value;
+                                var hoKhauQuanError = document.getElementById('hoKhauQuanError');
+                                if (hoKhauQuan === "") {
+                                    hoKhauQuanError.textContent = "Quận/Huyện không được để trống!";
+                                    hoKhauQuanError.style.display = 'block';
+                                    document.getElementById('hoKhauQuan').classList.add('input-error');
+                                    valid = false;
+                                } else {
+                                    hoKhauQuanError.textContent = "";
+                                    hoKhauQuanError.style.display = 'none';
+                                    document.getElementById('hoKhauQuan').classList.remove('input-error');
+                                }
+
+                                // Kiểm tra Xã/Phường
+                                var hoKhauXa = document.getElementById('hoKhauXa').value;
+                                var hoKhauXaError = document.getElementById('hoKhauXaError');
+                                if (hoKhauXa === "") {
+                                    hoKhauXaError.textContent = "Xã/Phường không được để trống!";
+                                    hoKhauXaError.style.display = 'block';
+                                    document.getElementById('hoKhauXa').classList.add('input-error');
+                                    valid = false;
+                                } else {
+                                    hoKhauXaError.textContent = "";
+                                    hoKhauXaError.style.display = 'none';
+                                    document.getElementById('hoKhauXa').classList.remove('input-error');
+                                }
+
+                                // Kiểm tra Địa chỉ chi tiết
+                                var diaChiChiTiet = document.getElementById('diaChiChiTiet').value.trim();
+                                var diaChiChiTietError = document.getElementById('diaChiChiTietError');
+                                if (diaChiChiTiet === "") {
+                                    diaChiChiTietError.textContent = "Địa chỉ chi tiết không được để trống!";
+                                    diaChiChiTietError.style.display = 'block';
+                                    document.getElementById('diaChiChiTiet').classList.add('input-error');
+                                    valid = false;
+                                } else {
+                                    diaChiChiTietError.textContent = "";
+                                    diaChiChiTietError.style.display = 'none';
+                                    document.getElementById('diaChiChiTiet').classList.remove('input-error');
+                                }
+
+                                // Kiểm tra các trường khác nếu cần...
+
+
+
+                                return valid;
+                            }
+                        </script>
+
                     </form>
                    
 

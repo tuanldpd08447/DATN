@@ -38,7 +38,7 @@ namespace DATN_QLTiemChung_Api
         public DbSet<DatLichKham> DatLichKham { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=DUCTUAN;Initial Catalog=QLYTIEMCHUNG;Integrated Security=True;Trust Server Certificate=True");
+        => optionsBuilder.UseSqlServer("Server=db11363.databaseasp.net; Database=db11363; User Id=db11363; Password=123456789; Encrypt=False; MultipleActiveResultSets=True;");
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Cấu hình quan hệ giữa District và Ward

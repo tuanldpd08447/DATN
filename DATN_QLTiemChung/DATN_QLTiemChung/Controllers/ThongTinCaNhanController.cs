@@ -30,7 +30,7 @@ namespace DATN_QLTiemChung.Controllers
             var client = _httpClientFactory.CreateClient();
 
 
-            var response = await client.GetAsync("https://localhost:7143/api/QLNhanVien/GetAllBYIDNV/" + IDNV);
+            var response = await client.GetAsync("http://qltiemchungapi.runasp.net/api/QLNhanVien/GetAllBYIDNV/" + IDNV);
 
             if (response.IsSuccessStatusCode)
             {
@@ -38,17 +38,17 @@ namespace DATN_QLTiemChung.Controllers
                 var nhanVien = JsonConvert.DeserializeObject<NhanVienDTO>(nhanvienapiResponse);
                 ViewBag.NhanVien = nhanVien;
 
-                var response1 = await client.GetAsync("https://localhost:7143/api/QLNhanVien/GetPhongBan");
+                var response1 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/QLNhanVien/GetPhongBan");
                 var apiResponse1 = await response1.Content.ReadAsStringAsync();
                 List<PhongBan> phongBan = JsonConvert.DeserializeObject<List<PhongBan>>(apiResponse1);
                 ViewBag.PhongBans = phongBan;
 
-                var response2 = await client.GetAsync("https://localhost:7143/api/QLNhanVien/GetChucDanh");
+                var response2 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/QLNhanVien/GetChucDanh");
                 var apiResponse2 = await response2.Content.ReadAsStringAsync();
                 List<ChucDanh> chucDanh = JsonConvert.DeserializeObject<List<ChucDanh>>(apiResponse2);
                 ViewBag.ChucDanhs = chucDanh;
 
-                var response3 = await client.GetAsync($"https://localhost:7143/api/QLNhanVien/GetWardByid/{nhanVien.IDXP}");
+                var response3 = await client.GetAsync($"http://qltiemchungapi.runasp.net/api/QLNhanVien/GetWardByid/{nhanVien.IDXP}");
                 var apiResponse3 = await response3.Content.ReadAsStringAsync();
                 DiaChi dc = JsonConvert.DeserializeObject<DiaChi>(apiResponse3);
                 ViewBag.DiaChi = dc;

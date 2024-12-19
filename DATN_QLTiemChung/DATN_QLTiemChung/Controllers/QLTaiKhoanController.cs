@@ -36,7 +36,7 @@ namespace DATN_QLTiemChung.Controllers
             try
             {
                 // Lấy danh sách nhân viên
-                var response = await client.GetAsync("https://localhost:7143/api/QLTaiKhoan/GetAllTaiKhoanNV");
+                var response = await client.GetAsync("http://qltiemchungapi.runasp.net/api/QLTaiKhoan/GetAllTaiKhoanNV");
                 if (response.IsSuccessStatusCode)
                 {
                     var apiResponse = await response.Content.ReadAsStringAsync();
@@ -50,7 +50,7 @@ namespace DATN_QLTiemChung.Controllers
                 }
 
                 // Lấy danh sách khách hàng
-                var response0 = await client.GetAsync("https://localhost:7143/api/QLTaiKhoan/GetAllTaiKhoanKH");
+                var response0 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/QLTaiKhoan/GetAllTaiKhoanKH");
                 if (response0.IsSuccessStatusCode)
                 {
                     var apiResponse0 = await response0.Content.ReadAsStringAsync();
@@ -63,7 +63,7 @@ namespace DATN_QLTiemChung.Controllers
                     ViewBag.ErrorMessage = "Không thể lấy thông tin khách hàng từ API.";
                 }
                 // Lấy danh sách khách hàng
-                var response1 = await client.GetAsync("https://localhost:7143/api/QLTaiKhoan/GetTaiKhoanNhanVienChuaCoTK");
+                var response1 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/QLTaiKhoan/GetTaiKhoanNhanVienChuaCoTK");
                 if (response1.IsSuccessStatusCode)
                 {
                     var apiResponse1 = await response1.Content.ReadAsStringAsync();
@@ -75,7 +75,7 @@ namespace DATN_QLTiemChung.Controllers
                     // Xử lý lỗi nếu API trả về mã trạng thái không thành công
                     ViewBag.ErrorMessage = "Không thể lấy thông tin nhân viên từ API.";
                 }
-                var response2 = await client.GetAsync("https://localhost:7143/api/QLTaiKhoan/GetTaiKhoanKhachHangChuaCoTK");
+                var response2 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/QLTaiKhoan/GetTaiKhoanKhachHangChuaCoTK");
                 if (response2.IsSuccessStatusCode)
                 {
                     var apiResponse2 = await response2.Content.ReadAsStringAsync();
@@ -114,7 +114,7 @@ namespace DATN_QLTiemChung.Controllers
                 var client = _httpClientFactory.CreateClient();
 
                 // Gửi yêu cầu tới API
-                var response = await client.PostAsync($"https://localhost:7143/api/QLTaiKhoan/DoiMKNVTuDong/{IDNV}", null);
+                var response = await client.PostAsync($"http://qltiemchungapi.runasp.net/api/QLTaiKhoan/DoiMKNVTuDong/{IDNV}", null);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -174,7 +174,7 @@ namespace DATN_QLTiemChung.Controllers
                 var client = _httpClientFactory.CreateClient();
 
                 // Gửi yêu cầu tới API
-                var response = await client.PostAsync($"https://localhost:7143/api/QLTaiKhoan/DoiMKKHTuDong/{IDKH}", null);
+                var response = await client.PostAsync($"http://qltiemchungapi.runasp.net/api/QLTaiKhoan/DoiMKKHTuDong/{IDKH}", null);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -244,7 +244,7 @@ namespace DATN_QLTiemChung.Controllers
 
                 var content = new StringContent(JsonConvert.SerializeObject(createTaiKhoanNVDTO), Encoding.UTF8, "application/json");
                 // Send the POST request
-                var response = await client.PostAsync("https://localhost:7143/api/QLTaiKhoan/CreateTaiKhoanNV", content);
+                var response = await client.PostAsync("http://qltiemchungapi.runasp.net/api/QLTaiKhoan/CreateTaiKhoanNV", content);
 
 
                 if (response.IsSuccessStatusCode)
@@ -294,7 +294,7 @@ namespace DATN_QLTiemChung.Controllers
                 var content = new StringContent(JsonConvert.SerializeObject(qlTaiKhoanNVDTO), Encoding.UTF8, "application/json");
 
                 // Gửi yêu cầu PUT đến API
-                var response = await nv.PutAsync($"https://localhost:7143/api/QLTaiKhoan/UpdateMatKhauTKNV/{IDTKNV}", content);
+                var response = await nv.PutAsync($"http://qltiemchungapi.runasp.net/api/QLTaiKhoan/UpdateMatKhauTKNV/{IDTKNV}", content);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -321,7 +321,7 @@ namespace DATN_QLTiemChung.Controllers
 
             if(IDNV!= null && IDKH == null)
             {
-                var aresponse = await client.GetAsync("https://localhost:7143/api/QLTaiKhoan/GetTKNhanVienById/" + IDNV);
+                var aresponse = await client.GetAsync("http://qltiemchungapi.runasp.net/api/QLTaiKhoan/GetTKNhanVienById/" + IDNV);
 
                 if (aresponse.IsSuccessStatusCode)
                 {
@@ -339,7 +339,7 @@ namespace DATN_QLTiemChung.Controllers
             }
             else if (IDKH != null && IDNV == null)
             {
-                var aresponse = await client.GetAsync("https://localhost:7143/api/QLTaiKhoan/GetTKKhachHangById/" + IDKH);
+                var aresponse = await client.GetAsync("http://qltiemchungapi.runasp.net/api/QLTaiKhoan/GetTKKhachHangById/" + IDKH);
 
                 if (aresponse.IsSuccessStatusCode)
                 {
@@ -355,7 +355,7 @@ namespace DATN_QLTiemChung.Controllers
                 }
             }
 
-            var response = await client.GetAsync("https://localhost:7143/api/QLTaiKhoan/GetAllTaiKhoanNV");
+            var response = await client.GetAsync("http://qltiemchungapi.runasp.net/api/QLTaiKhoan/GetAllTaiKhoanNV");
             if (response.IsSuccessStatusCode)
             {
                 var apiResponse = await response.Content.ReadAsStringAsync();
@@ -369,7 +369,7 @@ namespace DATN_QLTiemChung.Controllers
             }
 
             // Lấy danh sách khách hàng
-            var response0 = await client.GetAsync("https://localhost:7143/api/QLTaiKhoan/GetAllTaiKhoanKH");
+            var response0 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/QLTaiKhoan/GetAllTaiKhoanKH");
             if (response0.IsSuccessStatusCode)
             {
                 var apiResponse0 = await response0.Content.ReadAsStringAsync();
@@ -382,7 +382,7 @@ namespace DATN_QLTiemChung.Controllers
                 ViewBag.ErrorMessage = "Không thể lấy thông tin khách hàng từ API.";
             }
             // Lấy danh sách khách hàng
-            var response1 = await client.GetAsync("https://localhost:7143/api/QLTaiKhoan/GetTaiKhoanNhanVienChuaCoTK");
+            var response1 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/QLTaiKhoan/GetTaiKhoanNhanVienChuaCoTK");
             if (response1.IsSuccessStatusCode)
             {
                 var apiResponse1 = await response1.Content.ReadAsStringAsync();
@@ -394,7 +394,7 @@ namespace DATN_QLTiemChung.Controllers
                 // Xử lý lỗi nếu API trả về mã trạng thái không thành công
                 ViewBag.ErrorMessage = "Không thể lấy thông tin nhân viên từ API.";
             }
-            var response2 = await client.GetAsync("https://localhost:7143/api/QLTaiKhoan/GetTaiKhoanKhachHangChuaCoTK");
+            var response2 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/QLTaiKhoan/GetTaiKhoanKhachHangChuaCoTK");
             if (response2.IsSuccessStatusCode)
             {
                 var apiResponse2 = await response2.Content.ReadAsStringAsync();
@@ -435,7 +435,7 @@ namespace DATN_QLTiemChung.Controllers
 
                 var content = new StringContent(JsonConvert.SerializeObject(createTaiKhoanKHDTO), Encoding.UTF8, "application/json");
                 // Send the POST request
-                var response = await client.PostAsync("https://localhost:7143/api/QLTaiKhoan/CreateTaiKhoanKH", content);
+                var response = await client.PostAsync("http://qltiemchungapi.runasp.net/api/QLTaiKhoan/CreateTaiKhoanKH", content);
 
 
                 if (response.IsSuccessStatusCode)

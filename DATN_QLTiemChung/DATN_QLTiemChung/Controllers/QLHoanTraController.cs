@@ -32,7 +32,7 @@ namespace DATN_QLTiemChung.Controllers
             {
 
                 // Lấy danh sách khách hàng hoàn trả
-                var response = await client.GetAsync("https://localhost:7143/api/QLHoanTra/DSHoanTra");
+                var response = await client.GetAsync("http://qltiemchungapi.runasp.net/api/QLHoanTra/DSHoanTra");
                 if (response.IsSuccessStatusCode)
                 {
                     var apiResponse = await response.Content.ReadAsStringAsync();
@@ -40,7 +40,7 @@ namespace DATN_QLTiemChung.Controllers
                     // Dùng Newtonsoft.Json
                     ViewBag.DSHoanTraDTO = KhachHangHT;
                     // Lấy danh sách khách hàng hoàn trả
-                    var response1 = await client.GetAsync("https://localhost:7143/api/QLHoanTra/GetAllHoanTra");
+                    var response1 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/QLHoanTra/GetAllHoanTra");
                     if (response1.IsSuccessStatusCode)
                     {
                         var apiResponse1 = await response1.Content.ReadAsStringAsync();
@@ -71,7 +71,7 @@ namespace DATN_QLTiemChung.Controllers
         {
             var client = _httpClientFactory.CreateClient();
 
-            var response = await client.GetAsync("https://localhost:7143/api/QLHoanTra/DSHoanTra");
+            var response = await client.GetAsync("http://qltiemchungapi.runasp.net/api/QLHoanTra/DSHoanTra");
             if (response.IsSuccessStatusCode)
             {
                 var apiResponse = await response.Content.ReadAsStringAsync();
@@ -80,7 +80,7 @@ namespace DATN_QLTiemChung.Controllers
                 ViewBag.DSHoanTraDTO = KhachHangHT;
             }
 
-            var HoaDon = await client.GetAsync($"https://localhost:7143/api/QLHoanTra/HoaDonHT/{IDKH}");
+            var HoaDon = await client.GetAsync($"http://qltiemchungapi.runasp.net/api/QLHoanTra/HoaDonHT/{IDKH}");
 
             if (HoaDon.IsSuccessStatusCode)
             {
@@ -106,7 +106,7 @@ namespace DATN_QLTiemChung.Controllers
                     HoaDonChiTiet = hoaDon.HoaDonChiTiet,
                 };
                 ViewBag.HoaDonHT = hoaDonHT;
-                var response2 = await client.GetAsync($"https://localhost:7143/api/QLHoanTra/GetSoMuiDaTiem/{IDKH}");
+                var response2 = await client.GetAsync($"http://qltiemchungapi.runasp.net/api/QLHoanTra/GetSoMuiDaTiem/{IDKH}");
                 if (response2.IsSuccessStatusCode)
                 {
                     var apiResponse2 = await response2.Content.ReadAsStringAsync();
@@ -178,7 +178,7 @@ namespace DATN_QLTiemChung.Controllers
 
                 // Tạo HTTP client và gửi POST request
                 var client = _httpClientFactory.CreateClient();
-                var response = await client.PostAsync("https://localhost:7143/api/QLHoanTra/AddNewHoaDon", content);
+                var response = await client.PostAsync("http://qltiemchungapi.runasp.net/api/QLHoanTra/AddNewHoaDon", content);
 
                 if (response.IsSuccessStatusCode)
                 {

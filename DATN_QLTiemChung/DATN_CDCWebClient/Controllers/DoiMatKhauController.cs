@@ -21,7 +21,7 @@ namespace DATN_CDCWebClient.Controllers
             var client = _httpClientFactory.CreateClient();
             try
             {
-                var response = await client.GetAsync($"https://localhost:7143/api/DoiMK/GetTKKhachHang?IDKH={IDKH}");
+                var response = await client.GetAsync($"http://qltiemchungapi.runasp.net/api/DoiMK/GetTKKhachHang?IDKH={IDKH}");
                 if (response.IsSuccessStatusCode)
                 {
                     var apiResponse = await response.Content.ReadAsStringAsync();
@@ -90,7 +90,7 @@ namespace DATN_CDCWebClient.Controllers
             }
 
             var client = _httpClientFactory.CreateClient();
-            var response = await client.GetAsync($"https://localhost:7143/api/DoiMK/GetTKKhachHang?IDKH={IDKH}");
+            var response = await client.GetAsync($"http://qltiemchungapi.runasp.net/api/DoiMK/GetTKKhachHang?IDKH={IDKH}");
 
             if (!response.IsSuccessStatusCode)
             {
@@ -124,7 +124,7 @@ namespace DATN_CDCWebClient.Controllers
             var jsonContent = JsonConvert.SerializeObject(doiMatKhauRequest);
             var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
-            var response1 = await client.PostAsync("https://localhost:7143/api/DoiMK/DoiMatKhau", content);
+            var response1 = await client.PostAsync("http://qltiemchungapi.runasp.net/api/DoiMK/DoiMatKhau", content);
 
             if (response1.IsSuccessStatusCode)
             {

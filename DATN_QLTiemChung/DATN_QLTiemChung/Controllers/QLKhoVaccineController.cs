@@ -33,7 +33,7 @@ namespace DATN_QLTiemChung.Controllers
             var hd = _httpClientFactory.CreateClient();
 
 
-            var vattuResponse = await hd.GetAsync($"https://localhost:7143/api/DataQLKhoVaccine/GetAllBYIDVT/{IDVT}");
+            var vattuResponse = await hd.GetAsync($"http://qltiemchungapi.runasp.net/api/DataQLKhoVaccine/GetAllBYIDVT/{IDVT}");
 
             var vattuApiResponse = await vattuResponse.Content.ReadAsStringAsync();
             VatTuDTO vattuyte = JsonConvert.DeserializeObject<VatTuDTO>(vattuApiResponse);
@@ -41,29 +41,29 @@ namespace DATN_QLTiemChung.Controllers
 
 
 
-            var Response = await hd.GetAsync("https://localhost:7143/api/DataQLKhoVaccine/GetAllVatTu");
+            var Response = await hd.GetAsync("http://qltiemchungapi.runasp.net/api/DataQLKhoVaccine/GetAllVatTu");
             var apiResponses = await Response.Content.ReadAsStringAsync();
             List<VatTuDTO> vatTuYTe = JsonConvert.DeserializeObject<List<VatTuDTO>>(apiResponses);
             ViewBag.vatTuYTe = vatTuYTe;
 
-            var Response1 = await hd.GetAsync("https://localhost:7143/api/DataQLKhoVaccine/GetLoaiVatTu");
+            var Response1 = await hd.GetAsync("http://qltiemchungapi.runasp.net/api/DataQLKhoVaccine/GetLoaiVatTu");
             var apiResponses1 = await Response1.Content.ReadAsStringAsync();
             List<LoaivatTu> loaivattu = JsonConvert.DeserializeObject<List<LoaivatTu>>(apiResponses1);
             ViewBag.loaivattu = loaivattu;
 
 
-            var Response2 = await hd.GetAsync("https://localhost:7143/api/DataQLKhoVaccine/GetNguonCap");
+            var Response2 = await hd.GetAsync("http://qltiemchungapi.runasp.net/api/DataQLKhoVaccine/GetNguonCap");
             var apiResponses2 = await Response2.Content.ReadAsStringAsync();
             List<NguonCungCap> NguonCap = JsonConvert.DeserializeObject<List<NguonCungCap>>(apiResponses2);
             ViewBag.NguonCap = NguonCap;
 
-            var Response3 = await hd.GetAsync("https://localhost:7143/api/DataQLKhoVaccine/GetNhacap");
+            var Response3 = await hd.GetAsync("http://qltiemchungapi.runasp.net/api/DataQLKhoVaccine/GetNhacap");
             var apiResponses3 = await Response3.Content.ReadAsStringAsync();
             List<NhaCungCap> NhaCap = JsonConvert.DeserializeObject<List<NhaCungCap>>(apiResponses3);
             ViewBag.NhaCap = NhaCap;
 
 
-            var Response4 = await hd.GetAsync("https://localhost:7143/api/DataQLKhoVaccine/Getxuatxu");
+            var Response4 = await hd.GetAsync("http://qltiemchungapi.runasp.net/api/DataQLKhoVaccine/Getxuatxu");
             var apiResponses4 = await Response4.Content.ReadAsStringAsync();
             List<XuatXu> Xuatxu = JsonConvert.DeserializeObject<List<XuatXu>>(apiResponses4);
             ViewBag.Xuatxu = Xuatxu;
@@ -74,29 +74,29 @@ namespace DATN_QLTiemChung.Controllers
         {
             var client = _httpClientFactory.CreateClient();
 
-            var Response = await client.GetAsync("https://localhost:7143/api/DataQLKhoVaccine/GetAllVatTu");
+            var Response = await client.GetAsync("http://qltiemchungapi.runasp.net/api/DataQLKhoVaccine/GetAllVatTu");
             var apiResponses = await Response.Content.ReadAsStringAsync();
             List<VatTuDTO> vatTuYTe = JsonConvert.DeserializeObject<List<VatTuDTO>>(apiResponses);
             ViewBag.vatTuYTe = vatTuYTe;
 
-            var Response1 = await client.GetAsync("https://localhost:7143/api/DataQLKhoVaccine/GetLoaiVatTu");
+            var Response1 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/DataQLKhoVaccine/GetLoaiVatTu");
             var apiResponses1 = await Response1.Content.ReadAsStringAsync();
             List<LoaivatTu> loaivattu = JsonConvert.DeserializeObject<List<LoaivatTu>>(apiResponses1);
             ViewBag.loaivattu = loaivattu;
 
 
-            var Response2 = await client.GetAsync("https://localhost:7143/api/DataQLKhoVaccine/GetNguonCap");
+            var Response2 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/DataQLKhoVaccine/GetNguonCap");
             var apiResponses2 = await Response2.Content.ReadAsStringAsync();
             List<NguonCungCap> NguonCap = JsonConvert.DeserializeObject<List<NguonCungCap>>(apiResponses2);
             ViewBag.NguonCap = NguonCap;
 
-            var Response3 = await client.GetAsync("https://localhost:7143/api/DataQLKhoVaccine/GetNhacap");
+            var Response3 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/DataQLKhoVaccine/GetNhacap");
             var apiResponses3 = await Response3.Content.ReadAsStringAsync();
             List<NhaCungCap> NhaCap = JsonConvert.DeserializeObject<List<NhaCungCap>>(apiResponses3);
             ViewBag.NhaCap = NhaCap;
 
 
-            var Response4 = await client.GetAsync("https://localhost:7143/api/DataQLKhoVaccine/Getxuatxu");
+            var Response4 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/DataQLKhoVaccine/Getxuatxu");
             var apiResponses4 = await Response4.Content.ReadAsStringAsync();
             List<XuatXu> Xuatxu = JsonConvert.DeserializeObject<List<XuatXu>>(apiResponses4);
             ViewBag.Xuatxu = Xuatxu;
@@ -128,37 +128,37 @@ namespace DATN_QLTiemChung.Controllers
             var content = new StringContent(JsonConvert.SerializeObject(find), Encoding.UTF8, "application/json");
 
             // Send the POST request
-            var response = await client.PostAsync("https://localhost:7143/api/DataQLKhoVaccine/Findvattu", content);
+            var response = await client.PostAsync("http://qltiemchungapi.runasp.net/api/DataQLKhoVaccine/Findvattu", content);
             if (response.IsSuccessStatusCode)
             {
                 var apiResponses = await response.Content.ReadAsStringAsync();
                 List<VatTuDTO> vatTuYTe = JsonConvert.DeserializeObject<List<VatTuDTO>>(apiResponses);
                 ViewBag.vatTuYTe = vatTuYTe;
             }
-            var vattuResponse = await client.GetAsync($"https://localhost:7143/api/DataQLKhoVaccine/GetAllBYIDVT/{IDVT}");
+            var vattuResponse = await client.GetAsync($"http://qltiemchungapi.runasp.net/api/DataQLKhoVaccine/GetAllBYIDVT/{IDVT}");
 
             var vattuApiResponse = await vattuResponse.Content.ReadAsStringAsync();
             VatTuDTO vattuyte = JsonConvert.DeserializeObject<VatTuDTO>(vattuApiResponse);
             ViewBag.vattu = vattuyte;
 
-            var Response1 = await client.GetAsync("https://localhost:7143/api/DataQLKhoVaccine/GetLoaiVatTu");
+            var Response1 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/DataQLKhoVaccine/GetLoaiVatTu");
             var apiResponses1 = await Response1.Content.ReadAsStringAsync();
             List<LoaivatTu> loaivattu = JsonConvert.DeserializeObject<List<LoaivatTu>>(apiResponses1);
             ViewBag.loaivattu = loaivattu;
 
 
-            var Response2 = await client.GetAsync("https://localhost:7143/api/DataQLKhoVaccine/GetNguonCap");
+            var Response2 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/DataQLKhoVaccine/GetNguonCap");
             var apiResponses2 = await Response2.Content.ReadAsStringAsync();
             List<NguonCungCap> NguonCap = JsonConvert.DeserializeObject<List<NguonCungCap>>(apiResponses2);
             ViewBag.NguonCap = NguonCap;
 
-            var Response3 = await client.GetAsync("https://localhost:7143/api/DataQLKhoVaccine/GetNhacap");
+            var Response3 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/DataQLKhoVaccine/GetNhacap");
             var apiResponses3 = await Response3.Content.ReadAsStringAsync();
             List<NhaCungCap> NhaCap = JsonConvert.DeserializeObject<List<NhaCungCap>>(apiResponses3);
             ViewBag.NhaCap = NhaCap;
 
 
-            var Response4 = await client.GetAsync("https://localhost:7143/api/DataQLKhoVaccine/Getxuatxu");
+            var Response4 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/DataQLKhoVaccine/Getxuatxu");
             var apiResponses4 = await Response4.Content.ReadAsStringAsync();
             List<XuatXu> Xuatxu = JsonConvert.DeserializeObject<List<XuatXu>>(apiResponses4);
             ViewBag.Xuatxu = Xuatxu;
@@ -197,7 +197,7 @@ namespace DATN_QLTiemChung.Controllers
                 var content = new StringContent(JsonConvert.SerializeObject(vaccinecreatedto), Encoding.UTF8, "application/json");
 
                 // Send the POST request
-                var response = await client.PostAsync("https://localhost:7143/api/DataQLKhoVaccine/AddVaccine", content);
+                var response = await client.PostAsync("http://qltiemchungapi.runasp.net/api/DataQLKhoVaccine/AddVaccine", content);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -205,7 +205,7 @@ namespace DATN_QLTiemChung.Controllers
                     var addevaccine = JsonConvert.DeserializeObject<VatTuYTe>(apiResponse);
 
                     // Get all customers after adding
-                    var allResponse = await client.GetAsync("https://localhost:7143/api/DataQLKhoVaccine/GetAllVatTu");
+                    var allResponse = await client.GetAsync("http://qltiemchungapi.runasp.net/api/DataQLKhoVaccine/GetAllVatTu");
                     if (allResponse.IsSuccessStatusCode)
                     {
                         var allApiResponse = await allResponse.Content.ReadAsStringAsync();
@@ -259,7 +259,7 @@ namespace DATN_QLTiemChung.Controllers
                 };
                 var content = new StringContent(JsonConvert.SerializeObject(vaccineUpdateDTO), Encoding.UTF8, "application/json");
 
-                var response = await vt.PutAsync($"https://localhost:7143/api/DataQLKhoVaccine/UpdateVaccine/{MaVT}", content);
+                var response = await vt.PutAsync($"http://qltiemchungapi.runasp.net/api/DataQLKhoVaccine/UpdateVaccine/{MaVT}", content);
                 if (response.IsSuccessStatusCode)
                 {
                     TempData["Notification"] = "Cập nhật vật tư thành công.";

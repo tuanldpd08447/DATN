@@ -35,7 +35,7 @@ namespace DATN_CDCWebClient.Controllers
 
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://localhost:7143/"); // API base address
+                client.BaseAddress = new Uri("http://qltiemchungapi.runasp.net/"); // API base address
 
                 try
                 {
@@ -104,7 +104,7 @@ namespace DATN_CDCWebClient.Controllers
             var client = _httpClientFactory.CreateClient();
 
             var content = new StringContent(JsonConvert.SerializeObject(khachHang), Encoding.UTF8, "application/json");
-            var response = await client.PutAsync("https://localhost:7143/api/TTCaNhan/UpdateKhachHang", content);
+            var response = await client.PutAsync("http://qltiemchungapi.runasp.net/api/TTCaNhan/UpdateKhachHang", content);
             if (!response.IsSuccessStatusCode)
             {
                 var error = await response.Content.ReadAsStringAsync();

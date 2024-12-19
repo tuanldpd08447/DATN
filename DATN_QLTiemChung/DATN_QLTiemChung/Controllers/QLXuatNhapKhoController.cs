@@ -32,7 +32,7 @@ namespace DATN_QLTiemChung.Controllers
         public async Task<IActionResult> HuyPhieu(string IDCT)
         {
             var client = _httpClientFactory.CreateClient();
-            var response = await client.PutAsync($"https://localhost:7143/api/QLXuatNhapKho/CapNhatTrangThai/{IDCT}", null);
+            var response = await client.PutAsync($"http://qltiemchungapi.runasp.net/api/QLXuatNhapKho/CapNhatTrangThai/{IDCT}", null);
 
             if (response.IsSuccessStatusCode)
             {
@@ -56,52 +56,117 @@ namespace DATN_QLTiemChung.Controllers
             var client = _httpClientFactory.CreateClient();
 
 
-            var chungTuResponse = await client.GetAsync($"https://localhost:7143/api/QLXuatNhapKho/GetChungTuById/{IDCT}");
+            var chungTuResponse = await client.GetAsync($"http://qltiemchungapi.runasp.net/api/QLXuatNhapKho/GetChungTuById/{IDCT}");
 
             var chungTuApiResponse = await chungTuResponse.Content.ReadAsStringAsync();
             ChungTuDetail chungTu = JsonConvert.DeserializeObject<ChungTuDetail>(chungTuApiResponse);
             ViewBag.chungTu = chungTu;
 
 
-            var Response = await client.GetAsync("https://localhost:7143/api/DataQLKhoVaccine/GetAllVatTu");
+            var Response = await client.GetAsync("http://qltiemchungapi.runasp.net/api/DataQLKhoVaccine/GetAllVatTu");
             var apiResponses = await Response.Content.ReadAsStringAsync();
             List<VatTuDTO> vatTuYTe = JsonConvert.DeserializeObject<List<VatTuDTO>>(apiResponses);
             ViewBag.vatTuYTe = vatTuYTe;
 
-            var Response1 = await client.GetAsync("https://localhost:7143/api/QLXuatNhapKho/GetLoaiVatTu");
+            var Response1 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/QLXuatNhapKho/GetLoaiVatTu");
             var apiResponses1 = await Response1.Content.ReadAsStringAsync();
             List<LoaivatTu> loaivattu = JsonConvert.DeserializeObject<List<LoaivatTu>>(apiResponses1);
             ViewBag.loaivattu = loaivattu;
 
 
-            var Response2 = await client.GetAsync("https://localhost:7143/api/QLXuatNhapKho/GetNguonCap");
+            var Response2 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/QLXuatNhapKho/GetNguonCap");
             var apiResponses2 = await Response2.Content.ReadAsStringAsync();
             List<NguonCungCap> NguonCap = JsonConvert.DeserializeObject<List<NguonCungCap>>(apiResponses2);
             ViewBag.NguonCap = NguonCap;
 
-            var Response3 = await client.GetAsync("https://localhost:7143/api/QLXuatNhapKho/GetNhacap");
+            var Response3 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/QLXuatNhapKho/GetNhacap");
             var apiResponses3 = await Response3.Content.ReadAsStringAsync();
             List<NhaCungCap> NhaCap = JsonConvert.DeserializeObject<List<NhaCungCap>>(apiResponses3);
             ViewBag.NhaCap = NhaCap;
 
 
-            var Response4 = await client.GetAsync("https://localhost:7143/api/QLXuatNhapKho/GetAllChungTu");
+            var Response4 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/QLXuatNhapKho/GetAllChungTu");
             var apiResponses4 = await Response4.Content.ReadAsStringAsync();
             List<ChungTuDetail> chungTuList = JsonConvert.DeserializeObject<List<ChungTuDetail>>(apiResponses4);
             ViewBag.ListChungTu = chungTuList;
 
-            var Response5 = await client.GetAsync("https://localhost:7143/api/QLXuatNhapKho/GetXuatXu");
+            var Response5 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/QLXuatNhapKho/GetXuatXu");
             var apiResponses5 = await Response5.Content.ReadAsStringAsync();
             List<XuatXu> xuatXus = JsonConvert.DeserializeObject<List<XuatXu>>(apiResponses5);
             ViewBag.ListXuatSu = xuatXus;
 
-            var Response6 = await client.GetAsync("https://localhost:7143/api/QLXuatNhapKho/GenerateNewId");
+            var Response6 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/QLXuatNhapKho/GenerateNewId");
             var apiResponses6 = await Response6.Content.ReadAsStringAsync();
             string IDctnew = apiResponses6;
             ViewBag.IDCTNew = IDctnew;
 
               GetSession(); return View("~/Views/Home/QLXuatNhapKho.cshtml");
         }
+        [HttpPost]
+        public async Task<IActionResult> SearchChungTu(string? soPhieu, bool? loai, string? idVatTu, DateTime? ngayXuatNhap, bool? trangThai)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var search = new SearchChungTuModel
+            {
+                SoPhieu = soPhieu,
+                Loai = loai,
+                IdVatTu = idVatTu,
+                NgayXuatNhap = ngayXuatNhap,
+                TrangThai = trangThai
+            };
+
+            // Sử dụng PostAsJsonAsync để gửi yêu cầu với dữ liệu JSON
+            var response = await client.PostAsJsonAsync("http://qltiemchungapi.runasp.net/api/QLXuatNhapKho/SearchChungTu", search);
+
+            // Đọc kết quả phản hồi và chuyển nó thành danh sách ChungTuDetail
+            var apiResponses = await response.Content.ReadAsStringAsync();
+            List<ChungTuDetail> chungTuList = JsonConvert.DeserializeObject<List<ChungTuDetail>>(apiResponses);
+            ViewBag.ListChungTu = chungTuList;
+
+            // Lấy thông tin vật tư từ API
+            var Response0 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/DataQLKhoVaccine/GetAllVatTu");
+            var apiResponses0 = await Response0.Content.ReadAsStringAsync();
+            List<VatTuDTO> vatTuYTe = JsonConvert.DeserializeObject<List<VatTuDTO>>(apiResponses0);
+            ViewBag.vatTuYTe = vatTuYTe;
+
+            // Lấy thông tin các loại vật tư
+            var Response1 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/QLXuatNhapKho/GetLoaiVatTu");
+            var apiResponses1 = await Response1.Content.ReadAsStringAsync();
+            List<LoaivatTu> loaivattu = JsonConvert.DeserializeObject<List<LoaivatTu>>(apiResponses1);
+            ViewBag.loaivattu = loaivattu;
+
+            // Lấy thông tin nguồn cấp
+            var Response2 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/QLXuatNhapKho/GetNguonCap");
+            var apiResponses2 = await Response2.Content.ReadAsStringAsync();
+            List<NguonCungCap> NguonCap = JsonConvert.DeserializeObject<List<NguonCungCap>>(apiResponses2);
+            ViewBag.NguonCap = NguonCap;
+
+            // Lấy thông tin nhà cung cấp
+            var Response3 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/QLXuatNhapKho/GetNhacap");
+            var apiResponses3 = await Response3.Content.ReadAsStringAsync();
+            List<NhaCungCap> NhaCap = JsonConvert.DeserializeObject<List<NhaCungCap>>(apiResponses3);
+            ViewBag.NhaCap = NhaCap;
+
+            // Lấy thông tin xuất xứ
+            var Response5 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/QLXuatNhapKho/GetXuatXu");
+            var apiResponses5 = await Response5.Content.ReadAsStringAsync();
+            List<XuatXu> xuatXus = JsonConvert.DeserializeObject<List<XuatXu>>(apiResponses5);
+            ViewBag.ListXuatSu = xuatXus;
+
+            // Lấy thông tin ID mới
+            var Response6 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/QLXuatNhapKho/GenerateNewId");
+            var apiResponses6 = await Response6.Content.ReadAsStringAsync();
+            string IDctnew = apiResponses6;
+            ViewBag.IDCTNew = IDctnew;
+
+            // Truyền search vào ViewBag để sử dụng trong View
+            ViewBag.Search = search;
+
+            GetSession();
+            return View("~/Views/Home/QLXuatNhapKho.cshtml");
+        }
+
+
         [HttpPost]
         public async Task<IActionResult> AddChungTu(string IDCT, string Loaiphieu, int soLuong, DateTime NgayXuatNhap, string IDVT,
      string DonGia, string ThanhTien, string? GhiChu, IFormFile ChungtuFile)
@@ -200,7 +265,7 @@ namespace DATN_QLTiemChung.Controllers
 
                 // Gửi request POST tới API
                 Console.WriteLine("Gửi request POST tới API...");
-                var response = await client.PostAsync("https://localhost:7143/api/QLXuatNhapKho/CreateChungTu", content);
+                var response = await client.PostAsync("http://qltiemchungapi.runasp.net/api/QLXuatNhapKho/CreateChungTu", content);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -240,39 +305,39 @@ namespace DATN_QLTiemChung.Controllers
         {
             var client = _httpClientFactory.CreateClient();
 
-            var Response = await client.GetAsync("https://localhost:7143/api/DataQLKhoVaccine/GetAllVatTu");
+            var Response = await client.GetAsync("http://qltiemchungapi.runasp.net/api/DataQLKhoVaccine/GetAllVatTu");
             var apiResponses = await Response.Content.ReadAsStringAsync();
             List<VatTuDTO> vatTuYTe = JsonConvert.DeserializeObject<List<VatTuDTO>>(apiResponses);
             ViewBag.vatTuYTe = vatTuYTe;
 
-            var Response1 = await client.GetAsync("https://localhost:7143/api/QLXuatNhapKho/GetLoaiVatTu");
+            var Response1 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/QLXuatNhapKho/GetLoaiVatTu");
             var apiResponses1 = await Response1.Content.ReadAsStringAsync();
             List<LoaivatTu> loaivattu = JsonConvert.DeserializeObject<List<LoaivatTu>>(apiResponses1);
             ViewBag.loaivattu = loaivattu;
 
 
-            var Response2 = await client.GetAsync("https://localhost:7143/api/QLXuatNhapKho/GetNguonCap");
+            var Response2 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/QLXuatNhapKho/GetNguonCap");
             var apiResponses2 = await Response2.Content.ReadAsStringAsync();
             List<NguonCungCap> NguonCap = JsonConvert.DeserializeObject<List<NguonCungCap>>(apiResponses2);
             ViewBag.NguonCap = NguonCap;
 
-            var Response3 = await client.GetAsync("https://localhost:7143/api/QLXuatNhapKho/GetNhacap");
+            var Response3 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/QLXuatNhapKho/GetNhacap");
             var apiResponses3 = await Response3.Content.ReadAsStringAsync();
             List<NhaCungCap> NhaCap = JsonConvert.DeserializeObject<List<NhaCungCap>>(apiResponses3);
             ViewBag.NhaCap = NhaCap;
 
 
-            var Response4 = await client.GetAsync("https://localhost:7143/api/QLXuatNhapKho/GetAllChungTu");
+            var Response4 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/QLXuatNhapKho/GetAllChungTu");
             var apiResponses4 = await Response4.Content.ReadAsStringAsync();
             List<ChungTuDetail> chungTuList = JsonConvert.DeserializeObject<List<ChungTuDetail>>(apiResponses4);
             ViewBag.ListChungTu = chungTuList;
 
-            var Response5 = await client.GetAsync("https://localhost:7143/api/QLXuatNhapKho/GetXuatXu");
+            var Response5 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/QLXuatNhapKho/GetXuatXu");
             var apiResponses5 = await Response5.Content.ReadAsStringAsync();
             List<XuatXu> xuatXus = JsonConvert.DeserializeObject<List<XuatXu>>(apiResponses5);
             ViewBag.ListXuatSu = xuatXus;
 
-            var Response6 = await client.GetAsync("https://localhost:7143/api/QLXuatNhapKho/GenerateNewId");
+            var Response6 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/QLXuatNhapKho/GenerateNewId");
             var apiResponses6 = await Response6.Content.ReadAsStringAsync();
             string IDctnew = apiResponses6;
             ViewBag.IDCTNew = IDctnew;

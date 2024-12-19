@@ -64,7 +64,7 @@ namespace DATN_QLTiemChung.Controllers
                     ViewBag.HangCho = hangChoList;
                 }
 
-                var response1 = await client.GetAsync("https://localhost:7143/api/KhamSanLoc/GetAllVatTu");
+                var response1 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/KhamSanLoc/GetAllVatTu");
 
                 if (!response1.IsSuccessStatusCode)
                 {
@@ -87,18 +87,18 @@ namespace DATN_QLTiemChung.Controllers
                     ViewBag.VatTus = JsonConvert.SerializeObject(vatTuDTOFull);
                 }
 
-                var Response2 = await client.GetAsync("https://localhost:7143/api/DataQLKhoVaccine/GetNguonCap");
+                var Response2 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/DataQLKhoVaccine/GetNguonCap");
                 var apiResponses2 = await Response2.Content.ReadAsStringAsync();
                 List<NguonCungCap> NguonCap = JsonConvert.DeserializeObject<List<NguonCungCap>>(apiResponses2);
                 ViewBag.NguonCap = NguonCap;
 
-                var Response3 = await client.GetAsync("https://localhost:7143/api/DataQLKhoVaccine/GetNhacap");
+                var Response3 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/DataQLKhoVaccine/GetNhacap");
                 var apiResponses3 = await Response3.Content.ReadAsStringAsync();
                 List<NhaCungCap> NhaCap = JsonConvert.DeserializeObject<List<NhaCungCap>>(apiResponses3);
                 ViewBag.NhaCap = NhaCap;
 
 
-                var Response4 = await client.GetAsync("https://localhost:7143/api/DataQLKhoVaccine/Getxuatxu");
+                var Response4 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/DataQLKhoVaccine/Getxuatxu");
                 var apiResponses4 = await Response4.Content.ReadAsStringAsync();
                 List<XuatXu> Xuatxu = JsonConvert.DeserializeObject<List<XuatXu>>(apiResponses4);
                 ViewBag.Xuatxu = Xuatxu;
@@ -126,7 +126,7 @@ namespace DATN_QLTiemChung.Controllers
 
                 // Tạo tác vụ đồng thời để gọi API
                 var hangChoTask = client.GetAsync("https://65b86c3a46324d531d562e3d.mockapi.io/HangCho");
-                var khachHangTask = client.GetAsync($"https://localhost:7143/api/KhamSanLoc/GetKhachHangById/{IDKH}");
+                var khachHangTask = client.GetAsync($"http://qltiemchungapi.runasp.net/api/KhamSanLoc/GetKhachHangById/{IDKH}");
 
                 // Chờ cả hai API hoàn tất
                 await Task.WhenAll(hangChoTask, khachHangTask);
@@ -162,7 +162,7 @@ namespace DATN_QLTiemChung.Controllers
                     ViewBag.KhachHang = null;
                 }
 
-                var response1 = await client.GetAsync("https://localhost:7143/api/KhamSanLoc/GetAllVatTu");
+                var response1 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/KhamSanLoc/GetAllVatTu");
 
                 if (!response1.IsSuccessStatusCode)
                 {
@@ -184,24 +184,24 @@ namespace DATN_QLTiemChung.Controllers
                 {
                     ViewBag.VatTus = JsonConvert.SerializeObject(vatTuDTOFull);
                 }
-                var response = await client.GetAsync($"https://localhost:7143/api/KhamSanLoc/MuiTiepTheo/{IDKH}");
+                var response = await client.GetAsync($"http://qltiemchungapi.runasp.net/api/KhamSanLoc/MuiTiepTheo/{IDKH}");
                 if (response.IsSuccessStatusCode)
                 {
                     ViewBag.MuiTiepTheo = await response.Content.ReadFromJsonAsync<bool>();
                 }
 
-                var Response2 = await client.GetAsync("https://localhost:7143/api/KhamSanLoc/GetNguonCap");
+                var Response2 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/KhamSanLoc/GetNguonCap");
                 var apiResponses2 = await Response2.Content.ReadAsStringAsync();
                 List<NguonCungCap> NguonCap = JsonConvert.DeserializeObject<List<NguonCungCap>>(apiResponses2);
                 ViewBag.NguonCap = NguonCap;
 
-                var Response3 = await client.GetAsync("https://localhost:7143/api/KhamSanLoc/GetNhacap");
+                var Response3 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/KhamSanLoc/GetNhacap");
                 var apiResponses3 = await Response3.Content.ReadAsStringAsync();
                 List<NhaCungCap> NhaCap = JsonConvert.DeserializeObject<List<NhaCungCap>>(apiResponses3);
                 ViewBag.NhaCap = NhaCap;
 
 
-                var Response4 = await client.GetAsync("https://localhost:7143/api/KhamSanLoc/Getxuatxu");
+                var Response4 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/KhamSanLoc/Getxuatxu");
                 var apiResponses4 = await Response4.Content.ReadAsStringAsync();
                 List<XuatXu> Xuatxu = JsonConvert.DeserializeObject<List<XuatXu>>(apiResponses4);
                 ViewBag.Xuatxu = Xuatxu;
@@ -255,7 +255,7 @@ namespace DATN_QLTiemChung.Controllers
 
                 try
                 {
-                    var response = await client.PostAsync("https://localhost:7143/api/KhamSanLoc/AddKhamSangLoc", content);
+                    var response = await client.PostAsync("http://qltiemchungapi.runasp.net/api/KhamSanLoc/AddKhamSangLoc", content);
 
                     // Kiểm tra mã trạng thái HTTP trả về
                     if (response.IsSuccessStatusCode)

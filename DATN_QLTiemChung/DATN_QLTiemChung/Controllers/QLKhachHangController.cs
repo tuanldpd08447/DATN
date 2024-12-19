@@ -29,7 +29,7 @@ namespace DATN_QLTiemChung.Controllers
         public async Task<IActionResult> QLKhachHang()
         {
             var client = _httpClientFactory.CreateClient();
-            var response = await client.GetAsync("https://localhost:7143/api/QLKhachHang/GetAllKhachHang");
+            var response = await client.GetAsync("http://qltiemchungapi.runasp.net/api/QLKhachHang/GetAllKhachHang");
 
             if (response.IsSuccessStatusCode)
             {
@@ -58,7 +58,7 @@ namespace DATN_QLTiemChung.Controllers
 			var content = new StringContent(JsonConvert.SerializeObject(find), Encoding.UTF8, "application/json");
 
 			// Send the POST request
-			var response = await client.PostAsync("https://localhost:7143/api/QLKhachHang/GetAllKhachHangByFind", content);
+			var response = await client.PostAsync("http://qltiemchungapi.runasp.net/api/QLKhachHang/GetAllKhachHangByFind", content);
 			if (response.IsSuccessStatusCode)
 			{
 				var apiResponse = await response.Content.ReadAsStringAsync();
@@ -102,7 +102,7 @@ namespace DATN_QLTiemChung.Controllers
                 var content = new StringContent(JsonConvert.SerializeObject(khachHangCreateDTO), Encoding.UTF8, "application/json");
 
                 // Send the POST request
-                var response = await client.PostAsync("https://localhost:7143/api/QLKhachHang/AddKhachHang", content);
+                var response = await client.PostAsync("http://qltiemchungapi.runasp.net/api/QLKhachHang/AddKhachHang", content);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -110,7 +110,7 @@ namespace DATN_QLTiemChung.Controllers
                     var addedKhachHang = JsonConvert.DeserializeObject<KhachHangDTo>(apiResponse);
 
                     // Get all customers after adding
-                    var allResponse = await client.GetAsync("https://localhost:7143/api/QLKhachHang/GetAllKhachHang");
+                    var allResponse = await client.GetAsync("http://qltiemchungapi.runasp.net/api/QLKhachHang/GetAllKhachHang");
                     if (allResponse.IsSuccessStatusCode)
                     {
                         var allApiResponse = await allResponse.Content.ReadAsStringAsync();
@@ -143,7 +143,7 @@ namespace DATN_QLTiemChung.Controllers
         public async Task<IActionResult> ClickKhachHang(string IDKH)
         {
             var client = _httpClientFactory.CreateClient();
-            var response = await client.GetAsync("https://localhost:7143/api/QLKhachHang/GetAllKhachHang");
+            var response = await client.GetAsync("http://qltiemchungapi.runasp.net/api/QLKhachHang/GetAllKhachHang");
 
             if (response.IsSuccessStatusCode)
             {
@@ -152,7 +152,7 @@ namespace DATN_QLTiemChung.Controllers
                 ViewBag.KhachHangs = khachHangs;
             }
 
-            var response1 = await client.GetAsync($"https://localhost:7143/api/QLKhachHang/GetKhachHangById/{IDKH}");
+            var response1 = await client.GetAsync($"http://qltiemchungapi.runasp.net/api/QLKhachHang/GetKhachHangById/{IDKH}");
 
             if (response1.IsSuccessStatusCode)
             {
@@ -190,7 +190,7 @@ namespace DATN_QLTiemChung.Controllers
             var client = _httpClientFactory.CreateClient();
 
             var content = new StringContent(JsonConvert.SerializeObject(khachHang), Encoding.UTF8, "application/json");
-            var response = await client.PutAsync("https://localhost:7143/api/QLKhachHang/UpdateKhachHang", content);
+            var response = await client.PutAsync("http://qltiemchungapi.runasp.net/api/QLKhachHang/UpdateKhachHang", content);
             if (!response.IsSuccessStatusCode)
             {
                 var error = await response.Content.ReadAsStringAsync();

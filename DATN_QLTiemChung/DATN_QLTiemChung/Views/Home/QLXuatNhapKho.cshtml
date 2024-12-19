@@ -8,17 +8,13 @@
     var ListChungTu = ViewBag.ListChungTu as List<ChungTuDetail>;
     var ListXuatSu = ViewBag.ListXuatSu as List<XuatXu>;
     string newIDCT = ViewBag.IDCTNew as string;
-
+    var search = ViewBag.Search as SearchChungTuModel;
 }
   <div class="container mt-4" >
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="" style="color: #2fb388;">QUẢN LÝ XUẤT NHẬP KHO</h2>
             <div class="Double-end ">
-                <button class="btn fw-bold custom-btn"><i class="fa-solid fa-plus"></i> Thêm</button>
-                <button class="btn fw-bold custom-btn"><i class="fa-solid fa-floppy-disk"></i> Lưu</button>
-                <button class="btn fw-bold custom-btn"><i class="fa-solid fa-repeat"></i> Hủy </button>
-                <button class="btn fw-bold custom-btn"><i class="fa-solid fa-print"></i> In</button>
-                <button class="btn fw-bold custom-btn"><i class="fa-solid fa-right-from-bracket"></i> Thoát</button>
+               
               </div>
         </div>
       
@@ -28,37 +24,100 @@
             <div class=" ms-1 p-3 py-1 border rounded-4  h-100">
                 <div class="row ">
                     <div class="border rounded-4 p-2 ">
-                        <form class="row ">
+                        <form class="row" asp-action="SearchChungTu" asp-controller="QLXuatNhapKho" method="post">
                             <div class="col ps-5">
                                 <div class="form-group">
                                     <label for="ticketNumberFind">Số Phiếu</label>
-                                    <input type="text" class="form-control" id="ticketNumberFind" value="24URAD036">
+                                    <input type="text" class="form-control" id="ticketNumberFind" name="soPhieu" value="@search?.SoPhieu">
                                 </div>
                             </div>
+
                             <div class="col">
                                 <div class="form-group">
                                     <label for="TypeFind">Loại</label>
-                                    <select type="text" class="form-control" id="TypeFind">
+                                    <select class="form-control" id="TypeFind" name="loai">
+                                        <option value="">-- Chọn loại phiếu --</option>
+                                        @if (search != null && search.Loai == true)
+                                        {
+                                            <option value="true" selected>Phiếu Nhập</option>
+                                            <option value="false">Phiếu Xuất</option>
+                                        }else if (search != null && search.Loai == false)
+                                        {
+                                            <option value="true" >Phiếu Nhập</option>
+                                            <option value="false" selected>Phiếu Xuất</option>
+                                        }else
+                                        {
+                                            <option value="true">Phiếu Nhập</option>
+                                            <option value="false">Phiếu Xuất</option>
+                                        }
                                     </select>
                                 </div>
                             </div>
+
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="VatTuFind">Vật tư</label>
+                                    <select class="form-control" id="VatTuFind" name="idVatTu">
+                                        <option value="">-- Chọn vật tư --</option>
+                                        @if (vattu != null)
+                                        {
+                                            @foreach (var item in vattu)
+                                            {
+                                                if (search != null && search.IdVatTu == item.IDVT)
+                                                {
+                                                    <option value="@item.IDVT" selected>@item.TenVatTu</option>
+                                                }else
+                                                {
+                                                    <option value="@item.IDVT">@item.TenVatTu</option>
+                                                }
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="TrangThaiFind">Trạng Thái</label>
+                                    <select class="form-control" id="TrangThaiFind" name="trangThai">
+                                        <option value="">-- Chọn trạng thái --</option>
+                                        @if (search != null && search.TrangThai == true)
+                                        {
+                                            <option value="true" selected>Hoàn Thành</option>
+                                            <option value="false">Đã Hủy</option>
+                                        }
+                                        else if (search != null && search.TrangThai == false)
+                                        {
+                                            <option value="true">Hoàn Thành</option>
+                                            <option value="false" selected>Đã Hủy</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="true">Hoàn Thành</option>
+                                            <option value="false">Đã Hủy</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+
                             <div class="col">
                                 <div class="form-group">
                                     <label for="productionDateFind">Ngày Xuất/Nhập</label>
-                                    <input type="date" class="form-control" id="productionDateFind" value="2023-02-03">
+                                    <input type="date" class="form-control" id="productionDateFind" name="ngayXuatNhap" value="@search?.NgayXuatNhap?.ToString("yyyy-MM-dd")">
                                 </div>
-                            </div class="col">
-                           
+                            </div>
+
                             <div class="col">
-                                <button class="btn fw-bold custom-btn mt-4" type="button"><i class="fa-solid fa-magnifying-glass"></i>  Tìm</button>
+                                <button class="btn fw-bold custom-btn mt-4" type="submit"><i class="fa-solid fa-magnifying-glass"></i> Tìm</button>
                             </div>
                         </form>
+
                     </div>
-                    <form class="my-3 row">
+                    <form class="my-3 row" >
                         <div class="col-3">
                             <div class="form-group row mt-4">
                                 <label class="col-4 pt-1" for="ticketNumberFind">Số Phiếu</label>
-                                <input type="text" class="form-control col" id="ticketNumberFind" value="@if(ChungTu!=null){@ChungTu.IDXCT}">
+                                <input type="text" class="form-control col" id="ticketNumberFind" value="@if(ChungTu!=null){@ChungTu.IDXCT}" disabled>
                             </div>
                             <div >
                                 <button type="button" class="btn custom-btn rounded-pill px-3 py-2 mt-4 ms-5 fw-bold" data-bs-toggle="modal" data-bs-target="#VatTuModal">
@@ -78,18 +137,18 @@
                             <div class="row">
                                 <div class="form-group col">
                                     <label for="VatTuCode">Mã vật tư</label>
-                                    <input type="text" class="form-control" id="VatTuCode" placeholder="Nhập mã vật tư" value="@if(ChungTu!=null){@ChungTu.IDVT}">
+                                    <input type="text" class="form-control" id="VatTuCode" placeholder="Nhập mã vật tư" value="@if(ChungTu!=null){@ChungTu.IDVT}" disabled>
                                 </div>
                                 <div class="form-group col">
                                     <label for="VatTuName">Tên vật tư</label>
-                                    <input type="text" class="form-control" id="VatTuName" placeholder="Nhập tên vật tư" value="@if(ChungTu!=null){@ChungTu.TenVatTu}">
+                                    <input type="text" class="form-control" id="VatTuName" placeholder="Nhập tên vật tư" value="@if(ChungTu!=null){@ChungTu.TenVatTu}" disabled>
                                 </div>
                             </div>
                             
                             <div class="row">
                                 <div class="form-group col">
                                     <label for="VatTuType">Loại vật tư</label>
-                                   <select class="form-control" id="VatTuType" >
+                                    <select class="form-control" id="VatTuType" disabled>
                                          @if (loaivattu != null)
                                          {
       
@@ -112,7 +171,7 @@
                                 </div>
                                 <div class="form-group col">
                                     <label for="origin">Nguồn cung cấp</label>
-                                   <select class="form-control" id="origin">
+                                    <select class="form-control" id="origin" disabled>
                                             <option ></option>
                                              @if (nguoncap != null)
                                             {
@@ -139,7 +198,7 @@
                             <div class="row">
                                 <div class="form-group col">
                                     <label for="supplier">Nhà cung cấp</label>
-                                      <select class="form-control" id="supplier" placeholder="Nhập nhà cung cấp vật tư">
+                                    <select class="form-control" id="supplier" placeholder="Nhập nhà cung cấp vật tư" disabled>
                                          <option ></option>
                                            @if (nhacap != null)
                                          {
@@ -163,7 +222,7 @@
                                 </div>
                                 <div class="form-group col">
                                     <label for="documentType">Loại chứng từ</label>
-                                    <select class="form-control" id="documentType">
+                                    <select class="form-control" id="documentType" disabled>
                                        @if (ChungTu != null)
                                         {
                                             <option value="false" selected="@(ChungTu.LoaiChungTu == false)">Phiếu Xuất</option>
@@ -181,32 +240,32 @@
                             <div class="row">
                                 <div class="form-group col">
                                     <label for="quantity">Số lượng xuất/nhập</label>
-                                    <input type="number" class="form-control" id="quantity" placeholder="Nhập số lượng" value="@if(ChungTu!=null){@ChungTu.SoLuongXuatNhap}">
+                                    <input type="number" class="form-control" id="quantity" placeholder="Nhập số lượng" value="@if(ChungTu!=null){@ChungTu.SoLuongXuatNhap}" disabled>
                                 </div>
                                 <div class="form-group col">
                                     <label for="expirationDate">Hạn sử dụng</label>
-                                    <input type="date" class="form-control" id="expirationDate" value="@if(ChungTu!=null){@ChungTu.HanSuDung.ToString("yyyy-MM-dd")}">
+                                    <input type="date" class="form-control" id="expirationDate" value="@if(ChungTu!=null){@ChungTu.HanSuDung.ToString("yyyy-MM-dd")}" disabled>
                                 </div>
                             </div>
                             
                             <div class="row">
                                 <div class="form-group col">
                                     <label for="entryDate">Ngày nhập</label>
-                                    <input type="datetime" class="form-control" id="entryDate" value="@if(ChungTu!=null){@ChungTu.ThoiGianXuatNhap.ToString("yyyy-MM-dd HH:mm:ss")}">
+                                    <input type="datetime" class="form-control" id="entryDate" value="@if(ChungTu!=null){@ChungTu.ThoiGianXuatNhap.ToString("yyyy-MM-dd HH:mm:ss")}" disabled>
                                 </div>
                                 <div class="form-group col">
                                     <label for="Total">Tổng tiền</label>
-                                    <input type="text" class="form-control" id="Total" value="@if(ChungTu!=null){@ChungTu.ThanhTien}" />
+                                    <input type="text" class="form-control" id="Total" value="@if(ChungTu!=null){@ChungTu.ThanhTien}" disabled/>
                                 </div>
                             </div>
                              <div class="row">
                                 <div class="form-group col">
                                     <label for="notes">Ghi chú</label>
-                                    <textarea class="form-control" id="notes" rows="1" placeholder="Nhập ghi chú" value="@if(ChungTu!=null){@ChungTu.GhiChu}"></textarea>
+                                    <textarea class="form-control" id="notes" rows="1" placeholder="Nhập ghi chú" value="@if(ChungTu!=null){@ChungTu.GhiChu}" disabled></textarea>
                                 </div>
                                  <div class="form-group col">
                                     <label for="status">Trạng Thái</label>
-                                    <select class="form-control" id="status">
+                                    <select class="form-control" id="status" disabled>
                                        @if (ChungTu != null)
                                         {
                                             <option value="true" selected="@(ChungTu.TrangThai )">Hoàn Thành</option>
@@ -297,6 +356,13 @@
                                   
                                 }
                             }
+                            else
+                            {
+                                <tr >
+                                    <td colspan="13">Không tìm thấy thông tin chứng từ</td>
+                                </tr>
+                            }
+                            
                         </tbody>
                     </table>
                  <div class="modal fade" id="pdfModal" tabindex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">

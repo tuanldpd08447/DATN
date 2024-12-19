@@ -52,19 +52,33 @@
                     <tbody>
                         @if (lstiemChua != null && lstiemChua.Any())
                         {
-                            foreach (var item in lstiemChua)
+                            @foreach (var item in lstiemChua)
                             {
-                                <tr>
-                                    <td>@item.NgayTiem.ToString("dd/MM/yyyy")</td>
-                                    <td>@item.TenVacxin</td>
-                                    <td>@item.XuatXu</td>
-                                    <td>@item.DonGia?.ToString("N0") VND</td>
-                                    <td>@item.ThanhTien?.ToString("N0") VND</td>
-                                    <td>@item.LieuTiem</td>
-                                    <td><span class="badge bg-warning">Chưa tiêm</span></td>
-                                    <td>@item.TenNhanVien</td>
-                                </tr>
+                                int lieuTiem = 0;
+                                if (int.TryParse(item.LieuTiem, out lieuTiem))
+                                {
+                                    for (int i = 1; i <= lieuTiem; i++)
+                                    {
+                                        <tr>
+                                            <td>@item.NgayTiem.ToString("dd/MM/yyyy")</td>
+                                            <td>@item.TenVacxin</td>
+                                            <td>@item.XuatXu</td>
+                                            <td>@item.DonGia?.ToString("N0") VND</td>
+                                            <td>@item.ThanhTien?.ToString("N0") VND</td>
+                                            <td>Mũi @i</td>
+                                            <td><span class="badge bg-warning">Chưa tiêm</span></td>
+                                            <td>@item.TenNhanVien</td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="8" class="text-danger">Liều tiêm không hợp lệ cho mục này</td>
+                                    </tr>
+                                }
                             }
+
                         }
                         else
                         {
@@ -97,19 +111,20 @@
                     <tbody>
                         @if (lstiemda != null && lstiemda.Any())
                         {
-                            foreach (var item in lstiemda)
+                            foreach (var ls in lstiemda)
                             {
+
                                 <tr>
-                                    <td>@item.NgayTiem.ToString("dd/MM/yyyy")</td>
-                                    <td>@item.TenVacxin</td>
-                                    <td>@item.XuatXu</td>
-                                    <td>@item.DonGia?.ToString("N0") VND</td>
-                                    <td>@item.ThanhTien?.ToString("N0") VND</td>
-                                    <td>@item.LieuTiem</td>
+                                    <td>@ls.NgayTiem.ToString("dd/MM/yyyy")</td>
+                                    <td>@ls.TenVacxin</td>
+                                    <td>@ls.XuatXu</td>
+                                    <td>@ls.DonGia?.ToString("N0") VND</td>
+                                    <td>@ls.ThanhTien?.ToString("N0") VND</td>
+                                    <td>@ls.LieuTiem</td>
                                     <td>
                                         <span class="badge bg-success">Đã tiêm</span>
                                     </td>
-                                    <td>@item.TenNhanVien</td>
+                                    <td>@ls.TenNhanVien</td>
                                 </tr>
                             }
                         }

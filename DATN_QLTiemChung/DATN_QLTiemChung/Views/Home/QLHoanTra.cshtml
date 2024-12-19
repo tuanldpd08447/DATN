@@ -138,14 +138,7 @@
                 </form>
             </div>
             <div class="ms-3 mt-2 p-3 py-1 border rounded-4" style="width: 98%;">
-                <div class="row mb-3 mt-2">
-                    <div class="col-md-6">
-                        <input type="text" class="form-control" placeholder="Tìm Kiêm">
-                    </div>
-                    <div class="col-md-4 d-flex align-items-end">
-                        <button class="btn btn btn-outline-secondary me-2"><i class="bi bi-search"></i></button>
-                    </div>
-                </div>
+                
                 <style>
                     .table th {
                         background-color: #e8f5e9; /* Màu nền xanh nhạt cho tiêu đề */
@@ -209,9 +202,17 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <div class="row mb-3 mt-2">
+                    <div class="col-md-6">
+                        <input type="text" id="searchInput" class="form-control" placeholder="Tìm Kiếm">
+                    </div>
+                    <div class="col-md-4 d-flex align-items-end">
+                        <button class="btn btn-outline-secondary me-2" id="searchBtn"><i class="bi bi-search"></i></button>
+                    </div>
+                </div>
                 @if (hoanTraList != null && hoanTraList.Any())
                 {
-                    <table class="table">
+                    <table class="table" id="hoanTraTable">
                         <thead>
                             <tr>
                                 <th>ID Hoàn Trả</th>
@@ -225,38 +226,28 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if (hoanTraList != null && hoanTraList.Any())
-                            {
-                                @foreach (var hoanTra in hoanTraList)
-                                {
-                                    <tr>
-                                        <td>@hoanTra.IDHT</td>
-                                        <td>@hoanTra.IDKH</td>
-                                        <td>@hoanTra.LyDo</td>
-                                        <td>@hoanTra.ThoiGian.ToString("dd/MM/yyyy HH:mm:ss")</td>
-                                        <td>@hoanTra.DonGia.ToString("N0")</td>
-                                        <td>@hoanTra.ThanhTien.ToString("N0")</td>
-                                        <td>
-                                            <div><span class="text-muted">ID:</span> @hoanTra.HoaDonCu.IDHD</div>
-                                            <div><span class="text-muted">Khách Hàng:</span> @hoanTra.HoaDonCu.KhachHang</div>
-                                            <div><span class="text-muted">Tổng Tiền:</span> @hoanTra.HoaDonCu.TongTien.ToString("N0")</div>
-                                        </td>
-                                        <td>
-                                            <div><span class="text-muted">ID:</span> @hoanTra.HoaDonMoi.IDHD</div>
-                                            <div><span class="text-muted">Khách Hàng:</span> @hoanTra.HoaDonMoi.KhachHang</div>
-                                            <div><span class="text-muted">Tổng Tiền:</span> @hoanTra.HoaDonMoi.TongTien.ToString("N0")</div>
-                                        </td>
-                                    </tr>
-                                }
-                            }
-                            else
+                            @foreach (var hoanTra in hoanTraList)
                             {
                                 <tr>
-                                    <td colspan="8" class="text-center text-muted">Không có dữ liệu hoàn trả.</td>
+                                    <td>@hoanTra.IDHT</td>
+                                    <td>@hoanTra.IDKH</td>
+                                    <td>@hoanTra.LyDo</td>
+                                    <td>@hoanTra.ThoiGian.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                                    <td>@hoanTra.DonGia.ToString("N0")</td>
+                                    <td>@hoanTra.ThanhTien.ToString("N0")</td>
+                                    <td>
+                                        <div><span class="text-muted">ID:</span> @hoanTra.HoaDonCu.IDHD</div>
+                                        <div><span class="text-muted">Khách Hàng:</span> @hoanTra.HoaDonCu.KhachHang</div>
+                                        <div><span class="text-muted">Tổng Tiền:</span> @hoanTra.HoaDonCu.TongTien.ToString("N0")</div>
+                                    </td>
+                                    <td>
+                                        <div><span class="text-muted">ID:</span> @hoanTra.HoaDonMoi.IDHD</div>
+                                        <div><span class="text-muted">Khách Hàng:</span> @hoanTra.HoaDonMoi.KhachHang</div>
+                                        <div><span class="text-muted">Tổng Tiền:</span> @hoanTra.HoaDonMoi.TongTien.ToString("N0")</div>
+                                    </td>
                                 </tr>
                             }
                         </tbody>
-
                     </table>
                 }
                 else
@@ -270,7 +261,46 @@
         </div>
     </div>
 </div>
+
 <script>
+    //Tìm kiểm
+    // Lắng nghe sự kiện khi nhấn nút tìm kiếm
+    document.getElementById('searchBtn').addEventListener('click', function () {
+        var searchTerm = document.getElementById('searchInput').value.toLowerCase(); // Lấy từ khóa tìm kiếm và chuyển về chữ thường
+        var rows = document.querySelectorAll('#hoanTraTable tbody tr'); // Lấy tất cả các dòng trong bảng
+
+        // Nếu ô tìm kiếm trống, hiển thị lại tất cả các dòng
+        if (searchTerm === '') {
+            rows.forEach(function (row) {
+                row.style.display = ''; // Hiển thị tất cả các dòng
+            });
+            return; // Dừng lại ở đây vì không cần lọc thêm nữa
+        }
+
+        // Nếu ô tìm kiếm có nội dung, thực hiện tìm kiếm
+        rows.forEach(function (row) {
+            var cells = row.getElementsByTagName('td'); // Lấy tất cả các ô trong dòng
+            var matchFound = false;
+
+            // Kiểm tra từng ô xem có chứa từ khóa tìm kiếm không (dù chỉ là một phần của ô)
+            for (var i = 0; i < cells.length; i++) {
+                if (cells[i].textContent.toLowerCase().includes(searchTerm)) {
+                    matchFound = true; // Nếu tìm thấy khớp thì đánh dấu
+                    break;
+                }
+            }
+
+            // Hiển thị hoặc ẩn dòng dựa trên việc tìm thấy kết quả
+            if (matchFound) {
+                row.style.display = ''; // Hiển thị dòng nếu tìm thấy khớp
+            } else {
+                row.style.display = 'none'; // Ẩn dòng nếu không tìm thấy khớp
+            }
+        });
+    });
+
+
+
     const activateButton = document.getElementById('activateButton');
     const targetButton = document.getElementById('targetButton');
 

@@ -33,7 +33,7 @@ namespace DATN_QLTiemChung.Controllers
             try
             {
                 // Lấy danh sách khách hàng
-                var response = await client.GetAsync("https://localhost:7143/api/QLTiepNhan/GetAllKhachHang");
+                var response = await client.GetAsync("http://qltiemchungapi.runasp.net/api/QLTiepNhan/GetAllKhachHang");
                 if (response.IsSuccessStatusCode)
                 {
                     var apiResponse = await response.Content.ReadAsStringAsync();
@@ -47,7 +47,7 @@ namespace DATN_QLTiemChung.Controllers
                 }
 
                 // Lấy danh sách khách hàng đặt lịch
-                var response1 = await client.GetAsync("https://localhost:7143/api/QLTiepNhan/GetAllDatLichKhams");
+                var response1 = await client.GetAsync("http://qltiemchungapi.runasp.net/api/QLTiepNhan/GetAllDatLichKhams");
                 if (response1.IsSuccessStatusCode)
                 {
                     var apiResponse1 = await response1.Content.ReadAsStringAsync();
@@ -96,7 +96,7 @@ namespace DATN_QLTiemChung.Controllers
                 }
 
                 // Lấy thông tin khách hàng từ API
-                var response2 = await client.GetAsync($"https://localhost:7143/api/QLTiepNhan/GetAllKhachHangByIDKH/{IDKH}");
+                var response2 = await client.GetAsync($"http://qltiemchungapi.runasp.net/api/QLTiepNhan/GetAllKhachHangByIDKH/{IDKH}");
                 if (!response2.IsSuccessStatusCode)
                 {
                     GetSession();
@@ -172,7 +172,7 @@ namespace DATN_QLTiemChung.Controllers
                 var content = new StringContent(JsonConvert.SerializeObject(khachHangCreateDTO), Encoding.UTF8, "application/json");
 
                 // Send the POST request
-                var response = await client.PostAsync("https://localhost:7143/api/QLTiepNhan/AddKhachHang", content);
+                var response = await client.PostAsync("http://qltiemchungapi.runasp.net/api/QLTiepNhan/AddKhachHang", content);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -180,7 +180,7 @@ namespace DATN_QLTiemChung.Controllers
                     var addedKhachHang = JsonConvert.DeserializeObject<KhachHangDTo>(apiResponse);
 
                     // Get all customers after adding
-                    var allResponse = await client.GetAsync("https://localhost:7143/api/QLTiepNhan/GetAllKhachHang");
+                    var allResponse = await client.GetAsync("http://qltiemchungapi.runasp.net/api/QLTiepNhan/GetAllKhachHang");
                     if (allResponse.IsSuccessStatusCode)
                     {
                         var allApiResponse = await allResponse.Content.ReadAsStringAsync();

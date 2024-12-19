@@ -55,12 +55,12 @@ namespace DATN_QLTiemChung.Controllers
         public async Task<IActionResult> ClickKhachHang(string IDKH)
         {
             var hd = _httpClientFactory.CreateClient();
-            var Response = await hd.GetAsync("https://localhost:7143/api/DataQLHoaDon/GetAllVatTu");
+            var Response = await hd.GetAsync("http://qltiemchungapi.runasp.net/api/DataQLHoaDon/GetAllVatTu");
             var Responses = await Response.Content.ReadAsStringAsync();
             List<VatTuYTe> vatTuYTe = JsonConvert.DeserializeObject<List<VatTuYTe>>(Responses);
             ViewBag.vatTuYTe = vatTuYTe;
 
-            var response = await hd.GetAsync("https://localhost:7143/api/QLTiepNhan/GetAllKhachHang");
+            var response = await hd.GetAsync("http://qltiemchungapi.runasp.net/api/QLTiepNhan/GetAllKhachHang");
 
             if (response.IsSuccessStatusCode)
             {
@@ -71,13 +71,13 @@ namespace DATN_QLTiemChung.Controllers
             }
 
 
-            var foodResponse = await hd.GetAsync("https://localhost:7143/api/DataQLHoaDon/GetAllBYIDKh/" + IDKH);
+            var foodResponse = await hd.GetAsync("http://qltiemchungapi.runasp.net/api/DataQLHoaDon/GetAllBYIDKh/" + IDKH);
 
 
             if (!foodResponse.IsSuccessStatusCode)
             {
 
-                var khachHangResponse = await hd.GetAsync($"https://localhost:7143/api/DataQLHoaDon/GetKHBYID/{IDKH}");
+                var khachHangResponse = await hd.GetAsync($"http://qltiemchungapi.runasp.net/api/DataQLHoaDon/GetKHBYID/{IDKH}");
                 if (khachHangResponse.IsSuccessStatusCode)
                 {
                     var khachHangApiResponse = await khachHangResponse.Content.ReadAsStringAsync();
@@ -85,7 +85,7 @@ namespace DATN_QLTiemChung.Controllers
                     ViewBag.Khachhang = khachHang;
                     Console.WriteLine(khachHang.IDXP);
 
-                    var response0 = await hd.GetAsync($"https://localhost:7143/api/Data/GetWardByid/{khachHang.IDXP}");
+                    var response0 = await hd.GetAsync($"http://qltiemchungapi.runasp.net/api/Data/GetWardByid/{khachHang.IDXP}");
                     var apiResponse0 = await response0.Content.ReadAsStringAsync();
                     DiaChi dc = JsonConvert.DeserializeObject<DiaChi>(apiResponse0);
                     ViewBag.DiaChi = dc;
@@ -97,7 +97,7 @@ namespace DATN_QLTiemChung.Controllers
                 var apiResponse = await foodResponse.Content.ReadAsStringAsync();
                 HoaDonDTO hoaDon = JsonConvert.DeserializeObject<HoaDonDTO>(apiResponse);
                 ViewBag.HoaDons = hoaDon;
-                var response0 = await hd.GetAsync($"https://localhost:7143/api/Data/GetWardByid/{hoaDon.KhachHang.IDXP}");
+                var response0 = await hd.GetAsync($"http://qltiemchungapi.runasp.net/api/Data/GetWardByid/{hoaDon.KhachHang.IDXP}");
                 var apiResponse0 = await response0.Content.ReadAsStringAsync();
                 DiaChi dc = JsonConvert.DeserializeObject<DiaChi>(apiResponse0);
                 ViewBag.DiaChi = dc;
@@ -117,14 +117,14 @@ namespace DATN_QLTiemChung.Controllers
 
 
 
-            var apiResponse = await hd.GetAsync("https://localhost:7143/api/DataQLHoaDon/GetAllVatTu");
+            var apiResponse = await hd.GetAsync("http://qltiemchungapi.runasp.net/api/DataQLHoaDon/GetAllVatTu");
             var Responses = await apiResponse.Content.ReadAsStringAsync();
 
             List<VatTuYTe> vatTuYTe = JsonConvert.DeserializeObject<List<VatTuYTe>>(Responses);
 
             ViewBag.vatTuYTe = vatTuYTe;
 
-            var response = await hd.GetAsync("https://localhost:7143/api/QLTiepNhan/GetAllKhachHang");
+            var response = await hd.GetAsync("http://qltiemchungapi.runasp.net/api/QLTiepNhan/GetAllKhachHang");
 
             if (response.IsSuccessStatusCode)
             {
@@ -177,7 +177,7 @@ namespace DATN_QLTiemChung.Controllers
 
                 var content = new StringContent(JsonConvert.SerializeObject(hoadonCreateDTO), Encoding.UTF8, "application/json");
 
-                var response = await client.PostAsync("https://localhost:7143/api/DataQLHoaDon/AddHoaDon", content);
+                var response = await client.PostAsync("http://qltiemchungapi.runasp.net/api/DataQLHoaDon/AddHoaDon", content);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -213,7 +213,7 @@ namespace DATN_QLTiemChung.Controllers
 
                 var content = new StringContent(JsonConvert.SerializeObject(tt), Encoding.UTF8, "application/json");
 
-                var response = await client.PutAsync($"https://localhost:7143/api/DataQLHoaDon/CancelHoaDon/{MaHD}", content);
+                var response = await client.PutAsync($"http://qltiemchungapi.runasp.net/api/DataQLHoaDon/CancelHoaDon/{MaHD}", content);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -250,7 +250,7 @@ namespace DATN_QLTiemChung.Controllers
                     ThanhToan = ThanhToan,
                 };
                 var content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
-                var response = await client.PutAsync($"https://localhost:7143/api/DataQLHoaDon/UpdateHoaDon/{MaHD}", content);
+                var response = await client.PutAsync($"http://qltiemchungapi.runasp.net/api/DataQLHoaDon/UpdateHoaDon/{MaHD}", content);
 
                 if (!response.IsSuccessStatusCode)
                 {

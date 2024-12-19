@@ -29,7 +29,7 @@ namespace DATN_CDCWebClient.Controllers
         {
             var client = _httpClientFactory.CreateClient();
 
-            var screeningResult = await client.GetAsync($"https://localhost:7143/api/QLTiemChung/LsTiem/{IDKH}");
+            var screeningResult = await client.GetAsync($"http://qltiemchungapi.runasp.net/api/QLTiemChung/LsTiem/{IDKH}");
 
             if (screeningResult.IsSuccessStatusCode)
             {

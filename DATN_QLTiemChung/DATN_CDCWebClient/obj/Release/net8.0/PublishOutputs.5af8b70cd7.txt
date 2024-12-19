@@ -1,0 +1,11 @@
+C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_CDCWebClient\obj\Release\net8.0\PubTmp\Out\DATN_CDCWebClient.exe
+C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_CDCWebClient\obj\Release\net8.0\PubTmp\Out\appsettings.Development.json
+C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_CDCWebClient\obj\Release\net8.0\PubTmp\Out\appsettings.json
+C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_CDCWebClient\obj\Release\net8.0\PubTmp\Out\DATN_CDCWebClient.dll
+C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_CDCWebClient\obj\Release\net8.0\PubTmp\Out\DATN_CDCWebClient.deps.json
+C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_CDCWebClient\obj\Release\net8.0\PubTmp\Out\DATN_CDCWebClient.runtimeconfig.json
+C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_CDCWebClient\obj\Release\net8.0\PubTmp\Out\DATN_CDCWebClient.pdb
+C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_CDCWebClient\obj\Release\net8.0\PubTmp\Out\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_CDCWebClient\obj\Release\net8.0\PubTmp\Out\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_CDCWebClient\obj\Release\net8.0\PubTmp\Out\Newtonsoft.Json.dll
+C:\Users\ductu\Documents\Github\DATN\DATN_QLTiemChung\DATN_CDCWebClient\obj\Release\net8.0\PubTmp\Out\Newtonsoft.Json.Bson.dll

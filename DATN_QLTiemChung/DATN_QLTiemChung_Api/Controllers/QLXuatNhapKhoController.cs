@@ -144,6 +144,81 @@ namespace DATN_QLTiemChung_Api.Controllers
 
             return Ok(ListChungTu);
         }
+
+        [HttpPost("SearchChungTu")]
+        public async Task<IActionResult> SearchChungTu([FromBody] SearchChungTuModel searchCt)
+        {
+            var query = _context.ChungTu
+                .Include(ct => ct.Order)
+                .ThenInclude(od => od.VatTuYTe)
+                .AsQueryable();
+
+            // Lọc theo số phiếu
+            if (!string.IsNullOrEmpty(searchCt.SoPhieu))
+            {
+                query = query.Where(ct => ct.IDXCT.Contains(searchCt.SoPhieu));
+            }
+
+            // Lọc theo loại chứng từ
+            if (searchCt.Loai.HasValue)
+            {
+                query = query.Where(ct => ct.LoaiChungTu == searchCt.Loai.Value);
+            }
+
+            // Lọc theo ID vật tư
+            if (!string.IsNullOrEmpty(searchCt.IdVatTu))
+            {
+                query = query.Where(ct => ct.Order.VatTuYTe.IDVT == searchCt.IdVatTu);
+            }
+
+            // Lọc theo ngày xuất/nhập
+            if (searchCt.NgayXuatNhap.HasValue)
+            {
+                query = query.Where(ct => ct.ThoiGian.Date == searchCt.NgayXuatNhap.Value.Date);
+            }
+
+            // Lọc theo trạng thái (TrangThai)
+            if (searchCt.TrangThai.HasValue)
+            {
+                query = query.Where(ct => ct.TrangThai == searchCt.TrangThai.Value);
+            }
+
+            // Thực hiện truy vấn và lấy kết quả
+            var filteredList = await query
+                .Select(ct => new ChungTuDetail
+                {
+                    IDXCT = ct.IDXCT,
+                    IDNV = ct.IDNV,
+                    IDVT = ct.Order.IDVT,
+                    IDTL = ct.Order.VatTuYTe.IDTL,
+                    IDNHC = ct.Order.VatTuYTe.IDNHC,
+                    IDNGC = ct.Order.VatTuYTe.IDNGC,
+                    IDXX = ct.Order.VatTuYTe.IDXX,
+                    TenVatTu = ct.Order.VatTuYTe.TenVatTu,
+                    HanSuDung = ct.Order.VatTuYTe.HanSuDung,
+                    GhiChu = ct.Order.VatTuYTe.GhiChu,
+                    DonGia = ct.Order.VatTuYTe.DonGia,
+                    SoLuongXuatNhap = ct.Order.SoLuong,
+                    SoLuongTonKho = ct.Order.VatTuYTe.SoLuong,
+                    LoaiChungTu = ct.LoaiChungTu,
+                    ThoiGianXuatNhap = ct.ThoiGian,
+                    DonGiaXuatNhap = ct.DonGia,
+                    ThanhTien = ct.ThanhTien,
+                    TrangThai = ct.TrangThai,
+                    HinhAnh = ct.HinhAnh
+                })
+                .ToListAsync();
+
+            // Nếu danh sách trống hoặc null, trả về NotFound hoặc null
+            if (filteredList == null || filteredList.Count == 0)
+            {
+                return Ok(null); 
+            }
+
+            return Ok(filteredList);
+        }
+
+
         [HttpGet("GetChungTuById/{id}")]
         public async Task<IActionResult> GetChungTuById(string id)
         {
@@ -187,6 +262,7 @@ namespace DATN_QLTiemChung_Api.Controllers
 
             return Ok(ListChungTu);
         }
+
         [HttpGet("GenerateNewId")]
         public async Task<IActionResult> GenerateNewId()
         {

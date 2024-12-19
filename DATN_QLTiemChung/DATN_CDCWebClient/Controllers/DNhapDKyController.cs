@@ -72,7 +72,7 @@ namespace DATN_CDCWebClient.Controllers
 
             try
             {
-                var response = await client.PostAsJsonAsync("https://localhost:7143/api/DNhapDky/update-password", updatePasswordRequest);
+                var response = await client.PostAsJsonAsync("http://qltiemchungapi.runasp.net/api/DNhapDky/update-password", updatePasswordRequest);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -121,7 +121,7 @@ namespace DATN_CDCWebClient.Controllers
             var content = new StringContent(JsonConvert.SerializeObject(otpRequest), Encoding.UTF8, "application/json");
 
             // Thay thế URL dưới đây bằng URL của API gửi OTP của bạn
-            var response = await client.PostAsync("https://localhost:7143/api/DNhapDky/send", content);
+            var response = await client.PostAsync("http://qltiemchungapi.runasp.net/api/DNhapDky/send", content);
 
             if (response.IsSuccessStatusCode)
             {
@@ -145,7 +145,7 @@ namespace DATN_CDCWebClient.Controllers
             }
 
             var client = _httpClientFactory.CreateClient();
-            var response = await client.GetAsync($"https://localhost:7143/api/DNhapDky/CheckEmailDaDK/{email}");
+            var response = await client.GetAsync($"http://qltiemchungapi.runasp.net/api/DNhapDky/CheckEmailDaDK/{email}");
 
             // Kiểm tra phản hồi từ API
             if (response.IsSuccessStatusCode)
@@ -211,7 +211,7 @@ namespace DATN_CDCWebClient.Controllers
             };
             var client = _httpClientFactory.CreateClient();
             var content = new StringContent(JsonConvert.SerializeObject(login), Encoding.UTF8, "application/json");
-            var response = await client.PostAsync("https://localhost:7143/api/DNhapDky/LoginKH", content);
+            var response = await client.PostAsync("http://qltiemchungapi.runasp.net/api/DNhapDky/LoginKH", content);
             if (response.IsSuccessStatusCode)
             {
                 var apiResponse = await response.Content.ReadAsStringAsync();
@@ -253,7 +253,7 @@ namespace DATN_CDCWebClient.Controllers
             };
 
             var client = _httpClientFactory.CreateClient();
-            var response0 = await client.GetAsync($"https://localhost:7143/api/Data/GetWardByid/{hoKhauXa}");
+            var response0 = await client.GetAsync($"http://qltiemchungapi.runasp.net/api/Data/GetWardByid/{hoKhauXa}");
             var apiResponse = await response0.Content.ReadAsStringAsync();
             DiaChi dc = JsonConvert.DeserializeObject<DiaChi>(apiResponse);
 
@@ -292,7 +292,7 @@ namespace DATN_CDCWebClient.Controllers
 
                 // Send registration request
                 var content = new StringContent(JsonConvert.SerializeObject(registerDto), Encoding.UTF8, "application/json");
-                var response = await client.PostAsync("https://localhost:7143/api/DNhapDky/khachHangRegister", content);
+                var response = await client.PostAsync("http://qltiemchungapi.runasp.net/api/DNhapDky/khachHangRegister", content);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -324,7 +324,7 @@ namespace DATN_CDCWebClient.Controllers
         // Helper method to check availability
         private async Task<(string ErrorMessage, string ErrorKey)> CheckAvailability(HttpClient client, string endpoint, string value, string errorKey, string errorMessage)
         {
-            var response = await client.GetAsync($"https://localhost:7143/api/DNhapDky/{endpoint}/{value}");
+            var response = await client.GetAsync($"http://qltiemchungapi.runasp.net/api/DNhapDky/{endpoint}/{value}");
             if (!response.IsSuccessStatusCode)
             {
                 return (errorMessage, errorKey);

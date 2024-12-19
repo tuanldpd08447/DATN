@@ -581,4 +581,12 @@ namespace DATN_QLTiemChung.Models
         public string TenKH { get; set; }
         public string Email { get; set; }
     }
+    public class SearchChungTuModel
+    {
+        public string? SoPhieu { get; set; }    // Số Phiếu
+        public bool? Loai { get; set; }          // Loại (true: Phiếu Nhập, false: Phiếu Xuất)
+        public string? IdVatTu { get; set; }    // ID Vật Tư
+        public DateTime? NgayXuatNhap { get; set; } // Ngày Xuất/Nhập
+        public bool? TrangThai { get; set; }    // Trạng Thái (true: Hoàn Thành, false: Đã Hủy)
+    }
 }
