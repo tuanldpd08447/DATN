@@ -596,7 +596,11 @@ namespace DATN_QLTiemChung_Api.Models
         [Required]
         public string Email { get; set; }
         [Required]
+        public string TenNV { get; set; }
+        [Required]
         public string MatKhau { get; set; }
+        [Required]
+        public string SDT { get; set; }
 
     }
     public class CreateTaiKhoanNVDTO
@@ -619,6 +623,10 @@ namespace DATN_QLTiemChung_Api.Models
         [Required]
         public string SDT { get; set; }
         [Required]
+        public string Email { get; set; }
+        [Required]
+        public string TenKH { get; set; }
+
         public string MatKhau { get; set; }
     }
     public class CreateTaiKhoanKHDTO
@@ -631,6 +639,26 @@ namespace DATN_QLTiemChung_Api.Models
         public string SDT { get; set; }
 
         public string MatKhau { get; set; }
+    }
+    public class TTNV
+    {
+        public string IDNV { get; set; }
+        public string TenNV { get; set; }
+
+        public string Email { get; set; }
+        public string SDT { get; set; }
+
+    }
+    public class TTKH
+    {
+    
+        [Required]
+        public string IDKH { get; set; }
+        [Required]
+        public string SDT { get; set; }
+        [Required]
+        public string TenKH { get; set; }
+        public string Email { get; set; }
     }
 
 }

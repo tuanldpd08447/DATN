@@ -1,7 +1,9 @@
 ﻿using DATN_QLTiemChung_Api.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Crypto.Generators;
 
 namespace DATN_QLTiemChung_Api.Controllers
 {
@@ -10,10 +12,12 @@ namespace DATN_QLTiemChung_Api.Controllers
     public class QLTaiKhoanController : ControllerBase
     {
         private readonly DBContext _context;
+        private readonly EmailService _emailService;
 
-        public QLTaiKhoanController(DBContext context)
+        public QLTaiKhoanController(DBContext context, EmailService emailService)
         {
             _context = context;
+            _emailService = emailService;
         }
         [HttpGet("GetAllTaiKhoanNV")]
         public async Task<IActionResult> GetAllTaiKhoanNV()
@@ -25,11 +29,29 @@ namespace DATN_QLTiemChung_Api.Controllers
                     IDTKNV = t.IDTKNV.ToString(),
                     IDNV = t.NhanVien.IDNV,
                     Email = t.Email,
-                    MatKhau = t.MatKhau
+                    TenNV = t.NhanVien.TenNhanVien,
+                    SDT  = t.NhanVien.SoDienThoai,
+                    MatKhau = ""
                 }).ToListAsync();
 
             return Ok(taiKhoans);
         }
+        [HttpGet("GetTaiKhoanNhanVienChuaCoTK")]
+        public async Task<IActionResult> GetTaiKhoanNhanVienChuaCoTK()
+        {
+            var taiKhoans = await _context.NhanVien
+                .Where(nv => !_context.QLyTaiKhoanNV.Any(tk => tk.IDNV == nv.IDNV)) // Tìm nhân viên không có tài khoản
+                .Select(nv => new TTNV
+                {
+                    IDNV = nv.IDNV,
+                    TenNV = nv.TenNhanVien,
+                    Email = nv.Email,
+                    SDT = nv.SoDienThoai,
+                }).ToListAsync();
+
+            return Ok(taiKhoans);
+        }
+
         [HttpPost("CreateTaiKhoanNV")]
         public async Task<IActionResult> CreateTaiKhoanNV([FromBody] CreateTaiKhoanNVDTO dto)
         {
@@ -99,11 +121,32 @@ namespace DATN_QLTiemChung_Api.Controllers
         {
             var nhanVien = await _context.QLyTaiKhoanNV
                 .Include(kh => kh.NhanVien)
-                .FirstOrDefaultAsync(kh => kh.IDTKNV == id);
+                .Select(kh => new QLTaiKhoanNVDTO
+                {
+                    IDTKNV = kh.IDTKNV,
+                    IDNV = kh.IDNV,
+                    TenNV = kh.NhanVien.TenNhanVien,
+                    Email = kh.Email,
+                    MatKhau = "",
+                    SDT = kh.NhanVien.SoDienThoai
+
+                })
+                .FirstOrDefaultAsync(kh => kh.IDNV == id);
 
             if (nhanVien == null)
             {
-                return NotFound();
+                var nhanVien2 = await _context.NhanVien.Select(kh => new QLTaiKhoanNVDTO
+                {
+                    IDTKNV = "",
+                    IDNV = kh.IDNV,
+                    TenNV = kh.TenNhanVien,
+                    Email = kh.Email,
+                    MatKhau = "",
+                    SDT = kh.SoDienThoai
+
+                })
+                .FirstOrDefaultAsync(kh => kh.IDNV == id);
+                return Ok(nhanVien2);
             }
 
             return Ok(nhanVien);
@@ -155,11 +198,29 @@ namespace DATN_QLTiemChung_Api.Controllers
                {
                    IDTKKH = t.IDTKKH.ToString(),
                    IDKH = t.KhachHang.IDKH,
+                   TenKH = t.KhachHang.TenKhachHang,
                    SDT = t.SDT,
-                   MatKhau = t.MatKhau
+                   MatKhau = "",
+                   Email = t.KhachHang.Email
                }).ToListAsync();
 
             return Ok(taiKhoankhs);
+        }
+
+        [HttpGet("GetTaiKhoanKhachHangChuaCoTK")]
+        public async Task<IActionResult> GetTaiKhoanKhachHangChuaCoTK()
+        {
+            var taiKhoans = await _context.KhachHang
+                .Where(kh => !_context.QLyTaiKhoanKH.Any(tk => tk.IDKH == kh.IDKH)) 
+                .Select(kh => new TTKH
+                {
+                    IDKH = kh.IDKH,
+                    TenKH = kh.TenKhachHang,
+                    SDT = kh.SoDienThoai,
+                    Email = kh.Email,
+                }).ToListAsync();
+
+            return Ok(taiKhoans);
         }
 
         [HttpGet("GetTKKhachHangById/{id}")]
@@ -167,11 +228,34 @@ namespace DATN_QLTiemChung_Api.Controllers
         {
             var khachHang = await _context.QLyTaiKhoanKH
                 .Include(kh => kh.KhachHang)
-                .FirstOrDefaultAsync(kh => kh.IDTKKH == id);
+                 .Select(kh => new QLTaiKhoanKHDTO
+                 {
+                     IDTKKH = kh.IDTKKH,
+                     IDKH = kh.IDKH,
+                     TenKH = kh.KhachHang.TenKhachHang,
+                     Email = kh.KhachHang.Email,
+                     MatKhau = "",
+                     SDT = kh.KhachHang.SoDienThoai
+
+                 })
+                .FirstOrDefaultAsync(kh => kh.IDKH == id);
 
             if (khachHang == null)
             {
-                return NotFound();
+                var khachHang2 = await _context.KhachHang.
+                 Select(kh => new QLTaiKhoanKHDTO
+                 {
+                     IDTKKH = "",
+                     IDKH = kh.IDKH,
+                     TenKH = kh.TenKhachHang,
+                     Email = kh.Email,
+                     MatKhau ="",
+                     SDT = kh.SoDienThoai
+
+                 })
+                
+                .FirstOrDefaultAsync(kh => kh.IDKH == id);
+                return Ok(khachHang2);
             }
 
             return Ok(khachHang);
@@ -239,6 +323,127 @@ namespace DATN_QLTiemChung_Api.Controllers
 
             return newIDTKKH;
         }
+
+        [HttpPost("DoiMKNVTuDong/{idnv}")]
+        public async Task<IActionResult> DoiMKNVTuDong(string idnv)
+        {
+            if (string.IsNullOrEmpty(idnv))
+                return Ok(new { success = false, message = "Mã nhân viên không hợp lệ" });
+
+            // Tìm tài khoản theo ID nhân viên trong QLyTaiKhoanNV
+            var user = await _context.QLyTaiKhoanNV.FirstOrDefaultAsync(u => u.IDNV == idnv);
+
+            if (user == null)
+            {
+                // Nếu không tìm thấy tài khoản, kiểm tra trong bảng NhanVien
+                var nhanVien = await _context.NhanVien.FirstOrDefaultAsync(nv => nv.IDNV == idnv);
+                if (nhanVien == null)
+                {
+                    return Ok(new { success = false, message = "Không tìm thấy thông tin nhân viên!" });
+                }
+
+                // Tạo tài khoản mới trong QLyTaiKhoanNV
+                user = new QLyTaiKhoanNV
+                {
+                    IDTKNV = await GenerateNewIDTKNV(),
+                    IDNV = nhanVien.IDNV,
+                    Email = nhanVien.Email,
+                    MatKhau = "", 
+                };
+                _context.QLyTaiKhoanNV.Add(user);
+            }
+
+            // Sinh mật khẩu mới
+            var newPassword = GenerateRandomPassword();
+            user.MatKhau = newPassword;
+
+            try
+            {
+                // Lưu tài khoản
+                await _context.SaveChangesAsync();
+
+                // Gửi mật khẩu qua email
+                if (!string.IsNullOrEmpty(user.Email))
+                {
+                    await _emailService.SendEmailAsync(user.Email, "Mật khẩu mới",
+                        $"Mật khẩu mới của bạn là: {newPassword}");
+                }
+
+                return Ok(new { success = true, message = "Mật khẩu đã được tạo và gửi qua email." });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { success = false, message = "Đã xảy ra lỗi khi đổi mật khẩu", error = ex.Message });
+            }
+        }
+
+        [HttpPost("DoiMKKHTuDong/{idKH}")]
+        public async Task<IActionResult> DoiMKKHTuDong(string idKH)
+        {
+            if (string.IsNullOrEmpty(idKH))
+                return Ok(new { success = false, message = "Mã khách hàng không hợp lệ" });
+
+            // Tìm tài khoản theo ID khách hàng trong QLyTaiKhoanKH
+            var user = await _context.QLyTaiKhoanKH.Include(kh => kh.KhachHang).FirstOrDefaultAsync(u => u.IDKH == idKH);
+            string emai = null; // Khai báo biến emai để lưu email từ KhachHang
+
+            if (user == null)
+            {
+                // Nếu không tìm thấy tài khoản, kiểm tra trong bảng KhachHang
+                var khachHang = await _context.KhachHang.FirstOrDefaultAsync(kh => kh.IDKH == idKH);
+                if (khachHang == null)
+                {
+                    return Ok(new { success = false, message = "Không tìm thấy thông tin khách hàng!" });
+                }
+
+                // Tạo tài khoản mới trong QLyTaiKhoanKH
+                user = new QLyTaiKhoanKH
+                {
+                    IDTKKH = await GenerateNewIDTKKH(),
+                    IDKH = khachHang.IDKH,
+                    SDT = khachHang.SoDienThoai,
+                    MatKhau = "",
+                };
+                emai = khachHang.Email;  // Lưu email của khách hàng từ bảng KhachHang
+                _context.QLyTaiKhoanKH.Add(user);
+            }
+
+            // Sinh mật khẩu mới
+            var newPassword = GenerateRandomPassword();
+            user.MatKhau = newPassword;
+
+            try
+            {
+                // Lưu tài khoản
+                await _context.SaveChangesAsync();
+
+                // Gửi mật khẩu qua email
+                if (!string.IsNullOrEmpty(user.KhachHang.Email))  // Nếu có email trong tài khoản hiện tại
+                {
+                    await _emailService.SendEmailAsync(user.KhachHang.Email, "Mật khẩu mới", $"Mật khẩu mới của bạn là: {newPassword}");
+                }
+                else if (!string.IsNullOrEmpty(emai))  // Nếu không có email trong tài khoản, sử dụng email lưu từ bảng KhachHang
+                {
+                    await _emailService.SendEmailAsync(emai, "Mật khẩu mới", $"Mật khẩu mới của bạn là: {newPassword}");
+                }
+
+                return Ok(new { success = true, message = "Mật khẩu đã được tạo và gửi qua email." });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { success = false, message = "Đã xảy ra lỗi khi đổi mật khẩu", error = ex.Message });
+            }
+        }
+
+
+
+        private string GenerateRandomPassword()
+        {
+            const string validChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@#$%^&*()!";
+            return new string(Enumerable.Repeat(validChars, 10)
+                .Select(s => s[new Random().Next(s.Length)]).ToArray());
+        }
+
 
     }
 }

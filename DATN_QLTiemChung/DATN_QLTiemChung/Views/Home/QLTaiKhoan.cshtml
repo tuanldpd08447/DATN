@@ -2,14 +2,14 @@
 @{
     var qltknhanViensJson = ViewBag.QLTaiKhoanNVs;
     var qltkkhachHangsJson = ViewBag.QLTaiKhoanKHs;
-
+    var qltkNV = ViewBag.NvChuaCoTk;
+    var qltkKH = ViewBag.KhChuaCoTk;
     var qlTaiKhoanNV = ViewBag.QLTaiKhoanNV as QLTaiKhoanNVDTO;
     var qltkkhachhang = ViewBag.QLyTaiKhoanKH as QLTaiKhoanKHDTO;
-    string emailtemplpe = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$/";
+
+
 }
 
-@{
-}
   <style>
                     .table th {
                         background-color: #e8f5e9; /* Màu nền xanh nhạt cho tiêu đề */
@@ -38,6 +38,12 @@
                     .table th:first-child, .table th:nth-child(2) {
                         padding-right: 20px; /* Khoảng cách thêm giữa tiêu đề cột đầu và cột 2 */
                    }
+
+    .custom-btn.active {
+        background-color: #2fb388; /* Màu nền khi được chọn */
+        color: white; /* Màu chữ khi được chọn */
+        border-color: #2fb388; /* Màu viền */
+    }
                 </style>
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
@@ -47,7 +53,7 @@
                 <i class="fa-solid fa-plus" type="submit"></i> Thêm
             </button>
             <button class="btn fw-bold custom-btn" id="activateButton"><i class="fa-solid fa-floppy-disk"></i> Lưu</button>
-            <button class="btn fw-bold custom-btn" id="CancelButton"><i class="fa-solid fa-repeat"></i> Hủy </button>
+            <a asp-action="QLTaiKhoan" asp-controller="QLTaiKhoan" class="btn fw-bold custom-btn" id="CancelButton"><i class="fa-solid fa-repeat"></i> Hủy </a>
             <button class="btn fw-bold custom-btn" id="editButton" data-action="@Url.Action("UpdateMatKhauTKNV", "QLTaiKhoan")" onclick="changeAction(this)">
                 <i class="fa-solid fa-pen-to-square"></i> Sửa
             </button>
@@ -55,99 +61,154 @@
 
         </div>
     </div>
-    <script>
-        function changeAction(button) {
-            var form = document.getElementById('QLTaiKhoanNVForm');
-            if (form) {
-                var actionUrl = button.getAttribute('data-action');
-                if (actionUrl) {
-                    // Kiểm tra và chỉ thay đổi action khi nó chưa đúng
-                    if (form.action !== actionUrl) {
-                        form.action = actionUrl; // Chỉ thay đổi action khi cần thiết
-                    }
-                } else {
-                    console.error('No action URL found');
-                }
-            } else {
-                console.error('Form not found');
-            }
-        }
-    </script>
-
+  
+    <div class="row mb-3" style="width: 50%;">
+      <button class="btn btn-outline custom-btn col border rounded-0 mb-3" id="btnNhanVien" onclick="toggleTable('nv')">Nhân viên</button>
+      <button class="btn btn-outline custom-btn col border rounded-0 mb-3" id="btnKhachHang" onclick="toggleTable('kh')">Khách Hàng</button>
+    </div>
     <!-- Thông tin hóa đơn -->
-    <div class="row m-0 mb-3 border rounded-4 py-2  ">
+    <div class="row m-0 mb-3 border rounded-4 py-2 " id="nvTable" style="display: none;">
         <div class="col">
             <div class=" ms-1 p-3 py-1 border rounded-4 ">
-                <form id="QLTaiKhoanNVForm" class=" col" method="post">
-
-                    <div class="row g-3 mt-1 ">
+                <form id="QLTaiKhoanNVForm" class="col" method="post">
+                    <div class="row ">
                         <!-- Cột 1: Thông tin Tài Khoản -->
-                        <div class="col-md-4 ">
-                            <div class="mb-3">
-                                <label class="form-label">Mã TK nhân viên</label>
+                            <div class="" style="display:none;">
+                            <label class="form-label fw-bold">Mã TK nhân viên</label>
                                 <input type="text" class=" form-control" name="IDTKNV" id="IDTKNV" placeholder="" value="@if(qlTaiKhoanNV != null){
                                 @qlTaiKhoanNV.IDTKNV}" disabled>
                             </div>
 
-                            <div class="mb-3">
-                                <label class="form-label">Mã nhân viên</label>
-                                <input type="text" class=" form-control" id="IDNV" name="IDNV" placeholder="Nhập ID nhân viên" value="@if(qlTaiKhoanNV != null){
-                                @qlTaiKhoanNV.IDNV}" required disabled>
+                            <div class="col-md-4">
+                            <label class="form-label fw-bold">Mã nhân viên</label>
+                           <input type="text" class="form-control" id="IDNV" placeholder="Nhập ID nhân viên" value="@if(qlTaiKhoanNV != null){@qlTaiKhoanNV.IDNV}" required>
+                            <input type="hidden" class="form-control" name="IDNV"  placeholder="Nhập ID nhân viên" value="@if(qlTaiKhoanNV != null){
+                            @qlTaiKhoanNV.IDNV
+}" required>
                             </div>
+                            <div class="col-md-4">
+                            <label class="form-label fw-bold">Email</label>
+                            <input type="email" class="form-control" name="email" id="emailNV" placeholder="Nhập email" value="@if(qlTaiKhoanNV != null){
+                                @qlTaiKhoanNV.Email}" required >
+                            </div>
+                            <div class="col-md-2">
+                            <label class="form-label fw-bold">  </label>
+                            <button class="btn fw-bold custom-btn form-control" type="button" id="searchButtonNV" style="margin-top:3.3%;">
+                                        <i class="fa-solid fa-magnifying-glass"></i>  Tìm
+                                    </button>
+                                </div>
+                        <div class="col-md-2">
+                            <label class="form-label fw-bold"></label>
+                            <button class="btn fw-bold custom-btn form-control" type="button" id="CapLaiMatKhauNV" disabled data-bs-toggle="modal" data-bs-target="#confirmModalNV" style="margin-top:3.3%;">
+                                <i class="fa-solid fa-arrows-rotate"></i> Cấp lại mật khẩu
+                            </button>
                         </div>
 
-                        <!-- Cột 2: Thông tin Đăng Nhập -->
-                        <div class="col-md-4 ">
-                            <div class="mb-3">
-                                <label class="form-label">Email</label>
-                                <input type="email" class="form-control" name="email" id="email" placeholder="Nhập email" oninput="validateEmail()" value="@if(qlTaiKhoanNV != null){
-                                @qlTaiKhoanNV.Email}" required disabled>
-                                <span id="emailError" class="error-message"></span>
-                                <input type="hidden" id="emailPattern" value="@emailtemplpe" style="display:none;" />
+                        <!-- Modal -->
+                        <div class="modal fade" id="confirmModalNV" tabindex="-1" aria-labelledby="confirmModalLabelNV" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="confirmModalLabelNV">Xác nhận cấp lại mật khẩu</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
 
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Mật Khẩu</label>
-                                <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu" oninput="validatePassword()" value="@if(qlTaiKhoanNV != null){
-                                @qlTaiKhoanNV.MatKhau}" required disabled>
-                            </div>
-                        </div>
+                                    <!-- Modal Body -->
+                                    <div class="modal-body">
+                                        Bạn có chắc chắn muốn cấp lại mật khẩu cho nhân viên này? Hành động này không thể hoàn tác.
+                                    </div>
 
-                        <!-- Cột 3: Nhập lại mật khẩu -->
-                        <div class="col-md-4">
-
-                            <div class="mb-3">
-                                <label class="form-label">Nhập Lại Mật Khẩu</label>
-                                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Nhập lại mật khẩu" oninput="validatePassword()" required disabled>
+                                    <!-- Modal Footer -->
+                                    <div class="modal-footer">
+                                         <button type="button" class="btn btn-outline-danger border-2 fw-bold " data-bs-dismiss="modal">Hủy</button>
+                                        <button type="button" class="btn custom-btn fw-bold " id="confirmResetPasswordNV" data-action="@Url.Action("CapMKNV", "QLTaiKhoan")" onclick="changeAction(this)">Xác nhận</button>
+                                    </div>
+                                </div>
                             </div>
-                            <div id="errorMessage" style="color: red; display: none;">Mật khẩu không khớp!</div>
                         </div>
 
                     </div>
+                    <div class="row ">
+                        <!-- Cột 1: Thông tin Tài Khoản -->
+                        <div class="col-md-4" style="">
+                            <label class="form-label fw-bold">Tên nhân viên</label>
+                            <input type="text" class=" form-control" name="TenNV" id="TenNV" placeholder="" value="@if(qlTaiKhoanNV != null){
+                                @qlTaiKhoanNV.TenNV
+}" required>
+                        </div>
 
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold">SDT nhân viên</label>
+                            <input type="text" class=" form-control" id="SDTNV" name="SDTNV" placeholder="" value="@if(qlTaiKhoanNV != null){
+                                @qlTaiKhoanNV.SDT
+}" required>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label fw-bold">  </label>
+                            <button class="btn fw-bold custom-btn form-control" type="button" disabled id="CapMatKhauMoiNV" data-bs-toggle="modal" data-bs-target="#newPawordModalNV" style="margin-top:3.3%;">
+                                <i class="fa-solid fa-paper-plane"></i> Cấp mật khẩu 
+                            </button>
+                        </div>
+                        <div class="modal fade" id="newPawordModalNV" tabindex="-1" aria-labelledby="newPawordModallabelNV" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="newPawordModallabelNV">Xác nhận cấp mật khẩu mới</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
 
+                                    <!-- Modal Body -->
+                                    <div class="modal-body">
+                                        Bạn có chắc chắn muốn cấp mật khẩu mới cho nhân viên này? Hành động này không thể hoàn tác.
+                                    </div>
 
-
-                    <button id="targetButton" type="submit" style="display:none;">Nút bị kích hoạt</button>
-
-
-
+                                    <!-- Modal Footer -->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-danger border-2 fw-bold " data-bs-dismiss="modal">Hủy</button>
+                                        <button type="button" class="btn custom-btn fw-bold " id="confirmNewPasswordNV" data-action="@Url.Action("CapMKNV", "QLTaiKhoan")" onclick="changeAction(this)">Xác nhận</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="targetButtonVN" type="submit" style="display:none;">Nút bị kích hoạt</button>
                 </form>
 
-                <script type="module" src="~/js/site.js" asp-append-version="true"></script>
+                
 
             </div>
+            
             <div class=" mt-2 p-3 py-1 border rounded-4">
-
-              
-
+                <h5>Nhân Viên đã có tài khoản </h5>
                 <div class=" table-responsive">
                     <table class="table table-bordered  " id="qltknvTable">
                         <thead>
                             <tr>
                                 <th>Mã nhân viên</th>
+                                <th>Tên nhân viên</th>
+                                <th>SDT</th>
                                 <th>Email</th>
 
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+       
+            <div class=" mt-2 p-3 py-1 border rounded-4">
+                <h5>Nhân Viên chưa có tài khoản </h5>
+                <div class=" table-responsive">
+                    <table class="table table-bordered" id="TableNVchuaCoTk">
+                        <thead>
+                            <tr>
+                                <th>Mã nhân viên</th>
+                                <th>Tên nhân viên</th>
+                                <th>SDT</th>
+                                <th>Email</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -164,63 +225,189 @@
         </div>
     </div>
 
-    <div class="row m-0 mb-3 border rounded-4 py-2  ">
+    <div class="row m-0 mb-3 border rounded-4 py-2"  id="khTable" style="display: none;">
         <div class="col">
-            <div class=" ms-1 p-3 py-1 border rounded-4  ">
-                <form class="row ">
-                    <div class="col">
-                        <div class="form-group">
-                            <label class="fw-bold" for="IDTKKH">Mã tài khoản khách hàng</label>
-                            <input type="text" class="form-control" id="IDTKKH">
+            <div class=" ms-1 p-3 py-1 border rounded-4 ">
+                <form id="QLTaiKhoanTKKHForm" class=" col" method="post">
+                    <div class="row ">
+                        <!-- Cột 1: Thông tin Tài Khoản -->
+                        <div class="" style="display:none;">
+                            <label class="form-label fw-bold">Mã TK Khách Hàng</label>
+                            <input type="text" class=" form-control" name="IDTKKH" id="IDTKKH" placeholder="" value="@if(qltkkhachhang != null){
+                                @qltkkhachhang.IDTKKH
+}" disabled>
                         </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label class="fw-bold" for="IDKH">Mã khách hàng</label>
-                            <input type="text" class="form-control" id="IDKH">
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label class="fw-bold" for="sdt">SDT</label>
-                            <input type="text" class="form-control" id="sdt">
-                        </div>
-                    </div>
-                   
 
-                    <div class="col-2">
-                        <button class="btn btn-dark mt-4" type="button" id="searchButton">
-                            <i class="fa-solid fa-magnifying-glass"></i>  Tìm
-                        </button>
-                    </div>
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold">Mã Khách Hàng</label>
+                            <input type="text" class=" form-control" id="IDKH"  placeholder="Nhập ID Khách Hàng" value="@if(qltkkhachhang != null){
+                                @qltkkhachhang.IDKH
+}" required>
+                            <input type="hidden" class=" form-control"  name="IDKH" placeholder="N" value="@if(qltkkhachhang != null){
+                                @qltkkhachhang.IDKH
+}" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold">Email</label>
+                            <input type="email" class="form-control" name="email" id="emailKH" placeholder="Nhập email"  value="@if(qltkkhachhang != null){
+                                @qltkkhachhang.Email
+}" required >
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label fw-bold">  </label>
+                            <button class="btn fw-bold custom-btn form-control" type="button" id="searchButtonKH" style="margin-top:3.3%;">
+                                <i class="fa-solid fa-magnifying-glass"></i>  Tìm
+                            </button>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label fw-bold"></label>
+                            <button class="btn fw-bold custom-btn form-control" type="button" id="CapLaiMatKhauKH" disabled data-bs-toggle="modal" data-bs-target="#confirmModalKH" style="margin-top:3.3%;">
+                                <i class="fa-solid fa-arrows-rotate"></i> Cấp lại mật khẩu
+                            </button>
+                        </div>
 
+                        <!-- Modal -->
+                        <div class="modal fade" id="confirmModalKH" tabindex="-1" aria-labelledby="confirmModalLabelKH" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="confirmModalLabelKH">Xác nhận cấp lại mật khẩu</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+
+                                    <!-- Modal Body -->
+                                    <div class="modal-body">
+                                        Bạn có chắc chắn muốn cấp lại mật khẩu cho Khách Hàng Này này? Hành động này không thể hoàn tác.
+                                    </div>
+
+                                    <!-- Modal Footer -->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-danger border-2 fw-bold " data-bs-dismiss="modal">Hủy</button>
+                                        <button type="button" class="btn custom-btn fw-bold " id="confirmResetPasswordKH" data-action="@Url.Action("CapMKKH", "QLTaiKhoan")" onclick="changeAction2(this)">Xác nhận</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <!-- Cột 1: Thông tin Tài Khoản -->
+                        <div class="col-md-4" style="">
+                            <label class="form-label fw-bold">Tên Khách Hàng</label>
+                            <input type="text" class=" form-control" name="TenKH" id="TenKH" placeholder="" value="@if(qltkkhachhang != null){
+                                @qltkkhachhang.TenKH
+}" required>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold">SDT Khách Hàng</label>
+                            <input type="text" class=" form-control" id="SDTKH" name="SDTKH" placeholder="" value="@if(qltkkhachhang != null){
+                                @qltkkhachhang.SDT
+}" required>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label fw-bold">  </label>
+                            <button class="btn fw-bold custom-btn form-control" type="button" id="CapMatKhauMoiKH" disabled data-bs-toggle="modal" data-bs-target="#newPawordModalKH" style="margin-top:3.3%;">
+                                <i class="fa-solid fa-paper-plane"></i> Cấp mật khẩu
+                            </button>
+                        </div>
+                        <div class="modal fade" id="newPawordModalKH" tabindex="-1" aria-labelledby="newPawordModallabelKH" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="newPawordModallabelKH">Xác nhận cấp mật khẩu mới</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+
+                                    <!-- Modal Body -->
+                                    <div class="modal-body">
+                                        Bạn có chắc chắn muốn cấp mật khẩu mới cho khách Hàng này? Hành động này không thể hoàn tác.
+                                    </div>
+
+                                    <!-- Modal Footer -->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-danger border-2 fw-bold " data-bs-dismiss="modal">Hủy</button>
+                                        <button type="button" class="btn custom-btn fw-bold " id="confirmNewPasswordKH" data-action="@Url.Action("CapMKKH", "QLTaiKhoan")" onclick="changeAction2(this)">Xác nhận</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="targetButtonKH" type="submit" style="display:none;">Nút bị kích hoạt</button>
                 </form>
             </div>
           <div class=" mt-2 p-3 py-1 border rounded-4">
+                <h5>Khách hàng đã có tài khoản </h5>
             <div class=" table-responsive">
-                <table class="table table-bordered  " id="qltkkhTable">
+                    <table class="table table-bordered  " id="qltkkhTable">
                     <thead>
                         <tr>
                             <th>Mã khách hàng</th>
+                            <th>Tên khách hàng</th>
                             <th>SDT</th>
-
+                            <th>Email</th>
                         </tr>
                     </thead>
                     <tbody>
                     </tbody>
                 </table>
-                </div
+                </div>
+            </div>
+            <div class=" mt-2 p-3 py-1 border rounded-4">
+                <h5>Khách hàng chưa có tài khoản </h5>
+                <div class=" table-responsive">
+                    <table class="table table-bordered  " id="TableKHchuaCoTk">
+                        <thead>
+                            <tr>
+                                <th>Mã khách hàng</th>
+                                <th>Tên khách hàng</th>
+                                <th>SDT</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-      
+       
     </div>
+  
 </div>
 <script>
+
+    let table = true; // Thay const bằng let
+    function toggleTable(type) {
+        const nvTable = document.getElementById('nvTable');
+        const khTable = document.getElementById('khTable');
+
+        const btnNhanVien = document.getElementById('btnNhanVien');
+        const btnKhachHang = document.getElementById('btnKhachHang');
+
+        if (type === 'nv') {
+            nvTable.style.display = 'block';
+            khTable.style.display = 'none';
+            btnNhanVien.classList.add('active');
+            btnKhachHang.classList.remove('active');
+            table = true; 
+        } else if (type === 'kh') {
+            nvTable.style.display = 'none';
+            khTable.style.display = 'block';
+            btnKhachHang.classList.add('active');
+            btnNhanVien.classList.remove('active');
+            table = false; 
+        }
+    }
+
+    toggleTable('nv');
     const nvData = @Html.Raw(qltknhanViensJson);
     const khData = @Html.Raw(qltkkhachHangsJson);
+    const NVnoTk = @Html.Raw(qltkNV);
+    const KHnoTk = @Html.Raw(qltkKH);
 
-    // Hàm render bảng chung
-    function renderTable(data, tableId) {
+    function renderTable(data, tableId, urlAction, idField) {
         const tbody = document.querySelector(`#${tableId} tbody`);
         tbody.innerHTML = '';
 
@@ -232,73 +419,261 @@
         const fragment = document.createDocumentFragment();
         data.forEach(item => {
             const tr = document.createElement('tr');
-            tr.innerHTML = `
-                                <td>${item.IDNV || item.IDKH}</td>
-                                <td>${item.Email || item.SDT}</td>
-                            `;
 
-            // Thêm sự kiện click để chuyển hướng khi nhấp vào dòng
+            if (item.TenKH) {
+                tr.innerHTML = `
+                    <td>${item[idField]}</td>
+                    <td>${item.TenKH}</td>
+                    <td>${item.SDT}</td>
+                    <td>${item.Email}</td>
+                `;
+            } else {
+                tr.innerHTML = `
+                    <td>${item[idField]}</td>
+                    <td>${item.TenNV}</td>
+                    <td>${item.SDT}</td>
+                    <td>${item.Email}</td>
+                `;
+            }
+
             tr.addEventListener('click', function () {
-                location.href = `@Url.Action("ClickTK", "QLTaiKhoan")?IDTKNV=${item.IDTKNV || item.IDTKKH}`;
+                location.href = `${urlAction}?${idField}=${item[idField]}`;
             });
 
             fragment.appendChild(tr);
         });
+
         tbody.appendChild(fragment);
     }
 
-    // Khởi tạo bảng
-    renderTable(nvData, 'qltknvTable');
-    renderTable(khData, 'qltkkhTable');
+    // Gọi hàm render bảng
+    renderTable(nvData, 'qltknvTable', '@Url.Action("ClickTK", "QLTaiKhoan")', 'IDNV');
+    renderTable(NVnoTk, 'TableNVchuaCoTk', '@Url.Action("ClickTK", "QLTaiKhoan")', 'IDNV');
+    renderTable(khData, 'qltkkhTable', '@Url.Action("ClickTK", "QLTaiKhoan")', 'IDKH');
+    renderTable(KHnoTk, 'TableKHchuaCoTk', '@Url.Action("ClickTK", "QLTaiKhoan")', 'IDKH');
 
-    // Hàm tìm kiếm
-    function handleSearch(inputIds, data, tableId) {
-        const filters = inputIds.map(id => document.getElementById(id).value.trim().toLowerCase());
-        const filteredData = data.filter(item => {
-            return filters.every((filter, index) => {
-                if (!filter) return true;
-                const keys = Object.values(item).map(value => (value || '').toString().toLowerCase());
-                return keys[index] && keys[index].includes(filter);
-            });
+    const ClickKH = @Html.Raw(ViewBag.ClickKH?.ToString().ToLower() ?? "false");
+    const ClickNV = @Html.Raw(ViewBag.ClickNV?.ToString().ToLower() ?? "false");
+
+    function disableFields(fields) {
+        fields.forEach(field => {
+            document.querySelector(field)?.setAttribute('disabled', true);
         });
-        renderTable(filteredData, tableId);
     }
 
-    document.getElementById('searchButton').addEventListener('click', () => {
-        handleSearch(['IDTKKH', 'IDKH', 'sdt'], khData, 'qltkkhTable');
+    function enableFields(fields) {
+        fields.forEach(field => {
+            document.querySelector(field)?.removeAttribute('disabled');
+        });
+    }
+
+    function checkTableForTerm(tableSelector, searchTerm) {
+        const table = document.querySelector(tableSelector);
+        if (table && table.rows.length > 0) {
+            let found = false;
+            document.querySelectorAll(`${tableSelector} td`).forEach(cell => {
+                if (cell.innerText.trim().toLowerCase() === searchTerm) {
+                    found = true;
+                }
+            });
+            return found;
+        }
+        return false;
+    }
+
+    if (ClickKH) {
+        toggleTable('kh');  // Giả sử đây là hàm để hiển thị hoặc ẩn bảng
+
+        const idKH = (document.querySelector('#IDKH')?.value || "").trim().toLowerCase();
+        const searchTerm = idKH;
+
+        const foundCoTk = checkTableForTerm('#qltkkhTable', searchTerm);
+        const foundNoTK = checkTableForTerm('#TableKHchuaCoTk', searchTerm);
+
+        if (foundCoTk) {
+            document.querySelector('#CapMatKhauMoiKH')?.setAttribute('disabled', true);
+        } else {
+            document.querySelector('#CapMatKhauMoiKH')?.removeAttribute('disabled');
+        }
+
+        if (foundNoTK) {
+            document.querySelector('#CapLaiMatKhauKH')?.setAttribute('disabled', true);
+        } else {
+            document.querySelector('#CapLaiMatKhauKH')?.removeAttribute('disabled');
+        }
+
+        disableFields(['#searchButtonKH', '#IDKH', '#emailKH', '#TenKH', '#SDTKH']);
+    } else if (ClickNV) {
+        const idNV = (document.querySelector('#IDNV')?.value || "").trim().toLowerCase();
+        const searchTerm = idNV;
+
+        const foundCoTk = checkTableForTerm('#qltknvTable', searchTerm);
+        const foundNoTK = checkTableForTerm('#TableNVchuaCoTk', searchTerm);
+
+        if (foundCoTk) {
+            document.querySelector('#CapMatKhauMoiNV')?.setAttribute('disabled', true);
+        } else {
+            document.querySelector('#CapMatKhauMoiNV')?.removeAttribute('disabled');
+        }
+
+        if (foundNoTK) {
+            document.querySelector('#CapLaiMatKhauNV')?.setAttribute('disabled', true);
+        } else {
+            document.querySelector('#CapLaiMatKhauNV')?.removeAttribute('disabled');
+        }
+
+        disableFields(['#searchButtonNV', '#IDNV', '#emailNV', '#TenNV', '#SDTNV']);
+    }
+
+
+
+
+
+
+
+    // Sự kiện tìm kiếm cho nhân viên
+    document.addEventListener('DOMContentLoaded', function () {
+        const searchButtonNV = document.getElementById('searchButtonNV');
+        if (searchButtonNV) {
+            searchButtonNV.addEventListener('click', function () {
+                // Lấy giá trị từ các trường input, kiểm tra dữ liệu
+                const idnv = (document.querySelector('#IDNV')?.value || "").trim().toLowerCase();
+                const emailNV = (document.querySelector('#emailNV')?.value || "").trim().toLowerCase();
+                const tenNV = (document.querySelector('#TenNV')?.value || "").trim().toLowerCase();
+                const sdtNV = (document.querySelector('#SDTNV')?.value || "").trim().toLowerCase();
+
+               
+
+                // Lọc dữ liệu từ mảng nvData
+                const filteredData = nvData.filter(item =>
+                    (!idnv || item.IDNV?.toLowerCase().includes(idnv)) &&
+                    (!emailNV || item.Email?.toLowerCase().includes(emailNV)) &&
+                    (!tenNV || item.TenNV?.toLowerCase().includes(tenNV)) &&
+                    (!sdtNV || item.SDT?.toLowerCase().includes(sdtNV))
+                );
+
+                // Lọc dữ liệu từ mảng NVnoTk
+                const filteredData2 = NVnoTk.filter(item =>
+                    (!idnv || item.IDNV?.toLowerCase().includes(idnv)) &&
+                    (!emailNV || item.Email?.toLowerCase().includes(emailNV)) &&
+                    (!tenNV || item.TenNV?.toLowerCase().includes(tenNV)) &&
+                    (!sdtNV || item.SDT?.toLowerCase().includes(sdtNV))
+                );
+
+            
+
+                // Render lại bảng
+                renderTable(filteredData, 'qltknvTable', '@Url.Action("ClickTK", "QLTaiKhoan")', 'IDNV');
+                renderTable(filteredData2, 'TableNVchuaCoTk', '@Url.Action("ClickTK", "QLTaiKhoan")', 'IDNV');
+            });
+        }
     });
 
-    // Validation email
-    function validateEmail() {
-        const email = document.getElementById('email').value;
-        const emailError = document.getElementById('emailError');
-        if (!emailPattern.test(email)) {
-            emailError.textContent = "Email không hợp lệ.";
-            emailError.style.display = 'block';
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const searchButtonKH = document.getElementById('searchButtonKH');
+        if (searchButtonKH) {
+            searchButtonKH.addEventListener('click', function () {
+                // Lấy giá trị từ các trường input, kiểm tra dữ liệu
+                const idKH = (document.querySelector('#IDKH')?.value || "").trim().toLowerCase();
+                const emailKH = (document.querySelector('#emailKH')?.value || "").trim().toLowerCase();
+                const tenKH = (document.querySelector('#TenKH')?.value || "").trim().toLowerCase();
+                const sdtKH = (document.querySelector('#SDTKH')?.value || "").trim().toLowerCase();
+
+                // Kiểm tra nếu tất cả trường đều trống thì thông báo
+              
+
+                // Lọc dữ liệu từ mảng khData
+                const filteredData = khData.filter(item =>
+                    (!idKH || item.IDKH?.toLowerCase().includes(idKH)) &&
+                    (!emailKH || item.Email?.toLowerCase().includes(emailKH)) &&
+                    (!tenKH || item.TenKH?.toLowerCase().includes(tenKH)) &&
+                    (!sdtKH || item.SDT?.toLowerCase().includes(sdtKH))
+                );
+
+                // Lọc dữ liệu từ mảng KHnoTk
+                const filteredData2 = KHnoTk.filter(item =>
+                    (!idKH || item.IDKH?.toLowerCase().includes(idKH)) &&
+                    (!emailKH || item.Email?.toLowerCase().includes(emailKH)) &&
+                    (!tenKH || item.TenKH?.toLowerCase().includes(tenKH)) &&
+                    (!sdtKH || item.SDT?.toLowerCase().includes(sdtKH))
+                );
+
+                // Kiểm tra nếu không tìm thấy dữ liệu
+               
+
+                // Render lại bảng
+                renderTable(filteredData, 'qltkkhTable', '@Url.Action("ClickTK", "QLTaiKhoan")', 'IDKH');
+                renderTable(filteredData2, 'TableKHchuaCoTk', '@Url.Action("ClickTK", "QLTaiKhoan")', 'IDKH');
+            });
+        }
+    });
+
+
+
+
+
+
+
+    document.getElementById('addButton').addEventListener('click', () => {
+        if (table) {
+            document.getElementById('targetButtonVN')?.click(); 
         } else {
-            emailError.style.display = 'none';
+            document.getElementById('targetButtonKH')?.click(); 
+        }
+    });
+
+    document.getElementById('confirmResetPasswordNV').addEventListener('click', () => {
+       
+            document.getElementById('targetButtonVN')?.click(); 
+        
+    });
+    document.getElementById('confirmNewPasswordNV').addEventListener('click', () => {
+
+        document.getElementById('targetButtonVN')?.click();
+
+    });
+    document.getElementById('confirmResetPasswordKH').addEventListener('click', () => {
+
+        document.getElementById('targetButtonKH')?.click();
+
+    });
+    document.getElementById('confirmNewPasswordKH').addEventListener('click', () => {
+
+        document.getElementById('targetButtonKH')?.click();
+
+    });
+    function changeAction(button) {
+        var form = document.getElementById('QLTaiKhoanNVForm');
+        if (form) {
+            var actionUrl = button.getAttribute('data-action');
+            if (actionUrl) {
+                if (form.action !== actionUrl) {
+                    form.action = actionUrl;
+                }
+            } else {
+                console.error('No action URL found');
+            }
+        } else {
+            console.error('Form not found');
+        }
+    }
+    function changeAction2(button) {
+        var form = document.getElementById('QLTaiKhoanTKKHForm');
+        if (form) {
+            var actionUrl = button.getAttribute('data-action');
+            if (actionUrl) {
+                if (form.action !== actionUrl) {
+                    form.action = actionUrl;
+                }
+            } else {
+                console.error('No action URL found');
+            }
+        } else {
+            console.error('Form not found');
         }
     }
 
-    // Validation mật khẩu
-    function validatePassword() {
-        const password = document.getElementById('password').value;
-        const confirmPassword = document.getElementById('confirmPassword').value;
-        const passwordError = document.getElementById('passwordError');
-        passwordError.style.display = password !== confirmPassword ? 'block' : 'none';
-    }
+       
 
-    // Điều chỉnh trạng thái form
-    function toggleFormState(formId, isEnabled) {
-        const form = document.getElementById(formId);
-        const inputs = form.querySelectorAll('input, select');
-        inputs.forEach(input => input.disabled = !isEnabled);
-    }
-
-    // Sự kiện nút
-    document.getElementById('addButton').addEventListener('click', () => toggleFormState('QLTaiKhoanNVForm', true));
-    document.getElementById('cancelButton').addEventListener('click', () => toggleFormState('QLTaiKhoanNVForm', false));
-
-    // Khóa form khi tải trang
-    window.onload = () => toggleFormState('QLTaiKhoanNVForm', false);
 </script>

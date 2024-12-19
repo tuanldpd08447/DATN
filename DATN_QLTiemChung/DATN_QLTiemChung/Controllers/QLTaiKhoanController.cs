@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using DATN_QLTiemChung.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Security.AccessControl;
 using System.Text;
@@ -33,26 +32,192 @@ namespace DATN_QLTiemChung.Controllers
         public async Task<IActionResult> QLTaiKhoan()
         {
             var client = _httpClientFactory.CreateClient();
-            var response = await client.GetAsync("https://localhost:7143/api/QLTaiKhoan/GetAllTaiKhoanNV");
+
+            try
+            {
+                // Lấy danh sách nhân viên
+                var response = await client.GetAsync("https://localhost:7143/api/QLTaiKhoan/GetAllTaiKhoanNV");
+                if (response.IsSuccessStatusCode)
+                {
+                    var apiResponse = await response.Content.ReadAsStringAsync();
+                    List<QLTaiKhoanNVDTO> qltknhanViens = JsonConvert.DeserializeObject<List<QLTaiKhoanNVDTO>>(apiResponse);
+                    ViewBag.QLTaiKhoanNVs = JsonConvert.SerializeObject(qltknhanViens);
+                }
+                else
+                {
+                    // Xử lý lỗi nếu API trả về mã trạng thái không thành công
+                    ViewBag.ErrorMessage = "Không thể lấy thông tin nhân viên từ API.";
+                }
+
+                // Lấy danh sách khách hàng
+                var response0 = await client.GetAsync("https://localhost:7143/api/QLTaiKhoan/GetAllTaiKhoanKH");
+                if (response0.IsSuccessStatusCode)
+                {
+                    var apiResponse0 = await response0.Content.ReadAsStringAsync();
+                    List<QLTaiKhoanKHDTO> qltkkhachHangs = JsonConvert.DeserializeObject<List<QLTaiKhoanKHDTO>>(apiResponse0);
+                    ViewBag.QLTaiKhoanKHs = JsonConvert.SerializeObject(qltkkhachHangs);
+                }
+                else
+                {
+                    // Xử lý lỗi nếu API trả về mã trạng thái không thành công
+                    ViewBag.ErrorMessage = "Không thể lấy thông tin khách hàng từ API.";
+                }
+                // Lấy danh sách khách hàng
+                var response1 = await client.GetAsync("https://localhost:7143/api/QLTaiKhoan/GetTaiKhoanNhanVienChuaCoTK");
+                if (response1.IsSuccessStatusCode)
+                {
+                    var apiResponse1 = await response1.Content.ReadAsStringAsync();
+                    List<TTNV> NvChuaCoTk = JsonConvert.DeserializeObject<List<TTNV>>(apiResponse1);
+                    ViewBag.NvChuaCoTk = JsonConvert.SerializeObject(NvChuaCoTk);
+                }
+                else
+                {
+                    // Xử lý lỗi nếu API trả về mã trạng thái không thành công
+                    ViewBag.ErrorMessage = "Không thể lấy thông tin nhân viên từ API.";
+                }
+                var response2 = await client.GetAsync("https://localhost:7143/api/QLTaiKhoan/GetTaiKhoanKhachHangChuaCoTK");
+                if (response2.IsSuccessStatusCode)
+                {
+                    var apiResponse2 = await response2.Content.ReadAsStringAsync();
+                    List<TTKH> KhChuaCoTk = JsonConvert.DeserializeObject<List<TTKH>>(apiResponse2);
+                    ViewBag.KhChuaCoTk = JsonConvert.SerializeObject(KhChuaCoTk);
+                }
+                else
+                {
+                    // Xử lý lỗi nếu API trả về mã trạng thái không thành công
+                    ViewBag.ErrorMessage = "Không thể lấy thông tin khách hàng từ API.";
+                }
+                // Gọi hàm GetSession() nếu cần thiết
+                GetSession();
+
+                return View("/Views/Home/QLTaiKhoan.cshtml");
+            }
+            catch (Exception ex)
+            {
+                // Xử lý ngoại lệ nếu có lỗi xảy ra trong quá trình gọi API hoặc xử lý dữ liệu
+                ViewBag.ErrorMessage = "Đã xảy ra lỗi khi tải dữ liệu: " + ex.Message;
+                return View("/Views/Home/QLTaiKhoan.cshtml");
+            }
+        }
 
 
-            var apiResponse = await response.Content.ReadAsStringAsync();
-            List<QLyTaiKhoanNV> qltknhanViens = JsonConvert.DeserializeObject<List<QLyTaiKhoanNV>>(apiResponse);
-            ViewBag.QLTaiKhoanNVs = JsonConvert.SerializeObject(qltknhanViens);
+        [HttpPost]
+        public async Task<IActionResult> CapMKNV(string IDNV)
+        {
+            if (!ModelState.IsValid)
+            {
+                GetSession(); return BadRequest(ModelState);
+            }
+            try
+            {
+                // Tạo HTTP client
+                var client = _httpClientFactory.CreateClient();
 
+                // Gửi yêu cầu tới API
+                var response = await client.PostAsync($"https://localhost:7143/api/QLTaiKhoan/DoiMKNVTuDong/{IDNV}", null);
 
+                if (response.IsSuccessStatusCode)
+                {
+                    // Đọc phản hồi từ API
+                    var apiResponse = await response.Content.ReadAsStringAsync();
 
-            var response0 = await client.GetAsync("https://localhost:7143/api/QLTaiKhoan/GetAllTaiKhoanKH");
+                    // Nếu phản hồi có định dạng JSON, kiểm tra và deserialize
+                    var result = JsonConvert.DeserializeObject<dynamic>(apiResponse);
 
+                    // Kiểm tra kết quả thành công từ API
+                    if (result?.success == true)
+                    {
+                        TempData["Notification"] = "Cấp mật khẩu thành công.";
+                        TempData["NotificationType"] = "success";
+                        TempData["NotificationTitle"] = "Thông báo.";
+                    }
+                    else
+                    {
+                        TempData["Notification"] = result?.message ?? "Cấp mật khẩu thất bại.";
+                        TempData["NotificationType"] = "error";
+                        TempData["NotificationTitle"] = "Lỗi.";
+                    }
 
-            var apiResponse1 = await response0.Content.ReadAsStringAsync();
-            List<QLyTaiKhoanKH> qltkkhachHangs = JsonConvert.DeserializeObject<List<QLyTaiKhoanKH>>(apiResponse1);
+                    GetSession();
+                    return RedirectToAction("QLTaiKhoan");
+                }
+                else
+                {
+                    TempData["Notification"] = "Không thể cấp mật khẩu. Vui lòng thử lại.";
+                    TempData["NotificationType"] = "error";
+                    TempData["NotificationTitle"] = "Lỗi.";
+                    GetSession();
+                    return StatusCode((int)response.StatusCode, "Đã xảy ra lỗi khi gọi API.");
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Notification"] = "Đã xảy ra lỗi khi kết nối với máy chủ.";
+                TempData["NotificationType"] = "error";
+                TempData["NotificationTitle"] = "Lỗi.";
+                GetSession();
+                return StatusCode(500, $"Có lỗi khi kết nối với máy chủ: {ex.Message}");
+            }
+        }
 
-            ViewBag.QLTaiKhoanKHs = JsonConvert.SerializeObject(qltkkhachHangs);
+        [HttpPost]
+        public async Task<IActionResult> CapMKKH(string IDKH)
+        {
+            if (!ModelState.IsValid)
+            {
+                GetSession();
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                // Tạo HTTP client
+                var client = _httpClientFactory.CreateClient();
 
-            //GẤP ĐÔI PHẦN TRÊN ĐỂ QLKH
+                // Gửi yêu cầu tới API
+                var response = await client.PostAsync($"https://localhost:7143/api/QLTaiKhoan/DoiMKKHTuDong/{IDKH}", null);
 
-            GetSession(); return View("/Views/Home/QLTaiKhoan.cshtml");
+                if (response.IsSuccessStatusCode)
+                {
+                    // Đọc phản hồi từ API
+                    var apiResponse = await response.Content.ReadAsStringAsync();
+
+                    // Nếu phản hồi có định dạng JSON, kiểm tra và deserialize
+                    var result = JsonConvert.DeserializeObject<dynamic>(apiResponse);
+
+                    // Kiểm tra kết quả thành công từ API
+                    if (result?.success == true)
+                    {
+                        TempData["Notification"] = "Cấp mật khẩu thành công.";
+                        TempData["NotificationType"] = "success";
+                        TempData["NotificationTitle"] = "Thông báo.";
+                    }
+                    else
+                    {
+                        TempData["Notification"] = result?.message ?? "Cấp mật khẩu thất bại.";
+                        TempData["NotificationType"] = "error";
+                        TempData["NotificationTitle"] = "Lỗi.";
+                    }
+
+                    GetSession();
+                    return RedirectToAction("QLTaiKhoan");
+                }
+                else
+                {
+                    TempData["Notification"] = "Không thể cấp mật khẩu. Vui lòng thử lại.";
+                    TempData["NotificationType"] = "error";
+                    TempData["NotificationTitle"] = "Lỗi.";
+                    GetSession();
+                    return StatusCode((int)response.StatusCode, "Đã xảy ra lỗi khi gọi API.");
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Notification"] = "Đã xảy ra lỗi khi kết nối với máy chủ.";
+                TempData["NotificationType"] = "error";
+                TempData["NotificationTitle"] = "Lỗi.";
+                GetSession();
+                return StatusCode(500, $"Có lỗi khi kết nối với máy chủ: {ex.Message}");
+            }
         }
 
         [HttpPost]
@@ -150,51 +315,100 @@ namespace DATN_QLTiemChung.Controllers
             }
         }
 
-        public async Task<IActionResult> ClickTK(string IDTKNV)
+        public async Task<IActionResult> ClickTK(string? IDNV, string? IDKH)
         {
             var client = _httpClientFactory.CreateClient();
 
+            if(IDNV!= null && IDKH == null)
+            {
+                var aresponse = await client.GetAsync("https://localhost:7143/api/QLTaiKhoan/GetTKNhanVienById/" + IDNV);
 
-            var response = await client.GetAsync("https://localhost:7143/api/QLTaiKhoan/GetTKNhanVienById/" + IDTKNV);
+                if (aresponse.IsSuccessStatusCode)
+                {
+                    var nhanvienapiResponse = await aresponse.Content.ReadAsStringAsync();
+                    var qlTaiKhoanNV = JsonConvert.DeserializeObject<QLTaiKhoanNVDTO>(nhanvienapiResponse);
+                    ViewBag.QLTaiKhoanNV = qlTaiKhoanNV;
+                    ViewBag.ClickNV = true;
 
+                }
+                else
+                {
+                    ViewBag.ErrorMessage = "Không thể tải thông tin nhân viên";
+
+                }
+            }
+            else if (IDKH != null && IDNV == null)
+            {
+                var aresponse = await client.GetAsync("https://localhost:7143/api/QLTaiKhoan/GetTKKhachHangById/" + IDKH);
+
+                if (aresponse.IsSuccessStatusCode)
+                {
+                    var nhanvienapiResponse = await aresponse.Content.ReadAsStringAsync();
+                    var QLyTaiKhoanKH = JsonConvert.DeserializeObject<QLTaiKhoanKHDTO>(nhanvienapiResponse);
+                    ViewBag.QLyTaiKhoanKH = QLyTaiKhoanKH;
+                    ViewBag.ClickKH = true;
+                }
+                else
+                {
+                    ViewBag.ErrorMessage = "Không thể tải thông tin khách hàng";
+
+                }
+            }
+
+            var response = await client.GetAsync("https://localhost:7143/api/QLTaiKhoan/GetAllTaiKhoanNV");
             if (response.IsSuccessStatusCode)
             {
-                var nhanvienapiResponse = await response.Content.ReadAsStringAsync();
-                var qlTaiKhoanNV = JsonConvert.DeserializeObject<QLTaiKhoanNVDTO>(nhanvienapiResponse);
-                ViewBag.QLTaiKhoanNV = qlTaiKhoanNV;
-
-                var response1 = await client.GetAsync("https://localhost:7143/api/QLTaiKhoan/GetAllTaiKhoanNV");
-
-
-                var apiResponse = await response1.Content.ReadAsStringAsync();
-                List<QLyTaiKhoanNV> qltknhanViens = JsonConvert.DeserializeObject<List<QLyTaiKhoanNV>>(apiResponse);
+                var apiResponse = await response.Content.ReadAsStringAsync();
+                List<QLTaiKhoanNVDTO> qltknhanViens = JsonConvert.DeserializeObject<List<QLTaiKhoanNVDTO>>(apiResponse);
                 ViewBag.QLTaiKhoanNVs = JsonConvert.SerializeObject(qltknhanViens);
-
-
-
-                var response0 = await client.GetAsync("https://localhost:7143/api/QLTaiKhoan/GetAllTaiKhoanKH");
-
-
-                var apiResponse1 = await response0.Content.ReadAsStringAsync();
-                List<QLyTaiKhoanKH> qltkkhachHangs = JsonConvert.DeserializeObject<List<QLyTaiKhoanKH>>(apiResponse1);
-
-                ViewBag.QLTaiKhoanKHs = JsonConvert.SerializeObject(qltkkhachHangs);
-
-
-
-
-               GetSession(); return View("/Views/Home/QLTaiKhoan.cshtml");
             }
             else
             {
-                ViewBag.ErrorMessage = "Không thể tải thông tin nhân viên";
-               GetSession(); return View("/Views/Home/QLTaiKhoan.cshtml");
+                // Xử lý lỗi nếu API trả về mã trạng thái không thành công
+                ViewBag.ErrorMessage = "Không thể lấy thông tin nhân viên từ API.";
             }
 
-
+            // Lấy danh sách khách hàng
+            var response0 = await client.GetAsync("https://localhost:7143/api/QLTaiKhoan/GetAllTaiKhoanKH");
+            if (response0.IsSuccessStatusCode)
+            {
+                var apiResponse0 = await response0.Content.ReadAsStringAsync();
+                List<QLTaiKhoanKHDTO> qltkkhachHangs = JsonConvert.DeserializeObject<List<QLTaiKhoanKHDTO>>(apiResponse0);
+                ViewBag.QLTaiKhoanKHs = JsonConvert.SerializeObject(qltkkhachHangs);
+            }
+            else
+            {
+                // Xử lý lỗi nếu API trả về mã trạng thái không thành công
+                ViewBag.ErrorMessage = "Không thể lấy thông tin khách hàng từ API.";
+            }
+            // Lấy danh sách khách hàng
+            var response1 = await client.GetAsync("https://localhost:7143/api/QLTaiKhoan/GetTaiKhoanNhanVienChuaCoTK");
+            if (response1.IsSuccessStatusCode)
+            {
+                var apiResponse1 = await response1.Content.ReadAsStringAsync();
+                List<TTNV> NvChuaCoTk = JsonConvert.DeserializeObject<List<TTNV>>(apiResponse1);
+                ViewBag.NvChuaCoTk = JsonConvert.SerializeObject(NvChuaCoTk);
+            }
+            else
+            {
+                // Xử lý lỗi nếu API trả về mã trạng thái không thành công
+                ViewBag.ErrorMessage = "Không thể lấy thông tin nhân viên từ API.";
+            }
+            var response2 = await client.GetAsync("https://localhost:7143/api/QLTaiKhoan/GetTaiKhoanKhachHangChuaCoTK");
+            if (response2.IsSuccessStatusCode)
+            {
+                var apiResponse2 = await response2.Content.ReadAsStringAsync();
+                List<TTKH> KhChuaCoTk = JsonConvert.DeserializeObject<List<TTKH>>(apiResponse2);
+                ViewBag.KhChuaCoTk = JsonConvert.SerializeObject(KhChuaCoTk);
+            }
+            else
+            {
+                // Xử lý lỗi nếu API trả về mã trạng thái không thành công
+                ViewBag.ErrorMessage = "Không thể lấy thông tin khách hàng từ API.";
+            }
             // Nếu thành công, có thể lấy lại danh sách nhân viên để cập nhật giao diện
             // Chuyển hướng về danh sách nhân viên
-
+            GetSession(); return View("/Views/Home/QLTaiKhoan.cshtml");
         }
 
         [HttpPost]
